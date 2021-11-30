@@ -8,9 +8,7 @@
     /*fondo*/
     background-image:url(../../../../assets/quito.jpg);
     background-size: cover;
-    background-position-y: center;
     background-position-x: center;
-    background-repeat: no-repeat;
 }
 
 #slider h1 {
@@ -42,6 +40,6 @@
 }
 
 .btn-white:hover{
-    background: #444;
+    background: rgb(44, 89, 160);
     color: white;
 }

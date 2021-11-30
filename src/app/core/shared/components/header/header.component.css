@@ -1,7 +1,7 @@
 #header {
     height: 130px;
     width: 100%;
-    border-top: 3px solid rgb(87, 86, 47);
+    border-top: 3px solid rgb(44, 89, 160);
 }
 
 .center {
@@ -43,12 +43,12 @@
 
 #logo a strong {
     text-decoration: none;
-    color: rgb(87, 86, 47);
+    color: rgb(44, 89, 160);
 }
 
 #logo a:hover {
     text-decoration: none;
-    color: rgb(87, 86, 47);
+    color: rgb(44, 89, 160);
 }
 
 #menu {
@@ -83,7 +83,7 @@
 
 #menu a:hover,
 .active{
-    color: rgb(87, 86, 47);
+    color: rgb(44, 89, 160);
 }
 
 
