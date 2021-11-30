@@ -1,1 +1,7 @@
 <h3>Esta sera la home del proyecto</h3>
+
+<mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
