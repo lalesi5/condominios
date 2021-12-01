@@ -24,7 +24,7 @@
     background: white;
     color: rgb(88,88,88);
     padding: 2px;
-    width: 100px;
+    width: 120px;
     height: 35px;
     margin: 0px auto;
     font-size: 20px;
@@ -42,4 +42,36 @@
 .btn-white:hover{
     background: rgb(44, 89, 160);
     color: white;
+}
+
+#nosotros{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+#nosotros h2{
+    font-size: 40px;
+    padding-bottom: 30px;
+}
+
+.mat-card-title{
+    padding-bottom: 25px;
+    padding-top: 12px;
+}
+
+#servicios{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 70px;
+}
+
+#servicios h2{
+    font-size: 40px;
+    padding-bottom: 30px;
+}
+
+#servicios p{
+    font-size: 15px;
+    padding-bottom: 30px;
 }

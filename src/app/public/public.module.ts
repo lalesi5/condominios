@@ -7,13 +7,16 @@ import { PublicComponent } from './public.component';
 import { HomeComponent } from './home/containers/home.component';
 import { LoginComponent } from './login/login.component';
 
+import {MatCardModule} from '@angular/material/card';
+
 
 
 @NgModule({
 
   imports: [
     PublicRoutingModule,
-    SharedModule
+    SharedModule,
+    MatCardModule
   ],
   declarations: [
     PublicComponent,
