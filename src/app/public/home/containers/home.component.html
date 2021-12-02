@@ -26,7 +26,7 @@
             <mat-card-subtitle>
               Estudiante de Ingenieria en Sistemas<br>Escuela Politecnica Nacional
             </mat-card-subtitle>
-            <img mat-card-md-image src="../../../../assets/alexCarrera.jpg">
+            <img mat-card-lg-image src="../../../../assets/alexCarrera.jpg">
           </mat-card-title-group>
         </mat-card>
       </div>
@@ -37,7 +37,7 @@
             <mat-card-subtitle>
               Estudiante de Ingenieria en Sistemas <br> Escuela Politecnica Nacional
             </mat-card-subtitle>
-            <img mat-card-md-image src="../../../../assets/alejandroTupiza.jpg">
+            <img mat-card-lg-image src="../../../../assets/alejandroTupiza.jpg">
           </mat-card-title-group>
         </mat-card>
       </div>
@@ -53,66 +53,92 @@
 
 <div id="servicios">
   <h2>Servicios</h2>
-  <p>Deja que nos encarguemos de la administración de tu condominio. Tú administración fácil y rapida de una manera nunca antes vista</p>
+  <p>Deja que nos encarguemos de la administración de tu condominio. Tú administración fácil y rapida de una manera
+    nunca antes vista</p>
   <div class="container-border">
     <div class="row justify-content-around">
-      <div class="col">
+      <div class="col-sm-3">
         <mat-card class="example-card">
           <mat-card-title>Administración de Pagos</mat-card-title>
-          <mat-card-title><mat-icon>payment</mat-icon></mat-card-title>
+          <mat-card-title>
+            <mat-icon>payment</mat-icon>
+          </mat-card-title>
           <mat-card-subtitle>TODOS LOS PAGOS EN UN SOLO LUGAR</mat-card-subtitle>
           <mat-card-content>
-            <p>Conoce el estado de tus pagos en cualquier momento y cualquier lugar que te encuentres</p>
+            <p>Conoce el estado de tus pagos en cualquier momento y cualquier lugar</p>
           </mat-card-content>
         </mat-card>
       </div>
-      <div class="col">
+      <div class="col-sm-3">
         <mat-card class="example-card">
           <mat-card-title>Reservas de Areas Comunales</mat-card-title>
-          <mat-card-title><mat-icon>calendar_today</mat-icon></mat-card-title>
+          <mat-card-title>
+            <mat-icon>calendar_today</mat-icon>
+          </mat-card-title>
           <mat-card-subtitle>GESTIONA TODO CON UN SOLO CLICK</mat-card-subtitle>
           <mat-card-content>
             <p>Administra con tiempo todas tus reservas e informa de esto a otros propietarios</p>
-            <p></p>
           </mat-card-content>
         </mat-card>
       </div>
-      <div class="col">
+      <div class="col-sm-3">
         <mat-card class="example-card">
           <mat-card-title>Reportes de Gastos</mat-card-title>
-          <mat-card-title><mat-icon> monetization_on</mat-icon></mat-card-title>
+          <mat-card-title>
+            <mat-icon> monetization_on</mat-icon>
+          </mat-card-title>
           <mat-card-subtitle>TUS REPORTES RAPIDOS Y SEGUROS</mat-card-subtitle>
           <mat-card-content>
             <p>Genera reportes desde la comodidad de tu ordenador, rápido y seguro</p>
-            <p></p>
           </mat-card-content>
         </mat-card>
       </div>
     </div>
-    <div class="row justify-content-around">
-        <div class="col">
-          <mat-card class="example-card">
-            <mat-card-title>Comunicación</mat-card-title>
-            <mat-card-title><mat-icon> chat</mat-icon></mat-card-title>
-            <mat-card-subtitle>MENSAJES INDIVIDUALES Y GENERALES</mat-card-subtitle>
-            <mat-card-content>
-              <p>Comunicate con cada uno de los propietarios dentro del condominio y recibe alertas por parte de la administración</p>
-              <p></p>
-            </mat-card-content>
-          </mat-card>
-        </div>
-        <div class="col">
-          <mat-card class="example-card">
-            <mat-card-title>Roles de Usuario</mat-card-title>
-            <mat-card-title><mat-icon>supervised_user_circle</mat-icon></mat-card-title>
-            <mat-card-subtitle>ADMINISTRA TUS PERFILES</mat-card-subtitle>
-            <mat-card-content>
-              <p>Genera roles de usuarios y administrador para una mayor seguridad en tu condominio</p>
-              <p></p>
-            </mat-card-content>
-          </mat-card>
-        </div>
+    <div class="row justify-content-center">
+      <div class="col-sm-3">
+        <mat-card class="example-card">
+          <mat-card-title>Comunicación</mat-card-title>
+          <mat-card-title>
+            <mat-icon> chat</mat-icon>
+          </mat-card-title>
+          <mat-card-subtitle>MENSAJES INDIVIDUALES Y GENERALES</mat-card-subtitle>
+          <mat-card-content>
+            <p>Comunicate con cada uno de los propietarios dentro del condominio y recibe alertas por parte de la
+              administración</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-sm-3">
+        <mat-card class="example-card">
+          <mat-card-title>Roles de Usuario</mat-card-title>
+          <mat-card-title>
+            <mat-icon>supervised_user_circle</mat-icon>
+          </mat-card-title>
+          <mat-card-subtitle>ADMINISTRA TUS PERFILES</mat-card-subtitle>
+          <mat-card-content>
+            <p>Genera roles de usuarios y administrador para una mayor seguridad en tu condominio</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>
 
 <!--Fin Seccion Servicios-->
+
+<div class="clearfix"> </div>
+
+<!--Inicio Seccion Mapa-->
+
+<div id="mapa">
+  <div class="embed-responsive embed-responsive-4by3">
+    <iframe class="embed-responsive-item"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4883.718290847799!2d-78.49041917656263!3d-0.2103980373679002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a107e1cd44b%3A0x88a284f66939ed4!2sEscuela%20Polit%C3%A9cnica%20Nacional!5e0!3m2!1ses!2sec!4v1638413054739!5m2!1ses!2sec"
+      loading="lazy"
+      allowfullscreen></iframe>
+  </div>
+</div>
+
+<!--Fin Seccion Mapa-->
+
+<div class="clearfix"> </div>

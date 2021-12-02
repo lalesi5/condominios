@@ -55,9 +55,9 @@
     padding-bottom: 30px;
 }
 
-.mat-card-title{
-    padding-bottom: 25px;
-    padding-top: 12px;
+#nosotros .mat-card-title{
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 #servicios{
@@ -74,4 +74,22 @@
 #servicios p{
     font-size: 15px;
     padding-bottom: 30px;
+}
+
+#servicios .justify-content-around{
+    margin-bottom: 50px;
+}
+
+#servicios .mat-card{
+    margin-top: 30px;
+    padding-top: 35px;
+}
+
+#mapa{
+    margin-top: 40px;
+    height: 300px;
+}
+
+#mapa .embed-responsive-item{
+    height: 40%;
 }
