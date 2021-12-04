@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "condominiosepn-68a1d": {
+      "hosting": {
+        "condominios": [
+          "condominiosepn-68a1d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "condominiosepn-68a1d"
+  }
+}

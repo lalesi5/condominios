@@ -4,6 +4,9 @@ import { RouterModule, Routes } from "@angular/router";
 import { PublicComponent } from "./public.component";
 import { HomeComponent } from "./home/containers/home.component";
 import { LoginComponent } from "./login/login.component";
+import { AdminComponent } from "../admin/admin.component";
+
+
 
 
 const routes: Routes = [
