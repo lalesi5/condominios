@@ -1,0 +1,21 @@
+#login {
+  margin-top: 150px;
+  margin-bottom: 70px;
+  text-align: center;
+  height: 54%;
+}
+
+#login h2 {
+  font-size: 40px;
+  padding-bottom: 30px;
+}
+
+#login .col-md-12{
+    padding-right: 150px;
+    padding-left: 150px;
+}
+
+#login .form.floating{
+    margin-top: 20px;
+}
+

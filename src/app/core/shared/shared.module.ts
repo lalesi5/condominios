@@ -6,6 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
 
@@ -16,14 +17,16 @@ import { HeaderComponent } from './components/header/header.component';
   ],
   declarations: [
     NotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   exports: [
     HttpClientModule,
     RouterModule,
     NotFoundComponent,
     HeaderComponent,
-    MatIconModule
+    MatIconModule,
+    FooterComponent
   ],
   providers:[]
 })

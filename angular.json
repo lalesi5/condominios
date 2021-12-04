@@ -101,6 +101,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "condominios:build:production",
+            "firebaseProject": "condominiosepn-68a1d",
+            "firebaseHostingSite": "condominiosepn-68a1d"
+          }
         }
       }
     }
