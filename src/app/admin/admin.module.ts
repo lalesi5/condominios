@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../core/shared/shared.module';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 
 @NgModule({
@@ -13,10 +14,12 @@ import { SharedModule } from '../core/shared/shared.module';
         SharedModule
     ],
     declarations: [
+        NavigationComponent
     ],
     exports: [
         HttpClientModule,
         RouterModule,
+        NavigationComponent
     ],
     providers: []
 })
