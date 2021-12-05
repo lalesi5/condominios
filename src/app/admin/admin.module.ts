@@ -1,26 +1,23 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
-import { RouterModule } from '@angular/router';
+import { AdminRoutingModule } from './admin-routing.module';
 
 import { SharedModule } from '../core/shared/shared.module';
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { AdminComponent } from './admin.component';
+import { AdministracionComponent } from './Administracion/administracion.component';
+
 
 
 @NgModule({
 
     imports: [
-        HttpClientModule,
-        RouterModule,
+        AdminRoutingModule,
         SharedModule
     ],
     declarations: [
-        NavigationComponent
+        AdminComponent,
+        AdministracionComponent
     ],
-    exports: [
-        HttpClientModule,
-        RouterModule,
-        NavigationComponent
-    ],
+    exports: [],
     providers: []
 })
 export class AdminModule {
