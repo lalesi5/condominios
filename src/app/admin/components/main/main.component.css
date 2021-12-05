@@ -1,0 +1,13 @@
+.main{
+    position: absolute;
+    width: calc(100% - 252px);
+    left: 242px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.2s;
+}
+
+.main.active{
+    width: calc(100% - 101px);
+    left: 55px;
+}
