@@ -1,8 +1,8 @@
-.administracion{
+.reportes{
     position: absolute;
     width: calc(100% - 232px);
     left: 232px;
     min-height: 100vh;
-    background: rgb(79, 91, 145);
+    background: seagreen;
     transition: 0.2s;
 }

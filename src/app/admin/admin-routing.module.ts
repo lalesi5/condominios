@@ -4,13 +4,23 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { AdminComponent } from "./admin.component";
 import { AdministracionComponent } from "./Administracion/administracion.component";
+import { AjustesComponent } from "./Ajustes/ajustes.component";
+import { ComunicacionComponent } from "./Comunicacion/comunicacion.component";
+import { FinanzasComponent } from "./Finanzas/finanzas.component";
+import { InicioComponent } from "./Inicio/inicio.component";
+import { ReportesComponent } from "./Reportes/reportes.component";
 
 
 const routesAdmin: Routes = [
     {path: '', component: AdminComponent, children:
         [
-            {path: '', redirectTo: 'administracion', pathMatch: 'full'},
-            {path: 'administracion', component: AdministracionComponent}
+            {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+            {path: 'inicio', component: InicioComponent},
+            {path: 'administracion', component: AdministracionComponent},
+            {path: 'comunicacion', component: ComunicacionComponent},
+            {path: 'reportes', component: ReportesComponent},
+            {path: 'finanzas', component: FinanzasComponent},
+            {path: 'ajustes', component: AjustesComponent},
         ]
     },
 ];
