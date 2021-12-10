@@ -11,8 +11,6 @@ import { AjustesComponent } from './Ajustes/ajustes.component';
 import { ComunicacionComponent } from './Comunicacion/comunicacion.component';
 import { ReportesComponent } from './Reportes/reportes.component';
 import { FinanzasComponent } from './Finanzas/finanzas.component';
-import { IndividualesComponent } from './Comunicacion/individuales/individuales.component';
-import { GeneralesComponent } from './Comunicacion/generales/generales.component';
 
 import {MatCardModule} from '@angular/material/card'; 
 
@@ -33,9 +31,7 @@ import {MatCardModule} from '@angular/material/card';
         ComunicacionComponent,
         ReportesComponent,
         FinanzasComponent,
-        AjustesComponent,
-        IndividualesComponent,
-        GeneralesComponent
+        AjustesComponent
     ],
     exports: [
         MatCardModule

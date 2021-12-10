@@ -7,15 +7,14 @@
       <nav id="menu">
         <ul>
           <li>
-            <a [routerLink]="['/home']" [routerLinkActive]="['active']">Anuncios Generales</a>
+            <a [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']">Anuncios Generales</a>
           </li>
           <li>
-            <a [routerLink]="['/admin']" [routerLinkActive]="['active']">Comunicados Individuales</a>
+            <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']">Comunicados Individuales</a>
           </li>
         </ul>
       </nav>
     </mat-card>
   </div>
 </div>
-
 <router-outlet></router-outlet>

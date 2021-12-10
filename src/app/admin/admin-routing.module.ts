@@ -5,9 +5,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { AdminComponent } from "./admin.component";
 import { AdministracionComponent } from "./Administracion/administracion.component";
 import { AjustesComponent } from "./Ajustes/ajustes.component";
-import { ComunicacionComponent } from "./Comunicacion/comunicacion.component";
-import { GeneralesComponent } from "./Comunicacion/generales/generales.component";
-import { IndividualesComponent } from "./Comunicacion/individuales/individuales.component";
 import { FinanzasComponent } from "./Finanzas/finanzas.component";
 import { InicioComponent } from "./Inicio/inicio.component";
 import { ReportesComponent } from "./Reportes/reportes.component";
@@ -19,9 +16,7 @@ const routesAdmin: Routes = [
             {path: '', redirectTo: 'inicio', pathMatch: 'full'},
             {path: 'inicio', component: InicioComponent},
             {path: 'administracion', component: AdministracionComponent},
-            {path: 'comunicacion', component: ComunicacionComponent},
-            {path: 'comunicacion/individuales', component: IndividualesComponent},
-            {path: 'comunicacion/generales', component: GeneralesComponent},
+            {path: 'comunicacion', loadChildren: () => import('./Comunicacion/comunicacion.module').then(m => m.ComunicacionModule)},
             {path: 'reportes', component: ReportesComponent},
             {path: 'finanzas', component: FinanzasComponent},
             {path: 'ajustes', component: AjustesComponent},
