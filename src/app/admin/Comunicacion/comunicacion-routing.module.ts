@@ -9,7 +9,7 @@ const routesComunicacion: Routes = [
         path: '', component: ComunicacionComponent, children:
         [
             {path: '', redirectTo: 'generales', pathMatch: 'full'},
-            {path: 'individuales', component: IndividualesComponent},
+            {path: 'individuales', loadChildren: () => import('./individuales/individuales.module').then(m => m.IndividualesModule)},
             {path: 'generales', loadChildren: () => import('./generales/generales.module').then(m => m.GeneralesModule)}
         ]
     }
