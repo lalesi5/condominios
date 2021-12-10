@@ -1,3 +1,34 @@
-h1{
-    font-size: 100px;
+.anuncioGeneral{
+position: absolute;
+width: calc(100% - 231px);
+min-height: 60vh;
+left: 231px;
+top: 190px;
+}
+
+.containerGeneral mat-card{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 100px;
+    width: 90%;
+    height: auto;
+}
+
+.containerMensajes mat-card{
+    position: relative;
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 90%;
+    height: auto;
+}
+
+.btn{
+    position: relative;
+    margin-top: 8px;
+    margin-right: 8px;
+    padding: 5px 5px;
+    background: #287bff;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 6px;
 }

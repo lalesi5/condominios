@@ -2,15 +2,18 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { ComunicacionComponent } from "./comunicacion.component";
+import { GeneralesComponent } from "./generales/generales.component";
 import { IndividualesComponent } from "./individuales/individuales.component";
+import { NuevoMensajeComponent } from "./nuevoMensaje/nuevoMensaje.component";
 
 const routesComunicacion: Routes = [
     {
         path: '', component: ComunicacionComponent, children:
         [
             {path: '', redirectTo: 'generales', pathMatch: 'full'},
-            {path: 'individuales', loadChildren: () => import('./individuales/individuales.module').then(m => m.IndividualesModule)},
-            {path: 'generales', loadChildren: () => import('./generales/generales.module').then(m => m.GeneralesModule)}
+            {path: 'individuales', component: IndividualesComponent},
+            {path: 'generales', component: GeneralesComponent},
+            {path: 'nuevo', component: NuevoMensajeComponent}
         ]
     }
 ]
