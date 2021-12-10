@@ -11,14 +11,18 @@ import { AjustesComponent } from './Ajustes/ajustes.component';
 import { ComunicacionComponent } from './Comunicacion/comunicacion.component';
 import { ReportesComponent } from './Reportes/reportes.component';
 import { FinanzasComponent } from './Finanzas/finanzas.component';
+import { IndividualesComponent } from './Comunicacion/individuales/individuales.component';
+import { GeneralesComponent } from './Comunicacion/generales/generales.component';
 
+import {MatCardModule} from '@angular/material/card'; 
 
 
 @NgModule({
 
     imports: [
         AdminRoutingModule,
-        SharedModule
+        SharedModule,
+        MatCardModule
     ],
     declarations: [
         AdminComponent,
@@ -30,8 +34,12 @@ import { FinanzasComponent } from './Finanzas/finanzas.component';
         ReportesComponent,
         FinanzasComponent,
         AjustesComponent,
+        IndividualesComponent,
+        GeneralesComponent
     ],
-    exports: [],
+    exports: [
+        MatCardModule
+    ],
     providers: []
 })
 export class AdminModule {

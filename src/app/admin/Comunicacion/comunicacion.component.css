@@ -1,8 +1,44 @@
 .comunicacion{
     position: absolute;
-    width: calc(100% - 232px);
-    left: 232px;
+    width: calc(100% - 231px);
+    left: 231px;
     min-height: 100vh;
-    background: seagreen;
-    transition: 0.2s;
+    background: white;
+    transition: 0.5s;
+}
+
+.headerComunicacion mat-card{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 100px;
+    width: 90%;
+}
+
+#menu {
+    font-size: 20px;
+}
+
+#menu ul{
+    line-height: 50px;
+    width: 100%;
+    float: initial;
+    margin-bottom: 0rem;
+}
+
+#menu ul li{
+    display: inline-block;
+    list-style: none;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#menu a{
+    text-decoration: none;
+    padding-top: 10px;
+    transition: 300ms all;
+    color: black;
+}
+
+#menu a:hover{
+    color: #287bff;
 }

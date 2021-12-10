@@ -1,4 +1,21 @@
 <div class="comunicacion">
-    <app-topbar></app-topbar>
-    <h1>Comunicacion Works</h1>
-    </div>
+  <app-topbar></app-topbar>
+
+  <!--Header Comunicacion-->
+  <div class="headerComunicacion">
+    <mat-card>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/home']" [routerLinkActive]="['active']">Anuncios Generales</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin']" [routerLinkActive]="['active']">Comunicados Individuales</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-card>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

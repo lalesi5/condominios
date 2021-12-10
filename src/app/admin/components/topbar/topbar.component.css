@@ -27,3 +27,15 @@
     height: 100%;
     object-fit: cover;
 }
+
+
+.btn{
+    position: relative;
+    margin-top: 8px;
+    margin-right: 8px;
+    padding: 5px 5px;
+    background: #287bff;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 6px;
+}
