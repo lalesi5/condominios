@@ -1,26 +1,58 @@
-.anuncioIndividual{
+.anuncioIndividual {
+  position: absolute;
+  width: calc(100% - 231px);
+  min-height: 60vh;
+  left: 231px;
+  top: 190px;
+}
+
+.containerIndividual mat-card {
+  position: absolute;
+  margin-top: 210px;
+  margin-left: 332px;
+  width: 79%;
+  height: auto;
+}
+
+.btn {
+  position: relative;
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 5px 5px;
+  background: #287bff;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.containerMensajes mat-card{
     position: absolute;
-    width: calc(100% - 231px);
-    min-height: 60vh;
-    left: 231px;
-    top: 190px;
-    }
-    
-    .containerIndividual mat-card{
-        position: absolute;
-        margin-top: 210px;
-        margin-left: 332px;
-        width: 79%;
-        height: auto;
-    }
-    
-    .btn{
-        position: relative;
-        margin-top: 8px;
-        margin-right: 8px;
-        padding: 5px 5px;
-        background: #287bff;
-        text-decoration: none;
-        color: #fff;
-        border-radius: 6px;
-    }
+    margin-top: 330px;
+    margin-left: 332px;
+    width: 79%;
+    height: auto;
+}
+
+.containerMensajes table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+.containerMensajes table thead {
+    font-weight: 600;
+}
+
+.containerMensajes .unidadesPrivativas table td{
+    color: #222;
+    border-top: 3px solid rgba(0,0,0,0.1);
+}
+
+.containerMensajes .unidadesPrivativas table tr td{
+    padding: 17px;
+}
+
+.containerMensajes .unidadesPrivativas table tr td mat-icon{
+    color: #287bff;
+    font-size: 2.5em;
+}

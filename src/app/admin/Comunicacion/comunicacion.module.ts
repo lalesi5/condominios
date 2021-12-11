@@ -7,6 +7,8 @@ import { IndividualesComponent } from "./individuales/individuales.component";
 import {MatCardModule} from '@angular/material/card'; 
 import {MatIconModule} from '@angular/material/icon'; 
 import { NuevoMensajeComponent } from "./nuevoMensaje/nuevoMensaje.component";
+import { MensajeUsuarioComponent } from "./mensajesUsuario/mensajesUsuario.component";
+import { NuevoAnuncioComponent } from "./nuevoAnuncio/nuevoAnuncio.component";
 
 @NgModule({
     imports: [
@@ -17,7 +19,9 @@ import { NuevoMensajeComponent } from "./nuevoMensaje/nuevoMensaje.component";
     declarations:[
         GeneralesComponent,
         IndividualesComponent,
-        NuevoMensajeComponent
+        NuevoMensajeComponent,
+        MensajeUsuarioComponent,
+        NuevoAnuncioComponent
     ],
     exports: [
         MatCardModule,
