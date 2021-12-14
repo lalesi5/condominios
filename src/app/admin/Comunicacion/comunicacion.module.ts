@@ -6,6 +6,8 @@ import { IndividualesComponent } from "./individuales/individuales.component";
 
 import {MatCardModule} from '@angular/material/card'; 
 import {MatIconModule} from '@angular/material/icon'; 
+import {MatInputModule} from '@angular/material/input'; 
+
 import { NuevoMensajeComponent } from "./nuevoMensaje/nuevoMensaje.component";
 import { MensajeUsuarioComponent } from "./mensajesUsuario/mensajesUsuario.component";
 import { NuevoAnuncioComponent } from "./nuevoAnuncio/nuevoAnuncio.component";
@@ -14,7 +16,8 @@ import { NuevoAnuncioComponent } from "./nuevoAnuncio/nuevoAnuncio.component";
     imports: [
         ComunicacionRoutingModule,
         MatCardModule,
-        MatIconModule
+        MatIconModule,
+        MatInputModule
     ],
     declarations:[
         GeneralesComponent,

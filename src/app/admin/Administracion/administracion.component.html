@@ -1,4 +1,22 @@
 <div class="administracion">
   <app-topbar></app-topbar>
-  <h1>Administracion Works</h1>
+ 
+  <!--Header Comunicacion-->
+  <div class="headerAdministracion">
+    <mat-card>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']">Unidades</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']">Usuarios</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']">Areas Comunes</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-card>
+  </div>
 </div>

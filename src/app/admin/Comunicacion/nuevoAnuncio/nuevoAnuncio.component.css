@@ -1,0 +1,52 @@
+.nuevoAnuncio {
+  position: absolute;
+  width: calc(100% - 231px);
+  min-height: 60vh;
+  left: 231px;
+  top: 190px;
+}
+
+.headerAnuncio mat-card {
+  position: relative;
+  margin-top: 20px;
+  margin-left: 100px;
+  width: 90%;
+  height: auto;
+}
+
+.btn{
+    position: relative;
+    margin-top: 8px;
+    margin-right: 8px;
+    padding-bottom: 2px;
+    background: #287bff;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.containerAnuncio mat-card{
+    position: relative;
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 90%;
+    height: auto;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+#insertFile{
+  margin-bottom: 15px;
+}
+
+.textAreaAnuncio{
+  width: 100%;
+  height: auto;
+}
+
+.formularioAnuncio .botonesSubmit{
+  display:flex;
+  justify-content: right;
+}
