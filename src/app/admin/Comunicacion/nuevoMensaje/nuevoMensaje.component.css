@@ -1,0 +1,52 @@
+.nuevoMensaje {
+  position: absolute;
+  width: calc(100% - 231px);
+  min-height: 60vh;
+  left: 231px;
+  top: 190px;
+}
+
+.headerMensaje mat-card {
+  position: relative;
+  margin-top: 10px;
+  margin-left: 100px;
+  width: 90%;
+  height: auto;
+}
+
+.btn {
+  position: relative;
+  margin-right: 8px;
+  padding-bottom: 2px;
+  background: #287bff;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.containerMensaje mat-card {
+  position: absolute;
+  margin-top: 310px;
+  margin-left: 330px;
+  width: 79%;
+  height: auto;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.textAreaMensaje {
+    width: 100%;
+  }
+
+#insertFile {
+  margin-bottom: 15px;
+}
+
+
+
+.formularioMensaje .botonesSubmit {
+  display: flex;
+  justify-content: right;
+}

@@ -15,7 +15,7 @@ const routesAdmin: Routes = [
         [
             {path: '', redirectTo: 'inicio', pathMatch: 'full'},
             {path: 'inicio', component: InicioComponent},
-            {path: 'administracion', component: AdministracionComponent},
+            {path: 'administracion', loadChildren: () => import('./Administracion/administracion.module').then(m => m.AdministracionModule)},
             {path: 'comunicacion', loadChildren: () => import('./Comunicacion/comunicacion.module').then(m => m.ComunicacionModule)},
             {path: 'reportes', component: ReportesComponent},
             {path: 'finanzas', component: FinanzasComponent},

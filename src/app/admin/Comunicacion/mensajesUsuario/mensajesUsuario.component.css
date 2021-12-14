@@ -1,0 +1,50 @@
+.mensajeUsuario {
+  position: relative;
+  width: calc(100% - 231px);
+  min-height: 60vh;
+  left: 231px;
+  top: 190px;
+}
+
+.headerMensajesUsuario mat-card {
+  position: absolute;
+  margin-top: 150px;
+  margin-left: 330px;
+  width: 79.2%;
+  height: auto;
+}
+
+.btn {
+  position: relative;
+  margin-top: 8px;
+  margin-right: 8px;
+  padding-bottom: 2px;
+  background: #287bff;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.headerUser mat-card {
+  position: absolute;
+  margin-top: 250px;
+  margin-left: 330px;
+  text-align: center;
+  width: 79%;
+  height: auto;
+  background: #287bff;
+  color: #fff;
+}
+
+.headerUser mat-card mat-card-subtitle{
+    color: #fff;
+}
+
+.bodyUser mat-card {
+    position: relative;
+    top: 350px;
+    left: 330px;
+    width: 79%;
+    height: auto;
+    margin-bottom: 15px;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-nuevoMensaje',
@@ -11,3 +12,8 @@ export class NuevoMensajeComponent implements OnInit{
     
     ngOnInit(){}
 }
+
+export class SelectMultipleExample {
+    toppings = new FormControl();
+    toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  }
