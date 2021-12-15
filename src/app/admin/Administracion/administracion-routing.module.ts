@@ -10,6 +10,7 @@ const routerAdministracion: Routes = [
     {
         path: '', component: AdministracionComponent, children:
         [
+            {path: '', redirectTo: 'unidades', pathMatch: 'full'},
             {path: 'unidades', component: UnidadesComponent},
             {path: 'usuarios', component: UsuariosComponent},
             {path: 'areasComunes', component: AreasComunesComponent}

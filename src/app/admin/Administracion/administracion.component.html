@@ -1,22 +1,22 @@
 <div class="administracion">
   <app-topbar></app-topbar>
- 
   <!--Header Comunicacion-->
   <div class="headerAdministracion">
     <mat-card>
       <nav id="menu">
         <ul>
           <li>
-            <a [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']">Unidades</a>
+            <a [routerLink]="['/admin/administracion/unidades']" [routerLinkActive]="['active']">Unidades</a>
           </li>
           <li>
-            <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']">Usuarios</a>
+            <a [routerLink]="['/admin/administracion/usuarios']" [routerLinkActive]="['active']">Usuarios</a>
           </li>
           <li>
-            <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']">Areas Comunes</a>
+            <a [routerLink]="['/admin/administracion/areasComunes']" [routerLinkActive]="['active']">Areas Comunes</a>
           </li>
         </ul>
       </nav>
     </mat-card>
   </div>
 </div>
+<router-outlet></router-outlet>

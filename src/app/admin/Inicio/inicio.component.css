@@ -8,7 +8,7 @@
 }
 
 
-.cardBox{
+.headerReseMenUni{
     position: relative;
     margin-left: 300px;
     width: 60%;
@@ -18,7 +18,7 @@
     grid-gap: 30px;
 }
 
-.cardBox .card{
+.headerReseMenUni .card{
     position: relative;
     align-items: center;
     padding: 10px;
@@ -28,11 +28,11 @@
     box-shadow: 0 7px 25px rgba(0,0,0,0.08);
 }
 
-.cardBox .card:hover{
+.headerReseMenUni .card:hover{
     background: #287bff;
 }
 
-.cardBox .card .numbers{
+.headerReseMenUni .card .numbers{
     text-align: center;
     padding-top: 10px;
     position: relative;
@@ -41,28 +41,28 @@
     color: #287bff;
 }
 
-.cardBox .card .cardName{
+.headerReseMenUni .card .cardName{
     color: #999;
     font-size: 1.1em;
     margin-top: 10px;
     text-align: center;
 }
 
-.cardBox .card .iconBx{   
+.headerReseMenUni .card .iconBx{   
     color: #999;
     width: 15%;
 }
 
-.cardBox .card .iconBx mat-icon{
+.headerReseMenUni .card .iconBx mat-icon{
     font-size: 3em;
     padding-top: 15px;
     align-items: flex-start;
 }
 
 
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBx{
+.headerReseMenUni .card:hover .numbers,
+.headerReseMenUni .card:hover .cardName,
+.headerReseMenUni .card:hover .iconBx{
     color: #fff;
 }
 
