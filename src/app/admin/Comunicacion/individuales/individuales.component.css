@@ -1,24 +1,25 @@
-.anuncioIndividual {
+.anuncioindividual {
   position: absolute;
   width: calc(100% - 231px);
-  min-height: 60vh;
   left: 231px;
-  top: 190px;
+  top: 150px;
+  min-height: 82vh;
 }
 
 .containerIndividual mat-card {
-  position: absolute;
-  margin-top: 210px;
-  margin-left: 332px;
-  width: 79%;
-  height: auto;
+    display: flex;
+    top: 15px;
+    width: 99%;
+    left: 8px;
+    border-radius: 20px;
+    padding-bottom: 25px;
 }
 
 .btn {
   position: relative;
   margin-top: 8px;
   margin-right: 8px;
-  padding: 5px 5px;
+  padding: 5px 4px;
   background: #287bff;
   text-decoration: none;
   color: #fff;
@@ -26,11 +27,12 @@
 }
 
 .containerMensajes mat-card{
-    position: absolute;
-    margin-top: 330px;
-    margin-left: 332px;
-    width: 79%;
-    height: auto;
+  top: 15px;
+  margin-top: 15px;
+  width: 99%;
+  left: 8px;
+  border-radius: 20px;
+  padding: 20px 20px;
 }
 
 .containerMensajes table{

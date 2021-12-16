@@ -39,13 +39,12 @@
   width: 100%;
 }
 
-#insertFile{
-  margin-bottom: 15px;
-}
-
 .textAreaAnuncio{
   width: 100%;
-  height: auto;
+}
+
+#insertFile{
+  margin-bottom: 15px;
 }
 
 .formularioAnuncio .botonesSubmit{
