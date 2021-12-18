@@ -9,19 +9,17 @@
 
 
 .headerReseMenUni{
-    position: relative;
-    margin-left: 300px;
-    width: 60%;
-    padding: 20px;
+    padding: 10px;
     display: grid;
     grid-template-columns: repeat(3,1fr) ;
-    grid-gap: 30px;
+    justify-items: center;
 }
 
 .headerReseMenUni .card{
     position: relative;
     align-items: center;
     padding: 10px;
+    width: 60%;
     border-radius: 20px;
     display: flex;
     cursor: pointer;

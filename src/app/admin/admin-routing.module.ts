@@ -3,11 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 
 
 import { AdminComponent } from "./admin.component";
-import { AdministracionComponent } from "./Administracion/administracion.component";
 import { AjustesComponent } from "./Ajustes/ajustes.component";
-import { FinanzasComponent } from "./Finanzas/finanzas.component";
 import { InicioComponent } from "./Inicio/inicio.component";
-import { ReportesComponent } from "./Reportes/reportes.component";
 
 
 const routesAdmin: Routes = [
@@ -17,8 +14,8 @@ const routesAdmin: Routes = [
             {path: 'inicio', component: InicioComponent},
             {path: 'administracion', loadChildren: () => import('./Administracion/administracion.module').then(m => m.AdministracionModule)},
             {path: 'comunicacion', loadChildren: () => import('./Comunicacion/comunicacion.module').then(m => m.ComunicacionModule)},
-            {path: 'reportes', component: ReportesComponent},
-            {path: 'finanzas', component: FinanzasComponent},
+            {path: 'reportes', loadChildren: () => import('./Reportes/reportes.module').then(m => m.ReportesModule)},
+            {path: 'finanzas', loadChildren: () => import('./Finanzas/finanzas.module').then(m => m.FinanzasModule)},
             {path: 'ajustes', component: AjustesComponent},
             
         ]
