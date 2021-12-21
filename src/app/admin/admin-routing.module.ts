@@ -16,7 +16,7 @@ const routesAdmin: Routes = [
             {path: 'administracion', loadChildren: () => import('./Administracion/administracion.module').then(m => m.AdministracionModule)},
             {path: 'comunicacion', loadChildren: () => import('./Comunicacion/comunicacion.module').then(m => m.ComunicacionModule)},
             {path: 'reportes', loadChildren: () => import('./Reportes/reportes.module').then(m => m.ReportesModule)},
-            {path: 'finanzas', component: FinanzasComponent},
+            {path: 'finanzas', loadChildren: () => import('./Finanzas/finanzas.module').then(m => m.FinanzasModule)},
             {path: 'ajustes', component: AjustesComponent},
             
         ]
