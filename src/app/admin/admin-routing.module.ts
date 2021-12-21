@@ -5,6 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AdminComponent } from "./admin.component";
 import { AjustesComponent } from "./Ajustes/ajustes.component";
 import { InicioComponent } from "./Inicio/inicio.component";
+import { FinanzasComponent } from './Finanzas/finanzas.component';
 
 
 const routesAdmin: Routes = [
@@ -15,7 +16,7 @@ const routesAdmin: Routes = [
             {path: 'administracion', loadChildren: () => import('./Administracion/administracion.module').then(m => m.AdministracionModule)},
             {path: 'comunicacion', loadChildren: () => import('./Comunicacion/comunicacion.module').then(m => m.ComunicacionModule)},
             {path: 'reportes', loadChildren: () => import('./Reportes/reportes.module').then(m => m.ReportesModule)},
-            {path: 'finanzas', loadChildren: () => import('./Finanzas/finanzas.module').then(m => m.FinanzasModule)},
+            {path: 'finanzas', component: FinanzasComponent},
             {path: 'ajustes', component: AjustesComponent},
             
         ]

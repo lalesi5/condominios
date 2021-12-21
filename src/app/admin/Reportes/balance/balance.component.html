@@ -1,0 +1,118 @@
+<div class="balance">
+
+  <div class="containerCardsBalance">
+    <mat-card>
+      <div class="cardsBalance">
+        <div class="card">
+          <div>
+            <div class="cardName">Saldo Neto Disponible</div>
+            <div class="numbers">$600.00</div>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <div class="cardName">Total Ingresos</div>
+            <div class="numbers">$1500.00</div>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <div class="cardName">Total Egresos</div>
+            <div class="numbers">$900.00</div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="tablaBalance">
+    <mat-card>
+      <!--tabla Ingresos-->
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Ingresos</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mantenimientos</td>
+            <td>9000</td>
+          </tr>
+          <tr>
+            <td>Areas Comunes</td>
+            <td>9000</td>
+          </tr>
+          <tr>
+            <td>Otros ingresos</td>
+            <td>5000</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="bg-success">
+            <td>Total</td>
+            <td>$1500</td>
+          </tr>
+        </tfoot>
+      </table>
+    </mat-card>
+
+    <mat-card>
+      <!--Tabla Egresos-->
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Egresos</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Agua Potable</td>
+            <td>900</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="bg-danger">
+            <td>Total</td>
+            <td>$900</td>
+          </tr>
+        </tfoot>
+      </table>
+    </mat-card>
+
+    
+    <mat-card>
+        <!--Tabla Saldo Neto-->
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Resumen</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td>Saldo</td>
+                <td>0</td>
+              </tr>
+            <tr>
+              <td>Total Ingresos</td>
+              <td>1500</td>
+            </tr>
+            <tr>
+                <td>Total Egresos</td>
+                <td>1500</td>
+              </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-info">
+              <td>Saldo Neto Dispobible</td>
+              <td>$600</td>
+            </tr>
+          </tfoot>
+        </table>
+      </mat-card>
+  </div>
+</div>

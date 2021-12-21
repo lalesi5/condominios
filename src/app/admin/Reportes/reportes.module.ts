@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/core/shared/shared.module';
+import { ReportesRoutingModule } from './reportes-routing.module';
+
 import { BalanceComponent } from './balance/balance.component';
 import { EgresosReportesComponent } from './egresos/egresosReportes.component';
 import { IngresosReportesComponent } from './ingresos/ingresosReportes.component';
-import { ReportesRoutingModule } from './reportes-routing.module';
 
 
+import {MatCardModule} from '@angular/material/card'; 
+import {MatIconModule} from '@angular/material/icon'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';  
 
 @NgModule({
 
     imports: [
         ReportesRoutingModule,
-        SharedModule
+        MatCardModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule
     ],
     declarations: [
         BalanceComponent,
