@@ -34,7 +34,9 @@ import {MatCardModule} from '@angular/material/card';
         AjustesComponent
     ],
     exports: [
-        MatCardModule
+        MatCardModule,
+        NavigationComponent,
+        TopBarComponent
     ],
     providers: []
 })

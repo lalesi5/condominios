@@ -5,7 +5,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { AdminComponent } from "./admin.component";
 import { AjustesComponent } from "./Ajustes/ajustes.component";
 import { InicioComponent } from "./Inicio/inicio.component";
-import { FinanzasComponent } from './Finanzas/finanzas.component';
 
 
 const routesAdmin: Routes = [
