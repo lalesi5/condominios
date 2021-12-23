@@ -8,9 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,7 +16,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgbModule
   ],
+  declarations: [
+    AppComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

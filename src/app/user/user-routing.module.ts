@@ -1,9 +1,7 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from '@angular/router';
 
 import { UserAnunciosComponent } from "./Anuncios/userAnuncios.component";
-
-
 import { UserComponent } from "./user.component";
 
 
@@ -26,4 +24,4 @@ const routesUsuarios: Routes = [
 
 })
 
-export class UserRoutingModule {}
+export class UsuarioRoutingModule {}

@@ -35,15 +35,8 @@ import {MatCardModule} from '@angular/material/card';
     ],
     exports: [
         MatCardModule,
-        NavigationComponent,
-        TopBarComponent
     ],
     providers: []
 })
-export class AdminModule {
 
-    constructor() {
-
-    }
-
-}
+export class AdminModule {}
