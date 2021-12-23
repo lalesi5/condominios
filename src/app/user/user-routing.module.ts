@@ -3,16 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UserAnunciosComponent } from "./Anuncios/userAnuncios.component";
 import { UserComponent } from "./user.component";
+import { InicioUsuarioComponent } from './inicio/inicioUsuario.component';
+import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario.component';
+import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
 
 
 const routesUsuarios: Routes = [
     {path: '', component: UserComponent, children:
         [
-            {path: '', redirectTo: 'anuncios', pathMatch: 'full'},
+            {path: '', redirectTo: 'home', pathMatch: 'full'},
+            {path: 'home', component: InicioUsuarioComponent},
             {path: 'anuncios', component: UserAnunciosComponent},
-            {path: 'finanzas'},
+            {path: 'comunicacion', component: ComunicacionUsuarioComponent},
+            {path: 'finanzas', component: FinanzasUsuarioComponent},
             {path: 'areasComunes'},
-            {path: 'configuracion'}
+            {path: 'ajustes'}
             
         ]
     },
