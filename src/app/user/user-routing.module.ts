@@ -6,6 +6,8 @@ import { UserComponent } from "./user.component";
 import { InicioUsuarioComponent } from './inicio/inicioUsuario.component';
 import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario.component';
 import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
+import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario.component';
+import { AjustesUsuarioComponent } from './Ajustes/ajustesUsuario.component';
 
 
 const routesUsuarios: Routes = [
@@ -16,8 +18,8 @@ const routesUsuarios: Routes = [
             {path: 'anuncios', component: UserAnunciosComponent},
             {path: 'comunicacion', component: ComunicacionUsuarioComponent},
             {path: 'finanzas', component: FinanzasUsuarioComponent},
-            {path: 'areasComunes'},
-            {path: 'ajustes'}
+            {path: 'areasComunes', component: AreasComunesUsuarioComponent},
+            {path: 'ajustes', component: AjustesUsuarioComponent},
             
         ]
     },

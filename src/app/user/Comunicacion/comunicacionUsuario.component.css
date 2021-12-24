@@ -2,7 +2,9 @@
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
-  min-height: 82vh;
+  min-height: 100vh;
+  background: rgba(0,0,0,0.08);
+  transition: 0.5s;
 }
 
 .headerMensajesUsuario mat-card {

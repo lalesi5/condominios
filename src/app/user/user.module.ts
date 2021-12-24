@@ -12,6 +12,9 @@ import { UserComponent } from './user.component';
 import { NavigationUserComponent } from './components/navigation/navigationUser.component';
 import { TopBarUserComponent } from './components/topbar/topbarUser.component';
 import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario.component';
+import { AjustesUsuarioComponent } from './Ajustes/ajustesUsuario.component';
+import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario.component';
+import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
 
 
 @NgModule({
@@ -29,8 +32,10 @@ import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario
         NavigationUserComponent,
         InicioUsuarioComponent,
         TopBarUserComponent,
-        ComunicacionUsuarioComponent
-        
+        ComunicacionUsuarioComponent,
+        AjustesUsuarioComponent,
+        AreasComunesUsuarioComponent,
+        FinanzasUsuarioComponent
     ],
     exports: [
         MatCardModule,
