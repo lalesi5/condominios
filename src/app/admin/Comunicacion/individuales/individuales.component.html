@@ -1,0 +1,86 @@
+<div class="anuncioindividual">
+  <div class="containerIndividual">
+    <mat-card>
+      <div class="botonNuevo">
+        <a [routerLink]="['/admin/comunicacion/nuevoMensaje']" [routerLinkActive]="['active']" class="btn">Nuevo</a>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="containerMensajes">
+    <mat-card>
+      <div class="unidadesPrivativas">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Unidad Privativa</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Mensajes</th>
+              <th>Contactar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <mat-icon> person_pin</mat-icon>
+              </td>
+              <td>1</td>
+              <td>Alex Carrera</td>
+              <td>alex.carrera@epn.edu.ec</td>
+              <td><a [routerLink]="['/admin/comunicacion/mensajeUsuario']" [routerLinkActive]="['active']">Ver mensajes
+                  individuales</a></td>
+              <td>
+                <mat-icon [routerLink]="['/admin/comunicacion/nuevoMensaje']" [routerLinkActive]="['active']">mail
+                </mat-icon>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-icon> person_pin</mat-icon>
+              </td>
+              <td>2</td>
+              <td>Alejandro Tupiza</td>
+              <td>alejandro.tupiza@epn.edu.ec</td>
+              <td><a [routerLink]="['/admin/comunicacion/mensajeUsuario']" [routerLinkActive]="['active']">Ver mensajes
+                  individuales</a></td>
+              <td>
+                <mat-icon [routerLink]="['/admin/comunicacion/nuevoMensaje']" [routerLinkActive]="['active']">mail
+                </mat-icon>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-icon> person_pin</mat-icon>
+              </td>
+              <td>3</td>
+              <td>Juan Rodriguez</td>
+              <td>juan.rodriguez@epn.edu.ec</td>
+              <td><a [routerLink]="['/admin/comunicacion/mensajeUsuario']" [routerLinkActive]="['active']">Ver mensajes
+                  individuales</a></td>
+              <td>
+                <mat-icon [routerLink]="['/admin/comunicacion/nuevoMensaje']" [routerLinkActive]="['active']">mail
+                </mat-icon>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-icon> person_pin</mat-icon>
+              </td>
+              <td>4</td>
+              <td>Javier Gomez</td>
+              <td>javier.gomez@epn.edu.ec</td>
+              <td><a [routerLink]="['/admin/comunicacion/mensajeUsuario']" [routerLinkActive]="['active']">Ver mensajes
+                  individuales</a></td>
+              <td>
+                <mat-icon [routerLink]="['/admin/comunicacion/nuevoMensaje']" [routerLinkActive]="['active']">mail
+                </mat-icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-card>
+  </div>
+</div>

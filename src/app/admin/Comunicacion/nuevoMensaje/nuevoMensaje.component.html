@@ -1,0 +1,39 @@
+<div class="nuevoMensaje">
+  <div class="headerMensaje">
+    <mat-card>
+      <div class="botonAtras">
+        <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']" class="btn">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </a>
+      </div>
+    </mat-card>
+  </div>
+  <div class="containerMensaje">
+    <mat-card>
+      <form class="formularioMensaje">
+        <mat-form-field appearance="fill">
+          <mat-label>Usuarios</mat-label>
+          <mat-select multiple>
+            <mat-option>afcalvarez@hotmail.com</mat-option>
+            <mat-option>alex.carrera@epn.edu.ec</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Titulo</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <div id="insertFile">
+          <input type="file">
+        </div>
+        <mat-form-field class="textAreaMensaje" appearance="fill">
+          <mat-label>Mensaje</mat-label>
+          <textarea matInput placeholder="Ingrese su Mensaje"></textarea>
+        </mat-form-field>
+        <div class="botonesSubmit">
+          <button type="submit" class="btn">Enviar</button>
+          <button class="btn">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

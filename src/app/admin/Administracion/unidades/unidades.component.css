@@ -1,0 +1,130 @@
+.selectorUnidades {
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 165px;
+  min-height: 82vh;
+}
+
+.containerSelector mat-card {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  width: 99%;
+  left: 8px;
+  padding-bottom: 1px;
+  border-radius: 20px;
+}
+
+.containerSelector mat-card h2 {
+  padding-top: 10px;
+  padding-right: 30px;
+}
+
+.bodyUnidades mat-card {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  width: 99%;
+  left: 9px;
+  top: 15px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+}
+
+.cardsDatosUnidades {
+  width: 80%;
+  padding: 1px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 35px;
+}
+
+.cardsDatosUnidades .card {
+  position: relative;
+  align-items: center;
+  padding: 1px;
+  border-radius: 20px;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardsDatosUnidades .card:hover {
+  background: #287bff;
+}
+
+.cardsDatosUnidades .card .numbers {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+  font-size: 1.5em;
+  color: #298135;
+}
+
+.cardsDatosUnidades .card .cardName {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+
+.cardsDatosUnidades .card:hover .numbers,
+.cardsDatosUnidades .card:hover .cardName {
+  color: #fff;
+}
+
+.datosArrendador mat-card {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 99%;
+  left: 9px;
+  top: 30px;
+  border-radius: 20px;
+}
+
+.datosArrendador .card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 10px;
+  bottom: 10px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.datosArrendador .card .name {
+  padding-bottom: 10px;
+}
+
+.datosArrendador .card .email {
+  padding-bottom: 10px;
+}
+
+.datosArrendatario mat-card {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 99%;
+  left: 9px;
+  top: 45px;
+  border-radius: 20px;
+}
+
+.datosArrendatario .card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 10px;
+  bottom: 10px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.datosArrendatario .card .name {
+  padding-bottom: 10px;
+}
+
+.datosArrendatario .card .email {
+  padding-bottom: 10px;
+}

@@ -1,0 +1,23 @@
+.bodyUnidades {
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    top: 165px;
+    min-height: 82vh;
+  }
+  .bodyUnidades mat-card {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    width: 99%;
+    left: 8px;
+    padding-bottom: 1px;
+    border-radius: 20px;
+  }
+  .tablaUsuarios mat-card{
+    display: flex;
+    top: 15px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    flex-flow: column;
+  }

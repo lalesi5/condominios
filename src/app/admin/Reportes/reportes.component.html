@@ -1,0 +1,23 @@
+<div class="reportes">
+    <app-topbar></app-topbar>
+
+  <!--Header Reportes-->
+  <div class="headerReportes">
+    <mat-card>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/admin/reportes/balance']" [routerLinkActive]="['active']">Balance</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/reportes/ingresosReportes']" [routerLinkActive]="['active']">Ingresos</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/reportes/egresosReportes']" [routerLinkActive]="['active']">Egresos</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-card>
+  </div>
+</div>
+<router-outlet></router-outlet>

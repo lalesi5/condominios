@@ -1,0 +1,74 @@
+.inicio{
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    min-height: 100vh;
+    background: rgba(0,0,0,0.08);
+    transition: 0.5s;
+}
+
+.headerHomeUsuario{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr) ;
+    justify-items: center;
+}
+
+.headerHomeUsuario .card{
+    position: relative;
+    align-items: center;
+    padding: 10px;
+    width: 60%;
+    border-radius: 20px;
+    display: flex;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+}
+
+.headerHomeUsuario .card:hover{
+    background: #2b85a8;
+}
+
+.headerHomeUsuario .card .numbers{
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    font-weight: 600;
+    font-size: 2em;
+    color: #2b85a8;
+}
+
+.headerHomeUsuario .card .cardName{
+    color: #999;
+    font-size: 1.8em;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.headerHomeUsuario .card .iconBx{   
+    color: #999;
+    width: 15%;
+}
+
+.headerHomeUsuario .card .iconBx mat-icon{
+    font-size: 3em;
+    padding-top: 15px;
+    align-items: flex-start;
+}
+
+
+.headerHomeUsuario .card:hover .numbers,
+.headerHomeUsuario .card:hover .cardName,
+.headerHomeUsuario .card:hover .iconBx{
+    color: #fff;
+}
+
+.containerMensajes mat-card {
+    top: 15px;
+    margin-top: 15px;
+    width: 99%;
+    left: 8px;
+    border-radius: 20px;
+    padding: 20px 20px;
+}
+

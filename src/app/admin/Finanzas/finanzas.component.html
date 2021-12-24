@@ -1,0 +1,21 @@
+<div class="finanzas">
+  <app-topbar></app-topbar>
+  <div class="headerFinanzas">
+    <mat-card>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/admin/finanzas/ingresosFinanzas/']" [routerLinkActive]="['active']">Ingresos Alicuota</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/finanzas/ingresosExtraordinarios']" [routerLinkActive]="['active']">Ingresos Extraordinarias</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/finanzas/egresosFinanzas']" [routerLinkActive]="['active']">Egresos</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-card>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,48 @@
+.finanzas{
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    min-height: 100vh;
+    background: rgba(0,0,0,0.08);
+    transition: 0.5s;
+}
+
+.headerFinanzas mat-card{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    background:#287bff;
+    width: 99%;
+    top: 15px;
+    left: 8px;
+    border-radius: 10px;
+}
+
+#menu {
+    font-size: 20px;
+}
+
+#menu ul{
+    line-height: 20px;
+    width: 100%;
+    float: initial;
+    margin-bottom: 0rem;
+}
+
+#menu ul li{
+    display: inline-block;
+    list-style: none;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#menu a{
+    text-decoration: none;
+    padding-top: 10px;
+    transition: 300ms all;
+    color: white;
+}
+
+#menu a:hover{
+    color: black;
+}

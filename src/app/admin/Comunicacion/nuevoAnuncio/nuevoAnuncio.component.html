@@ -1,0 +1,32 @@
+<div class="nuevoAnuncio">
+  <div class="headerAnuncio">
+    <mat-card>
+      <div class="botonAtras">
+        <a [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']" class="btn">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </a>
+      </div>
+    </mat-card>
+  </div>
+  <div class="containerAnuncio">
+    <mat-card>
+      <form class="formularioAnuncio">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Titulo</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <div id="insertFile">
+          <input type="file">
+        </div>
+        <mat-form-field class="textAreaAnuncio" appearance="fill">
+          <mat-label>Anuncio</mat-label>
+          <textarea matInput placeholder="Ingrese su anuncio"></textarea>
+        </mat-form-field>
+        <div class="botonesSubmit">
+          <button type="submit" class="btn">Enviar</button>
+          <button class="btn">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
