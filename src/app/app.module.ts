@@ -10,6 +10,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { environment } from '../environments/environment';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CommonModule
   ],
   declarations: [
     AppComponent

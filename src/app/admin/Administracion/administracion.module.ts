@@ -9,6 +9,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';  
+import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
         MatCardModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        CommonModule
     ],
     declarations:[
         UnidadesComponent,
@@ -27,7 +30,8 @@ import {MatSelectModule} from '@angular/material/select';
     exports: [
         MatCardModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        CommonModule
     ]    
 })
 

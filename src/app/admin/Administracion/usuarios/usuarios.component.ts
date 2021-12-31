@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UsuarioService } from "src/app/services/user.service";
-import { UnidadesComponent } from '../unidades/unidades.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { convertToObject } from "typescript";
+
 
 @Component({
     selector: 'app-usuarios',
@@ -8,28 +10,31 @@ import { UnidadesComponent } from '../unidades/unidades.component';
     styleUrls: ['./usuarios.component.css']
 })
 
-export class UsuariosComponent implements OnInit{
+export class UsuariosComponent implements OnInit {
 
     usuarios: any[] = [];
+    unitsUsers: string[] = [];
 
-    constructor(private _usuarioService: UsuarioService){}
-    
-    ngOnInit(){
+    constructor(
+        private _usuarioService: UsuarioService
+    ) { }
+
+    ngOnInit() {
         this.getEmpleados();
     }
 
-getEmpleados(){
-    this._usuarioService.getUser().subscribe(data => {
-        this.usuarios = [];
-        data.forEach((element: any) => {
-            this.usuarios.push({
-                id:element.payload.doc.id,
-                ...element.payload.doc.data(),
+    getEmpleados() {
+        this._usuarioService
+            .getUser()
+            .subscribe(data => {
+                data.forEach((element: any) => {
+                    console.log(element.payload.doc.data().units.idUser);
+                    this.usuarios.push({
+                        id: element.payload.doc.id,
+                        ...element.payload.doc.data(),
+                    })
+                })
             })
-        });
-        console.log(this.usuarios);
-    })
-}
-
+    }
 }
 

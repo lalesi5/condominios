@@ -24,17 +24,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr [*ngFor]="let usuario of usuarios">
+          <tr *ngFor="let usuario of usuarios">
             <td>1</td>
-            <td>{{ usuario.type}}</td>
+            <td>{{ usuario.type }}</td>
             <td>{{ usuario.name }} {{usuario.last_name}}</td>
             <td>{{ usuario.email }}</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
+            <td>{{ usuario.phone }}</td>
+            <td>{{ usuario.cellphone }}</td>
+            <td>{{ usuario.city }}</td>
+            <td>{{ usuario.address }}</td>
             <td>200 m.</td>
           </tr>
+
         </tbody>
       </table>
     </mat-card>
