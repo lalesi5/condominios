@@ -20,10 +20,10 @@ export class UsuariosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.getEmpleados();
+        this.getUsuario();
     }
 
-    getEmpleados() {
+    getUsuario() {
         this._usuarioService
             .getUser()
             .subscribe(data => {
