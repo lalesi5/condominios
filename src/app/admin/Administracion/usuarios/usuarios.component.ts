@@ -20,9 +20,14 @@ export class UsuariosComponent implements OnInit{
 
 getEmpleados(){
     this._usuarioService.getUser().subscribe(data => {
+        this.usuarios = [];
         data.forEach((element: any) => {
-            console.log(element.payload.doc.data().units)
+            this.usuarios.push({
+                id:element.payload.doc.id,
+                ...element.payload.doc.data(),
+            })
         });
+        console.log(this.usuarios);
     })
 }
 
