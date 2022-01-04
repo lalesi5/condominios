@@ -1,7 +1,6 @@
+import { elementEventFullName } from "@angular/compiler/src/view_compiler/view_compiler";
 import { Component, OnInit } from "@angular/core";
 import { UsuarioService } from "src/app/services/user.service";
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { convertToObject } from "typescript";
 
 
 @Component({
@@ -13,7 +12,7 @@ import { convertToObject } from "typescript";
 export class UsuariosComponent implements OnInit {
 
     usuarios: any[] = [];
-    unitsUsers: string[] = [];
+    unitUsuarios: any[] = [];
 
     constructor(
         private _usuarioService: UsuarioService
@@ -21,6 +20,7 @@ export class UsuariosComponent implements OnInit {
 
     ngOnInit() {
         this.getUsuario();
+        //this.getUnit();
     }
 
     getUsuario() {
@@ -28,13 +28,28 @@ export class UsuariosComponent implements OnInit {
             .getUser()
             .subscribe(data => {
                 data.forEach((element: any) => {
-                    console.log(element.payload.doc.data().units.idUser);
-                    this.usuarios.push({
-                        id: element.payload.doc.id,
-                        ...element.payload.doc.data(),
+                    this.unitUsuarios = element.payload.doc.data().units;
+                    this.unitUsuarios.forEach((dataUser: any) => {
+                        this.usuarios.push({
+                            unitId: dataUser.id,
+                            id: element.payload.doc.id,
+                            ...element.payload.doc.data(),
+                        })                                                
                     })
                 })
             })
     }
+
+    // getUnit() {
+    //     this._usuarioService
+    //     .getUnitUser()
+    //     .subscribe(data => {
+    //         data.forEach((element: any) => {
+    //             console.log(element.payload.doc.data());
+    //         });
+    //     })
+    // }
+
+
 }
 

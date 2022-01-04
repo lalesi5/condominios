@@ -13,4 +13,7 @@ export class UsuarioService {
         return this.firestore.collection('user').snapshotChanges();
     }
 
+    getUnitUser(): Observable<any> {
+        return this.firestore.collection('unit').snapshotChanges();
+    }
 }

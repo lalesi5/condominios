@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let usuario of usuarios">
-            <td>1</td>
+            <td>{{ usuario.unitId }}</td>
             <td>{{ usuario.type }}</td>
             <td>{{ usuario.name }} {{usuario.last_name}}</td>
             <td>{{ usuario.email }}</td>
