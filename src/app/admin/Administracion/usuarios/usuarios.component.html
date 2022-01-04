@@ -24,94 +24,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Casa</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{ usuario.unitId }}</td>
+            <td>{{ usuario.type }}</td>
+            <td>{{ usuario.name }} {{usuario.last_name}}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.phone }}</td>
+            <td>{{ usuario.cellphone }}</td>
+            <td>{{ usuario.city }}</td>
+            <td>{{ usuario.address }}</td>
             <td>200 m.</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Departamento</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
-            <td>200 m.</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Casa</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
-            <td>200 m.</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Departamento</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
-            <td>200 m.</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Casa</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
-            <td>200 m.</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Departamento</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
-            <td>200 m.</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Casa</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
-            <td>200 m.</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>Departamento</td>
-            <td>Alex Carrera</td>
-            <td>alex.carrera@epn.edu.ec</td>
-            <td>3330234</td>
-            <td>0979106802</td>
-            <td>Quito</td>
-            <td>Bellavista Canal 8</td>
-            <td>200 m.</td>
-          </tr>
+
         </tbody>
       </table>
     </mat-card>

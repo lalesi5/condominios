@@ -12,7 +12,8 @@ import { ComunicacionComponent } from './Comunicacion/comunicacion.component';
 import { ReportesComponent } from './Reportes/reportes.component';
 import { FinanzasComponent } from './Finanzas/finanzas.component';
 
-import {MatCardModule} from '@angular/material/card'; 
+import { MatCardModule } from '@angular/material/card'; 
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {MatCardModule} from '@angular/material/card';
     imports: [
         AdminRoutingModule,
         SharedModule,
-        MatCardModule
+        MatCardModule,
+        CommonModule
     ],
     declarations: [
         AdminComponent,
@@ -35,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
     ],
     exports: [
         MatCardModule,
+        CommonModule
     ],
     providers: []
 })

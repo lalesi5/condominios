@@ -5,6 +5,7 @@ import { AdministracionComponent } from "./administracion.component";
 import { AreasComunesComponent } from "./areasComunes/areasComunes.component";
 import { UnidadesComponent } from "./unidades/unidades.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
+import { CommonModule } from '@angular/common';
 
 const routerAdministracion: Routes = [
     {
@@ -19,7 +20,7 @@ const routerAdministracion: Routes = [
 ]
 
 @NgModule({
-    imports: [RouterModule.forChild(routerAdministracion)],
+    imports: [RouterModule.forChild(routerAdministracion), CommonModule],
     exports: [RouterModule]
 })
 

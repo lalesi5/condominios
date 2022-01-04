@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PublicRoutingModule } from './public-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { SharedModule } from '../core/shared/shared.module';
@@ -16,7 +17,8 @@ import {MatCardModule} from '@angular/material/card';
   imports: [
     PublicRoutingModule,
     SharedModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule
   ],
   declarations: [
     PublicComponent,
