@@ -1,10 +1,13 @@
 import { Condominium } from './condominium';
 export interface Admin {
+    id?: string;
+    name: [{
+        first_name: string,
+        last_name: string,
+    }];
     adress: string;
     condominiums: Condominium[];
     email: string;
-    last_name: string;
-    name: string;
     password: string;
     phone: string;
 }

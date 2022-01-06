@@ -1,4 +1,3 @@
-import { elementEventFullName } from "@angular/compiler/src/view_compiler/view_compiler";
 import { Component, OnInit } from "@angular/core";
 import { UsuarioService } from "src/app/services/user.service";
 
@@ -13,14 +12,15 @@ export class UsuariosComponent implements OnInit {
 
     usuarios: any[] = [];
     unitUsuarios: any[] = [];
+    tempo: any[] = [];
 
     constructor(
         private _usuarioService: UsuarioService
     ) { }
 
     ngOnInit() {
+        this.getUnit();
         this.getUsuario();
-        //this.getUnit();
     }
 
     getUsuario() {
@@ -28,27 +28,27 @@ export class UsuariosComponent implements OnInit {
             .getUser()
             .subscribe(data => {
                 data.forEach((element: any) => {
-                    this.unitUsuarios = element.payload.doc.data().units;
-                    this.unitUsuarios.forEach((dataUser: any) => {
-                        this.usuarios.push({
-                            unitId: dataUser.id,
-                            id: element.payload.doc.id,
-                            ...element.payload.doc.data(),
-                        })                                                
+                    this.usuarios.push({
+                        id: element.payload.doc.id,
+                        ...element.payload.doc.data(),
                     })
                 })
             })
+            console.log(this.usuarios);
     }
 
-    // getUnit() {
-    //     this._usuarioService
-    //     .getUnitUser()
-    //     .subscribe(data => {
-    //         data.forEach((element: any) => {
-    //             console.log(element.payload.doc.data());
-    //         });
-    //     })
-    // }
+    getUnit() {
+        this._usuarioService
+        .getUnitUser()
+        .subscribe(data => {
+            data.forEach((element: any) => {
+                this.unitUsuarios.push({
+                    idUnit: element.payload.doc.id,
+                    ...element.payload.doc.data(),
+                })
+            });
+        })
+    }
 
 
 }

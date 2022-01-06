@@ -5,15 +5,12 @@ import { Observable } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class UsuarioService {
+export class AdminService {
 
     constructor(private firestore: AngularFirestore) { }
 
-    getUser(): Observable<any> {
-        return this.firestore.collection('user').snapshotChanges();
+    getAdmin(): Observable<any> {
+        return this.firestore.collection('admin').snapshotChanges();
     }
 
-    getUnitUser(): Observable<any> {
-        return this.firestore.collection('unit').snapshotChanges();
-    }
 }

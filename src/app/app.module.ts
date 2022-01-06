@@ -12,6 +12,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { environment } from '../environments/environment';
+import { UsuarioService } from 'src/app/services/user.service';
 
 
 
@@ -31,7 +32,7 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent
   ],
-  providers: [],
+  providers: [ UsuarioService ],
   bootstrap: [AppComponent]
 })
 
