@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from "./admin.component";
 import { InicioComponent } from "./Inicio/inicio.component";
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 const routesAdmin: Routes = [
@@ -23,7 +24,7 @@ const routesAdmin: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routesAdmin), CommonModule],
+    imports: [RouterModule.forChild(routesAdmin), CommonModule, ReactiveFormsModule],
     exports: [RouterModule]
 
 })

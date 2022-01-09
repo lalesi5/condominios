@@ -8,6 +8,7 @@ import { AjustesCondominioComponent } from './ajustesCondominio/ajustesCondomini
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatSelectModule} from '@angular/material/select';  
 import { AjustesRoutingModule } from './ajuste-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 
@@ -18,7 +19,8 @@ import { AjustesRoutingModule } from './ajuste-routing.module';
         CommonModule,
         MatCardModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        ReactiveFormsModule
     ],
 
     declarations: [
@@ -29,7 +31,8 @@ import { AjustesRoutingModule } from './ajuste-routing.module';
     exports: [
         MatCardModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        ReactiveFormsModule
     ],
     providers: []
 

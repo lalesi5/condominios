@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { AdminService } from '../../../services/admin.service';
+import { Component, OnInit } from "@angular/core";  
+import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-ajustesAdmin',
@@ -8,26 +9,23 @@ import { AdminService } from '../../../services/admin.service';
 })
 
 export class AjustesAdminComponent implements OnInit{
-    admins: any[] = [];
 
-    constructor( private _adminService: AdminService ){}
+    adminNombreCuenta!: FormGroup;
+
+    constructor( private router: Router, private fb: FormBuilder ){}
     
-    ngOnInit(){
-
-        this.getAdmin();
-        
+    ngOnInit(): void {
+        this.initForm();
     }
 
-    getAdmin(){
-        this._adminService
-        .getAdmin()
-        .subscribe(data => {
-            data.forEach((element: any) => {
-                this.admins.push({
-                    id: element.payload.doc.id,
-                    ...element.payload.doc.data()
-                })
-            });
-        })
+    onSave(): void{
+        console.log('saved', this.adminNombreCuenta.value);
     }
+
+    private initForm(): void {
+        this.adminNombreCuenta = this.fb.group({
+            nombreCuenta: ['', [Validators.required]]
+        });
+    }
+
 }

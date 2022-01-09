@@ -3,11 +3,11 @@
     <mat-card>
       <h2>Propiedad de la Organización</h2>
       <h3><strong>Titular de la información</strong></h3>
-      <div class="card" *ngFor='let admin of admins'>
-        <div><b>Nombre:</b> {{admin.name}} {{admin.last_name}} </div>
-        <div><b>Telefono:</b> {{admin.phone}}</div>
-        <div><b>Email:</b>{{admin.email}}</div>
-        <div><b>Celular:</b> {{admin.phone}}</div>
+      <div class="card" >
+        <div><b>Nombre:</b></div>
+        <div><b>Telefono:</b></div>
+        <div><b>Email:</b></div>
+        <div><b>Celular:</b></div>
       </div>
 
       <div class="notes">
@@ -21,17 +21,20 @@
   </div>
   <div class="cuentaInfo">
     <mat-card>
-        <h2>Nombre de la cuenta</h2>
-        <h3><strong>Nombre de la cuenta</strong></h3>
-        <h4>Este es el nombre que se muestra a los usuarios al iniciar sesión, 
-            así como el encabezado de los correos electronicos
-        </h4>
-        <div class="input-group mb-3" *ngFor='let admin of admins'>
-            <input type="text" class="form-control" placeholder="{{admin.nombreCuenta}}" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">Guardar</button>
-            </div>
+      <h2>Nombre de la cuenta</h2>
+      <h3><strong>Nombre de la cuenta</strong></h3>
+      <h4>Este es el nombre que se muestra a los usuarios al iniciar sesión,
+        así como el encabezado de los correos electronicos
+      </h4>
+      <form (ngSubmit)="onSave()" [formGroup]="adminNombreCuenta">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
+            formControlName="nombreCuenta">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Guardar</button>
           </div>
+        </div>
+      </form>
     </mat-card>
   </div>
 </div>
