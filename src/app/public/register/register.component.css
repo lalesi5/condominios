@@ -1,0 +1,21 @@
+  #register {
+    margin-top: 150px;
+    margin-bottom: 70px;
+    text-align: left;
+    height: 54%;
+  }
+  
+  #register h2 {
+    font-size: 40px;
+    padding-bottom: 30px;
+  }
+  
+  #register .col-md-12{
+      padding-right: 150px;
+      padding-left: 150px;
+  }
+  
+  #register .form.floating{
+      margin-top: 20px;
+  }
+  

@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+<div class="clearfix"></div>
+
+<!--Pantalla registro-->
+
+<div id="register">
+    <h2 class="text-center">Registrarse</h2>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="well well-md">
+              <form [formGroup]='registerForm' (ngSubmit)="onRegister()">
+                <fieldset>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input id="email" name="email" type="email" placeholder="Ingrese su Email" class="form-control" formControlName="email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input id="password" name="password" type="password" placeholder="Ingrese la Contraseña" class="form-control" formControlName="password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12 text-center">
+                      <label>Ya tienes una cuenta?<a [routerLink]="['/login']"> Login</a></label>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<!--Fin Seccion Registro-->
+
+<div class="clearfix"></div>
+
+<app-footer></app-footer>

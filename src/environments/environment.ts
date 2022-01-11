@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: "AIzaSyAgNs6TBtkKQ3Y12DZnSZCBU4TvNPwVvOQ",
+    apiBaseUrl: "https://identitytoolkit.googleapis.com",
     authDomain: "condominiosepn-68a1d.firebaseapp.com",
     projectId: "condominiosepn-68a1d",
     storageBucket: "condominiosepn-68a1d.appspot.com",
