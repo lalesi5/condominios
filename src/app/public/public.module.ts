@@ -9,6 +9,7 @@ import { HomeComponent } from './home/containers/home.component';
 import { LoginComponent } from './login/login.component';
 
 import {MatCardModule} from '@angular/material/card';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -23,7 +24,8 @@ import {MatCardModule} from '@angular/material/card';
   declarations: [
     PublicComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   exports: [],
   providers:[]

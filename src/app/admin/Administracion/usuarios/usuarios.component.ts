@@ -19,7 +19,6 @@ export class UsuariosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.getUnit();
         this.getUsuario();
     }
 
@@ -34,21 +33,8 @@ export class UsuariosComponent implements OnInit {
                     })
                 })
             })
-            console.log(this.usuarios);
     }
 
-    getUnit() {
-        this._usuarioService
-        .getUnitUser()
-        .subscribe(data => {
-            data.forEach((element: any) => {
-                this.unitUsuarios.push({
-                    idUnit: element.payload.doc.id,
-                    ...element.payload.doc.data(),
-                })
-            });
-        })
-    }
 
 
 }
