@@ -19,31 +19,6 @@
     text-align: center;
 }
 
-.btn-white {
-    display: block;
-    background: white;
-    color: rgb(88,88,88);
-    padding: 2px;
-    width: 120px;
-    height: 35px;
-    margin: 0px auto;
-    font-size: 20px;
-    text-transform: uppercase;
-    text-shadow: none;
-    text-decoration: none;
-    line-height: 30px;
-    box-shadow: 0px 0px 5px rgb(88,88,88);;
-    margin-top: 90px;
-    border-radius: 10px;
-    transition: 300ms all;
-    text-align: center;
-}
-
-.btn-white:hover{
-    background: rgb(44, 89, 160);
-    color: white;
-}
-
 #nosotros{
     text-align: center;
     margin-top: 30px;

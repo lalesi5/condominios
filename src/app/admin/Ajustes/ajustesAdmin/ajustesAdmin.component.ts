@@ -26,6 +26,7 @@ export class AjustesAdminComponent implements OnInit{
         this.adminNombreCuenta = this.fb.group({
             nombreCuenta: ['', [Validators.required]]
         });
+        console.log(this.adminNombreCuenta);
     }
 
 }
