@@ -1,7 +1,7 @@
 import { Condominium } from './condominium';
+
 export interface Admin {
-    adress: string;
-    condominiums: Condominium[];
+    address: string;
     email: string;
     last_name: string;
     name: string;
