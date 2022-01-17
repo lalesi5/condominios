@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-//import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from 'firebase/auth';
 import { first } from 'rxjs';
-import { Admin } from 'src/app/models/admin';
+import { AdminI } from '../models/admin';
 
 
 @Injectable()
 export class AuthService {
 
-  public User: User | undefined;
+  //public User: User | undefined;
 
   constructor(public afAuth: AngularFireAuth) { }
 
@@ -25,16 +24,20 @@ export class AuthService {
     }
   }
 
-  async register(datos: Admin) {
-    try {
-      const result = await this.afAuth.createUserWithEmailAndPassword(
-        datos.email,
-        datos.password
-      );
-      return result;
-    } catch (error) {
-      return console.log(error);
-    }
+  /**async register(datos: AdminI) {
+     try {
+       const result = await this.afAuth.createUserWithEmailAndPassword(
+         datos.email,
+         datos.password
+       );
+       return result;
+     } catch (error) {
+       return console.log(error);
+     }
+   }**/
+
+  register(datos: AdminI) {
+    return this.afAuth.createUserWithEmailAndPassword(datos.email, datos.password);
   }
 
   async logout() {

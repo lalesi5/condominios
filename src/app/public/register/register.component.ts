@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Admin } from 'src/app/models/admin';
-import { AuthService } from '../services/auth.service';
+import { AdminI } from 'src/app/models/admin';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,13 +13,14 @@ import { AuthService } from '../services/auth.service';
 
 export class RegisterComponent implements OnInit {
 
-  datos: Admin = {
+  datos: AdminI = {
     address: '',
     email: '',
     last_name: '',
     name: '',
     password: '',
     phone: '',
+    uid: '',
   }
 
   registerForm = new FormGroup({
@@ -32,20 +33,38 @@ export class RegisterComponent implements OnInit {
   })
 
   constructor(private authSvc: AuthService,
-    private firestore: AngularFirestore) { }
+    private firestore: FirestoreService) { }
 
   ngOnInit(): void {
   }
 
   async onRegister() {
     console.log('datos -> ', this.datos);
-    //const { email, password } = this.registerForm.value;
-    //this.authSvc.register(email, password);
-    const res = await this.authSvc.register(this.datos).catch(error => console.log('error'))
-    if(res){
-      console.log('Exito al crear el usuario');
-      const path = 'Admin';
-      const id = res.user?.uid;
+    const res = await this.authSvc.register(this.datos).catch(error => {
+      console.log('error');
+    })
+    if (res) {
+      console.log('exito al crear usuario');
+      const path = 'Usuarios';
+      const id = res.user.uid;
+      this.datos.uid = id;
+      this.datos.password = '';
+      await this.firestore.createDoc(this.datos, path, id)
+
     }
   }
+
+  /**async onRegister() {
+    console.log('datos -> ', this.datos);
+    //const { email, password } = this.registerForm.value;
+    //this.authSvc.register(email, password);
+    const res = await this.authSvc.register(this.datos).catch(error => console.log('error'));
+    /**if(res){
+      console.log('Exito al crear el usuario');
+      const path = 'Admin';
+      const id = res.user.uid;
+      //this.datos.password = null;
+      this.firestore.createDoc(this.datos, path, id);
+    }
+  }**/
 }

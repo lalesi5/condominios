@@ -1,10 +1,9 @@
-import { Condominium } from './condominium';
-
-export interface Admin {
+export interface AdminI {
     address: string;
     email: string;
     last_name: string;
     name: string;
     password: string;
     phone: string;
+    uid: string;
 }
