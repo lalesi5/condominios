@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';  
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -20,7 +21,8 @@ import { CommonModule } from '@angular/common';
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        CommonModule
+        CommonModule,
+        ReactiveFormsModule
     ],
     declarations:[
         UnidadesComponent,

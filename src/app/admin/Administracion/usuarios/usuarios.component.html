@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let usuario of usuarios">
-            <td>{{ usuario.unitId }}</td>
+            <td>{{ usuario.units }}</td>
             <td>{{ usuario.type }}</td>
             <td>{{ usuario.name }} {{usuario.last_name}}</td>
             <td>{{ usuario.email }}</td>
@@ -35,7 +35,6 @@
             <td>{{ usuario.address }}</td>
             <td>200 m.</td>
           </tr>
-
         </tbody>
       </table>
     </mat-card>

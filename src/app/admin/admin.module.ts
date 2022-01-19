@@ -14,6 +14,7 @@ import { FinanzasComponent } from './Finanzas/finanzas.component';
 
 import { MatCardModule } from '@angular/material/card'; 
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CommonModule } from '@angular/common';
         AdminRoutingModule,
         SharedModule,
         MatCardModule,
-        CommonModule
+        CommonModule,
+        ReactiveFormsModule
     ],
     declarations: [
         AdminComponent,

@@ -6,19 +6,10 @@
       <nav id="menu">
         <ul>
           <li>
-            <a>Ajustes Cuenta</a>
+            <a [routerLink]="['/admin/ajustes/ajustes_admin']" [routerLinkActive]="['active']">Ajustes Cuenta</a>
           </li>
           <li>
-            <a>Crear Condominio</a>
-          </li>
-          <li>
-            <a>Crear Unidades</a>
-          </li>
-          <li>
-            <a>Crear Usuarios</a>
-          </li>
-          <li>
-            <a>Crear Areas Comunales</a>
+            <a [routerLink]="['/admin/ajustes/ajustes_condominio']" [routerLinkActive]="['active']">Crear Condominio</a>
           </li>
         </ul>
       </nav>

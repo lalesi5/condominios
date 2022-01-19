@@ -9,9 +9,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { environment } from '../environments/environment';
+import { UsuarioService } from 'src/app/services/user.service';
 
 
 
@@ -31,7 +32,10 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent
   ],
-  providers: [],
+  providers: [
+    UsuarioService,
+    AngularFirestore
+  ],
   bootstrap: [AppComponent]
 })
 

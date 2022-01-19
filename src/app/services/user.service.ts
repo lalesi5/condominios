@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/compat/firestore"
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -11,9 +11,5 @@ export class UsuarioService {
 
     getUser(): Observable<any> {
         return this.firestore.collection('user').snapshotChanges();
-    }
-
-    getUnitUser(): Observable<any> {
-        return this.firestore.collection('unit').snapshotChanges();
     }
 }

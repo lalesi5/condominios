@@ -1,6 +1,5 @@
-import { Unit } from "./unit";
-
-export interface Usuario {
+export interface UsuarioInterface {
+    id?: string;
     address: string;
     celphone: string;
     city: string;
@@ -10,5 +9,4 @@ export interface Usuario {
     password: string;
     phone: string;
     type: string;
-    units: Unit[];
 }

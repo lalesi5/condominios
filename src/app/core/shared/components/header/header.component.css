@@ -1,39 +1,20 @@
 #header {
-    height: 130px;
+    position: relative;
+    border-top: 4px solid rgb(44, 89, 160);
+    background-color: white;
     width: 100%;
-    border-top: 3px solid rgb(44, 89, 160);
+    height: 60px;
 }
 
-.center {
-    width: 95%;
-    margin: -10px auto;
-}
-
-.clearfix {
-    clear: both;
-    float: none;
-    width: 100px;
-}
-
-
-#contacto{
-    width: auto;
-    float: right;
-    margin-top: 55px;
-    font-size: 16px;
-    padding-left: 20px;
-}
-
-#contacto mat-icon{
-
-    margin-left: 20px;
+.center{
+    display: inline;
+    background-color: white;
 }
 
 #logo {
-    width: 15%;
     font-size: 30px;
     float: left;
-    margin-top: 60px;
+    margin-top: 15px;
 }
 
 #logo a {
@@ -52,36 +33,50 @@
 }
 
 #menu {
-    width: 56%;
-    float: left;
     font-size: 18px;
     color: black;
-}
-
-#menu ul {
-    line-height: 138px;
-    width: 80%;
-    float: right;
-    margin-bottom: 0rem;
+    float: left;
+    margin-top: 15px;
 }
 
 #menu ul li {
-    display: inline-block;
+    display: inline;
     list-style: none;
-    height: 46px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 20px;
 }
 
 #menu a {
     text-decoration: none;
-    padding-top: 10px;
     transition: 300ms all;
     color: #000;
 }
 
-
 #menu a:hover,
+.active{
+    color: rgb(44, 89, 160);
+}
+
+#contacto{
+    font-size: 18px;
+    float: right;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+#contacto mat-icon{
+    font-size: 17px;
+    color: rgb(44, 89, 160);
+}
+
+#contacto a {
+    text-decoration: none;
+    transition: 300ms all;
+    color: #000;
+}
+
+#contacto a:hover,
 .active{
     color: rgb(44, 89, 160);
 }
