@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit{
         const{email, password} = this.loginForm.value;
         this.authSvc.login(email, password);
         this.router.navigate(['/admin']);
-        //this.prueba();
+        this.prueba();
     }
 
     //prueba para recuperar el usuario
