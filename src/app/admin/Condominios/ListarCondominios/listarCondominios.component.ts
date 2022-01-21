@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { CondominiosService } from '../../../services/condominios.service';
 
 @Component({
     selector: 'app-listarCondominios',
@@ -7,7 +8,29 @@ import { Component, OnInit } from "@angular/core";
 })
 
 export class ListarCondominiosComponent implements OnInit{
-    constructor(){}
+
+    condominios: any[] = [];
+
+    constructor(
+        private _condominioService: CondominiosService
+    ){}
     
-    ngOnInit(){}
+    ngOnInit(){
+        this.getCondominios();
+    }
+
+    getCondominios(){
+        this._condominioService
+        .getCondominio()
+        .subscribe(data => {
+            data.forEach((element: any) => {
+                this.condominios.push({
+                    id: element.payload.doc.id,
+                    ...element.payload.doc.data(),
+                })
+            });
+        })
+        console.log(this.condominios);
+    }
+
 }

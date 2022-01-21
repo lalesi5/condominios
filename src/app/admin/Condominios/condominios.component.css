@@ -1,9 +1,10 @@
-.administracion{
+.condominios{
     position: absolute;
     width: calc(100% - 231px);
     left: 231px;
     min-height: 100vh;
-    background: red;
     transition: 0.5s;
 }
+
+
 
