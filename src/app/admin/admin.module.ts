@@ -15,6 +15,7 @@ import { FinanzasComponent } from './Finanzas/finanzas.component';
 import { MatCardModule } from '@angular/material/card'; 
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CondominiosComponent } from './Condominios/condominios.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         ComunicacionComponent,
         ReportesComponent,
         FinanzasComponent,
-        AjustesComponent
+        AjustesComponent,
+        CondominiosComponent
     ],
     exports: [
         MatCardModule,
