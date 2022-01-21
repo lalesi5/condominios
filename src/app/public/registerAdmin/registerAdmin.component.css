@@ -1,21 +1,22 @@
-#login {
+#register {
     margin-top: 150px;
+    padding-top: 100px;
     margin-bottom: 70px;
     text-align: center;
-    height: 54%;
+    height: calc(100vh - 230px);
   }
   
-  #login h2 {
+  #register h2 {
     font-size: 40px;
     padding-bottom: 30px;
   }
   
-  #login .col-md-12{
+  #register .col-md-12{
       padding-right: 150px;
       padding-left: 150px;
   }
   
-  #login .form.floating{
+  #register .form.floating{
       margin-top: 20px;
   }
   

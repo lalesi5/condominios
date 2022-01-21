@@ -1,0 +1,21 @@
+<div class="listar">
+    <h2>Lista de Condominios</h2>
+    <div class="container">
+        <div class="card" [routerLinkActive]="['active']" *ngFor="let condominio of condominios">
+            <div class="iconBx">
+                <mat-icon>home</mat-icon>
+            </div>
+            <div>
+                <div class="numbers">{{condominio.name}}</div>
+            </div>
+        </div>
+        <div class="card" [routerLink]="['/admin/condominios/crear']" [routerLinkActive]="['active']">
+            <div class="iconBx">
+                <mat-icon>library_add</mat-icon>
+            </div>
+            <div>
+                <div class="numbers"> Agregar Condominio </div>
+            </div>
+        </div>
+    </div>
+</div>
