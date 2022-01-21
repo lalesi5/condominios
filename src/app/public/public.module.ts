@@ -6,10 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../core/shared/shared.module';
 import { PublicComponent } from './public.component';
 import { HomeComponent } from './home/containers/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+
+import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component';
 
 import {MatCardModule} from '@angular/material/card';
+import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
 
 
 
@@ -25,8 +26,8 @@ import {MatCardModule} from '@angular/material/card';
   declarations: [
     PublicComponent,
     HomeComponent,
-    LoginComponent,
-    RegisterComponent
+    LoginAdminComponent,
+    RegisterAdminComponent
   ],
   exports: [],
   providers:[]

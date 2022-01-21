@@ -1,8 +1,9 @@
 #login {
   margin-top: 150px;
+  padding-top: 100px;
   margin-bottom: 70px;
   text-align: center;
-  height: 54%;
+  height: calc(100vh - 230px);
 }
 
 #login h2 {

@@ -1,7 +1,7 @@
 <div class="listar">
     <h2>Lista de Condominios</h2>
-    <div class="container" *ngFor="let condominio of condominios">
-        <div class="card" [routerLinkActive]="['active']">
+    <div class="container">
+        <div class="card" [routerLinkActive]="['active']" *ngFor="let condominio of condominios">
             <div class="iconBx">
                 <mat-icon>home</mat-icon>
             </div>
