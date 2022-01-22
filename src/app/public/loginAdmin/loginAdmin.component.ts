@@ -25,7 +25,7 @@ export class LoginAdminComponent implements OnInit {
     onLogin() {
         const { email, password } = this.loginForm.value;
         this.authSvc.login(email, password);
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/admin']);
         //this.prueba();
     }
 
