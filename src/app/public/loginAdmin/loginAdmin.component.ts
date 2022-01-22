@@ -11,6 +11,8 @@ import { AuthService } from "src/app/services/auth.service";
 
 export class LoginAdminComponent implements OnInit {
 
+    public isLogged = false;
+
     loginForm = new FormGroup({
         email: new FormControl,
         password: new FormControl
@@ -26,7 +28,16 @@ export class LoginAdminComponent implements OnInit {
         const { email, password } = this.loginForm.value;
         this.authSvc.login(email, password);
         this.router.navigate(['/admin']);
-        //this.prueba();
+        this.prueba();
+    }
+
+    async prueba(){
+        console.log('Login');
+        const user = await this.authSvc.getCurrentUser();
+        if (user) {
+            this.isLogged = true;
+            console.log('User->', user);
+        }
     }
 
 }

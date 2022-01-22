@@ -29,9 +29,18 @@ export class AuthService {
     }
   }
 
+  async logout() {
+    try {
+      await this.afAuth.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //metodo para recuperar el usuario logeado
   getCurrentUser() {
     return this.afAuth.authState.pipe(first());
   }
+
 
 }

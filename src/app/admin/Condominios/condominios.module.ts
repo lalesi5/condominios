@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CondominiosRoutingModule } from './condominios-routing.module';
 import { CommonModule } from '@angular/common';
-import { CrearCondominiosComponent } from './CrearCondominios/crearCondominios.component';
 import { ListarCondominiosComponent } from './ListarCondominios/listarCondominios.component';
 
 import {MatCardModule} from '@angular/material/card'; 
@@ -20,7 +19,6 @@ import {MatSelectModule} from '@angular/material/select';
         MatSelectModule,
     ],
     declarations: [
-        CrearCondominiosComponent,
         ListarCondominiosComponent
     ],
     exports: [
