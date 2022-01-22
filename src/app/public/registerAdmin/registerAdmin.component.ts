@@ -19,6 +19,7 @@ export class RegisterAdminComponent implements OnInit {
         name: '',
         password: '',
         phone: '',
+        rol:'',
         uid: '',
     }
 
@@ -29,8 +30,7 @@ export class RegisterAdminComponent implements OnInit {
         password: new FormControl(''),
     })
 
-    constructor(private authSvc: AuthService,
-        private firestore: AngularFirestore) { }
+    constructor(private authSvc: AuthService) { }
 
     ngOnInit() { }
 
@@ -40,7 +40,7 @@ export class RegisterAdminComponent implements OnInit {
     */
     async onRegister() {
         console.log('datos -> ', this.datos);
-        const res = await this.authSvc.register(this.datos).catch(error => {
+        const res = await this.authSvc.registerAdmin(this.datos).catch(error => {
             console.log('error');
         })
 
@@ -49,15 +49,9 @@ export class RegisterAdminComponent implements OnInit {
             const path = 'admins';
             const id = res.user.uid;
             this.datos.uid = id;
+            this.datos.rol = 'administrador';
             this.datos.password = '';
-            await this.createDoc(this.datos, path, id);
+            await this.authSvc.createDoc(this.datos, path, id);
         }
-
-    }
-
-    //Metodo para crear la coleccion
-    createDoc(data: any, path: string, id: string) {
-        const collection = this.firestore.collection(path);
-        return collection.doc(id).set(data);
     }
 }

@@ -1,4 +1,4 @@
-export interface AdminI {
+export interface UsuarioI {
     address: string;
     email: string;
     last_name: string;
@@ -6,5 +6,5 @@ export interface AdminI {
     password: string;
     phone: string;
     rol: string;
-    uid: string;
+    userId: string;
 }
