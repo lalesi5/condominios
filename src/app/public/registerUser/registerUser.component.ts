@@ -3,6 +3,7 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { FormControl, FormGroup } from "@angular/forms";
 import { UsuarioI } from "src/app/models/usuario";
 import { AuthService } from "src/app/services/auth.service";
+import { FirestoreService } from "src/app/services/firestore.service";
 
 @Component({
     selector: 'app-registerUser',
@@ -31,7 +32,7 @@ export class RegisterUserComponent implements OnInit {
     })
 
     constructor(private authSvc: AuthService,
-        private firestore: AngularFirestore) { }
+        private fstore: FirestoreService) { }
 
     ngOnInit() { }
 
@@ -39,7 +40,7 @@ export class RegisterUserComponent implements OnInit {
     * Metodo para registrar usuario
     * guarda el uid del usuario autenticado como dato
     */
-     async onRegister() {
+    async onRegister() {
         console.log('datos -> ', this.datos);
         const res = await this.authSvc.registerUsuario(this.datos).catch(error => {
             console.log('error');
@@ -51,8 +52,8 @@ export class RegisterUserComponent implements OnInit {
             const id = res.user.uid;
             this.datos.userId = id;
             this.datos.password = '';
-            this.datos.rol='usuario';
-            await this.authSvc.createDoc(this.datos, path, id);
+            this.datos.rol = 'usuario';
+            await this.fstore.createDoc(this.datos, path, id);
         }
     }
 }
