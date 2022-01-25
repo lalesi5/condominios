@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators"
+import { AdminI } from "../models/administrador";
 
 @Injectable({
     providedIn: 'root'
@@ -9,10 +10,9 @@ import { map } from "rxjs/operators"
 export class AdminService {
 
     administradores!: Observable<any>;
-    private administradoresCollection!: AngularFirestoreCollection<any>;
+    private administradoresCollection!: AngularFirestoreCollection<AdminI>;
 
     constructor(private readonly firestore: AngularFirestore) { 
-        this.administradoresCollection = firestore.collection<any>('admin');
 
     }
 

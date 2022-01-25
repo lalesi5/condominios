@@ -25,7 +25,7 @@ import { CondominiosComponent } from './Condominios/condominios.component';
         SharedModule,
         MatCardModule,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     declarations: [
         AdminComponent,
@@ -43,7 +43,8 @@ import { CondominiosComponent } from './Condominios/condominios.component';
         MatCardModule,
         CommonModule
     ],
-    providers: []
+    providers: [
+    ]
 })
 
 export class AdminModule {}

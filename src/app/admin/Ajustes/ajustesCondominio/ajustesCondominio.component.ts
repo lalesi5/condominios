@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { CondominiosService } from "src/app/services/condominios.service";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'app-ajustesCondominio',
@@ -7,7 +9,21 @@ import { Component, OnInit } from "@angular/core";
 })
 
 export class AjustesCondominioComponent implements OnInit{
-    constructor(){}
+
+    createFormGroup(){
+        return new FormGroup({
+            nombre: new FormControl(''),
+            ciudad: new FormControl(''),
+            Propietario: new FormControl(''),
+            idAdministrador: new FormControl (''),
+        });
+    }
+
+    contactForm: FormGroup;
+
+    constructor(private cdService: CondominiosService){
+        this.contactForm = this.createFormGroup();
+    }
     
     ngOnInit(){}
 }
