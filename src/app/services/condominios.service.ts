@@ -10,17 +10,17 @@ export class CondominiosService {
 
     private condominiosCollection: AngularFirestoreCollection<CondominioInterface> | undefined;
 
-    constructor(private firestore: AngularFirestore) { 
+    constructor(private firestore: AngularFirestore) {
 
         this.condominiosCollection = firestore.collection<CondominioInterface>('condominium')
 
     }
 
-    addCondominio(newCondominio: CondominioInterface): void{
-        this.condominiosCollection?.add(newCondominio);
-    }
-
     getCondominio(): Observable<any> {
         return this.firestore.collection('condominium').snapshotChanges();
+    }
+
+    getCondominioIdAdmin(idAdmin: string){
+        return this.firestore.collection('condominium', ref => ref.where('idAdmin', '==', idAdmin)).valueChanges();
     }
 }

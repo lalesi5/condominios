@@ -12,7 +12,6 @@ import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component'
 import {MatCardModule} from '@angular/material/card';
 import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
 import { LoginUserComponent } from './loginUser/loginUser.component';
-import { RegisterUserComponent } from './registerUser/registerUser.component';
 
 
 
@@ -31,7 +30,6 @@ import { RegisterUserComponent } from './registerUser/registerUser.component';
     LoginAdminComponent,
     RegisterAdminComponent,
     LoginUserComponent,
-    RegisterUserComponent
   ],
   exports: [],
   providers:[]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigationExtras, Router } from "@angular/router";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
 import { FirestoreService } from "src/app/services/firestore.service";
@@ -13,6 +13,11 @@ import { FirestoreService } from "src/app/services/firestore.service";
 
 export class LoginAdminComponent implements OnInit {
 
+    navigationExtras: NavigationExtras = {
+        state: {
+            admin: null
+        }
+    }
     perfilUsuario: string='';
 
     loginForm = new FormGroup({
@@ -27,17 +32,9 @@ export class LoginAdminComponent implements OnInit {
 
     ngOnInit() { }
 
-    /**async onlogin(){
-
-        console.log('datos -> ', this.datos);
-        const { email, password } = this.loginForm.value;
-        const res = await this.authSvc.loginAdmin(this.datos).catch(error => {
-            console.log('error');
-        })
-    }**/
 
     async onLogin() {
-        //console.log('Form->', this.loginForm.value);
+        
         try {
             const { email, password } = this.loginForm.value;
 
@@ -48,18 +45,17 @@ export class LoginAdminComponent implements OnInit {
             if (res) {
                 console.log('res -> ', res);
                 const uid = res.user.uid;
-                //this.comprobarRol(uid);
+                
                 this.getDatosUser(res.user.uid);
                 
             } else {
-                console.log('No autenticado');
-                //swift alert revisar
+                alert('No autenticado');
+                
             }
         } catch (error) {
             return console.log(error);
         }
     }
-    //this.prueba();
 
     comprobarRol(uid: string) {
         const usuario = this.authSvc.getUsuario(uid).subscribe(colUser => {
@@ -78,9 +74,8 @@ export class LoginAdminComponent implements OnInit {
                 this.perfilUsuario = res.rol;
                 if (this.perfilUsuario=='administrador') {
                     this.router.navigate(['/admin']);
-                } else {
-                   
-                    console.log('El usuario no tiene permisos');
+                } else {       
+                    alert('El usuario no tiene permisos');
                 }
             }
         })

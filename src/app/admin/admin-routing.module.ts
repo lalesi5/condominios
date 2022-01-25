@@ -11,9 +11,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 const routesAdmin: Routes = [
     {path: '', component: AdminComponent, children:
         [
-            {path: '', redirectTo: 'condominios', pathMatch: 'full'},
+            {path: '', redirectTo: 'ajustes', pathMatch: 'full'},
             {path: 'inicio', component: InicioComponent},
-            {path: 'condominios', loadChildren:() => import('./Condominios/condominios.module').then(m => m.CondominiosModule)},
             {path: 'administracion', loadChildren: () => import('./Administracion/administracion.module').then(m => m.AdministracionModule)},
             {path: 'comunicacion', loadChildren: () => import('./Comunicacion/comunicacion.module').then(m => m.ComunicacionModule)},
             {path: 'reportes', loadChildren: () => import('./Reportes/reportes.module').then(m => m.ReportesModule)},

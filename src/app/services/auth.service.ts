@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { first } from "rxjs";
-import { preProcessFile } from "typescript";
 import { AdminI } from "../models/administrador";
 import { UsuarioI } from "../models/usuario";
 import { FirestoreService } from "./firestore.service";
