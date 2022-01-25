@@ -3,6 +3,7 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { FormControl, FormGroup } from "@angular/forms";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
+import { FirestoreService } from "src/app/services/firestore.service";
 
 @Component({
     selector: 'app-registerAdmin',
@@ -19,7 +20,7 @@ export class RegisterAdminComponent implements OnInit {
         name: '',
         password: '',
         phone: '',
-        rol:'',
+        rol: '',
         uid: '',
     }
 
@@ -30,7 +31,8 @@ export class RegisterAdminComponent implements OnInit {
         password: new FormControl(''),
     })
 
-    constructor(private authSvc: AuthService) { }
+    constructor(private authSvc: AuthService,
+        private fstore: FirestoreService) { }
 
     ngOnInit() { }
 
@@ -51,7 +53,7 @@ export class RegisterAdminComponent implements OnInit {
             this.datos.uid = id;
             this.datos.rol = 'administrador';
             this.datos.password = '';
-            await this.authSvc.createDoc(this.datos, path, id);
+            await this.fstore.createDoc(this.datos, path, id);
         }
     }
 }

@@ -2,8 +2,10 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { first } from "rxjs";
+import { preProcessFile } from "typescript";
 import { AdminI } from "../models/administrador";
 import { UsuarioI } from "../models/usuario";
+import { FirestoreService } from "./firestore.service";
 
 
 @Injectable({
@@ -13,15 +15,22 @@ import { UsuarioI } from "../models/usuario";
 export class AuthService {
 
   constructor(public afAuth: AngularFireAuth,
-    private firestore: AngularFirestore) { }
+    private firestore: AngularFirestore,
+    private fstore: FirestoreService) { }
 
-  //Metodo para registrar usuario
+  //Metodo para registrar usuario administrador
   registerAdmin(datos: AdminI) {
     return this.afAuth.createUserWithEmailAndPassword(datos.email, datos.password);
   }
 
+  //Metodo para registrar usuario administrador
   registerUsuario(datos: UsuarioI) {
     return this.afAuth.createUserWithEmailAndPassword(datos.email, datos.password);
+  }
+
+
+  loginAdmin(email: string, password: string) {
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   async login(email: string, password: string) {
@@ -36,15 +45,27 @@ export class AuthService {
     }
   }
 
+  async logout() {
+    try {
+      await this.afAuth.signOut();
+    } catch (error) {
+      return console.error(error);
+    }
+  }
+
   //metodo para recuperar el usuario logeado
   getCurrentUser() {
+    //return this.afAuth.authState;
     return this.afAuth.authState.pipe(first());
   }
 
-  //Metodo para crear la coleccion
-  createDoc(data: any, path: string, id: string) {
-    const collection = this.firestore.collection(path);
-    return collection.doc(id).set(data);
+  getUsuario(uid: string) {
+    return this.firestore.collection('admins', ref => ref.where('uid', '==', uid)).valueChanges();
   }
 
+  
+
+  stateUser(){
+    return this.afAuth.authState
+  }
 }
