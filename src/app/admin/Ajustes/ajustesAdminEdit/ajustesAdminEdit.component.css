@@ -1,4 +1,4 @@
-.ajustesAdmin {
+.ajustesAdminEdit {
     position: absolute;
     width: calc(100% - 231px);
     left: 231px;
@@ -17,7 +17,7 @@
   }
   
   .containerInfo mat-card h2 {
-    background-color: darkcyan;
+    background-color:#287bff;
     color: #fff;
     border-radius: 10px;
     padding: 5px;
@@ -36,4 +36,5 @@
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   }
 
+ 
   

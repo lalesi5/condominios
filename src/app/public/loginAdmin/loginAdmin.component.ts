@@ -13,11 +13,6 @@ import { FirestoreService } from "src/app/services/firestore.service";
 
 export class LoginAdminComponent implements OnInit {
 
-    navigationExtras: NavigationExtras = {
-        state: {
-            admin: null
-        }
-    }
     perfilUsuario: string='';
 
     loginForm = new FormGroup({

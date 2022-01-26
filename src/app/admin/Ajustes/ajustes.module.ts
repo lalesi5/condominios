@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';  
 import { AjustesRoutingModule } from './ajuste-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AjustesAdminEditComponent } from './ajustesAdminEdit/ajustesAdminEdit.component';
 
 @NgModule({
 
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
     declarations: [
         AjustesAdminComponent,
+        AjustesAdminEditComponent,
         AjustesCondominioComponent
     ],
 
