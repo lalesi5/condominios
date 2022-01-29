@@ -1,4 +1,4 @@
-.ajustesAdminEdit {
+.ajustesCondominioEdit {
     position: absolute;
     width: calc(100% - 231px);
     left: 231px;
@@ -23,8 +23,9 @@
     padding: 5px;
     text-align: center;
   }
-  .containerInfo mat-card h3 {
-    padding: 5px;
+  .containerInfo textarea {
+    width: 100%;
+    min-height: 150px;
   }
 
   .containerInfo .card {

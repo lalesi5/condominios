@@ -1,0 +1,72 @@
+.ajustesAreasComunales {
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    top: 150px;
+    min-height: 82vh;
+  }
+
+  .containerInfo mat-card {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 99%;
+    left: 9px;
+    top: 15px;
+    border-radius: 20px;
+    padding-bottom: 25px;
+  }
+
+  .containerInfo mat-card h2 {
+    background-color:#2ba846;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .headerReseMenUni{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr) ;
+    justify-items: center;
+}
+
+.headerReseMenUni .card{
+    position: relative;
+    align-items: center;
+    padding: 10px;
+    width: 60%;
+    border-radius: 20px;
+    display: flex;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+}
+
+.headerReseMenUni .card:hover{
+    background: #287bff;
+}
+
+.headerReseMenUni .card .cardName{
+    font-size: 1.4em;
+    margin-top: 10px;
+    text-align: center;
+    color:#287bff
+}
+
+.headerReseMenUni .card .iconBx{   
+    color: #999;
+    width: 50%;
+}
+
+.headerReseMenUni .card .iconBx mat-icon{
+    font-size: 4em;
+    padding: 15px;
+}
+
+
+.headerReseMenUni .card:hover .numbers,
+.headerReseMenUni .card:hover .cardName,
+.headerReseMenUni .card:hover .iconBx{
+    color: #fff;
+}

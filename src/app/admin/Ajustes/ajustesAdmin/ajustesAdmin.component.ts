@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";  
+import { Component, OnInit } from "@angular/core";
 import { AdminService } from '../../../services/admin.service';
-import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
     selector: 'app-ajustesAdmin',
@@ -8,40 +7,46 @@ import { Router, NavigationExtras } from '@angular/router';
     styleUrls: ['./ajustesAdmin.component.css']
 })
 
-export class AjustesAdminComponent implements OnInit{
+export class AjustesAdminComponent implements OnInit {
 
-    idLoggedAdmin: string = 'aJ3KYBIqvRhQ8Q0LsYKAX59vpuG2';
     admins: any[] = [];
-
-    NavigationExtras: NavigationExtras = {
-        state: {
-            value: null
-        } 
-    }
+    condominios: any[] = [];
 
     constructor(
-        private _adminService: AdminService,
-        private router: Router
-        ){
-        }
-    
+        private _adminService: AdminService
+    ) { }
+
     ngOnInit(): void {
-        this.getAdminLogged();
+        this.getAdministrador();
+        this.getCondominios();
     }
 
-    getAdminLogged(){
+    getAdministrador() {
         this._adminService
-            .getAdmin(this.idLoggedAdmin)
+            .getAdministrador()
             .subscribe(data => {
                 data.forEach((element: any) => {
-                    this.admins.push(element);
-                });
-                this.NavigationExtras.state = this.admins;
+                    this.admins.push({
+                        id: element.payload.doc.id,
+                        ...element.payload.doc.data()
+                    })
+                })
+                console.log(this.admins);
             })
     }
 
-    onEdit(): void{
-        this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.NavigationExtras );
+    getCondominios() {
+        this._adminService
+            .getCondominiosAdministrador()
+            .subscribe(data => {
+                data.forEach((element: any) => {
+                    this.condominios.push({
+                        id: element.payload.doc.id,
+                        ...element.payload.doc.data()
+                    })
+                })
+                console.log(this.condominios);
+            })
     }
 
 

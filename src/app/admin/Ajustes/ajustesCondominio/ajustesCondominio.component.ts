@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-ajustesCondominio',
@@ -20,9 +21,15 @@ export class AjustesCondominioComponent implements OnInit{
 
     contactForm: FormGroup;
 
-    constructor(){
+    constructor(
+        private router: Router
+    ){
         this.contactForm = this.createFormGroup();
     }
     
     ngOnInit(){}
+
+    onEdit(): void{
+        this.router.navigate(['/admin/ajustes/ajustesCondominioEdit']);
+    }
 }

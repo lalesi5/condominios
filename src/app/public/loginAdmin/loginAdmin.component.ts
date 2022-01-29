@@ -18,7 +18,14 @@ export class LoginAdminComponent implements OnInit {
     loginForm = new FormGroup({
         email: new FormControl,
         password: new FormControl
-    })
+    });
+
+    NavigationExtras: NavigationExtras = {
+        state: {
+            adminLogged: null
+        }
+        
+    }
 
 
     constructor(private authSvc: AuthService,
@@ -38,14 +45,11 @@ export class LoginAdminComponent implements OnInit {
             });
 
             if (res) {
-                console.log('res -> ', res);
+                //console.log('res -> ', res);
                 const uid = res.user.uid;
-                
                 this.getDatosUser(res.user.uid);
-                
             } else {
-                alert('No autenticado');
-                
+                alert('No autenticado'); 
             }
         } catch (error) {
             return console.log(error);
@@ -54,7 +58,7 @@ export class LoginAdminComponent implements OnInit {
 
     comprobarRol(uid: string) {
         const usuario = this.authSvc.getUsuario(uid).subscribe(colUser => {
-            console.log('usuario---', colUser);
+            //console.log('usuario---', colUser);
             colUser.forEach(element => console.log(element))
         })
 
@@ -64,11 +68,12 @@ export class LoginAdminComponent implements OnInit {
         const path = 'admins';
         const id = uid;
         this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
-            console.log('datos1 -> ', res);
+            //console.log('datos1 -> ', res);
             if(res){
                 this.perfilUsuario = res.rol;
+                this.NavigationExtras.state = res;
                 if (this.perfilUsuario=='administrador') {
-                    this.router.navigate(['/admin']);
+                    this.router.navigate(['/admin'], this.NavigationExtras );
                 } else {       
                     alert('El usuario no tiene permisos');
                 }

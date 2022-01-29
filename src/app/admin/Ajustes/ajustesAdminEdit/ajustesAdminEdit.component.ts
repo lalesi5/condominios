@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";  
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
     selector: 'app-ajustesAdminEdit',
@@ -8,13 +8,18 @@ import { Router } from '@angular/router';
 })
 
 export class AjustesAdminEditComponent implements OnInit{
+
+    admins: any[] = [];
+
     constructor(
         private router: Router
     ){
-        const navigation = this.router.getCurrentNavigation();
-        console.log(navigation?.extras?.state);
-    }
+        const navigations:any = this.router.getCurrentNavigation()?.extras.state;
+        console.log(navigations);
+        this.admins = navigations;
 
+        console.log(this.admins);
+    }
     ngOnInit(): void {
         
     }

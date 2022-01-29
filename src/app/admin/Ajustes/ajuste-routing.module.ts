@@ -5,6 +5,8 @@ import { AjustesComponent } from './ajustes.component';
 import { AjustesAdminComponent } from "./ajustesAdmin/ajustesAdmin.component";
 import { AjustesCondominioComponent } from './ajustesCondominio/ajustesCondominio.component';
 import { AjustesAdminEditComponent } from './ajustesAdminEdit/ajustesAdminEdit.component';
+import { AjustesCondominioEditComponent } from './ajustesCondominioEdit/ajustesCondominioEdit.component';
+import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajustes-areas-comunales.component';
 
 
 const routesAjustes: Routes = [
@@ -13,7 +15,9 @@ const routesAjustes: Routes = [
             {path: '', redirectTo: 'ajustesAdmin', pathMatch: 'full'},
             {path: 'ajustesAdmin', component: AjustesAdminComponent},
             {path: 'ajustesAdminEdit', component: AjustesAdminEditComponent},
-            {path: 'ajustes_condominio', component: AjustesCondominioComponent}
+            {path: 'ajustesCondominio', component: AjustesCondominioComponent},
+            {path: 'ajustesCondominioEdit', component: AjustesCondominioEditComponent},
+            {path: 'ajustesAreasComunales', component: AjustesAreasComunalesComponent}
             
         ]
     },
