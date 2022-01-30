@@ -10,7 +10,10 @@ import { AdminService } from '../../../services/admin.service';
 export class AjustesAdminComponent implements OnInit {
 
     admins: any[] = [];
+    idAdmin: string = '';
     condominios: any[] = [];
+    idCondominio: string = ';'
+    areasComunales: any[] = [];
 
     constructor(
         private _adminService: AdminService
@@ -18,11 +21,11 @@ export class AjustesAdminComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAdministrador();
-        this.getCondominios();
+        //this.getAreasComunales();
     }
 
-    getAdministrador() {
-        this._adminService
+    async getAdministrador() {
+      await  this._adminService
             .getAdministrador()
             .subscribe(data => {
                 data.forEach((element: any) => {
@@ -30,22 +33,40 @@ export class AjustesAdminComponent implements OnInit {
                         id: element.payload.doc.id,
                         ...element.payload.doc.data()
                     })
+                    this.idAdmin = element.payload.doc.id;
                 })
                 console.log(this.admins);
+                this.getCondominios(this.idAdmin);
             })
     }
 
-    getCondominios() {
+    getCondominios(idAdministrador: string) {
         this._adminService
-            .getCondominiosAdministrador()
+            .getCondominiosAdministrador(idAdministrador)
             .subscribe(data => {
                 data.forEach((element: any) => {
                     this.condominios.push({
                         id: element.payload.doc.id,
                         ...element.payload.doc.data()
                     })
+                    this.idCondominio = element.payload.doc.id;
                 })
                 console.log(this.condominios);
+                this.getAreasComunales(idAdministrador,this.idCondominio);
+            })
+    }
+
+    getAreasComunales(idAdministrado:string, idCondominio: string) {
+        this._adminService
+            .getAreasComunalesCondominio(idAdministrado, idCondominio)
+            .subscribe(data => {
+                data.forEach((element: any) => {
+                    this.areasComunales.push({
+                        id: element.payload.doc.id,
+                        ...element.payload.doc.data()
+                    })
+                })
+                console.log(this.areasComunales);
             })
     }
 

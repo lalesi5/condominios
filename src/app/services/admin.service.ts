@@ -20,15 +20,20 @@ export class AdminService {
             .snapshotChanges();
     }
 
-    getCondominiosAdministrador() {
+    getCondominiosAdministrador(idAdministrador: string) {
         return this.firestore.collection('Administrador')
-            .doc('venAdVbQzj8AtFR3FYCI')
+            .doc(idAdministrador)
             .collection('Condominios')
             .snapshotChanges();
     }
 
-    getAreasComunalesCondominio(){
-        return this.firestore
+    getAreasComunalesCondominio(idAdministrador: string, idCondominio: string){
+        return this.firestore.collection('Administrador')
+        .doc(idAdministrador)
+        .collection('Condominios')
+        .doc(idCondominio)
+        .collection('AreasComunales')
+        .snapshotChanges();
     }
 
 
