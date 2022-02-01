@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
@@ -77,12 +77,39 @@ export class LoginAdminComponent implements OnInit {
             if(res){
                 this.perfilUsuario = res.rol;
                 if (this.perfilUsuario=='administrador') {
-                    this.router.navigate(['/admin']);
-                } else {
+                    console.log('el usuario tiene permisos');
+                    
+                    //this.router.navigate(['/admin']);
+                } else if(this.perfilUsuario=='usuario') {
                    
                     console.log('El usuario no tiene permisos');
                 }
             }
         })
     }
+
+    isValidField(field: string): string {
+        const validatedField = this.loginForm.get(field);
+        return (!validatedField!.valid && validatedField!.touched)
+            ? 'is-invalid' : validatedField!.touched ? 'is-valid' : '';
+    }
+
+    obtenerUsuarioLogeado() {
+        this.authSvc.getUserLogged().subscribe(res => {
+            console.log(res?.email);
+        });
+    }
+
+    get form(): { [key: string]: AbstractControl; } {
+        return this.loginForm.controls;
+    }
+
+    get email() {
+        return this.loginForm.get('email');
+    }
+
+    get password() {
+        return this.loginForm.get('password');
+    }
+
 }

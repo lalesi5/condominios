@@ -28,33 +28,47 @@ export class AuthService {
     return this.afAuth.createUserWithEmailAndPassword(datos.email, datos.password);
   }
 
-
-  loginAdmin(email: string, password: string) {
+  login(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  logoutA() {
-    return this.afAuth.signOut();
-  }
-
-  async login(email: string, password: string) {
-    try {
-      const result = await this.afAuth.signInWithEmailAndPassword(
-        email,
-        password
-      );
-      return result;
-    } catch (error) {
-      return console.error(error);
+    /**
+   * Metodo para inicio de sesión desde Firebase
+   * @param param0 
+   * @returns result
+   */
+     async loginByEmailAdmin({ email, password }: AdminI) {
+      try {
+        const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+        return result;
+      } catch (error) {
+        console.error("Error en login: ", error);
+        return null;
+      }
     }
-  }
+  
+    /**
+     * Metodo para registro de usuario en Firebase
+     * @param param0 
+     * @returns result
+     */
+    async registerByEmailAdmin({ email, password }: AdminI) {
+      try {
+        const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
+        return result;
+      } catch (error) {
+        console.error("Error en Registro: ", error);
+        return null;
+      }
+    }
+
 
   /**
    * Metodo para inicio de sesión desde Firebase
    * @param param0 
    * @returns result
    */
-  async loginByEmail({ email, password }: UsuarioI) {
+  async loginByEmailUser({ email, password }: UsuarioI) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       return result;
@@ -69,7 +83,7 @@ export class AuthService {
    * @param param0 
    * @returns result
    */
-  async registerByEmail({ email, password }: UsuarioI) {
+  async registerByEmailUser({ email, password }: UsuarioI) {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
       return result;
@@ -107,11 +121,6 @@ export class AuthService {
     })
   }
 
-  //el que esta usando como prueba 
-  logoutPrueba() {
-    return this.afAuth.signOut()
-  }
-
   //metodo para recuperar el usuario logeado
   getCurrentUser() {
     //return this.afAuth.authState;
@@ -119,7 +128,7 @@ export class AuthService {
   }
 
   getUsuario(uid: string) {
-    return this.firestore.collection('admins', ref => ref.where('uid', '==', uid)).valueChanges();
+    return this.firestore.collection('user', ref => ref.where('uid', '==', uid)).valueChanges();
   }
 
   //obtener el uid del usuario

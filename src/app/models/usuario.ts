@@ -6,5 +6,5 @@ export interface UsuarioI {
     password: string;
     phone: string;
     rol: string;
-    userId: string;
+    uid: string;
 }

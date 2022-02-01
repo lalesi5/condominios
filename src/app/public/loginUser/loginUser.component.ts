@@ -1,10 +1,8 @@
-
-import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
-import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
     selector: 'app-loginUser',
@@ -26,8 +24,7 @@ export class LoginUserComponent implements OnInit {
     constructor(private authSvc: AuthService,
         private afAuth: AngularFireAuth,
         private router: Router,
-        private fb: FormBuilder,
-        private fstore: FirestoreService) {
+        private fb: FormBuilder) {
         afAuth.authState.subscribe(user => {
             console.log(user);
 
@@ -36,26 +33,17 @@ export class LoginUserComponent implements OnInit {
 
     ngOnInit() { }
 
-    /*onLogin() {
-        const formValue = this.loginForm.value;
-        if (this.loginForm.valid) {
-            const { email, password } = this.loginForm.value;
-            this.authSvc.login(email, password);
-            this.router.navigate(['/user/home']);
-        }
-    }*/
-
     onLogin(): void {
         console.log('entralOGIN');
 
         const formValue = this.loginForm.value;
         if (this.loginForm.valid) {
             console.log('Datos validos');
-            this.authSvc.loginByEmail(formValue).then((res) => {
+            this.authSvc.loginByEmailUser(formValue).then((res) => {
                 if (res) {
                     console.log('usuario - ', res);
-                    //this.comprobarVerificacionEmail();
-                    this.router.navigate(['/user/home']);
+                    this.comprobarVerificacionEmail();
+                    //this.router.navigate(['/user/home']);
                 }
             })
         } else {
@@ -70,6 +58,7 @@ export class LoginUserComponent implements OnInit {
                 this.router.navigate(['/user/home']);
             } else {
                 console.log('No esta verificado');
+                this.authSvc.logout();
                 this.router.navigate(['../loginUser']);
             }
         }))

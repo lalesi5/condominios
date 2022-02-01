@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UsuarioI } from "src/app/models/usuario";
 import { AuthService } from "src/app/services/auth.service";
@@ -21,7 +21,7 @@ export class RegisterUserComponent implements OnInit {
         password: '',
         phone: '',
         rol: '',
-        userId: '',
+        uid: '',
     }
 
     private isEmail = /\S+@\S+\.\S+/;
@@ -50,20 +50,20 @@ export class RegisterUserComponent implements OnInit {
         const formValue = this.registerForm.value;
         if (this.registerForm.valid) {
             console.log('Datos validos');
-            this.authSvc.registerByEmail(formValue).then(async (res) => {
+            this.authSvc.registerByEmailUser(formValue).then(async (res) => {
                 if (res) {
                     console.log('usuario - ', res);
                     const path = 'user';
                     const id = res.user.uid;
                     
-                    this.datos.userId = id;
+                    this.datos.uid = id;
                     this.datos.password = '';
                     this.datos.rol = 'usuario';
                     await this.fstore.createDoc(this.datos, path, id);
                 }
                 console.log('Usuario registrado');
-                //this.authSvc.verificarCorreo();
-                //console.log('Correo de verificacion enviado');
+                this.authSvc.verificarCorreo();
+                console.log('Correo de verificacion enviado');
 
 
                 this.authSvc.logout();
