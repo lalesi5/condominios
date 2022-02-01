@@ -1,50 +1,72 @@
 <div class="navigation">
     <ul>
         <li>
-            <a href="#">
-                <span class="icon"><mat-icon>donut_small</mat-icon></span>
+            <!--<a href="#">
+                <span class="icon">
+                    <mat-icon>donut_small</mat-icon>
+                </span>
                 <span class="title">Alex Carrera</span>
+            </a>-->
+            <a href="#"  *ngIf="userLogged|async as user">
+                <span class="icon">
+                    <mat-icon>donut_small</mat-icon>
+                </span>
+                <span class="title">{{user.email}}</span>
             </a>
         </li>
         <li>
-            <a [routerLink] = "['/user/home']" [routerLinkActive]="['active']">
-                <span class="icon"><mat-icon>home</mat-icon></span>
+            <a [routerLink]="['/user/home']" [routerLinkActive]="['active']">
+                <span class="icon">
+                    <mat-icon>home</mat-icon>
+                </span>
                 <span class="title">Inicio</span>
             </a>
         </li>
         <li>
-            <a [routerLink] = "['/user/comunicacion']" [routerLinkActive]="['active']">
-                <span class="icon"><mat-icon> chat</mat-icon></span>
+            <a [routerLink]="['/user/comunicacion']" [routerLinkActive]="['active']">
+                <span class="icon">
+                    <mat-icon> chat</mat-icon>
+                </span>
                 <span class="title">Comunicación</span>
             </a>
         </li>
         <li>
-            <a [routerLink] = "['/user/areasComunes']" [routerLinkActive]="['active']">
-                <span class="icon"><mat-icon>folder</mat-icon></span>
+            <a [routerLink]="['/user/areasComunes']" [routerLinkActive]="['active']">
+                <span class="icon">
+                    <mat-icon>folder</mat-icon>
+                </span>
                 <span class="title">Areas Comunes</span>
             </a>
         </li>
         <li>
-            <a [routerLink] = "['/user/finanzas']" [routerLinkActive]="['active']">
-                <span class="icon"><mat-icon> attach_money</mat-icon></span>
+            <a [routerLink]="['/user/finanzas']" [routerLinkActive]="['active']">
+                <span class="icon">
+                    <mat-icon> attach_money</mat-icon>
+                </span>
                 <span class="title">Finanzas</span>
             </a>
         </li>
         <li>
-            <a [routerLink] = "['/user/ajustes']" [routerLinkActive]="['active']">
-                <span class="icon">	<mat-icon>settings</mat-icon></span>
+            <a [routerLink]="['/user/ajustes']" [routerLinkActive]="['active']">
+                <span class="icon">
+                    <mat-icon>settings</mat-icon>
+                </span>
                 <span class="title">Ajustes</span>
             </a>
         </li>
         <li>
-            <a [routerLink] = "['/home']" [routerLinkActive]="['active']">
-                <span class="icon">	<mat-icon>exit_to_app</mat-icon></span>
+            <a [routerLink]="['/home']" [routerLinkActive]="['active']" (click)="onLogout()">
+                <span class="icon">
+                    <mat-icon>exit_to_app</mat-icon>
+                </span>
                 <span class="title">Salir</span>
             </a>
         </li>
         <li>
             <a>
-                <span class="icon"><mat-icon>donut_small</mat-icon></span>
+                <span class="icon">
+                    <mat-icon>donut_small</mat-icon>
+                </span>
                 <span class="title">CondominioEPN</span>
             </a>
         </li>

@@ -12,17 +12,36 @@
               <form [formGroup]='loginForm' (ngSubmit)="onLogin()">
                 <h1 class="h3 mb-3 font-weight-normal">Login Usuarios</h1>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control" placeholder="Ingrese su Correo Electrónico"
-                    required minlength="8" formControlName="email">
+                  <input id="email" type="email" name="email" class="form-control" required
+                    placeholder="Ingrese su Correo Electrónico" formControlName="email" [class]="isValidField('email')">
+                  <div *ngIf="form['email'].errors" class="invalid-feedback">
+                    <div *ngIf="form['email'].errors['required']">
+                      El campo es requerido
+                    </div>
+                    <div *ngIf="form['email'].errors['pattern']">
+                      Por favor ingrese un email valido
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña"
-                    required minlength="5" maxlength="10" formControlName="password">
+                    formControlName="password" [class]="isValidField('password')">
+                  <div *ngIf="form['password'].errors" class="invalid-feedback">
+                    <div *ngIf="form['password'].errors['required']">
+                      Campo requerido
+                    </div>
+                    <!--<div *ngIf="form['password'].errors['minlength']">
+                      La contraseña no puede tener menos de 6 caracteres
+                    </div>
+                    <div *ngIf="form['password'].errors['pattern']">
+                      Debe tener al menos una mayúscula, una minúscula y un dígito
+                    </div>-->
+                  </div>
                 </div>
                 <input #imageUser type="hidden">
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
                 <div class="form-group">
-                  <a routerLink="../registerAdmin" class="form-control login-user">Eres Nuevo?</a>
+                  <a routerLink="../registerUser" class="form-control login-user">Eres Nuevo?</a>
                 </div>
               </form>
             </div>

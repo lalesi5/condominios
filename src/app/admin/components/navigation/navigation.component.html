@@ -43,7 +43,7 @@
             </a>
         </li>
         <li>
-            <a [routerLink] = "['/home']" [routerLinkActive]="['active']">
+            <a [routerLink] = "['/home']" [routerLinkActive]="['active']" (click)="onLogout()">
                 <span class="icon">	<mat-icon>exit_to_app</mat-icon></span>
                 <span class="title">Salir</span>
             </a>
