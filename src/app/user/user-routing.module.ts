@@ -8,18 +8,18 @@ import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario
 import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
 import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario.component';
 import { AjustesUsuarioComponent } from './Ajustes/ajustesUsuario.component';
-
+import { CheckLoginGuard } from "../core/shared/guards/check-login.guard";
 
 const routesUsuarios: Routes = [
     {path: '', component: UserComponent, children:
         [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
-            {path: 'home', component: InicioUsuarioComponent},
-            {path: 'anuncios', component: UserAnunciosComponent},
-            {path: 'comunicacion', component: ComunicacionUsuarioComponent},
-            {path: 'finanzas', component: FinanzasUsuarioComponent},
-            {path: 'areasComunes', component: AreasComunesUsuarioComponent},
-            {path: 'ajustes', component: AjustesUsuarioComponent},
+            {path: 'home', component: InicioUsuarioComponent, canActivate:[CheckLoginGuard]},
+            {path: 'anuncios', component: UserAnunciosComponent, canActivate:[CheckLoginGuard]},
+            {path: 'comunicacion', component: ComunicacionUsuarioComponent, canActivate:[CheckLoginGuard]},
+            {path: 'finanzas', component: FinanzasUsuarioComponent, canActivate:[CheckLoginGuard]},
+            {path: 'areasComunes', component: AreasComunesUsuarioComponent, canActivate:[CheckLoginGuard]},
+            {path: 'ajustes', component: AjustesUsuarioComponent, canActivate:[CheckLoginGuard]},
             
         ]
     },
