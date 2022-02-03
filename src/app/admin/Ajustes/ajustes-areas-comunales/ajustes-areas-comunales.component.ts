@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../../services/admin.service';
 
 @Component({
   selector: 'app-ajustes-areas-comunales',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjustesAreasComunalesComponent implements OnInit {
 
-  constructor() { }
+  idAdmin: string = '';
+  idCondominio: string = ';'
+  areasComunales: any[] = [];
+
+  constructor(private _adminService: AdminService) { }
 
   ngOnInit(): void {
   }
+
+//   getAreasComunales(idAdministrado: string, idCondominio: string) {
+//     this._adminService
+//         .getAreasComunalesCondominio(idAdministrado, idCondominio)
+//         .subscribe(data => {
+//             data.forEach((element: any) => {
+//                 this.areasComunales.push({
+//                     id: element.payload.doc.id,
+//                     ...element.payload.doc.data()
+//                 })
+//             })
+//             console.log(this.areasComunales);
+//         })
+// }
 
 }
