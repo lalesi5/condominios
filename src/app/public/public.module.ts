@@ -35,7 +35,6 @@ import { MatCommonModule } from '@angular/material/core';
     LoginAdminComponent,
     RegisterAdminComponent,
     LoginUserComponent,
-    RegisterUserComponent
   ],
   exports: [],
   providers:[]

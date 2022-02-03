@@ -18,7 +18,14 @@ export class LoginAdminComponent implements OnInit {
     loginForm = new FormGroup({
         email: new FormControl,
         password: new FormControl
-    })
+    });
+
+    NavigationExtras: NavigationExtras = {
+        state: {
+            adminLogged: null
+        }
+        
+    }
 
 
     constructor(private authSvc: AuthService,
@@ -27,17 +34,9 @@ export class LoginAdminComponent implements OnInit {
 
     ngOnInit() { }
 
-    /**async onlogin(){
-
-        console.log('datos -> ', this.datos);
-        const { email, password } = this.loginForm.value;
-        const res = await this.authSvc.loginAdmin(this.datos).catch(error => {
-            console.log('error');
-        })
-    }**/
 
     async onLogin() {
-        //console.log('Form->', this.loginForm.value);
+        
         try {
             const { email, password } = this.loginForm.value;
 
@@ -46,24 +45,20 @@ export class LoginAdminComponent implements OnInit {
             });
 
             if (res) {
-                console.log('res -> ', res);
+                //console.log('res -> ', res);
                 const uid = res.user.uid;
-                //this.comprobarRol(uid);
                 this.getDatosUser(res.user.uid);
-                
             } else {
-                console.log('No autenticado');
-                //swift alert revisar
+                alert('No autenticado'); 
             }
         } catch (error) {
             return console.log(error);
         }
     }
-    //this.prueba();
 
     comprobarRol(uid: string) {
         const usuario = this.authSvc.getUsuario(uid).subscribe(colUser => {
-            console.log('usuario---', colUser);
+            //console.log('usuario---', colUser);
             colUser.forEach(element => console.log(element))
         })
 
@@ -73,9 +68,10 @@ export class LoginAdminComponent implements OnInit {
         const path = 'admins';
         const id = uid;
         this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
-            console.log('datos1 -> ', res);
+            //console.log('datos1 -> ', res);
             if(res){
                 this.perfilUsuario = res.rol;
+                this.NavigationExtras.state = res;
                 if (this.perfilUsuario=='administrador') {
                     console.log('el usuario tiene permisos');
                     

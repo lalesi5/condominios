@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";  
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { AdminService } from '../../../services/admin.service';
+import { NavigationExtras, Router } from '@angular/router';
+import { Administrador } from '../../../models/administrador.interface';
 
 @Component({
     selector: 'app-ajustesAdmin',
@@ -8,25 +9,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['./ajustesAdmin.component.css']
 })
 
-export class AjustesAdminComponent implements OnInit{
+export class AjustesAdminComponent implements OnInit {
 
-    adminNombreCuenta!: FormGroup;
+    administradores$ = this._adminService.administradores;
 
-    constructor( private router: Router, private fb: FormBuilder ){}
-    
+    navigationExtras: NavigationExtras = {
+      state: {
+        value: null
+      }
+    };
+  
+    constructor(
+        private router: Router,
+        private _adminService: AdminService
+    ) { 
+        const navigation = this.router.getCurrentNavigation();
+    }
+
     ngOnInit(): void {
-        this.initForm();
+        
     }
 
-    onSave(): void{
-        console.log('saved', this.adminNombreCuenta.value);
-    }
-
-    private initForm(): void {
-        this.adminNombreCuenta = this.fb.group({
-            nombreCuenta: ['', [Validators.required]]
-        });
-        console.log(this.adminNombreCuenta);
+    onGoEdit(item: any): void {
+        this.navigationExtras.state = item;
+        this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
     }
 
 }
