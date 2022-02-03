@@ -12,9 +12,8 @@ import { CheckLoginGuard } from "../core/shared/guards/check-login.guard";
 const routesAdmin: Routes = [
     {path: '', component: AdminComponent, children:
         [
-            {path: '', redirectTo: 'condominios', pathMatch: 'full'},
+            {path: '', redirectTo: 'ajustes', pathMatch: 'full'},
             {path: 'inicio', component: InicioComponent, canActivate:[CheckLoginGuard]},
-            {path: 'condominios', loadChildren:() => import('./Condominios/condominios.module').then(m => m.CondominiosModule), canActivate:[CheckLoginGuard]},
             {path: 'administracion', loadChildren: () => import('./Administracion/administracion.module').then(m => m.AdministracionModule), canActivate:[CheckLoginGuard]},
             {path: 'comunicacion', loadChildren: () => import('./Comunicacion/comunicacion.module').then(m => m.ComunicacionModule), canActivate:[CheckLoginGuard]},
             {path: 'reportes', loadChildren: () => import('./Reportes/reportes.module').then(m => m.ReportesModule), canActivate:[CheckLoginGuard]},

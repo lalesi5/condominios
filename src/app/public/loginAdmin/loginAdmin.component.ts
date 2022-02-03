@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigationExtras, Router } from "@angular/router";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
 import { FirestoreService } from "src/app/services/firestore.service";
@@ -47,7 +47,8 @@ export class LoginAdminComponent implements OnInit {
             if (res) {
                 //console.log('res -> ', res);
                 const uid = res.user.uid;
-                this.getDatosUser(res.user.uid);
+                //this.getDatosUser(res.user.uid);
+                this.router.navigate(['/admin']);
             } else {
                 alert('No autenticado'); 
             }

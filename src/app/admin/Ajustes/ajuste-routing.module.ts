@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AjustesComponent } from './ajustes.component';
 import { AjustesAdminComponent } from "./ajustesAdmin/ajustesAdmin.component";
 import { AjustesCondominioComponent } from './ajustesCondominio/ajustesCondominio.component';
-import { AjustesAdminEditComponent } from './ajustesAdminEdit/ajustesAdminEdit.component';
-import { AjustesCondominioEditComponent } from './ajustesCondominioEdit/ajustesCondominioEdit.component';
 import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajustes-areas-comunales.component';
+import { AjustesAdminEditComponent } from "./ajustesAdminEdit/ajustesAdminEdit.component";
+import { AjustesCondominioEditComponent } from "./ajustesCondominioEdit/ajustesCondominioEdit.component";
 
 
 const routesAjustes: Routes = [
