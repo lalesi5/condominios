@@ -1,20 +1,19 @@
 import { Component, OnInit } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AdminI } from "src/app/models/administrador";
+import { UsuarioI } from "src/app/models/usuario";
 import { AuthService } from "src/app/services/auth.service";
 import { FirestoreService } from "src/app/services/firestore.service";
 
 @Component({
-    selector: 'app-registerAdmin',
-    templateUrl: './registerAdmin.component.html',
-    styleUrls: ['./registerAdmin.component.css']
+    selector: 'app-registerUser',
+    templateUrl: './registerUser.component.html',
+    styleUrls: ['./registerUser.component.css']
 })
 
-export class RegisterAdminComponent implements OnInit {
+export class RegisterUserComponent implements OnInit {
 
-    datos: AdminI = {
+    datos: UsuarioI = {
         address: '',
         email: '',
         last_name: '',
@@ -41,37 +40,52 @@ export class RegisterAdminComponent implements OnInit {
 
     ngOnInit() { }
 
-
     /**
-     * Metodo para registro de usuario administrador
-     */
+    * Metodo para registrar usuario
+    * guarda el uid del usuario autenticado como dato
+    */
     onRegister() {
         console.log('datos -> ', this.datos);
         console.log('entra al registro');
         const formValue = this.registerForm.value;
         if (this.registerForm.valid) {
             console.log('Datos validos');
-            this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
+            this.authSvc.registerByEmailUser(formValue).then(async (res) => {
                 if (res) {
                     console.log('usuario - ', res);
-                    const path = 'admins';
+                    const path = 'user';
                     const id = res.user.uid;
-
+                    
                     this.datos.uid = id;
                     this.datos.password = '';
-                    this.datos.rol = 'administrador';
+                    this.datos.rol = 'usuario';
                     await this.fstore.createDoc(this.datos, path, id);
                 }
                 console.log('Usuario registrado');
                 this.authSvc.verificarCorreo();
                 console.log('Correo de verificacion enviado');
 
+
                 this.authSvc.logout();
-                this.router.navigate(['../loginAdmin']);
+                this.router.navigate(['../loginUser']);
             })
         } else {
             console.log('Datos no validos');
         }
+
+        /**const res = await this.authSvc.registerUsuario(this.datos).catch(error => {
+            console.log('error');
+        })
+
+        if (res) {
+            console.log('exito al crear usuario');
+            const path = 'user';
+            const id = res.user.uid;
+            this.datos.userId = id;
+            this.datos.password = '';
+            this.datos.rol = 'usuario';
+            await this.fstore.createDoc(this.datos, path, id);
+        }**/
     }
 
     /**

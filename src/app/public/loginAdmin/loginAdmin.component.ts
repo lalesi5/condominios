@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
 import { NavigationExtras, Router } from "@angular/router";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
@@ -47,7 +47,8 @@ export class LoginAdminComponent implements OnInit {
             if (res) {
                 //console.log('res -> ', res);
                 const uid = res.user.uid;
-                this.getDatosUser(res.user.uid);
+                //this.getDatosUser(res.user.uid);
+                this.router.navigate(['/admin']);
             } else {
                 alert('No autenticado'); 
             }
@@ -73,11 +74,39 @@ export class LoginAdminComponent implements OnInit {
                 this.perfilUsuario = res.rol;
                 this.NavigationExtras.state = res;
                 if (this.perfilUsuario=='administrador') {
-                    this.router.navigate(['/admin'], this.NavigationExtras );
-                } else {       
-                    alert('El usuario no tiene permisos');
+                    console.log('el usuario tiene permisos');
+                    
+                    //this.router.navigate(['/admin']);
+                } else if(this.perfilUsuario=='usuario') {
+                   
+                    console.log('El usuario no tiene permisos');
                 }
             }
         })
     }
+
+    isValidField(field: string): string {
+        const validatedField = this.loginForm.get(field);
+        return (!validatedField!.valid && validatedField!.touched)
+            ? 'is-invalid' : validatedField!.touched ? 'is-valid' : '';
+    }
+
+    obtenerUsuarioLogeado() {
+        this.authSvc.getUserLogged().subscribe(res => {
+            console.log(res?.email);
+        });
+    }
+
+    get form(): { [key: string]: AbstractControl; } {
+        return this.loginForm.controls;
+    }
+
+    get email() {
+        return this.loginForm.get('email');
+    }
+
+    get password() {
+        return this.loginForm.get('password');
+    }
+
 }

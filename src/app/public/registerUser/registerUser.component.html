@@ -9,12 +9,17 @@
         <div class="card_register">
           <div class="card">
             <div class="card-body text-center">
-              <form [formGroup]='registerForm' (ngSubmit)="onRegister()">
+              <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
                 <h1 class="h3 mb-3 font-weight-normal">Registrar Administrador</h1>
                 <div class="form-group">
                   <input type="text" name="name" class="form-control" placeholder="Nombres" formControlName="name"
                     [(ngModel)]="datos.name"
                     [ngClass]="{ 'is-invalid': !registerForm.controls['name'].valid  && registerForm.controls['name'].touched }">
+                  <!--<div *ngIf="form['name'].errors" class="invalid-feedback">
+                    <div *ngIf="form['name'].errors['required']">
+                      El campo es requerido
+                    </div>
+                    </div>-->
                   <div *ngIf=" registerForm.controls['name'].touched  && !registerForm.controls['name'].valid"
                     class="invalid-feedback">
                     Campo requerido
@@ -41,6 +46,14 @@
                       Por favor ingrese un email valido
                     </div>
                   </div>
+                  <!--<div *ngIf="form['email'].errors" class="invalid-feedback">
+                    <div *ngIf="form['email'].errors['required']">
+                      El campo es requerido
+                    </div>
+                    <div *ngIf="form['email'].errors['pattern']">
+                      Por favor ingrese un email valido
+                    </div>
+                  </div>-->
                 </div>
                 <div class="form-group">
                   <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña"
@@ -57,10 +70,14 @@
                     </div>
                   </div>
                 </div>
+                <!--<div class="form-group">
+                  <input type="password" name="passwordConfirm" class="form-control" placeholder="Repita la contraseña" required
+                    minlength="5" maxlength="10" formControlName="password" [(ngModel)]="datos.password">
+                </div>-->
                 <input #imageUser type="hidden">
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Registrar</button>
                 <div class="form-group">
-                  <a routerLink="../loginAdmin" class="form-control login-user">Tienes una cuenta?</a>
+                  <a routerLink="../loginUser" class="form-control login-user">Tienes una cuenta?</a>
                 </div>
               </form>
             </div>
