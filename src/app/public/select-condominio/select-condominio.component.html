@@ -1,0 +1,25 @@
+<div class="Condominios">
+    <div class="containerInfo">
+        <mat-card>
+            <h2>Lista de Condominios</h2>
+            <div class="headerCondominio">
+                <div class="card" *ngFor="let condominio of condominios" (click)="onGoAdmin(condominio)">
+                    <div>
+                        <div class="cardName">{{condominio.nombre}}</div>
+                    </div>
+                    <div class="iconBx">
+                        <mat-icon>home</mat-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="cardName">Agregar Condominio</div>
+                    </div>
+                    <div class="iconBx">
+                        <mat-icon>add</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
