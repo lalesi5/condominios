@@ -65,7 +65,7 @@ export class LoginAdminComponent implements OnInit {
     }
 
     getDatosUser(uid: string) {
-        const path = 'admins';
+        const path = 'Administrador';
         const id = uid;
         this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
             //console.log('datos1 -> ', res);

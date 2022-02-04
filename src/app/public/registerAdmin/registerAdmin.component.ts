@@ -54,7 +54,7 @@ export class RegisterAdminComponent implements OnInit {
             this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
                 if (res) {
                     console.log('usuario - ', res);
-                    const path = 'admins';
+                    const path = 'Administrador';
                     const id = res.user.uid;
 
                     this.datos.uid = id;
