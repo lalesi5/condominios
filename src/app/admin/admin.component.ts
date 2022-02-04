@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {NavigationExtras} from "@angular/router";
+import { NavigationExtras, Router } from "@angular/router";
 
 @Component({
     selector: 'app-admin',
@@ -9,8 +9,24 @@ import {NavigationExtras} from "@angular/router";
 
 export class AdminComponent implements OnInit {
 
-    constructor() { }
+    idAministrador: string = '';
 
-    ngOnInit() { }
+    NavigationExtras: NavigationExtras = {
+        state: {
+
+        }
+    }
+
+    constructor(
+        private router: Router
+    ) {
+        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+        this.idAministrador = navigations.uid;
+        console.log('Dato obtenido en /admin', this.idAministrador);
+    }
+
+    ngOnInit() { 
+
+    }
 
 }

@@ -22,7 +22,7 @@ export class LoginAdminComponent implements OnInit {
 
     NavigationExtras: NavigationExtras = {
         state: {
-            adminLogged: null
+            
         }
         
     }
@@ -47,8 +47,7 @@ export class LoginAdminComponent implements OnInit {
             if (res) {
                 //console.log('res -> ', res);
                 const uid = res.user.uid;
-                //this.getDatosUser(res.user.uid);
-                this.router.navigate(['/admin']);
+                this.getDatosUser(uid);
             } else {
                 alert('No autenticado'); 
             }
@@ -74,9 +73,8 @@ export class LoginAdminComponent implements OnInit {
                 this.perfilUsuario = res.rol;
                 this.NavigationExtras.state = res;
                 if (this.perfilUsuario=='administrador') {
-                    console.log('el usuario tiene permisos');
-                    
-                    //this.router.navigate(['/admin']);
+                    console.log('el usuario tiene permisos', res);
+                    this.router.navigate(['/admin'], this.NavigationExtras);
                 } else if(this.perfilUsuario=='usuario') {
                    
                     console.log('El usuario no tiene permisos');

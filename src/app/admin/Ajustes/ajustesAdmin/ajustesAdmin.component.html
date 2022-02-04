@@ -1,28 +1,22 @@
 <div class="ajustesAdmin">
   <div class="containerInfo">
-    <mat-card>
+    <mat-card *ngFor= "let admin of admins">
       <h2>Datos del administrador</h2>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td class="bnt-group" role="group">
-                <button type="button" class="btn btn-info m-1">Edit</button>
-                <button type="button" class="btn btn-info m-1">See</button>
-                <button type="button" class="btn btn-danger m-1">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card">
+        <div><b>Nombre: </b>{{admin.nombre}}</div>
+        <div><b>Direccion: </b>{{admin.apellido}}</div>
+        <div><b>Email: </b>{{admin.email}}</div>
+        <div><b>Celular: </b>{{admin.telefono}}</div>
+      </div>
+      <div class="notes">
+        La persona titular de la información,, es considerada el
+        propietario de los datos alojados en el sistema y aquellos que se generan dentro
+        del mismo fruto de la operación diaria, siendo su responsabilidad el cumplimiento
+        de cualquier tipo de acuerdo de confidencialidad para con sus clientes o miembros
+        de su comunidad.
+      </div>
+      <div>
+        <button class="btn btn-primary mt-2" (click)= "onEdit()">Editar</button>
       </div>
     </mat-card>
   </div>

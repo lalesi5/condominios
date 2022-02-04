@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AdminService } from '../../../services/admin.service';
-import { NavigationExtras, Router } from '@angular/router';
-import { Administrador } from '../../../models/administrador.interface';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
     selector: 'app-ajustesAdmin',
@@ -11,27 +10,48 @@ import { Administrador } from '../../../models/administrador.interface';
 
 export class AjustesAdminComponent implements OnInit {
 
-    administradores$ = this._adminService.administradores;
+    admins: any[] = [];
+    idAdmin: string = '';
+    condominios: any[] = [];
+    idCondominio: string = ';'
+    areasComunales: any[] = [];
 
-    navigationExtras: NavigationExtras = {
-      state: {
-        value: null
-      }
-    };
-  
+    navigationExtras: NavigationExtras ={
+        state:{
+
+        }
+    }
+
     constructor(
         private router: Router,
         private _adminService: AdminService
-    ) { 
-        const navigation = this.router.getCurrentNavigation();
-    }
+    ) { }
 
     ngOnInit(): void {
-        
+        this.getAdministrador();
     }
 
-    onGoEdit(item: any): void {
-        this.navigationExtras.state = item;
+    async getAdministrador() {
+        try{
+            this._adminService
+            .getAdministrador()
+            .subscribe(data => {
+                data.forEach((element: any) => {
+                    this.admins.push({
+                        id: element.payload.doc.id,
+                        ...element.payload.doc.data()
+                    })
+                    this.idAdmin = element.payload.doc.id;
+                })
+            })
+        }
+                catch (err){
+            console.log(err);
+        }
+    }
+
+    onEdit(): void {
+        this.navigationExtras.state = this.admins; 
         this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
     }
 

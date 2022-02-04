@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NavigationExtras, Router } from "@angular/router";
 
 
 @Component({
@@ -9,9 +10,21 @@ import { Component, OnInit } from "@angular/core";
 
 export class AjustesComponent implements OnInit{
 
+    idAministrador: string = '';
 
+    NavigationExtras: NavigationExtras = {
+        state: {
 
-    constructor(  ){}
+        }
+    }
+
+    constructor(
+        private router: Router,
+    ) {
+        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+        this.idAministrador = navigations;
+        console.log('Dato obtenido en /ajustes', this.idAministrador);
+    }
     
     ngOnInit(){
 

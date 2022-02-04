@@ -15,10 +15,14 @@ export class AjustesAdminEditComponent implements OnInit{
         private router: Router
     ){
         const navigations:any = this.router.getCurrentNavigation()?.extras.state;
-        console.log(navigations);
-        this.admins = navigations;
+        navigations.forEach((element: any) => {
+            this.admins.push({
+                //id: element.id,
+                ...element
+            })
+        });
 
-        console.log(this.admins);
+        console.log('Dato obtenido',this.admins);
     }
     ngOnInit(): void {
         
