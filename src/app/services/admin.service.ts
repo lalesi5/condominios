@@ -20,21 +20,21 @@ export class AdminService {
             .snapshotChanges();
     }
 
-    getCondominiosAdministrador(idAdministrador: string) {
-        return this.firestore.collection('Administrador')
-            .doc(idAdministrador)
-            .collection('Condominios')
-            .snapshotChanges();
-    }
+    // getCondominiosAdministrador(idAdministrador: string) {
+    //     return this.firestore.collection('Administrador')
+    //         .doc(idAdministrador)
+    //         .collection('Condominios')
+    //         .snapshotChanges();
+    // }
 
-    getAreasComunalesCondominio(idAdministrador: string, idCondominio: string){
-        return this.firestore.collection('Administrador')
-        .doc(idAdministrador)
-        .collection('Condominios')
-        .doc(idCondominio)
-        .collection('AreasComunales')
-        .snapshotChanges();
-    }
+    // getAreasComunalesCondominio(idAdministrador: string, idCondominio: string){
+    //     return this.firestore.collection('Administrador')
+    //     .doc(idAdministrador)
+    //     .collection('Condominios')
+    //     .doc(idCondominio)
+    //     .collection('AreasComunales')
+    //     .snapshotChanges();
+    // }
 
 
 }

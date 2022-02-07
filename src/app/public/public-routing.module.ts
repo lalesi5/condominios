@@ -9,6 +9,7 @@ import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
 import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component';
 import { LoginUserComponent } from './loginUser/loginUser.component';
 import { SelectCondominioComponent } from "./select-condominio/select-condominio.component";
+import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 
 
 
@@ -21,7 +22,8 @@ const routes: Routes = [
             {path: 'loginAdmin', component: LoginAdminComponent},
             {path: 'registerAdmin', component: RegisterAdminComponent},
             {path: 'loginUser', component: LoginUserComponent},
-            {path: 'selectCondominio', component: SelectCondominioComponent}
+            {path: 'selectCondominio', component: SelectCondominioComponent},
+            {path: 'createCondominio', component: CreateCondominioComponent}
         ]
     },
 ];

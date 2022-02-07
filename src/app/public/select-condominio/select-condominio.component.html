@@ -5,13 +5,13 @@
             <div class="headerCondominio">
                 <div class="card" *ngFor="let condominio of condominios" (click)="onGoAdmin(condominio)">
                     <div>
-                        <div class="cardName">{{condominio.nombre}}</div>
+                        <div class="cardName">{{condominio.nombreCondominio}}</div>
                     </div>
                     <div class="iconBx">
                         <mat-icon>home</mat-icon>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" (click)="onGoCreate()">
                     <div>
                         <div class="cardName">Agregar Condominio</div>
                     </div>

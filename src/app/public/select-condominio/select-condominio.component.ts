@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { AdminService } from '../../services/admin.service';
+import { CondominioService } from '../../services/condominios.service';
 
 @Component({
   selector: 'app-select-condominio',
@@ -9,51 +9,61 @@ import { AdminService } from '../../services/admin.service';
 })
 export class SelectCondominioComponent implements OnInit {
 
+  administrador: any[] = [];
   idAministrador: string = '';
   condominios: any[] = [];
-  idCondominio: string = ';';
+  idCondominio: string = '';
 
   NavigationExtras: NavigationExtras = {
-      state: {
+    state: {
 
-      }
+    }
   }
 
   constructor(
-      private router: Router,
-      private _adminService: AdminService
+    private router: Router,
+    private _condominiosService: CondominioService
   ) {
-      const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-      this.idAministrador = navigations.uid;
-      console.log('Id Administrador: ', this.idAministrador);
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.administrador = navigations;
+    this.idAministrador = navigations.uid;
+    //console.log('Id Administrador: ', this.idAministrador);
   }
 
   ngOnInit(): void {
     this.onListCondominios();
   }
-  
 
-  async onListCondominios(){
-    try{
-      this._adminService
-      .getCondominiosAdministrador('venAdVbQzj8AtFR3FYCI')
-      .subscribe(data => {
-        data.forEach((element: any) => {
-          this.condominios.push({
-            id: element.payload.doc.id,
-            ...element.payload.doc.data()
+
+  async onListCondominios() {
+    try {
+      this._condominiosService
+        .getCondominios(this.idAministrador)
+        .subscribe(data => {
+          data.forEach((element: any) => {
+            this.condominios.push({
+              id: element.payload.doc.id,
+              ...element.payload.doc.data()
+            })
           })
+          this.condominios.forEach((element:any) => {
+            this.idCondominio = element.idCondominio
+          })
+          //console.log(this.condominios);
         })
-        console.log(this.condominios);
-      })
     }
-    catch (err){
+    catch (err) {
       console.log(err);
     }
   }
 
-  async onGoAdmin(item: any){
-    console.log('Boton',item, this.idAministrador);
+  async onGoAdmin(item: any) {
+    console.log('Objeto: ', item, 'IdAdministrador: ', this.idAministrador,'idCondominio: ', this.idCondominio);
+  }
+
+  onGoCreate(){
+    this.NavigationExtras.state = this.administrador;
+    this.router.navigate(['/createCondominio'], this.NavigationExtras);
   }
 
 }

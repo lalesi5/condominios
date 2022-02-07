@@ -16,6 +16,7 @@ import { RegisterUserComponent } from './registerUser/registerUser.component';
 import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
 import { SelectCondominioComponent } from './select-condominio/select-condominio.component';
+import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 
 
 
@@ -37,7 +38,8 @@ import { SelectCondominioComponent } from './select-condominio/select-condominio
     RegisterAdminComponent,
     LoginUserComponent,
     RegisterUserComponent,
-    SelectCondominioComponent
+    SelectCondominioComponent,
+    CreateCondominioComponent
   ],
   exports: [],
   providers:[]
