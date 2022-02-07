@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UsuarioI } from "src/app/models/usuario";
 import { AuthService } from "src/app/services/auth.service";
 import { FirestoreService } from "src/app/services/firestore.service";
+import Validation from "../confirm.validator";
 
 @Component({
     selector: 'app-registerUser',
@@ -26,11 +27,12 @@ export class RegisterUserComponent implements OnInit {
 
     private isEmail = /\S+@\S+\.\S+/;
 
-    registerForm = this.fb.group({
-        email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
-        password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/\d/), Validators.pattern(/[A-Z]/), Validators.pattern(/[a-z]/)]],
-        name: ['', [Validators.required]],
-        last_name: ['', [Validators.required]],
+    registerForm: FormGroup = new FormGroup({
+        name: new FormControl(''),
+        last_name: new FormControl(''),
+        email: new FormControl(''),
+        password: new FormControl(''),
+        confirmPassword: new FormControl('')
     });
 
     constructor(private authSvc: AuthService,
@@ -38,7 +40,30 @@ export class RegisterUserComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder) { }
 
-    ngOnInit() { }
+    ngOnInit(): void {
+        this.registerForm = this.fb.group(
+            {
+                name: ['', Validators.required],
+                last_name: ['', Validators.required],
+                email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+                password: [
+                    '',
+                    [
+                        Validators.required,
+                        Validators.minLength(6),
+                        Validators.maxLength(15),
+                        Validators.pattern(/\d/),
+                        Validators.pattern(/[A-Z]/),
+                        Validators.pattern(/[a-z]/)
+                    ]
+                ],
+                confirmPassword: ['', Validators.required]
+            },
+            {
+                validators: [Validation.match('password', 'confirmPassword')]
+            }
+        );
+    }
 
     /**
     * Metodo para registrar usuario
@@ -55,15 +80,15 @@ export class RegisterUserComponent implements OnInit {
                     console.log('usuario - ', res);
                     const path = 'user';
                     const id = res.user.uid;
-                    
+
                     this.datos.uid = id;
                     this.datos.password = '';
                     this.datos.rol = 'usuario';
                     await this.fstore.createDoc(this.datos, path, id);
                 }
                 console.log('Usuario registrado');
-                this.authSvc.verificarCorreo();
-                console.log('Correo de verificacion enviado');
+                //this.authSvc.verificarCorreo();
+                //console.log('Correo de verificacion enviado');
 
 
                 this.authSvc.logout();
@@ -88,21 +113,18 @@ export class RegisterUserComponent implements OnInit {
         }**/
     }
 
-    /**
-     * Metodo para validar los campos del formulario de registro
-     * @param field 
-     * @returns 
-     */
-    isValidField(field: string): string {
-        const validatedField = this.registerForm.get(field);
-        return (!validatedField!.valid && validatedField!.touched)
-            ? 'is-invalid' : validatedField!.touched ? 'is-valid' : '';
-    }
-
     obtenerUsuarioLogeado() {
         this.authSvc.getUserLogged().subscribe(res => {
             console.log(res?.email);
         });
+    }
+
+    onSubmit(): void {
+        //this.submitted = true;
+        if (this.registerForm.invalid) {
+            return;
+        } 
+        console.log(JSON.stringify(this.registerForm.value, null, 2));
     }
 
     get form(): { [key: string]: AbstractControl; } {
@@ -115,6 +137,10 @@ export class RegisterUserComponent implements OnInit {
 
     get password() {
         return this.registerForm.get('password');
+    }
+
+    get confirmPassword() {
+        return this.registerForm.get('confirmPassword');
     }
 
     get name() {
