@@ -22,7 +22,7 @@ export class InicioComponent implements OnInit{
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
         this.idAministrador = navigations;
-        console.log('Dato obtenido en /inicio', this.idAministrador);
+        //console.log('Dato obtenido en /inicio', this.idAministrador);
     }
     
     ngOnInit(){}

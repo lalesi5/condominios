@@ -17,18 +17,4 @@ export class AjustesAreasComunalesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-//   getAreasComunales(idAdministrado: string, idCondominio: string) {
-//     this._adminService
-//         .getAreasComunalesCondominio(idAdministrado, idCondominio)
-//         .subscribe(data => {
-//             data.forEach((element: any) => {
-//                 this.areasComunales.push({
-//                     id: element.payload.doc.id,
-//                     ...element.payload.doc.data()
-//                 })
-//             })
-//             console.log(this.areasComunales);
-//         })
-// }
-
 }

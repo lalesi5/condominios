@@ -11,30 +11,33 @@ export class AdminService {
         public firestore: AngularFirestore,
     ) { }
 
-    // getAdmin(idAdminLogged: string) {
-    //     return this.firestore.collection('admins', ref => ref.where('uid', '==', idAdminLogged)).valueChanges();
-    // }
-
-    getAdministrador() {
+    getAdministradores() {
         return this.firestore.collection('Administrador')
             .snapshotChanges();
     }
 
-    // getCondominiosAdministrador(idAdministrador: string) {
-    //     return this.firestore.collection('Administrador')
-    //         .doc(idAdministrador)
-    //         .collection('Condominios')
-    //         .snapshotChanges();
-    // }
+    getAdministradorID(idAdmin: string) {
+        return this.firestore.collection('Administrador', ref => ref.where('uid', '==', idAdmin))
+        .snapshotChanges();
+    }
 
-    // getAreasComunalesCondominio(idAdministrador: string, idCondominio: string){
-    //     return this.firestore.collection('Administrador')
-    //     .doc(idAdministrador)
-    //     .collection('Condominios')
-    //     .doc(idCondominio)
-    //     .collection('AreasComunales')
-    //     .snapshotChanges();
-    // }
+    saveAdministrador(formulario:any, 
+        idAdministrador: string, 
+        emailAdministrador: string,
+        passwordAdministrador: string,
+        rolAdministrador: string
+        ){
+        console.log('Formulario', formulario);
+        console.log('Administrador', idAdministrador);
+        const uid = idAdministrador;
+        const email = emailAdministrador;
+        const password = passwordAdministrador;
+        const rol = rolAdministrador; 
+        const data = {uid, email, password, rol, ...formulario}
+        return this.firestore.collection('Administrador')
+        .doc(idAdministrador)
+        .set(data);
+    }
 
 
 }

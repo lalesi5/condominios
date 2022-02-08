@@ -21,7 +21,7 @@ export class FinanzasComponent implements OnInit{
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
         this.idAministrador = navigations;
-        console.log('Dato obtenido en /finanzas', this.idAministrador);
+        //console.log('Dato obtenido en /finanzas', this.idAministrador);
     }
     
     ngOnInit(){}

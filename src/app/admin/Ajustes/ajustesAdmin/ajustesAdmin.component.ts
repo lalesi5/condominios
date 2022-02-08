@@ -10,14 +10,12 @@ import { Router, NavigationExtras } from '@angular/router';
 
 export class AjustesAdminComponent implements OnInit {
 
-    admins: any[] = [];
-    idAdmin: string = '';
-    condominios: any[] = [];
-    idCondominio: string = ';'
-    areasComunales: any[] = [];
+    administrador: any[] = [];
+    idAministrador: string = '';
+    condominio: any[] = [];
 
-    navigationExtras: NavigationExtras ={
-        state:{
+    navigationExtras: NavigationExtras = {
+        state: {
 
         }
     }
@@ -25,33 +23,36 @@ export class AjustesAdminComponent implements OnInit {
     constructor(
         private router: Router,
         private _adminService: AdminService
-    ) { }
+    ) {
+        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+        this.idAministrador = navigations.idAdministrador;
+        this.condominio = navigations;
+        //console.log('Dato obtenido en /ajustes', navigations);
+    }
 
     ngOnInit(): void {
         this.getAdministrador();
     }
 
-    async getAdministrador() {
-        try{
+    getAdministrador() {
+        try {
             this._adminService
-            .getAdministrador()
-            .subscribe(data => {
-                data.forEach((element: any) => {
-                    this.admins.push({
-                        id: element.payload.doc.id,
-                        ...element.payload.doc.data()
+                .getAdministradorID(this.idAministrador)
+                .subscribe(data => {
+                    data.forEach((element: any) => {
+                        this.administrador.push({
+                            ...element.payload.doc.data()
+                        })
                     })
-                    this.idAdmin = element.payload.doc.id;
                 })
-            })
         }
-                catch (err){
+        catch (err) {
             console.log(err);
         }
     }
 
     onEdit(): void {
-        this.navigationExtras.state = this.admins; 
+        this.navigationExtras.state = this.condominio;
         this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
     }
 

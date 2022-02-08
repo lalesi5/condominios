@@ -11,6 +11,7 @@ import { NavigationExtras, Router } from "@angular/router";
 export class AjustesComponent implements OnInit{
 
     idAministrador: string = '';
+    condominio: any[] = [];
 
     NavigationExtras: NavigationExtras = {
         state: {
@@ -22,15 +23,31 @@ export class AjustesComponent implements OnInit{
         private router: Router,
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations;
-        console.log('Dato obtenido en /ajustes', this.idAministrador);
+        this.idAministrador = navigations.uid;
+        this.condominio = navigations;
+        //console.log('Dato obtenido en /ajustesAdmin', this.condominio);
     }
     
     ngOnInit(){
 
-        
     }
 
+    onGoAjustesAdmin(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
+    }
+
+    onGoAjustesCondominio(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesCondominio'], this.NavigationExtras);
+    }
+
+    onGoAjustesAreasComunales(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.NavigationExtras);
+    }
+
+    
 
 
 }

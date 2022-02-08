@@ -21,8 +21,8 @@ export class AdminComponent implements OnInit {
         private router: Router
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations.uid;
-        console.log('Dato obtenido en /admin', this.idAministrador);
+        //this.idAministrador = navigations.idAdministrador;
+        //console.log('Dato obtenido en /admin', navigations);
     }
 
     ngOnInit() { 

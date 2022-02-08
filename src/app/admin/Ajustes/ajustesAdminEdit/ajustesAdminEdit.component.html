@@ -1,29 +1,49 @@
 <div class="ajustesAdminEdit">
-  <div class="containerInfo">
-    <mat-card>
-      <h2>Editar Administrador</h2>
-      <form>
-        <div class="form-group">
-          <label>Nombres</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Apellidos</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Correo Eléctronico</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Dirección</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="btn-group">
-          <button type="submit" class="btn btn-primary mr-2">Submit</button>
-          <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
-        </div>
-      </form>
-    </mat-card>
-  </div>
+    <div class="containerInfo">
+        <mat-card>
+            <h2>Editar Administrador</h2>
+            <form [formGroup]='administradorForm' (ngSubmit)="onCreateAdmin()" *ngFor="let admin of administrador">
+                <div class="form-group">
+                    <label>Nombres</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="{{admin.name}}">
+                    <div class="invalid-feedback">
+                        <span>
+                          Este campo es requerido
+                      </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Apellidos</label>
+                    <input type="text" class="form-control" formControlName="last_name" placeholder="{{admin.last_name}}">
+                    <div class="invalid-feedback">
+                        <span>
+                          Este campo es requerido
+                      </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Dirección</label>
+                    <input type="text" class="form-control" formControlName="address" placeholder="{{admin.address}}">
+                    <div class="invalid-feedback">
+                        <span>
+                          Este campo es requerido
+                      </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control" formControlName="phone" placeholder="{{admin.phone}}">
+                    <div class="invalid-feedback">
+                        <span>
+                          Este campo es requerido
+                      </span>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+                    <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
 </div>

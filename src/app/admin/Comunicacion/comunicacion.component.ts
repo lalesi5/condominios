@@ -21,7 +21,7 @@ export class ComunicacionComponent implements OnInit{
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
         this.idAministrador = navigations;
-        console.log('Dato obtenido en /comunicacion', this.idAministrador);
+        //console.log('Dato obtenido en /comunicacion', this.idAministrador);
     }
     ngOnInit(){}
 }

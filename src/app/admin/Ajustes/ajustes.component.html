@@ -1,22 +1,22 @@
 <div class="ajustes">
-  <app-topbar></app-topbar>
+    <app-topbar></app-topbar>
 
-  <div class="headerAjustes">
-    <mat-card>
-      <nav id="menu">
-        <ul>
-          <li>
-            <a [routerLink]="['/admin/ajustes/ajustesAdmin']" [routerLinkActive]="['active']">Ajustes Cuenta</a>
-          </li>
-          <li>
-            <a [routerLink]="['/admin/ajustes/ajustesCondominio']" [routerLinkActive]="['active']">Ajustes Condominio</a>
-          </li>
-          <li>
-            <a [routerLink]="['/admin/ajustes/ajustesAreasComunales']" [routerLinkActive]="['active']">Ajustes Areas Comunales</a>
-          </li>
-        </ul>
-      </nav>
-    </mat-card>
-  </div>
+    <div class="headerAjustes">
+        <mat-card>
+            <nav id="menu">
+                <ul>
+                    <li>
+                        <a [routerLink]="['/admin/ajustes/ajustesAdmin']" [routerLinkActive]="['active']" (click)="onGoAjustesAdmin()">Ajustes Cuenta</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/admin/ajustes/ajustesCondominio']" [routerLinkActive]="['active']" (click)="onGoAjustesCondominio()">Ajustes Condominio</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/admin/ajustes/ajustesAreasComunales']" [routerLinkActive]="['active']" (click)="onGoAjustesAreasComunales()">Ajustes Areas Comunales</a>
+                    </li>
+                </ul>
+            </nav>
+        </mat-card>
+    </div>
 </div>
 <router-outlet></router-outlet>

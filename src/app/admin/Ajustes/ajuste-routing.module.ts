@@ -12,6 +12,7 @@ import { AjustesCondominioEditComponent } from "./ajustesCondominioEdit/ajustesC
 const routesAjustes: Routes = [
     {path: '', component: AjustesComponent, children:
         [
+            {path: '', redirectTo: 'ajustesAdmin', pathMatch: 'full'},
             {path: 'ajustesAdmin', component: AjustesAdminComponent},
             {path: 'ajustesAdminEdit', component: AjustesAdminEditComponent},
             {path: 'ajustesCondominio', component: AjustesCondominioComponent},

@@ -23,7 +23,7 @@ export class AdministracionComponent implements OnInit{
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
         this.idAministrador = navigations;
-        console.log('Dato obtenido en /administracion', this.idAministrador);
+        //console.log('Dato obtenido en /administracion', this.idAministrador);
     }
 
     ngOnInit(){}

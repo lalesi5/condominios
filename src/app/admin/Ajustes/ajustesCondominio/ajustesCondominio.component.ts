@@ -39,26 +39,6 @@ export class AjustesCondominioComponent implements OnInit {
         
     }
 
-    // async getCondominios(idAdministrador: string) {
-    //     try {
-    //         this._adminService
-    //         .getCondominiosAdministrador(idAdministrador)
-    //         .subscribe(data => {
-    //             data.forEach((element: any) => {
-    //                 this.condominios.push({
-    //                     id: element.payload.doc.id,
-    //                     ...element.payload.doc.data()
-    //                 })
-    //                 this.idCondominio = element.payload.doc.id;
-    //             })
-    //             console.log(this.condominios);
-    //         })
-    //     }
-    //     catch (err){
-    //         console.log(err);
-    //     }
-    // }
-
     onEdit(): void{
         this.router.navigate(['/admin/ajustes/ajustesCondominioEdit']);
     }

@@ -51,7 +51,7 @@ export class CreateCondominioComponent implements OnInit {
   }
 
   onCreate(){
-    console.log(this.condominioForm.value, 'idAdmin: ', this.idAministrador);
+    //console.log(this.condominioForm.value, 'idAdmin: ', this.idAministrador);
     this._condominioService.saveCondominios(this.condominioForm.value, this.idAministrador);
   }
 
