@@ -15,6 +15,7 @@ import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario
 import { AjustesUsuarioComponent } from './Ajustes/ajustesUsuario.component';
 import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario.component';
 import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
         MatCardModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        CommonModule
     ],
     declarations: [
         UserComponent,

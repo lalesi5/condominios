@@ -4,14 +4,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { AjustesComponent } from './ajustes.component';
 import { AjustesAdminComponent } from "./ajustesAdmin/ajustesAdmin.component";
 import { AjustesCondominioComponent } from './ajustesCondominio/ajustesCondominio.component';
+import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajustes-areas-comunales.component';
+import { AjustesAdminEditComponent } from "./ajustesAdminEdit/ajustesAdminEdit.component";
+import { AjustesCondominioEditComponent } from "./ajustesCondominioEdit/ajustesCondominioEdit.component";
+import { AjustesAreasComunalesEditComponent } from './ajustes-areas-comunales-edit/ajustes-areas-comunales-edit.component';
 
 
 const routesAjustes: Routes = [
     {path: '', component: AjustesComponent, children:
         [
-            {path: '', redirectTo: 'ajustes_admin', pathMatch: 'full'},
-            {path: 'ajustes_admin', component: AjustesAdminComponent},
-            {path: 'ajustes_condominio', component: AjustesCondominioComponent}
+            {path: '', redirectTo: 'ajustesAdmin', pathMatch: 'full'},
+            {path: 'ajustesAdmin', component: AjustesAdminComponent},
+            {path: 'ajustesAdminEdit', component: AjustesAdminEditComponent},
+            {path: 'ajustesCondominio', component: AjustesCondominioComponent},
+            {path: 'ajustesCondominioEdit', component: AjustesCondominioEditComponent},
+            {path: 'ajustesAreasComunales', component: AjustesAreasComunalesComponent},
+            {path: 'ajustesAreasComunalesEdit', component: AjustesAreasComunalesEditComponent}
             
         ]
     },

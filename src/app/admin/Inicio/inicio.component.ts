@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NavigationExtras, Router } from "@angular/router";
 
 @Component({
     selector: 'app-inicio',
@@ -7,7 +8,22 @@ import { Component, OnInit } from "@angular/core";
 })
 
 export class InicioComponent implements OnInit{
-    constructor(){}
+    
+    idAministrador: string = '';
+
+    NavigationExtras: NavigationExtras = {
+        state: {
+
+        }
+    }
+
+    constructor(
+        private router: Router,
+    ) {
+        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+        this.idAministrador = navigations;
+        //console.log('Dato obtenido en /inicio', this.idAministrador);
+    }
     
     ngOnInit(){}
 }

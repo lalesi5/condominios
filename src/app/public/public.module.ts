@@ -11,6 +11,12 @@ import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component'
 
 import {MatCardModule} from '@angular/material/card';
 import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
+import { LoginUserComponent } from './loginUser/loginUser.component';
+import { RegisterUserComponent } from './registerUser/registerUser.component';
+import { CommonModule } from '@angular/common';
+import { MatCommonModule } from '@angular/material/core';
+import { SelectCondominioComponent } from './select-condominio/select-condominio.component';
+import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 
 
 
@@ -21,13 +27,19 @@ import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
     PublicRoutingModule,
     SharedModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    MatCommonModule
   ],
   declarations: [
     PublicComponent,
     HomeComponent,
     LoginAdminComponent,
-    RegisterAdminComponent
+    RegisterAdminComponent,
+    LoginUserComponent,
+    RegisterUserComponent,
+    SelectCondominioComponent,
+    CreateCondominioComponent
   ],
   exports: [],
   providers:[]

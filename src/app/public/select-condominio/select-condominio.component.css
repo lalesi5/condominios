@@ -1,0 +1,71 @@
+.Condominios {
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.containerInfo mat-card {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 98%;
+    left: 1%;
+    top: 30vh;
+    border-radius: 20px;
+    padding-bottom: 25px;
+}
+
+.containerInfo mat-card h2 {
+    background-color: #287bff;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+.headerCondominio {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+
+.headerCondominio .card {
+    position: relative;
+    align-items: center;
+    padding: 10px;
+    width: 60%;
+    border-radius: 20px;
+    display: flex;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.headerCondominio .card:hover {
+    background: #287bff;
+}
+
+.headerCondominio .card .cardName {
+    font-size: 1.4em;
+    margin-top: 10px;
+    text-align: center;
+    color: #287bff
+}
+
+.headerCondominio .card .iconBx {
+    color: #999;
+    padding: 5px;
+    align-items: center;
+}
+
+.headerCondominio .card .iconBx mat-icon {
+    font-size: 4em;
+    padding: 15px;
+}
+
+.headerCondominio .card:hover .numbers,
+.headerCondominio .card:hover .cardName,
+.headerCondominio .card:hover .iconBx {
+    color: #fff;
+}

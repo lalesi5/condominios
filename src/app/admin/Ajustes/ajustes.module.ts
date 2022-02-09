@@ -9,6 +9,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';  
 import { AjustesRoutingModule } from './ajuste-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AjustesAdminEditComponent } from './ajustesAdminEdit/ajustesAdminEdit.component';
+import { AjustesCondominioEditComponent } from './ajustesCondominioEdit/ajustesCondominioEdit.component';
+import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajustes-areas-comunales.component';
+import { AjustesAreasComunalesEditComponent } from './ajustes-areas-comunales-edit/ajustes-areas-comunales-edit.component';
 
 @NgModule({
 
@@ -25,7 +29,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
     declarations: [
         AjustesAdminComponent,
-        AjustesCondominioComponent
+        AjustesAdminEditComponent,
+        AjustesCondominioComponent,
+        AjustesCondominioEditComponent,
+        AjustesAreasComunalesComponent,
+        AjustesAreasComunalesEditComponent
     ],
 
     exports: [

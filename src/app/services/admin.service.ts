@@ -1,20 +1,45 @@
 import { Injectable } from "@angular/core";
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators"
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class AdminService {
 
-    administradores!: Observable<any>;
-    private administradoresCollection!: AngularFirestoreCollection<any>;
+    constructor(
+        public firestore: AngularFirestore,
+    ) { }
 
-    constructor(private readonly firestore: AngularFirestore) { 
-        this.administradoresCollection = firestore.collection<any>('admin');
+    getAdministradores() {
+        return this.firestore.collection('Administrador')
+            .snapshotChanges();
+    }
 
+    getAdministradorID(idAdmin: string) {
+        return this.firestore.collection('Administrador', ref => ref.where('uid', '==', idAdmin))
+            .snapshotChanges();
+    }
+
+    saveAdministrador(formulario: any,
+        idAdministrador: string,
+        emailAdministrador: string,
+        passwordAdministrador: string,
+        rolAdministrador: string
+    ) {
+        console.log('Formulario', formulario);
+        console.log('Administrador', idAdministrador);
+        const uid = idAdministrador;
+        const email = emailAdministrador;
+        const password = passwordAdministrador;
+        const rol = rolAdministrador;
+        const data = { uid, email, password, rol, ...formulario }
+        return this.firestore.collection('Administrador')
+            .doc(idAdministrador)
+            .set(data);
     }
 
 
 }
+
+

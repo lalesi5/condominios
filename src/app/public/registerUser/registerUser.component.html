@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<div class="clearfix"></div>
+
+<div id="register" class="mb-5 mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+        <div class="card_register">
+          <div class="card">
+            <div class="card-body text-center">
+              <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <h1 class="h3 mb-3 font-weight-normal">Registrar Administrador</h1>
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" placeholder="Nombres" formControlName="name"
+                    [(ngModel)]="datos.name"
+                    [ngClass]="{ 'is-invalid': !registerForm.controls['name'].valid  && registerForm.controls['name'].touched }">
+                  <!--<div *ngIf="form['name'].errors" class="invalid-feedback">
+                    <div *ngIf="form['name'].errors['required']">
+                      El campo es requerido
+                    </div>
+                    </div>-->
+                  <div *ngIf=" registerForm.controls['name'].touched  && !registerForm.controls['name'].valid"
+                    class="invalid-feedback">
+                    Campo requerido
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="lastname" class="form-control" placeholder="Apellidos"
+                    formControlName="last_name" [(ngModel)]="datos.last_name"
+                    [ngClass]="{ 'is-invalid': !registerForm.controls['last_name'].valid  && registerForm.controls['last_name'].touched }">
+                  <div *ngIf=" registerForm.controls['last_name'].touched  && !registerForm.controls['last_name'].valid"
+                    class="invalid-feedback">
+                    Campo requerido
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" placeholder="Correo Electrónico"
+                    formControlName="email" [(ngModel)]="datos.email"
+                    [ngClass]="{ 'is-invalid': form['email'].errors && form['email'].touched}">
+                  <div *ngIf="form['email'].errors" class="invalid-feedback">
+                    <div *ngIf="form['email'].errors['required']">
+                      Campo requerido
+                    </div>
+                    <div *ngIf="form['email'].errors['pattern']">
+                      Por favor ingrese un email valido
+                    </div>
+                  </div>
+                  <!--<div *ngIf="form['email'].errors" class="invalid-feedback">
+                    <div *ngIf="form['email'].errors['required']">
+                      El campo es requerido
+                    </div>
+                    <div *ngIf="form['email'].errors['pattern']">
+                      Por favor ingrese un email valido
+                    </div>
+                  </div>-->
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña"
+                    formControlName="password" [class]="isValidField('password')">
+                  <div *ngIf="form['password'].errors" class="invalid-feedback">
+                    <div *ngIf="form['password'].errors['required']">
+                      Campo requerido
+                    </div>
+                    <div *ngIf="form['password'].errors['minlength']">
+                      La contraseña no puede tener menos de 6 caracteres
+                    </div>
+                    <div *ngIf="form['password'].errors['pattern']">
+                      Debe tener al menos una mayúscula, una minúscula y un dígito
+                    </div>
+                  </div>
+                </div>
+                <!--<div class="form-group">
+                  <input type="password" name="passwordConfirm" class="form-control" placeholder="Repita la contraseña" required
+                    minlength="5" maxlength="10" formControlName="password" [(ngModel)]="datos.password">
+                </div>-->
+                <input #imageUser type="hidden">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Registrar</button>
+                <div class="form-group">
+                  <a routerLink="../loginUser" class="form-control login-user">Tienes una cuenta?</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<app-footer></app-footer>

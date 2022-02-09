@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";  
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { AdminService } from '../../../services/admin.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
     selector: 'app-ajustesAdmin',
@@ -8,25 +8,52 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['./ajustesAdmin.component.css']
 })
 
-export class AjustesAdminComponent implements OnInit{
+export class AjustesAdminComponent implements OnInit {
 
-    adminNombreCuenta!: FormGroup;
+    administrador: any[] = [];
+    idAministrador: string = '';
+    condominio: any[] = [];
 
-    constructor( private router: Router, private fb: FormBuilder ){}
-    
+    navigationExtras: NavigationExtras = {
+        state: {
+
+        }
+    }
+
+    constructor(
+        private router: Router,
+        private _adminService: AdminService
+    ) {
+        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+        this.idAministrador = navigations.idAdministrador;
+        this.condominio = navigations;
+        //console.log('Dato obtenido en /ajustes', navigations);
+    }
+
     ngOnInit(): void {
-        this.initForm();
+        this.getAdministrador();
     }
 
-    onSave(): void{
-        console.log('saved', this.adminNombreCuenta.value);
+    getAdministrador() {
+        try {
+            this._adminService
+                .getAdministradorID(this.idAministrador)
+                .subscribe(data => {
+                    data.forEach((element: any) => {
+                        this.administrador.push({
+                            ...element.payload.doc.data()
+                        })
+                    })
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
-    private initForm(): void {
-        this.adminNombreCuenta = this.fb.group({
-            nombreCuenta: ['', [Validators.required]]
-        });
-        console.log(this.adminNombreCuenta);
+    onEdit(): void {
+        this.navigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
     }
 
 }
