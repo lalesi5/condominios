@@ -2,7 +2,10 @@
     <div class="containerInfo">
         <mat-card>
             <h2>Lista de Areas Comunales</h2>
-            <table class="table table-striped" *ngFor="let area of areasComunales">
+            <div>
+                <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+            </div>
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -10,20 +13,19 @@
                         <th>Opciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let area of areasComunales">
                     <tr>
                         <td>{{area.nombre}}</td>
                         <td>{{area.descripcion}}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-outline-warning m-1">Editar</button>
-                                <button type="button" class="btn btn-outline-danger m-1" (click)="onDelete(area)">Eliminar</button>
+                                <button type="button" class="btn btn-warning mr-2">Editar</button>
+                                <button type="button" class="btn btn-danger ml-2" (click)="onDelete(area)">Eliminar</button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-outline-info btn-sm m-1" (click)="onGoCreate()">Crear Nuevo</button>
         </mat-card>
     </div>
 </div>

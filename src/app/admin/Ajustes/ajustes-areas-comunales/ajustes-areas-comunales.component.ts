@@ -65,7 +65,7 @@ export class AjustesAreasComunalesComponent implements OnInit {
     const idAreaComunalEliminar = item.idAreaComunal;
     this._areaComunalService
     .deleteAreasComunales(idAreaComunalEliminar);
-    this.ngOnInit();
+    alert('Area comunal eliminada correctamente');
   }
 
 

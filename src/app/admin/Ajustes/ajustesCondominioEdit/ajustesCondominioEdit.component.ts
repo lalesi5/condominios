@@ -60,7 +60,6 @@ export class AjustesCondominioEditComponent implements OnInit {
     }
     
     onSaveCondominio(){
-        this.NavigationExtras.state = this.condominios;
         this._condominiosService.saveCondominios(this.condominioForm.value, this.idAdministrador,this.idCondominio)
         alert('Condominio actualizado correctamente');
     }

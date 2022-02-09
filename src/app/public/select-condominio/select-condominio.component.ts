@@ -31,7 +31,7 @@ export class SelectCondominioComponent implements OnInit {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.administrador = navigations;
     this.idAministrador = navigations.uid || navigations.idAdministrador;
-    //console.log('Id Administrador: ', this.idAministrador);
+    
   }
 
   ngOnInit(): void {
