@@ -18,25 +18,25 @@ export class AdminService {
 
     getAdministradorID(idAdmin: string) {
         return this.firestore.collection('Administrador', ref => ref.where('uid', '==', idAdmin))
-        .snapshotChanges();
+            .snapshotChanges();
     }
 
-    saveAdministrador(formulario:any, 
-        idAdministrador: string, 
+    saveAdministrador(formulario: any,
+        idAdministrador: string,
         emailAdministrador: string,
         passwordAdministrador: string,
         rolAdministrador: string
-        ){
+    ) {
         console.log('Formulario', formulario);
         console.log('Administrador', idAdministrador);
         const uid = idAdministrador;
         const email = emailAdministrador;
         const password = passwordAdministrador;
-        const rol = rolAdministrador; 
-        const data = {uid, email, password, rol, ...formulario}
+        const rol = rolAdministrador;
+        const data = { uid, email, password, rol, ...formulario }
         return this.firestore.collection('Administrador')
-        .doc(idAdministrador)
-        .set(data);
+            .doc(idAdministrador)
+            .set(data);
     }
 
 

@@ -41,23 +41,23 @@ export class LoginUserComponent implements OnInit {
             console.log('Datos validos');
             this.authSvc.loginByEmailUser(formValue).then((res) => {
                 if (res) {
-                    console.log('usuario - ', res);
+                    //console.log('usuario - ', res);
                     this.comprobarVerificacionEmail();
                     //this.router.navigate(['/user/home']);
                 }
             })
         } else {
-            console.log('Datos no validos');
+            //console.log('Datos no validos');
         }
     }
 
     comprobarVerificacionEmail() {
         this.authSvc.getCurrentUser().subscribe((user => {
             if (user?.emailVerified == true) {
-                console.log('Si esta verificado');
+                //console.log('Si esta verificado');
                 this.router.navigate(['/user/home']);
             } else {
-                console.log('No esta verificado');
+                //console.log('No esta verificado');
                 this.authSvc.logout();
                 this.router.navigate(['../loginUser']);
             }
@@ -72,7 +72,7 @@ export class LoginUserComponent implements OnInit {
 
     obtenerUsuarioLogeado() {
         this.authSvc.getUserLogged().subscribe(res => {
-            console.log(res?.email);
+            //console.log(res?.email);
         });
     }
 

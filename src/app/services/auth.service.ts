@@ -5,6 +5,7 @@ import { first } from "rxjs";
 import { AdminI } from "../models/administrador";
 import { UsuarioI } from "../models/usuario";
 import { FirestoreService } from "./firestore.service";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private fstore: FirestoreService) {
+    private fstore: FirestoreService,
+    private router: Router
+    ) {
 
   }
 
@@ -100,6 +103,7 @@ export class AuthService {
   async logout() {
     try {
       await this.afAuth.signOut();
+      this.router.navigate(['/home']);
     } catch (error) {
       return console.error(error);
     }

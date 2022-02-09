@@ -39,7 +39,7 @@ export class CreateCondominioComponent implements OnInit {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.administrador = navigations;
     this.idAministrador = navigations.uid;
-    console.log('Dato obtenido en /createCondominio', navigations);
+    //console.log('Dato obtenido en /createCondominio', navigations);
 }
 
   ngOnInit(): void {

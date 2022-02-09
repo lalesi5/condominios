@@ -73,11 +73,11 @@ export class LoginAdminComponent implements OnInit {
                 this.perfilUsuario = res.rol;
                 this.NavigationExtras.state = res;
                 if (this.perfilUsuario=='administrador') {
-                    console.log('el usuario tiene permisos');
+                    //console.log('el usuario tiene permisos');
                     this.router.navigate(['/selectCondominio'], this.NavigationExtras);
                 } else if(this.perfilUsuario=='usuario') {
                    
-                    console.log('El usuario no tiene permisos');
+                    alert('El usuario no tiene permisos');
                 }
             }
         })

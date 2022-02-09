@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AjustesAdminEditComponent } from './ajustesAdminEdit/ajustesAdminEdit.component';
 import { AjustesCondominioEditComponent } from './ajustesCondominioEdit/ajustesCondominioEdit.component';
 import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajustes-areas-comunales.component';
+import { AjustesAreasComunalesEditComponent } from './ajustes-areas-comunales-edit/ajustes-areas-comunales-edit.component';
 
 @NgModule({
 
@@ -31,7 +32,8 @@ import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajuste
         AjustesAdminEditComponent,
         AjustesCondominioComponent,
         AjustesCondominioEditComponent,
-        AjustesAreasComunalesComponent
+        AjustesAreasComunalesComponent,
+        AjustesAreasComunalesEditComponent
     ],
 
     exports: [

@@ -3,13 +3,14 @@
         <mat-card>
             <h2>Lista de Condominios</h2>
             <div class="headerCondominio">
-                <div class="card" *ngFor="let condominio of condominios" (click)="onGoAdmin(condominio)">
+                <div class="card" *ngFor="let condominio of condominios">
                     <div>
-                        <div class="cardName">{{condominio.nombreCondominio}}</div>
+                        <div class="cardName" (click)="onGoAdmin(condominio)">{{condominio.nombreCondominio}}</div>
                     </div>
                     <div class="iconBx">
-                        <mat-icon>home</mat-icon>
+                        <mat-icon (click)="onGoAdmin(condominio)">home</mat-icon>
                     </div>
+                    <button type="button" class="btn btn-danger" (click)="onDelete(condominio)">Eliminar</button>
                 </div>
                 <div class="card" (click)="onGoCreate()">
                     <div>
@@ -20,6 +21,7 @@
                     </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-secondary mt-2" (click)="onLogout()">Logout</button>
         </mat-card>
     </div>
 </div>

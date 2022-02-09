@@ -63,7 +63,6 @@ export class NavigationComponent implements OnInit {
 
     onLogout(): void {
         this.NavigationExtras.state = this.condominio;
-        alert('Gracias por usar el sistema');
         this.router.navigate(['/selectCondominio'], this.NavigationExtras)
     }
 }

@@ -11,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class AjustesAdminEditComponent implements OnInit {
 
-    /*Variables de Retorno */
+    /*Variables*/
 
     condominio: any[] = [];
     idAministrador: string = '';

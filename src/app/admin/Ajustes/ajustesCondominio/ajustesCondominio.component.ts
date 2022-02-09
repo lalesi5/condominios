@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
+import { CondominioService } from '../../../services/condominios.service';
 
 @Component({
     selector: 'app-ajustesCondominio',
@@ -12,34 +13,41 @@ import { AdminService } from '../../../services/admin.service';
 export class AjustesCondominioComponent implements OnInit {
 
     admins: any[] = [];
-    idAdmin: string = '';
     condominios: any[] = [];
-    idCondominio: string = ';'
-    areasComunales: any[] = [];
 
-    createFormGroup() {
-        return new FormGroup({
-            nombre: new FormControl(''),
-            ciudad: new FormControl(''),
-            Propietario: new FormControl(''),
-            idAdministrador: new FormControl(''),
-        });
+    idAdministrador: string = '';
+    idCondominio: string = '';
+    nombreCondominio: string = '';
+    ciudadCondominio: string = '';
+    descripcionCondominio: string = '';
+
+    /*Variables de retorno*/
+
+    NavigationExtras: NavigationExtras = {
+        state: {
+
+        }
     }
-
-    contactForm: FormGroup;
 
     constructor(
         private router: Router,
-        private _adminService: AdminService
+        private _condominioService: CondominioService
     ) {
-        this.contactForm = this.createFormGroup();
+        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+        this.condominios = navigations;
+        
+        this.idAdministrador = navigations.idAdministrador;
+        this.idCondominio = navigations.idCondominio;
+        this.nombreCondominio = navigations.nombreCondominio;
+        this.ciudadCondominio = navigations.ciudadCondominio;
+        this.descripcionCondominio = navigations.descripcionCondominio;
     }
 
     ngOnInit() { 
-        
     }
 
     onEdit(): void{
-        this.router.navigate(['/admin/ajustes/ajustesCondominioEdit']);
+        this.NavigationExtras.state = this.condominios;
+        this.router.navigate(['/admin/ajustes/ajustesCondominioEdit'], this.NavigationExtras);
     }
 }

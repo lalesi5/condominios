@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { CondominioService } from '../../services/condominios.service';
 import { AdminService } from '../../services/admin.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-select-condominio',
@@ -24,7 +25,8 @@ export class SelectCondominioComponent implements OnInit {
   constructor(
     private router: Router,
     private _condominiosService: CondominioService,
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private _authService: AuthService
   ) {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.administrador = navigations;
@@ -84,6 +86,18 @@ export class SelectCondominioComponent implements OnInit {
   onGoCreate() {
     this.NavigationExtras.state = this.administrador;
     this.router.navigate(['/createCondominio'], this.NavigationExtras);
+  }
+
+  onLogout(){
+    this._authService
+    .logout();
+    alert('Gracias por usar el sistema');
+  }
+
+  onDelete(item: any){
+    const idCondominioEliminar = item.idCondominio;
+    this._condominiosService
+    .deleteCondominios(idCondominioEliminar);
   }
 
 }

@@ -18,6 +18,12 @@ export class CondominioService {
             .snapshotChanges();
     }
 
+    getCondominiosID(idCondominio: string) {
+        return this.firestore.collection('Condominios',
+            ref => ref.where('idCondominio', '==', idCondominio))
+            .snapshotChanges();
+    }
+
 
 
     deleteCondominios(idCondominio: string) {
@@ -28,17 +34,12 @@ export class CondominioService {
 
 
     saveCondominios(condominio: any, idAdmin: string, idCondo?: string){
-        
+        //console.log(idCondo);
         const idAdministrador = idAdmin;
         const idCondominio = idCondo || this.firestore.createId();
         const data = {idAdministrador, idCondominio, ...condominio}
         return this.firestore.collection('Condominios')
         .doc(idCondominio)
         .set(data);
-
     }
-
-
-
-
 }
