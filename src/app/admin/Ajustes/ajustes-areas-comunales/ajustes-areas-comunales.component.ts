@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { AdminService } from '../../../services/admin.service';
 import { AreasComunalesService } from '../../../services/areasComunales.service';
 
 @Component({
@@ -58,7 +57,7 @@ export class AjustesAreasComunalesComponent implements OnInit {
 
   onGoCreate(){
     this.navigationExtras.state = this.condominio;
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesCreate'], this.navigationExtras);
   }
 
   onDelete(item: any){
@@ -66,6 +65,11 @@ export class AjustesAreasComunalesComponent implements OnInit {
     this._areaComunalService
     .deleteAreasComunales(idAreaComunalEliminar);
     alert('Area comunal eliminada correctamente');
+  }
+  
+  onGoEdit(item: any){
+    this.navigationExtras.state = item;
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit'], this.navigationExtras);
   }
 
 

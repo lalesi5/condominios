@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
-import { AreasComunalesService } from '../../../services/areasComunales.service';
+import { AreasComunalesService } from 'src/app/services/areasComunales.service';
 
 @Component({
-  selector: 'app-ajustes-areas-comunales-edit',
-  templateUrl: './ajustes-areas-comunales-edit.component.html',
-  styleUrls: ['./ajustes-areas-comunales-edit.component.css']
+  selector: 'app-ajustes-areas-comunales-create',
+  templateUrl: './ajustes-areas-comunales-create.component.html',
+  styleUrls: ['./ajustes-areas-comunales-create.component.css']
 })
-export class AjustesAreasComunalesEditComponent implements OnInit {
+export class AjustesAreasComunalesCreateComponent implements OnInit {
 
   idAministrador: string = '';
-  idCondominio: string = '';
-  idAreaComunal: string = '';
+  idCondominio: string = ';'
   areasComunales: any[] = [];
   condominio: any[] = [];
 
@@ -28,8 +27,8 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
 
     }
   }
-
-  constructor(
+  
+  constructor(    
     private router: Router,
     private _AreaComunalService: AreasComunalesService
   ) {
@@ -37,24 +36,21 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
-    this.idAreaComunal = navigations.idAreaComunal;
     this.condominio = navigations;
     console.log('Dato obtenido en /areasComunalesEdit', navigations);
 
   }
-
   ngOnInit(): void {
   }
-
 
   onBacktoList(): void {
     this.navigationExtras.state = this.condominio;
     this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
   }
 
-  onEditAreaComunal() {
+  onCreateAreaComunal() {
     this.navigationExtras.state = this.condominio;
-    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio, this.idAreaComunal );
+    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio );
   }
 
 }
