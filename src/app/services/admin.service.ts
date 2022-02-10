@@ -27,8 +27,6 @@ export class AdminService {
         passwordAdministrador: string,
         rolAdministrador: string
     ) {
-        console.log('Formulario', formulario);
-        console.log('Administrador', idAdministrador);
         const uid = idAdministrador;
         const email = emailAdministrador;
         const password = passwordAdministrador;

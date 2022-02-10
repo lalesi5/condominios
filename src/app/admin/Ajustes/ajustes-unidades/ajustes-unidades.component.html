@@ -1,9 +1,9 @@
-<div class="ajustesAreasComunales">
+<div class="ajustesUnidades">
     <div class="containerInfo">
         <mat-card>
-            <h2>Lista de Areas Comunales</h2>
+            <h2>Lista de Unidades</h2>
             <div>
-                <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+                <button class="btn btn-primary mb-2">Crear Nuevo</button>
             </div>
             <table class="table table-striped">
                 <thead>
@@ -13,14 +13,14 @@
                         <th>Opciones</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let area of areasComunales">
+                <tbody>
                     <tr>
-                        <td>{{area.nombre}}</td>
-                        <td>{{area.descripcion}}</td>
+                        <td></td>
+                        <td></td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-warning mr-2" (click)="onGoEdit(area)">Editar</button>
-                                <button type="button" class="btn btn-danger ml-2" (click)="onDelete(area)">Eliminar</button>
+                                <button type="button" class="btn btn-warning mr-2">Editar</button>
+                                <button type="button" class="btn btn-danger ml-2">Eliminar</button>
                             </div>
                         </td>
                     </tr>

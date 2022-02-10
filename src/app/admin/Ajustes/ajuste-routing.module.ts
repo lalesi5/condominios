@@ -8,6 +8,10 @@ import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajuste
 import { AjustesAdminEditComponent } from "./ajustesAdminEdit/ajustesAdminEdit.component";
 import { AjustesCondominioEditComponent } from "./ajustesCondominioEdit/ajustesCondominioEdit.component";
 import { AjustesAreasComunalesEditComponent } from './ajustes-areas-comunales-edit/ajustes-areas-comunales-edit.component';
+import { AjustesAreasComunalesCreateComponent } from './ajustes-areas-comunales-create/ajustes-areas-comunales-create.component';
+import { AjustesUnidadesComponent } from './ajustes-unidades/ajustes-unidades.component';
+import { AjustesUnidadesEditComponent } from './ajustes-unidades-edit/ajustes-unidades-edit.component';
+import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajustes-unidades-create.component';
 
 
 const routesAjustes: Routes = [
@@ -19,7 +23,11 @@ const routesAjustes: Routes = [
             {path: 'ajustesCondominio', component: AjustesCondominioComponent},
             {path: 'ajustesCondominioEdit', component: AjustesCondominioEditComponent},
             {path: 'ajustesAreasComunales', component: AjustesAreasComunalesComponent},
-            {path: 'ajustesAreasComunalesEdit', component: AjustesAreasComunalesEditComponent}
+            {path: 'ajustesAreasComunalesEdit', component: AjustesAreasComunalesEditComponent},
+            {path: 'ajustesAreasComunalesCreate', component: AjustesAreasComunalesCreateComponent},
+            {path: 'ajustesUnidades', component: AjustesUnidadesComponent},
+            {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},
+            {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent}
             
         ]
     },

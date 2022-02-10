@@ -13,6 +13,10 @@ import { AjustesAdminEditComponent } from './ajustesAdminEdit/ajustesAdminEdit.c
 import { AjustesCondominioEditComponent } from './ajustesCondominioEdit/ajustesCondominioEdit.component';
 import { AjustesAreasComunalesComponent } from './ajustes-areas-comunales/ajustes-areas-comunales.component';
 import { AjustesAreasComunalesEditComponent } from './ajustes-areas-comunales-edit/ajustes-areas-comunales-edit.component';
+import { AjustesAreasComunalesCreateComponent } from './ajustes-areas-comunales-create/ajustes-areas-comunales-create.component';
+import { AjustesUnidadesComponent } from './ajustes-unidades/ajustes-unidades.component';
+import { AjustesUnidadesEditComponent } from './ajustes-unidades-edit/ajustes-unidades-edit.component';
+import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajustes-unidades-create.component';
 
 @NgModule({
 
@@ -33,7 +37,11 @@ import { AjustesAreasComunalesEditComponent } from './ajustes-areas-comunales-ed
         AjustesCondominioComponent,
         AjustesCondominioEditComponent,
         AjustesAreasComunalesComponent,
-        AjustesAreasComunalesEditComponent
+        AjustesAreasComunalesEditComponent,
+        AjustesAreasComunalesCreateComponent,
+        AjustesUnidadesComponent,
+        AjustesUnidadesEditComponent,
+        AjustesUnidadesCreateComponent
     ],
 
     exports: [
