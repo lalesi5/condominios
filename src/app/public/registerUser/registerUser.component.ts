@@ -25,6 +25,7 @@ export class RegisterUserComponent implements OnInit {
         uid: '',
     }
 
+    hide: boolean = true;
     private isEmail = /\S+@\S+\.\S+/;
 
     registerForm: FormGroup = new FormGroup({
@@ -125,6 +126,11 @@ export class RegisterUserComponent implements OnInit {
             return;
         } 
         console.log(JSON.stringify(this.registerForm.value, null, 2));
+    }
+
+    //Mostrar y ocular contraseña
+    showPassword() {
+        this.hide = !this.hide;
     }
 
     get form(): { [key: string]: AbstractControl; } {

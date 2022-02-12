@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { Router } from "@angular/router";
+import { UsuarioI } from 'src/app/models/usuario';
 import { AuthService } from "src/app/services/auth.service";
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
     selector: 'app-loginUser',
@@ -14,15 +16,17 @@ export class LoginUserComponent implements OnInit {
 
     private isEmail = /\S+@\S+\.\S+/;
     verifyEmail: boolean = false;
-    hide: boolean = false;
+    rol: string = '';
+    hide: boolean = true;
 
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
-        password: ['', [Validators.required, Validators.minLength(6)/*, Validators.pattern(/\d/), Validators.pattern(/[A-Z]/), Validators.pattern(/[a-z]/)*/]],
+        password: ['', Validators.required],
     });
 
     constructor(private authSvc: AuthService,
         private afAuth: AngularFireAuth,
+        private fstore: FirestoreService,
         private router: Router,
         private fb: FormBuilder) {
         afAuth.authState.subscribe(user => {
@@ -34,21 +38,19 @@ export class LoginUserComponent implements OnInit {
     ngOnInit() { }
 
     onLogin(): void {
-        console.log('entralOGIN');
-
         const formValue = this.loginForm.value;
-        if (this.loginForm.valid) {
-            console.log('Datos validos');
-            this.authSvc.loginByEmailUser(formValue).then((res) => {
-                if (res) {
-                    console.log('usuario - ', res);
-                    this.comprobarVerificacionEmail();
-                    //this.router.navigate(['/user/home']);
-                }
-            })
-        } else {
-            console.log('Datos no validos');
-        }
+
+        this.authSvc.loginByEmailUser(formValue).then((res) => {
+            if (res) {
+                //console.log('usuario - ', res);
+                //this.comprobarVerificacionEmail();
+                const uid = res?.user.uid;
+                this.comprobarRol(uid);
+                //this.router.navigate(['/user/home']);
+            }
+            //this.router.navigate(['/user/home']);
+        })
+
     }
 
     comprobarVerificacionEmail() {
@@ -64,10 +66,29 @@ export class LoginUserComponent implements OnInit {
         }))
     }
 
-    isValidField(field: string): string {
-        const validatedField = this.loginForm.get(field);
-        return (!validatedField!.valid && validatedField!.touched)
-            ? 'is-invalid' : validatedField!.touched ? 'is-valid' : '';
+    comprobarRol(uid: string) {
+        const path = 'user';
+        const id = uid;
+        this.fstore.getDoc<UsuarioI>(path, id).subscribe(res => {
+            //console.log('datos1 -> ', res);
+            if (res) {
+                this.rol = res.rol;
+                if (this.rol === 'usuario') {
+                    console.log('el usuario tiene permisos');
+
+                    this.router.navigate(['/user']);
+                } else {
+                    console.log('El usuario no tiene permisos');
+                    this.authSvc.logout();
+                    this.router.navigate(['../loginUser']);
+                }
+            }
+        })
+    }
+
+    //Mostrar y ocular contraseña
+    showPassword() {
+        this.hide = !this.hide;
     }
 
     obtenerUsuarioLogeado() {

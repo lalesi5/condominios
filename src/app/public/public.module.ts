@@ -15,6 +15,8 @@ import { LoginUserComponent } from './loginUser/loginUser.component';
 import { RegisterUserComponent } from './registerUser/registerUser.component';
 import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -27,7 +29,9 @@ import { MatCommonModule } from '@angular/material/core';
     MatCardModule,
     ReactiveFormsModule,
     CommonModule,
-    MatCommonModule
+    MatCommonModule,
+    MatIconModule,
+    MatInputModule
   ],
   declarations: [
     PublicComponent,

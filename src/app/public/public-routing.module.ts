@@ -8,6 +8,7 @@ import { HomeComponent } from "./home/containers/home.component";
 import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
 import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component';
 import { LoginUserComponent } from './loginUser/loginUser.component';
+import { RegisterUserComponent } from "./registerUser/registerUser.component";
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
             {path: 'loginAdmin', component: LoginAdminComponent},
             {path: 'registerAdmin', component: RegisterAdminComponent},
             {path: 'loginUser', component: LoginUserComponent},
+            {path: 'registerUser', component: RegisterUserComponent},
         ]
     },
 ];
