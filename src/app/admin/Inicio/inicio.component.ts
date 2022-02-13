@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
+import { UnidadesService } from '../../services/unidades.service';
 
 @Component({
     selector: 'app-inicio',
@@ -10,20 +11,46 @@ import { NavigationExtras, Router } from "@angular/router";
 export class InicioComponent implements OnInit{
     
     idAministrador: string = '';
-
-    NavigationExtras: NavigationExtras = {
-        state: {
-
-        }
+    idCondominio: string = ';'
+    unidades: any[] = [];
+    condominio: any[] = [];
+  
+    navigationExtras: NavigationExtras = {
+      state: {
+  
+      }
     }
-
+  
     constructor(
-        private router: Router,
+      private router: Router,
+      private _unidades: UnidadesService
     ) {
-        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations;
-        //console.log('Dato obtenido en /inicio', this.idAministrador);
+  
+      const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+      this.idAministrador = navigations.idAdministrador;
+      this.idCondominio = navigations.idCondominio;
+      this.condominio = navigations;
+  
     }
     
-    ngOnInit(){}
+    ngOnInit(): void{
+        this.getUnidades();
+    }
+
+    getUnidades() {
+        try {
+          this._unidades
+            .getAllUnidades(this.idCondominio)
+            .subscribe(data => {
+              data.forEach((element: any) => {
+                this.unidades.push({
+                  ...element.payload.doc.data()
+                })
+              })
+            })
+        }
+        catch (err) {
+          console.log(err);
+        }
+      }
 }

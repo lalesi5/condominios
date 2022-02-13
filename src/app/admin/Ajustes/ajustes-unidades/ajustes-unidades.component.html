@@ -3,24 +3,30 @@
         <mat-card>
             <h2>Lista de Unidades</h2>
             <div>
-                <button class="btn btn-primary mb-2">Crear Nuevo</button>
+                <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
+                        <th>Numero de Unidad</th>
+                        <th>Area Unidad</th>
+                        <th>Tipo de Unidad</th>
+                        <th>Nombre Usuario</th>
+                        <th>Apellido Usuario</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let unidad of unidades">
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td>{{unidad.numeroUnidad}}</td>
+                        <td>{{unidad.areaUnidad}}</td>
+                        <td>{{unidad.tipoUnidad}}</td>
+                        <td>{{unidad.nombreArrendatario}}</td>
+                        <td>{{unidad.apellidoArrendatario}}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-warning mr-2">Editar</button>
-                                <button type="button" class="btn btn-danger ml-2">Eliminar</button>
+                                <button type="button" class="btn btn-warning mr-2" (click)="onGoEdit(unidad)">Editar</button>
+                                <button type="button" class="btn btn-danger ml-2" (click)="onDelete(unidad)">Eliminar</button>
                             </div>
                         </td>
                     </tr>

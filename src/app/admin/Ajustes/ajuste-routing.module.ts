@@ -27,8 +27,8 @@ const routesAjustes: Routes = [
             {path: 'ajustesAreasComunalesCreate', component: AjustesAreasComunalesCreateComponent},
             {path: 'ajustesUnidades', component: AjustesUnidadesComponent},
             {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},
-            {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent}
-            
+            {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent},
+
         ]
     },
 ];
