@@ -25,7 +25,6 @@ export class AjustesComponent implements OnInit{
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
         this.idAministrador = navigations.uid;
         this.condominio = navigations;
-        //console.log('Dato obtenido en /ajustesAdmin', this.condominio);
     }
     
     ngOnInit(){

@@ -1,22 +1,22 @@
 <div class="administracion">
-  <app-topbar></app-topbar>
-  <!--Header Comunicacion-->
-  <div class="headerAdministracion">
-    <mat-card>
-      <nav id="menu">
-        <ul>
-          <li>
-            <a [routerLink]="['/admin/administracion/unidades']" [routerLinkActive]="['active']">Unidades</a>
-          </li>
-          <li>
-            <a [routerLink]="['/admin/administracion/usuarios']" [routerLinkActive]="['active']">Usuarios</a>
-          </li>
-          <li>
-            <a [routerLink]="['/admin/administracion/areasComunes']" [routerLinkActive]="['active']">Areas Comunes</a>
-          </li>
-        </ul>
-      </nav>
-    </mat-card>
-  </div>
+    <app-topbar></app-topbar>
+    <!--Header Comunicacion-->
+    <div class="headerAdministracion">
+        <mat-card>
+            <nav id="menu">
+                <ul>
+                    <li>
+                        <a [routerLink]="['/admin/administracion/unidades']" [routerLinkActive]="['active']" (click)="onGoAjustesUnidades()">Unidades</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/admin/administracion/usuarios']" [routerLinkActive]="['active']" (click)="onGoAjustesUsuarios()">Usuarios</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/admin/administracion/areasComunes']" [routerLinkActive]="['active']" (click)="onGoAjustesAreasComunales()">Areas Comunes</a>
+                    </li>
+                </ul>
+            </nav>
+        </mat-card>
+    </div>
 </div>
 <router-outlet></router-outlet>

@@ -29,8 +29,6 @@ export class AjustesAreasComunalesComponent implements OnInit {
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
-    //console.log('Dato obtenido en /areasComunales', navigations);
-
   }
 
   ngOnInit(): void {
@@ -47,7 +45,6 @@ export class AjustesAreasComunalesComponent implements OnInit {
               ...element.payload.doc.data()
             })
           })
-          //console.log('Areas' , this.areasComunales);
         })
     }
     catch (err) {

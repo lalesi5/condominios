@@ -1,42 +1,30 @@
 <div class="bodyUnidades">
-  <mat-card>
-    <form class="formularioAnuncio">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Búsqueda</mat-label>
-        <input matInput>
-      </mat-form-field>
-    </form>
-  </mat-card>
-  <div class="tablaUsuarios">
-    <mat-card>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Unidad</th>
-            <th>Tipo</th>
-            <th>Usuario</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Celular</th>
-            <th>Ciudad</th>
-            <th>Dirección</th>
-            <th>Área</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let usuario of usuarios">
-            <td>{{ usuario.units }}</td>
-            <td>{{ usuario.type }}</td>
-            <td>{{ usuario.name }} {{usuario.last_name}}</td>
-            <td>{{ usuario.email }}</td>
-            <td>{{ usuario.phone }}</td>
-            <td>{{ usuario.cellphone }}</td>
-            <td>{{ usuario.city }}</td>
-            <td>{{ usuario.address }}</td>
-            <td>200 m.</td>
-          </tr>
-        </tbody>
-      </table>
-    </mat-card>
-  </div>
+    <div class="tablaUsuarios">
+        <mat-card>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Unidad</th>
+                        <th>Tipo</th>
+                        <th>Usuario</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Celular</th>
+                        <th>Área</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let unidad of unidades">
+                        <td>{{unidad.numeroUnidad}}</td>
+                        <td>{{unidad.tipoUnidad}}</td>
+                        <td>{{unidad.nombreArrendatario}} {{unidad.apellidoArrendatario}}</td>
+                        <td>{{unidad.emailArrendatario}}</td>
+                        <td>{{unidad.telefonoArrendatario}}</td>
+                        <td>{{unidad.celularArrendatario}}</td>
+                        <td>{{unidad.areaUnidad}} m.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-card>
+    </div>
 </div>

@@ -11,6 +11,7 @@ export class AdministracionComponent implements OnInit{
     
     
     idAministrador: string = '';
+    condominio: any[] = [];
 
     NavigationExtras: NavigationExtras = {
         state: {
@@ -22,9 +23,26 @@ export class AdministracionComponent implements OnInit{
         private router: Router,
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations;
-        //console.log('Dato obtenido en /administracion', this.idAministrador);
+        this.idAministrador = navigations.uid;
+        this.condominio = navigations;
     }
 
     ngOnInit(){}
+
+    onGoAjustesUnidades(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/administracion/unidades'], this.NavigationExtras);
+    }
+
+    onGoAjustesUsuarios(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/administracion/usuarios'], this.NavigationExtras);
+    }
+
+    onGoAjustesAreasComunales(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/administracion/areasComunes'], this.NavigationExtras);
+    }
+
+
 }
