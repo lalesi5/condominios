@@ -12,7 +12,12 @@ export class UnidadesService {
         public firestore: AngularFirestore,
     ) { }
 
-    getUnidades(idCondo: string){
+    getUnidadesById(idUni: string){
+        return this.firestore.collection('Unidades', ref => ref.where('idUnidad', '==', idUni))
+        .snapshotChanges();
+    }
+
+    getAllUnidades(idCondo: string){
         return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo))
         .snapshotChanges();
     }
@@ -24,7 +29,6 @@ export class UnidadesService {
     }
 
     saveUnidades(unidad: any, idAdmin: string, idCondo: string, idUni?: string){
-        console.log(unidad);
         const idAdministrador = idAdmin;
         const idCondominio = idCondo;
         const idUnidad = idUni || this.firestore.createId();

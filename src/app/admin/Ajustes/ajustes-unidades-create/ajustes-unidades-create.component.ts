@@ -14,6 +14,7 @@ export class AjustesUnidadesCreateComponent implements OnInit {
   idCondominio: string = ''
   unidades: any[] = [];
   condominio: any[] = [];
+  usuario: any[] = [];
 
   unidadesForm = new FormGroup({
     numeroUnidad: new FormControl,
@@ -21,6 +22,9 @@ export class AjustesUnidadesCreateComponent implements OnInit {
     areaUnidad: new FormControl,
     nombreArrendatario: new FormControl,
     apellidoArrendatario: new FormControl,
+    telefonoArrendatario: new FormControl,
+    celularArrendatario: new FormControl,
+    passwordArrendatario: new FormControl,
     emailArrendatario: new FormControl,
     nombreArrendador: new FormControl,
     ApellidoArrendador: new FormControl,
@@ -36,15 +40,13 @@ export class AjustesUnidadesCreateComponent implements OnInit {
 
   constructor(    
     private router: Router,
-    private _unidadesService: UnidadesService
+    private _unidadesService: UnidadesService,
   ) {
 
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
-    console.log('Dato obtenido en /areasComunalesEdit', navigations);
-
   }
   ngOnInit(): void {
   }
@@ -55,9 +57,7 @@ export class AjustesUnidadesCreateComponent implements OnInit {
   }
 
   onCreateUnidades() {
-    console.log(this.unidadesForm);
     this.navigationExtras.state = this.condominio;
     this._unidadesService.saveUnidades(this.unidadesForm.value, this.idAministrador, this.idCondominio);
   }
-
 }

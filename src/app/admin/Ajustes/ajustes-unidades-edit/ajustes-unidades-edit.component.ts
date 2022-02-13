@@ -22,6 +22,9 @@ export class AjustesUnidadesEditComponent implements OnInit {
     areaUnidad: new FormControl,
     nombreArrendatario: new FormControl,
     apellidoArrendatario: new FormControl,
+    telefonoArrendatario: new FormControl,
+    celularArrendatario: new FormControl,
+    passwordArrendatario: new FormControl,
     emailArrendatario: new FormControl,
     nombreArrendador: new FormControl,
     ApellidoArrendador: new FormControl,
@@ -35,7 +38,7 @@ export class AjustesUnidadesEditComponent implements OnInit {
     }
   }
 
-  constructor(    
+  constructor(
     private router: Router,
     private _unidadesService: UnidadesService
   ) {
@@ -45,11 +48,27 @@ export class AjustesUnidadesEditComponent implements OnInit {
     this.idCondominio = navigations.idCondominio;
     this.idUnidad = navigations.idUnidad;
     this.condominio = navigations;
-    console.log('Dato obtenido en /areasComunalesEdit', navigations);
-
   }
 
   ngOnInit(): void {
+    this.getUnidades();
+  }
+
+  getUnidades() {
+    try {
+      this._unidadesService
+        .getUnidadesById(this.idUnidad)
+        .subscribe(data => {
+          data.forEach((element: any) => {
+            this.unidades.push({
+              ...element.payload.doc.data()
+            })
+          })
+        })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
   onBacktoList(): void {

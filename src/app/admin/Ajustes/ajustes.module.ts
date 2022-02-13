@@ -41,7 +41,7 @@ import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajuste
         AjustesAreasComunalesCreateComponent,
         AjustesUnidadesComponent,
         AjustesUnidadesEditComponent,
-        AjustesUnidadesCreateComponent
+        AjustesUnidadesCreateComponent,
     ],
 
     exports: [

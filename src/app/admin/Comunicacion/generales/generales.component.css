@@ -1,9 +1,9 @@
 .anuncioGeneral {
-  position: absolute;
-  width: calc(100% - 231px);
-  left: 231px;
-  top: 150px;
-  min-height: 82vh;
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    top: 150px;
+    min-height: 82vh;
 }
 
 .containerGeneral mat-card {
@@ -22,15 +22,4 @@
     left: 8px;
     border-radius: 20px;
     padding: 20px 20px;
-}
-
-.btn {
-  position: relative;
-  margin-top: 8px;
-  margin-right: 8px;
-  padding: 5px 4px;
-  background: #287bff;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 6px;
 }

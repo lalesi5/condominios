@@ -1,4 +1,4 @@
-<div class="nuevoAnuncio">
+<div class="editarAnuncio">
     <div class="containerAnuncio">
         <mat-card>
             <form [formGroup]='anunciosForm'>
@@ -15,7 +15,7 @@
                     <textarea formControlName="descripcionAnuncio" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="btn-group">
-                    <button type="submit" class="btn btn-primary mr-2" (click)="onCreateAnuncios()">Submit</button>
+                    <button type="submit" class="btn btn-primary mr-2" (click)="onEditAnuncios()">Submit</button>
                     <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
                 </div>
             </form>

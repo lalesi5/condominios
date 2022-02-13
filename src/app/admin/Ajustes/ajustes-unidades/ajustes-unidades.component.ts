@@ -10,7 +10,7 @@ import {UnidadesService} from "../../../services/unidades.service";
 export class AjustesUnidadesComponent implements OnInit {
 
   idAministrador: string = '';
-  idCondominio: string = ';'
+  idCondominio: string = ''
   unidades: any[] = [];
   condominio: any[] = [];
 
@@ -30,8 +30,6 @@ export class AjustesUnidadesComponent implements OnInit {
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
     //console.log('Dato obtenido en /unidades', navigations);
-
-
   }
 
   ngOnInit(): void {
@@ -41,14 +39,13 @@ export class AjustesUnidadesComponent implements OnInit {
   getUnidades() {
     try {
       this._unidadesService
-        .getUnidades(this.idCondominio)
+        .getAllUnidades(this.idCondominio)
         .subscribe(data => {
           data.forEach((element: any) => {
             this.unidades.push({
               ...element.payload.doc.data()
             })
           })
-          //console.log('Unidades' , this.unidades);
         })
     }
     catch (err) {

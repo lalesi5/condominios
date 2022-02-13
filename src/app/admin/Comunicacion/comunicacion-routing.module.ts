@@ -7,6 +7,7 @@ import { IndividualesComponent } from "./individuales/individuales.component";
 import { MensajeUsuarioComponent } from "./mensajesUsuario/mensajesUsuario.component";
 import { NuevoAnuncioComponent } from "./nuevoAnuncio/nuevoAnuncio.component";
 import { NuevoMensajeComponent } from "./nuevoMensaje/nuevoMensaje.component";
+import { EditarAnuncioComponent } from './editar-anuncio/editar-anuncio.component';
 
 const routesComunicacion: Routes = [
     {
@@ -17,7 +18,8 @@ const routesComunicacion: Routes = [
             {path: 'generales', component: GeneralesComponent},
             {path: 'nuevoMensaje', component: NuevoMensajeComponent},
             {path: 'nuevoAnuncio', component: NuevoAnuncioComponent},
-            {path: 'mensajeUsuario', component: MensajeUsuarioComponent}
+            {path: 'mensajeUsuario', component: MensajeUsuarioComponent},
+            {path: 'editarAnuncio', component: EditarAnuncioComponent}
         ]
     }
 ]

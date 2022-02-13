@@ -9,20 +9,20 @@
                 <thead>
                     <tr>
                         <th>Numero de Unidad</th>
-                        <th>Nombre Arrendador</th>
-                        <th>Apellido Arrendador</th>
                         <th>Area Unidad</th>
                         <th>Tipo de Unidad</th>
+                        <th>Nombre Usuario</th>
+                        <th>Apellido Usuario</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let unidad of unidades">
                     <tr>
                         <td>{{unidad.numeroUnidad}}</td>
-                        <td>{{unidad.nombreArrendador}}</td>
-                        <td>{{unidad.ApellidoArrendador}}</td>
                         <td>{{unidad.areaUnidad}}</td>
                         <td>{{unidad.tipoUnidad}}</td>
+                        <td>{{unidad.nombreArrendatario}}</td>
+                        <td>{{unidad.apellidoArrendatario}}</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-warning mr-2" (click)="onGoEdit(unidad)">Editar</button>
