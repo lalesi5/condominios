@@ -1,53 +1,41 @@
 .mensajesUsuario {
-  position: absolute;
-  width: calc(100% - 231px);
-  left: 231px;
-  top: 150px;
-  min-height: 82vh;
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    top: 150px;
+    min-height: 82vh;
 }
 
 .headerMensajesUsuario mat-card {
-  display: flex;
-  top: 15px;
-  width: 99%;
-  left: 8px;
-  border-radius: 20px;
-  padding-bottom: 25px;
-}
-
-.btn {
-  position: relative;
-  margin-top: 8px;
-  margin-right: 8px;
-  padding-top: 10px;
-  padding-left: 10px;
-  background: #287bff;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 6px;
+    display: flex;
+    top: 15px;
+    width: 99%;
+    left: 8px;
+    border-radius: 20px;
+    padding-bottom: 25px;
 }
 
 .headerUser mat-card {
-  top: 15px;
-  margin-top: 15px;
-  width: 99%;
-  left: 8px;
-  border-radius: 20px;
-  padding: 20px 20px;
-  text-align: center;
-  background: #287bff;
-  color: #fff;
+    top: 15px;
+    margin-top: 15px;
+    width: 99%;
+    left: 8px;
+    border-radius: 20px;
+    padding: 20px 20px;
+    text-align: center;
+    background: #287bff;
+    color: #fff;
 }
 
-.headerUser mat-card mat-card-subtitle{
+.headerUser mat-card mat-card-subtitle {
     color: #fff;
 }
 
 .bodyUser mat-card {
-  top: 15px;
-  margin-top: 15px;
-  width: 99%;
-  left: 8px;
-  border-radius: 20px;
-  padding: 20px 20px;
+    top: 15px;
+    margin-top: 15px;
+    width: 99%;
+    left: 8px;
+    border-radius: 20px;
+    padding: 20px 20px;
 }

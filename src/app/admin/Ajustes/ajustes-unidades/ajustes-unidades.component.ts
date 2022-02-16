@@ -29,7 +29,6 @@ export class AjustesUnidadesComponent implements OnInit {
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
-    //console.log('Dato obtenido en /unidades', navigations);
   }
 
   ngOnInit(): void {
