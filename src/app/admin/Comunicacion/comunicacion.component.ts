@@ -8,7 +8,9 @@ import { NavigationExtras, Router } from "@angular/router";
 })
 
 export class ComunicacionComponent implements OnInit{
+
     idAministrador: string = '';
+    condominio: any[] = [];
 
     NavigationExtras: NavigationExtras = {
         state: {
@@ -20,8 +22,20 @@ export class ComunicacionComponent implements OnInit{
         private router: Router,
     ) {
         const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations;
-        //console.log('Dato obtenido en /comunicacion', this.idAministrador);
+        this.idAministrador = navigations.uid;
+        this.condominio = navigations;
     }
+
     ngOnInit(){}
+
+    onGoAnunciosGenerales(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/comunicacion/generales'], this.NavigationExtras);
+    }
+
+    onGoComunicadosIndividuales(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/comunicacion/individuales'], this.NavigationExtras);
+    }
+
 }
