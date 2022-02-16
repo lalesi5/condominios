@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
+import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { NavigationExtras, Router } from "@angular/router";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
@@ -13,30 +13,31 @@ import { FirestoreService } from "src/app/services/firestore.service";
 
 export class LoginAdminComponent implements OnInit {
 
-    perfilUsuario: string='';
+    private isEmail = /\S+@\S+\.\S+/;
+    verifyEmail: boolean = false;
+    rol: string = '';
+    hide: boolean = true;
+    perfilUsuario: string = '';
 
-    loginForm = new FormGroup({
-        email: new FormControl,
-        password: new FormControl
+    loginForm = this.fb.group({
+        email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+        password: ['', Validators.required],
     });
 
     NavigationExtras: NavigationExtras = {
         state: {
             
         }
-        
     }
-
 
     constructor(private authSvc: AuthService,
         private fstore: FirestoreService,
+        private fb: FormBuilder,
         private router: Router) { }
 
     ngOnInit() { }
 
-
-    async onLogin() {
-        
+    /*async onLogin() {
         try {
             const { email, password } = this.loginForm.value;
 
@@ -49,11 +50,28 @@ export class LoginAdminComponent implements OnInit {
                 const uid = res.user.uid;
                 this.getDatosUser(uid);
             } else {
-                alert('No autenticado'); 
+                alert('No autenticado');
             }
         } catch (error) {
             return console.log(error);
         }
+    }*/
+
+    //Nuevo metodo login
+    onLogin(): void {
+        const formValue = this.loginForm.value;
+
+        this.authSvc.loginByEmailAdmin(formValue).then((res) => {
+            if (res) {
+                //console.log('res -> ', res);
+                const uid = res.user.uid;
+                //this.getDatosUser(res.user.uid);
+                this.router.navigate(['/admin']);
+            } else {
+                alert('No autenticado');
+            }
+        })
+
     }
 
     comprobarRol(uid: string) {
@@ -69,7 +87,7 @@ export class LoginAdminComponent implements OnInit {
         const id = uid;
         this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
             //console.log('datos1 -> ', res);
-            if(res){
+            if (res) {
                 this.perfilUsuario = res.rol;
                 this.NavigationExtras.state = res;
                 if (this.perfilUsuario=='administrador') {
@@ -83,10 +101,22 @@ export class LoginAdminComponent implements OnInit {
         })
     }
 
-    isValidField(field: string): string {
-        const validatedField = this.loginForm.get(field);
-        return (!validatedField!.valid && validatedField!.touched)
-            ? 'is-invalid' : validatedField!.touched ? 'is-valid' : '';
+    comprobarVerificacionEmail() {
+        this.authSvc.getCurrentUser().subscribe((user => {
+            if (user?.emailVerified == true) {
+                console.log('Si esta verificado');
+                this.router.navigate(['/user/home']);
+            } else {
+                console.log('No esta verificado');
+                this.authSvc.logout();
+                this.router.navigate(['../loginUser']);
+            }
+        }))
+    }
+
+    //Mostrar y ocular contraseña
+    showPassword() {
+        this.hide = !this.hide;
     }
 
     obtenerUsuarioLogeado() {
