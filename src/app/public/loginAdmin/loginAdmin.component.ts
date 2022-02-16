@@ -65,8 +65,8 @@ export class LoginAdminComponent implements OnInit {
             if (res) {
                 //console.log('res -> ', res);
                 const uid = res.user.uid;
-                //this.getDatosUser(res.user.uid);
-                this.router.navigate(['/admin']);
+                this.getDatosUser(res.user.uid);
+                //this.router.navigate(['/admin']);
             } else {
                 alert('No autenticado');
             }

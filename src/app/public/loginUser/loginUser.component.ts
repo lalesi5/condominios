@@ -38,7 +38,6 @@ export class LoginUserComponent implements OnInit {
     ngOnInit() { }
 
     onLogin(): void {
-        const formValue = this.loginForm.value;
 
         const formValue = this.loginForm.value;
         if (this.loginForm.valid) {
