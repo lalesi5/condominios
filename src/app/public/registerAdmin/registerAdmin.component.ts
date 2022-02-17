@@ -22,7 +22,7 @@ export class RegisterAdminComponent implements OnInit {
         password: '',
         phone: '',
         rol: '',
-        uid: '',
+        idAdministrador: '',
     }
 
     private isEmail = /\S+@\S+\.\S+/;
@@ -56,8 +56,7 @@ export class RegisterAdminComponent implements OnInit {
                     console.log('usuario - ', res);
                     const path = 'Administrador';
                     const id = res.user.uid;
-
-                    this.datos.uid = id;
+                    this.datos.idAdministrador = id;
                     this.datos.password = '';
                     this.datos.rol = 'administrador';
                     await this.fstore.createDoc(this.datos, path, id);

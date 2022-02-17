@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { NavigationExtras, Router } from "@angular/router";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
@@ -26,7 +26,7 @@ export class LoginAdminComponent implements OnInit {
 
     NavigationExtras: NavigationExtras = {
         state: {
-            
+
         }
     }
 
@@ -37,92 +37,31 @@ export class LoginAdminComponent implements OnInit {
 
     ngOnInit() { }
 
-    /*async onLogin() {
-        try {
-            const { email, password } = this.loginForm.value;
 
-            const res = await this.authSvc.login(email, password).catch(error => {
-                console.log('error');
-            });
-
+    onLogin() {
+        const formValue = this.loginForm.value;
+        this.authSvc.loginByEmailAdmin(formValue).then((res) => {
             if (res) {
-                //console.log('res -> ', res);
                 const uid = res.user.uid;
                 this.getDatosUser(uid);
             } else {
-                alert('No autenticado');
-            }
-        } catch (error) {
-            return console.log(error);
-        }
-    }*/
-
-    //Nuevo metodo login
-    onLogin(): void {
-        const formValue = this.loginForm.value;
-
-        this.authSvc.loginByEmailAdmin(formValue).then((res) => {
-            if (res) {
-                //console.log('res -> ', res);
-                const uid = res.user.uid;
-                this.getDatosUser(res.user.uid);
-                //this.router.navigate(['/admin']);
-            } else {
-                alert('No autenticado');
+                alert('Usuario autenticado');
             }
         })
-
-    }
-
-    comprobarRol(uid: string) {
-        const usuario = this.authSvc.getUsuario(uid).subscribe(colUser => {
-            //console.log('usuario---', colUser);
-            colUser.forEach(element => console.log(element))
-        })
-
     }
 
     getDatosUser(uid: string) {
         const path = 'Administrador';
         const id = uid;
         this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
-            //console.log('datos1 -> ', res);
-            if (res) {
-                this.perfilUsuario = res.rol;
                 this.NavigationExtras.state = res;
-                if (this.perfilUsuario=='administrador') {
-                    //console.log('el usuario tiene permisos');
-                    this.router.navigate(['/selectCondominio'], this.NavigationExtras);
-                } else if(this.perfilUsuario=='usuario') {
-                   
-                    alert('El usuario no tiene permisos');
-                }
-            }
+                this.router.navigate(['/selectCondominio'], this.NavigationExtras);
+                console.log('Dato enviado', this.NavigationExtras);
         })
     }
 
-    comprobarVerificacionEmail() {
-        this.authSvc.getCurrentUser().subscribe((user => {
-            if (user?.emailVerified == true) {
-                console.log('Si esta verificado');
-                this.router.navigate(['/user/home']);
-            } else {
-                console.log('No esta verificado');
-                this.authSvc.logout();
-                this.router.navigate(['../loginUser']);
-            }
-        }))
-    }
-
-    //Mostrar y ocular contraseña
     showPassword() {
         this.hide = !this.hide;
-    }
-
-    obtenerUsuarioLogeado() {
-        this.authSvc.getUserLogged().subscribe(res => {
-            console.log(res?.email);
-        });
     }
 
     get form(): { [key: string]: AbstractControl; } {

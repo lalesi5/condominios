@@ -4,8 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from "./admin.component";
 import { InicioComponent } from "./Inicio/inicio.component";
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from "@angular/forms";
 import { CheckLoginGuard } from "../core/shared/guards/check-login.guard";
 
 
@@ -24,7 +22,7 @@ const routesAdmin: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routesAdmin), CommonModule, ReactiveFormsModule],
+    imports: [RouterModule.forChild(routesAdmin)],
     exports: [RouterModule]
 
 })

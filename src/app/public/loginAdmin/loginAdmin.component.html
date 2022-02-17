@@ -3,60 +3,63 @@
 <div class="clearfix"></div>
 
 <div id="login" class="mb-5 mt-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
-        <div class="card_register">
-          <div class="card">
-            <div class="card-body text-center">
-              <form [formGroup]='loginForm' (ngSubmit)="onLogin()">
-                <h1 class="h3 mb-3 font-weight-normal">Login Administradores</h1>
-                <!--Campo Email-->
-                <div class="form-group">
-                  <input type="email" name="email" class="form-control" placeholder="Correo Electrónico"
-                    formControlName="email" [ngClass]="{ 'is-invalid': form['email'].errors && form['email'].touched}">
-                  <div *ngIf="form['email'].errors" class="invalid-feedback">
-                    <div *ngIf="form['email'].errors['required']">
-                      Campo requerido
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+                <div class="card_register">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <form [formGroup]='loginForm' (ngSubmit)="onLogin()">
+                                <h1 class="h3 mb-3 font-weight-normal">Login Administradores</h1>
+                                <!--Campo Email-->
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Correo Electrónico" formControlName="email"
+                                        [ngClass]="{ 'is-invalid': form['email'].errors && form['email'].touched}">
+                                    <div *ngIf="form['email'].errors" class="invalid-feedback">
+                                        <div *ngIf="form['email'].errors['required']">
+                                            Campo requerido
+                                        </div>
+                                        <div *ngIf="form['email'].errors['pattern']">
+                                            Por favor ingrese un email valido
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Campo contraseña-->
+                                <div class="form-group">
+                                    <div class="input-group">
+
+                                        <input type="password" [type]="hide ? 'password' : 'text'" name="password"
+                                            class="form-control" placeholder="Ingrese su contraseña"
+                                            formControlName="password"
+                                            [ngClass]="{ 'is-invalid': form['password'].errors && form['password'].touched }">
+                                        <span class="input-group-text">
+
+                                            <mat-icon class="placeholder" (click)="showPassword()">{{hide ?
+                                                'visibility_off' : 'visibility'}}
+                                            </mat-icon>
+                                        </span>
+
+                                        <div *ngIf="form['password'].errors" class="invalid-feedback">
+                                            <div *ngIf="form['password'].errors['required']">
+                                                Campo requerido
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+                                <div class="form-group">
+                                    <a routerLink="../registerAdmin" class="form-control login-user">Eres Nuevo?</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div *ngIf="form['email'].errors['pattern']">
-                      Por favor ingrese un email valido
-                    </div>
-                  </div>
                 </div>
-                <!--Campo contraseña-->
-                <div class="form-group">
-                  <div class="input-group">
-
-                    <input type="password" [type]="hide ? 'password' : 'text'" name="password" class="form-control"
-                      placeholder="Ingrese su contraseña" formControlName="password"
-                      [ngClass]="{ 'is-invalid': form['password'].errors && form['password'].touched }">
-                    <span class="input-group-text">
-
-                      <mat-icon class="placeholder" (click)="showPassword()">{{hide ? 'visibility_off' : 'visibility'}}
-                      </mat-icon>
-                    </span>
-
-                    <div *ngIf="form['password'].errors" class="invalid-feedback">
-                      <div *ngIf="form['password'].errors['required']">
-                        Campo requerido
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
-                <div class="form-group">
-                  <a routerLink="../registerAdmin" class="form-control login-user">Eres Nuevo?</a>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <!--Fin Seccion Login-->
 

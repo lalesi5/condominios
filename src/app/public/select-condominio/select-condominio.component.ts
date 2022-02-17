@@ -78,7 +78,6 @@ export class SelectCondominioComponent implements OnInit {
   }
 
   onGoAdmin(item: any) {
-    //console.log('Objeto: ', item);
     this.NavigationExtras.state = item;
     this.router.navigate(['/admin'], this.NavigationExtras);
   }
@@ -89,8 +88,7 @@ export class SelectCondominioComponent implements OnInit {
   }
 
   onLogout(){
-    this._authService
-    .logout();
+    this._authService.logout();
     alert('Gracias por usar el sistema');
   }
 
