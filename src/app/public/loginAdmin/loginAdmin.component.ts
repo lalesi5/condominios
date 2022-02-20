@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { NavigationExtras, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
 import { FirestoreService } from "src/app/services/firestore.service";
@@ -11,8 +12,9 @@ import { FirestoreService } from "src/app/services/firestore.service";
     styleUrls: ['./loginAdmin.component.css']
 })
 
-export class LoginAdminComponent implements OnInit {
+export class LoginAdminComponent implements OnInit, OnDestroy {
 
+    private subscription: Subscription = new Subscription;
     private isEmail = /\S+@\S+\.\S+/;
     verifyEmail: boolean = false;
     rol: string = '';
@@ -35,11 +37,16 @@ export class LoginAdminComponent implements OnInit {
         private fb: FormBuilder,
         private router: Router) { }
 
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
     ngOnInit() { }
 
 
     onLogin() {
         const formValue = this.loginForm.value;
+
         this.authSvc.loginByEmailAdmin(formValue).then((res) => {
             if (res) {
                 const uid = res.user.uid;
@@ -53,11 +60,14 @@ export class LoginAdminComponent implements OnInit {
     getDatosUser(uid: string) {
         const path = 'Administrador';
         const id = uid;
-        this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
+        this.subscription.add(
+            this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
                 this.NavigationExtras.state = res;
                 this.router.navigate(['/selectCondominio'], this.NavigationExtras);
                 console.log('Dato enviado', this.NavigationExtras);
-        })
+            })
+        )
+
     }
 
     showPassword() {
