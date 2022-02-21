@@ -62,8 +62,8 @@ export class RegisterAdminComponent implements OnInit {
                     await this.fstore.createDoc(this.datos, path, id);
                 }
                 console.log('Usuario registrado');
-                this.authSvc.verificarCorreo();
-                console.log('Correo de verificacion enviado');
+                //this.authSvc.verificarCorreo();
+                //console.log('Correo de verificacion enviado');
 
                 this.authSvc.logout();
                 this.router.navigate(['../loginAdmin']);

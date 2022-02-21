@@ -17,7 +17,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
     private subscription: Subscription = new Subscription;
     private isEmail = /\S+@\S+\.\S+/;
     verifyEmail: boolean = false;
-    rol: string = '';
+    rolUser: string | undefined;
     hide: boolean = true;
     perfilUsuario: string = '';
 
@@ -62,9 +62,20 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
         const id = uid;
         this.subscription.add(
             this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
-                this.NavigationExtras.state = res;
-                this.router.navigate(['/selectCondominio'], this.NavigationExtras);
-                console.log('Dato enviado', this.NavigationExtras);
+                this.rolUser = res?.rol;
+
+                if (this.rolUser === 'administrador') {
+                    this.NavigationExtras.state = res;
+                    this.router.navigate(['/selectCondominio'], this.NavigationExtras);
+                    console.log('Dato enviado', this.NavigationExtras);
+                }
+                else if (this.rolUser === 'user') {
+                    this.router.navigate(['/user/home']);
+                }
+                else if (this.rolUser == 'admin-user') {
+                    alert('El usuario tiene ambos roles')
+                }
+
             })
         )
 
