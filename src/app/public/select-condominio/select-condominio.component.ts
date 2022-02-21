@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { CondominioService } from '../../services/condominios.service';
 import { AdminService } from '../../services/admin.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './select-condominio.component.html',
   styleUrls: ['./select-condominio.component.css']
 })
-export class SelectCondominioComponent implements OnInit {
+export class SelectCondominioComponent implements OnInit{
 
   administrador: any[] = [];
   idAministrador: string = '';
