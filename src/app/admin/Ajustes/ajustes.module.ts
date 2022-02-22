@@ -17,6 +17,8 @@ import { AjustesAreasComunalesCreateComponent } from './ajustes-areas-comunales-
 import { AjustesUnidadesComponent } from './ajustes-unidades/ajustes-unidades.component';
 import { AjustesUnidadesEditComponent } from './ajustes-unidades-edit/ajustes-unidades-edit.component';
 import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajustes-unidades-create.component';
+import { AjustesUsuariosComponent } from './ajustes-usuarios/ajustes-usuarios.component';
+import { AjustesUsuariosCreateComponent } from './ajustes-usuarios-create/ajustes-usuarios-create.component';
 
 @NgModule({
 
@@ -42,6 +44,8 @@ import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajuste
         AjustesUnidadesComponent,
         AjustesUnidadesEditComponent,
         AjustesUnidadesCreateComponent,
+        AjustesUsuariosComponent,
+        AjustesUsuariosCreateComponent,
     ],
 
     exports: [

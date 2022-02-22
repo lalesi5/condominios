@@ -56,5 +56,8 @@ export class AjustesComponent implements OnInit{
         this.router.navigate(['/admin/ajustes/ajustesUsuariosUnidades'], this.NavigationExtras);
     }   
 
-
+    onGoAjustesUsuarios(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+    }
 }

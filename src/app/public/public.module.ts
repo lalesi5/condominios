@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SelectCondominioComponent } from './select-condominio/select-condominio.component';
 import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
+import { SelectRolComponent } from './select-rol/select-rol.component';
 
 
 
@@ -43,7 +44,8 @@ import { CreateCondominioComponent } from './create-condominio/create-condominio
     LoginUserComponent,
     RegisterUserComponent,
     SelectCondominioComponent,
-    CreateCondominioComponent
+    CreateCondominioComponent,
+    SelectRolComponent
   ],
   exports: [],
   providers:[]

@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
-import {UnidadesService} from "../../../services/unidades.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UnidadesService } from "../../../services/unidades.service";
 
 @Component({
   selector: 'app-ajustes-unidades',
   templateUrl: './ajustes-unidades.component.html',
   styleUrls: ['./ajustes-unidades.component.css']
 })
-export class AjustesUnidadesComponent implements OnInit {
+export class AjustesUnidadesComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription;
   idAministrador: string = '';
   idCondominio: string = ''
   unidades: any[] = [];
@@ -35,36 +37,42 @@ export class AjustesUnidadesComponent implements OnInit {
     this.getUnidades();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   getUnidades() {
     try {
-      this._unidadesService
-        .getAllUnidades(this.idCondominio)
-        .subscribe(data => {
-          data.forEach((element: any) => {
-            this.unidades.push({
-              ...element.payload.doc.data()
+      this.subscription.add(
+        this._unidadesService
+          .getAllUnidades(this.idCondominio)
+          .subscribe(data => {
+            data.forEach((element: any) => {
+              this.unidades.push({
+                ...element.payload.doc.data()
+              })
             })
           })
-        })
+      )
     }
     catch (err) {
       console.log(err);
     }
   }
 
-  onGoCreate(){
+  onGoCreate() {
     this.navigationExtras.state = this.condominio;
     this.router.navigate(['/admin/ajustes/ajustesUnidadesCreate'], this.navigationExtras);
   }
 
-  onDelete(item: any){
+  onDelete(item: any) {
     const idAreaUnidadAEliminar = item.idUnidad;
     this._unidadesService
-    .deleteUnidades(idAreaUnidadAEliminar);
+      .deleteUnidades(idAreaUnidadAEliminar);
     alert('Unidad eliminada correctamente');
   }
-  
-  onGoEdit(item: any){
+
+  onGoEdit(item: any) {
     this.navigationExtras.state = item;
     this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit'], this.navigationExtras);
   }
