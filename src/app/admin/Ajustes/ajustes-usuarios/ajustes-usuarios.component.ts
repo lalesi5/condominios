@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
@@ -7,8 +8,9 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   templateUrl: './ajustes-usuarios.component.html',
   styleUrls: ['./ajustes-usuarios.component.css']
 })
-export class AjustesUsuariosComponent implements OnInit {
+export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription;
   idAministrador: string = '';
   idCondominio: string = ''
   usuarios: any[] = [];
@@ -30,6 +32,30 @@ export class AjustesUsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsuarios();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  getUsuarios() {
+    try {
+      const path = 'Administrador'
+      const idCampo = 'idCondominio'
+      this.subscription.add(
+        this.firestoreService.getAll(path, idCampo, this.idCondominio).subscribe(data => {
+          data.forEach((element: any) => {
+            this.usuarios.push({
+              ...element.payload.doc.data()
+            })
+          })
+        })
+      );
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
   onGoCreate() {
@@ -40,7 +66,7 @@ export class AjustesUsuariosComponent implements OnInit {
   onDelete(item: any) {
     const idAreaUnidadAEliminar = item.idUsuario;
     //this._unidadesService
-      //.deleteUnidades(idAreaUnidadAEliminar);
+    //.deleteUnidades(idAreaUnidadAEliminar);
     alert('Unidad eliminada correctamente');
   }
 

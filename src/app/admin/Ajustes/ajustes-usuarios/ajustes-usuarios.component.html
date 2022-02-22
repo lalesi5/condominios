@@ -17,10 +17,10 @@
                 </thead>
                 <tbody *ngFor="let user of usuarios">
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{user.nombre}}</td>
+                        <td>{{user.apellido}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.telefono}}</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-warning mr-2" (click)="onGoEdit(user)">Editar</button>
