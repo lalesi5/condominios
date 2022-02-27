@@ -3,14 +3,16 @@ import { NavigationExtras, Router } from '@angular/router';
 import { CondominioService } from '../../services/condominios.service';
 import { AdminService } from '../../services/admin.service';
 import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-select-condominio',
   templateUrl: './select-condominio.component.html',
   styleUrls: ['./select-condominio.component.css']
 })
-export class SelectCondominioComponent implements OnInit{
+export class SelectCondominioComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription;
   administrador: any[] = [];
   idAministrador: string = '';
   condominios: any[] = [];
@@ -31,7 +33,7 @@ export class SelectCondominioComponent implements OnInit{
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.administrador = navigations;
     this.idAministrador = navigations.uid || navigations.idAdministrador;
-    
+
   }
 
   ngOnInit(): void {
@@ -39,22 +41,27 @@ export class SelectCondominioComponent implements OnInit{
     this.getAdministrador();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   onListCondominios() {
     try {
-      this._condominiosService
-        .getCondominios(this.idAministrador)
-        .subscribe(data => {
-          data.forEach((element: any) => {
-            this.condominios.push({
-              ...element.payload.doc.data()
+      this.subscription.add(
+        this._condominiosService
+          .getCondominios(this.idAministrador)
+          .subscribe(data => {
+            data.forEach((element: any) => {
+              this.condominios.push({
+                ...element.payload.doc.data()
+              })
             })
+            this.condominios.forEach((element: any) => {
+              this.idCondominio = element.idCondominio
+            })
+            //console.log(this.condominios);
           })
-          this.condominios.forEach((element: any) => {
-            this.idCondominio = element.idCondominio
-          })
-          //console.log(this.condominios);
-        })
+      );
     }
     catch (err) {
       console.log(err);
@@ -87,15 +94,15 @@ export class SelectCondominioComponent implements OnInit{
     this.router.navigate(['/createCondominio'], this.NavigationExtras);
   }
 
-  onLogout(){
+  onLogout() {
     this._authService.logout();
     alert('Gracias por usar el sistema');
   }
 
-  onDelete(item: any){
+  onDelete(item: any) {
     const idCondominioEliminar = item.idCondominio;
     this._condominiosService
-    .deleteCondominios(idCondominioEliminar);
+      .deleteCondominios(idCondominioEliminar);
   }
 
 }

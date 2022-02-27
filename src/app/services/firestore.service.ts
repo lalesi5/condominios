@@ -18,6 +18,16 @@ export class FirestoreService {
     return collection.doc(id).valueChanges();
   }
 
+  getAllUsuarios(idCondo: string) {
+    return this.database.collection('Administrador', ref => ref.where('idCondominio', '==', idCondo))
+      .snapshotChanges();
+  }
+
+  getAll(path:string, idCampo: string, idBusqueda:string) {
+    return this.database.collection(path, ref => ref.where(idCampo, '==', idBusqueda))
+      .snapshotChanges();
+  }
+
   deleteDoc(path: string, id: string) {
     const collection = this.database.collection(path);
     return collection.doc(id).delete();

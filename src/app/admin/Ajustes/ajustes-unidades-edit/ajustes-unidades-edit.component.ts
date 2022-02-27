@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UnidadesService } from 'src/app/services/unidades.service';
 
 @Component({
@@ -8,8 +9,9 @@ import { UnidadesService } from 'src/app/services/unidades.service';
   templateUrl: './ajustes-unidades-edit.component.html',
   styleUrls: ['./ajustes-unidades-edit.component.css']
 })
-export class AjustesUnidadesEditComponent implements OnInit {
+export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription;
   idAministrador: string = '';
   idCondominio: string = '';
   idUnidad: string = '';
@@ -54,17 +56,23 @@ export class AjustesUnidadesEditComponent implements OnInit {
     this.getUnidades();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   getUnidades() {
     try {
-      this._unidadesService
-        .getUnidadesById(this.idUnidad)
-        .subscribe(data => {
-          data.forEach((element: any) => {
-            this.unidades.push({
-              ...element.payload.doc.data()
+      this.subscription.add(
+        this._unidadesService
+          .getUnidadesById(this.idUnidad)
+          .subscribe(data => {
+            data.forEach((element: any) => {
+              this.unidades.push({
+                ...element.payload.doc.data()
+              })
             })
           })
-        })
+      )
     }
     catch (err) {
       console.log(err);
