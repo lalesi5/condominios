@@ -12,8 +12,6 @@ import { PublicComponent } from './public.component';
 import { HomeComponent } from './home/containers/home.component';
 import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component';
 import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
-import { LoginUserComponent } from './loginUser/loginUser.component';
-import { RegisterUserComponent } from './registerUser/registerUser.component';
 import { SelectCondominioComponent } from './select-condominio/select-condominio.component';
 import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 import { SelectRolComponent } from './select-rol/select-rol.component';
@@ -38,8 +36,6 @@ import { SelectRolComponent } from './select-rol/select-rol.component';
     HomeComponent,
     LoginAdminComponent,
     RegisterAdminComponent,
-    LoginUserComponent,
-    RegisterUserComponent,
     SelectCondominioComponent,
     CreateCondominioComponent,
     SelectRolComponent

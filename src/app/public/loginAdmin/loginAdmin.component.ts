@@ -1,100 +1,92 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
-import { NavigationExtras, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { AdminI } from "src/app/models/administrador";
-import { AuthService } from "src/app/services/auth.service";
-import { FirestoreService } from "src/app/services/firestore.service";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import {NavigationExtras, Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {AdminI} from "src/app/models/administrador";
+import {AuthService} from "src/app/services/auth.service";
+import {FirestoreService} from "src/app/services/firestore.service";
 
 @Component({
-    selector: 'app-loginAdmin',
-    templateUrl: './loginAdmin.component.html',
-    styleUrls: ['./loginAdmin.component.css']
+  selector: 'app-loginAdmin',
+  templateUrl: './loginAdmin.component.html',
+  styleUrls: ['./loginAdmin.component.css']
 })
 
 export class LoginAdminComponent implements OnInit, OnDestroy {
 
-    private subscription: Subscription = new Subscription;
-    private isEmail = /\S+@\S+\.\S+/;
-    verifyEmail: boolean = false;
-    rolUser: string | undefined;
-    hide: boolean = true;
-    perfilUsuario: string = '';
+  private subscription: Subscription = new Subscription;
+  private isEmail = /\S+@\S+\.\S+/;
+  verifyEmail: boolean = false;
+  rolUser: any;
+  hide: boolean = true;
+  perfilUsuario: string = '';
 
-    loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
-        password: ['', Validators.required],
-    });
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+    password: ['', Validators.required],
+  });
 
-    NavigationExtras: NavigationExtras = {
-        state: {
+  NavigationExtras: NavigationExtras = {
+    state: {}
+  }
 
+  constructor(private authSvc: AuthService,
+              private fstore: FirestoreService,
+              private fb: FormBuilder,
+              private router: Router) {
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  ngOnInit() {
+  }
+
+
+  onLogin() {
+    const formValue = this.loginForm.value;
+
+    this.authSvc.loginByEmailAdmin(formValue).then((res) => {
+      if (res) {
+        const idAdministrador = res.user.uid;
+        this.getDatosUser(idAdministrador);
+      } else {
+        alert('Usuario autenticado');
+      }
+    })
+  }
+
+  getDatosUser(idAdministrador: string) {
+    const path = 'Administrador';
+    this.subscription.add(
+      this.fstore.getDoc<AdminI>(path, idAdministrador).subscribe(res => {
+        this.rolUser = res?.rol;
+        this.NavigationExtras.state = res;
+        if (this.rolUser === 'administrador') {
+          this.router.navigate(['/selectCondominio'], this.NavigationExtras);
+        } else if (this.rolUser === 'user') {
+          this.router.navigate(['/user/home'], this.NavigationExtras);
         }
-    }
+      })
+    )
 
-    constructor(private authSvc: AuthService,
-        private fstore: FirestoreService,
-        private fb: FormBuilder,
-        private router: Router) { }
+  }
 
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-    }
+  showPassword() {
+    this.hide = !this.hide;
+  }
 
-    ngOnInit() { }
+  get form(): { [key: string]: AbstractControl; } {
+    return this.loginForm.controls;
+  }
 
+  get email() {
+    return this.loginForm.get('email');
+  }
 
-    onLogin() {
-        const formValue = this.loginForm.value;
-
-        this.authSvc.loginByEmailAdmin(formValue).then((res) => {
-            if (res) {
-                const uid = res.user.uid;
-                this.getDatosUser(uid);
-            } else {
-                alert('Usuario autenticado');
-            }
-        })
-    }
-
-    getDatosUser(uid: string) {
-        const path = 'Administrador';
-        const id = uid;
-        this.subscription.add(
-            this.fstore.getDoc<AdminI>(path, id).subscribe(res => {
-                this.rolUser = res?.rol;
-
-                if (this.rolUser === 'administrador') {
-                    this.NavigationExtras.state = res;
-                    this.router.navigate(['/selectCondominio'], this.NavigationExtras);
-                    console.log('Dato enviado', this.NavigationExtras);
-                }
-                else if (this.rolUser === 'user') {
-                    this.router.navigate(['/user/home']);
-                }
-                else if (this.rolUser == 'admin-user') {
-                    alert('El usuario tiene ambos roles')
-                }
-
-            })
-        )
-
-    }
-
-    showPassword() {
-        this.hide = !this.hide;
-    }
-
-    get form(): { [key: string]: AbstractControl; } {
-        return this.loginForm.controls;
-    }
-
-    get email() {
-        return this.loginForm.get('email');
-    }
-
-    get password() {
-        return this.loginForm.get('password');
-    }
+  get password() {
+    return this.loginForm.get('password');
+  }
 
 }

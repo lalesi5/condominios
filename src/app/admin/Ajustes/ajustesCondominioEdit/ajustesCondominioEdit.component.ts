@@ -12,7 +12,7 @@ import { CondominioService } from '../../../services/condominios.service';
 export class AjustesCondominioEditComponent implements OnInit {
 
     /*Variables*/
-    
+
     condominios: any[] = [];
 
     idAdministrador: string = '';
@@ -58,9 +58,9 @@ export class AjustesCondominioEditComponent implements OnInit {
         this.NavigationExtras.state = this.condominios;
         this.router.navigate(['/admin/ajustes/ajustesCondominio'], this.NavigationExtras);
     }
-    
+
     onSaveCondominio(){
-        this._condominiosService.saveCondominios(this.condominioForm.value, this.idAdministrador,this.idCondominio)
+        this._condominiosService.updateCondominios(this.condominioForm.value, this.idAdministrador,this.idCondominio)
         alert('Condominio actualizado correctamente');
     }
 

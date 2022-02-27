@@ -7,8 +7,6 @@ import { HomeComponent } from "./home/containers/home.component";
 
 import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
 import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component';
-import { LoginUserComponent } from './loginUser/loginUser.component';
-import { RegisterUserComponent } from "./registerUser/registerUser.component";
 import { SelectCondominioComponent } from "./select-condominio/select-condominio.component";
 import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 import { CheckLoginGuard } from "../core/shared/guards/check-login.guard";
@@ -23,8 +21,6 @@ const routes: Routes = [
             {path: 'home', component: HomeComponent},
             {path: 'loginAdmin', component: LoginAdminComponent},
             {path: 'registerAdmin', component: RegisterAdminComponent},
-            {path: 'loginUser', component: LoginUserComponent, canActivate:[CheckLoginGuard]},
-            {path: 'registerUser', component: RegisterUserComponent, canActivate:[CheckLoginGuard]},
             {path: 'selectCondominio', component: SelectCondominioComponent, canActivate:[CheckLoginGuard]},
             {path: 'createCondominio', component: CreateCondominioComponent, canActivate:[CheckLoginGuard]}
         ]

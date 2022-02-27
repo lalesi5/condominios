@@ -1,45 +1,52 @@
-import { Injectable } from "@angular/core";
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
+import {Injectable} from "@angular/core";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class CondominioService {
 
-    constructor(
-        public firestore: AngularFirestore,
-    ) { }
+  constructor(
+    public firestore: AngularFirestore,
+  ) {
+  }
 
+  getCondominios(idAdministrador: string) {
+    return this.firestore.collection('Condominios',
+      ref => ref.where('idAdministrador', '==', idAdministrador))
+      .snapshotChanges();
+  }
 
-    getCondominios(idAdministrador: string) {
-        return this.firestore.collection('Condominios',
-            ref => ref.where('idAdministrador', '==', idAdministrador))
-            .snapshotChanges();
-    }
+  getCondominiosID(idCondominio: string) {
+    return this.firestore.collection('Condominios',
+      ref => ref.where('idCondominio', '==', idCondominio))
+      .snapshotChanges();
+  }
 
-    getCondominiosID(idCondominio: string) {
-        return this.firestore.collection('Condominios',
-            ref => ref.where('idCondominio', '==', idCondominio))
-            .snapshotChanges();
-    }
+  deleteCondominios(idCondominio: string) {
+    return this.firestore.collection('Condominios')
+      .doc(idCondominio)
+      .delete();
+  }
 
+  saveCondominios(condominio: any, idAdmin: string) {
+    //console.log(idCondo);
+    const idAdministrador = idAdmin;
+    const idCondominio = this.firestore.createId();
+    const data = {idAdministrador, idCondominio, ...condominio}
+    return this.firestore.collection('Condominios')
+      .doc(idCondominio)
+      .set(data);
+  }
 
+  updateCondominios(condominio: any, idAdmin: string, idCondo: string) {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
+    const data = {idAdministrador, idCondominio, ...condominio}
+    return this.firestore.collection('Condominios')
+      .doc(idCondominio)
+      .update(data);
+  }
 
-    deleteCondominios(idCondominio: string) {
-        return this.firestore.collection('Condominios')
-            .doc(idCondominio)
-            .delete();
-    }
-
-
-    saveCondominios(condominio: any, idAdmin: string, idCondo?: string){
-        //console.log(idCondo);
-        const idAdministrador = idAdmin;
-        const idCondominio = idCondo || this.firestore.createId();
-        const data = {idAdministrador, idCondominio, ...condominio}
-        return this.firestore.collection('Condominios')
-        .doc(idCondominio)
-        .set(data);
-    }
 }

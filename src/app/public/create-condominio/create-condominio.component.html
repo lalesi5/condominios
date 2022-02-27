@@ -1,32 +1,33 @@
 <div class="CrearCondominios">
-    <form class="mt-3 col-md-8 offset-md-2" [formGroup]='condominioForm' (ngSubmit)="onCreate()">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input type="text" class="form-control" formControlName="nombreCondominio" placeholder="Nombre del Condominio">
-                <div class="invalid-feedback">
+  <form class="mt-3 col-md-8 offset-md-2" [formGroup]='condominioForm' (ngSubmit)="onCreate()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control" formControlName="nombreCondominio" placeholder="Nombre del Condominio">
+        <div class="invalid-feedback">
                     <span>
                         Este campo es requerido
                     </span>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <input type="text" class="form-control" formControlName="ciudadCondominio" placeholder="Ciudad del Condominio">
-                <div class="invalid-feedback">
-                    <span>
-                        Este campo es requerido
-                    </span>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <input type="text" class="form-control" formControlName="descripcionCondominio" placeholder="Descripción del Condominio">
-                <div class="invalid-feedback">
-                    <span>
-                        Este campo es requerido
-                    </span>
-                </div>
-            </div>
         </div>
-        <button type="submit" class="btn bg-dark btn-block text-light">Guardar</button>
-    </form>
-    <button type="button" class="btn btn-secondary mt-2" (click)="onGoBackToList()">Go Back to list</button>
+      </div>
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control" formControlName="ciudadCondominio" placeholder="Ciudad del Condominio">
+        <div class="invalid-feedback">
+                    <span>
+                        Este campo es requerido
+                    </span>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control" formControlName="descripcionCondominio"
+               placeholder="Descripción del Condominio">
+        <div class="invalid-feedback">
+                    <span>
+                        Este campo es requerido
+                    </span>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn bg-dark btn-block text-light">Guardar</button>
+  </form>
+  <button type="button" class="btn btn-secondary mt-2" (click)="onGoBackToList()">Go Back to list</button>
 </div>

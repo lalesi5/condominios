@@ -6,9 +6,10 @@
   height: calc(100vh - 230px);
 }
 
-#login h2 {
-  font-size: 40px;
-  padding-bottom: 30px;
+#login span {
+  display: flex;
+  text-align: left;
+  padding-bottom: 5px;
 }
 
 #login .col-md-12{
