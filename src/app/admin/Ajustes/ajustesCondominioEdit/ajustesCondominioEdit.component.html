@@ -1,25 +1,29 @@
 <div class="ajustesCondominioEdit">
-    <div class="containerInfo">
-        <mat-card>
-            <h2>Editar Condominio</h2>
-            <form [formGroup]='condominioForm' (ngSubmit)="onSaveCondominio()">
-                <div class="form-group">
-                    <label>Nombre del Condominio</label>
-                    <input type="text" class="form-control" formControlName="nombreCondominio" placeholder="{{nombreCondominio}}">
-                </div>
-                <div class="form-group">
-                    <label>Ciudad</label>
-                    <input type="text" class="form-control" formControlName="ciudadCondominio" placeholder="{{ciudadCondominio}}">
-                </div>
-                <div class="form-group">
-                    <label>Descripción</label>
-                    <input type="text" class="form-control" formControlName="descripcionCondominio" placeholder="{{descripcionCondominio}}">
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
-                </div>
-            </form>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Condominio</h2>
+      <h3>Editar Datos del Condominio</h3>
+      <form [formGroup]='condominioForm' (ngSubmit)="onSaveCondominio()" *ngFor="let condominio of impCondominio">
+        <div class="form-group">
+          <label>Nombre del Condominio</label>
+          <input type="text" class="form-control" formControlName="nombreCondominio"
+                 [(ngModel)]="condominio.nombreCondominio">
+        </div>
+        <div class="form-group">
+          <label>Ciudad</label>
+          <input type="text" class="form-control" formControlName="ciudadCondominio"
+                 [(ngModel)]="condominio.ciudadCondominio">
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <input type="text" class="form-control" formControlName="descripcionCondominio"
+                 [(ngModel)]="condominio.descripcionCondominio">
+        </div>
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-success mr-2">Guardar</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 </div>

@@ -70,7 +70,6 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
         }
       })
     )
-
   }
 
   showPassword() {

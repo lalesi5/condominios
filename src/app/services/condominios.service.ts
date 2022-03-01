@@ -13,29 +13,36 @@ export class CondominioService {
   }
 
   getCondominios(idAdministrador: string) {
-    return this.firestore.collection('Condominios',
-      ref => ref.where('idAdministrador', '==', idAdministrador))
+    return this.firestore.collection(
+      'Condominios',
+      ref => ref.where(
+        'idAdministrador',
+        '==', idAdministrador))
       .snapshotChanges();
   }
 
   getCondominiosID(idCondominio: string) {
-    return this.firestore.collection('Condominios',
-      ref => ref.where('idCondominio', '==', idCondominio))
+    return this.firestore.collection(
+      'Condominios',
+      ref => ref.where(
+        'idCondominio',
+        '==', idCondominio))
       .snapshotChanges();
   }
 
   deleteCondominios(idCondominio: string) {
-    return this.firestore.collection('Condominios')
+    return this.firestore.collection(
+      'Condominios')
       .doc(idCondominio)
       .delete();
   }
 
   saveCondominios(condominio: any, idAdmin: string) {
-    //console.log(idCondo);
     const idAdministrador = idAdmin;
     const idCondominio = this.firestore.createId();
     const data = {idAdministrador, idCondominio, ...condominio}
-    return this.firestore.collection('Condominios')
+    return this.firestore.collection(
+      'Condominios')
       .doc(idCondominio)
       .set(data);
   }
@@ -44,7 +51,8 @@ export class CondominioService {
     const idAdministrador = idAdmin;
     const idCondominio = idCondo;
     const data = {idAdministrador, idCondominio, ...condominio}
-    return this.firestore.collection('Condominios')
+    return this.firestore.collection(
+      'Condominios')
       .doc(idCondominio)
       .update(data);
   }

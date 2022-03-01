@@ -19,7 +19,11 @@ export class FirestoreService {
   }
 
   getAllUsuarios(idCondo: string) {
-    return this.database.collection('Administrador', ref => ref.where('idCondominio', '==', idCondo))
+    return this.database.collection(
+      'Administrador',
+        ref => ref.where(
+          'idCondominio',
+          '==', idCondo))
       .snapshotChanges();
   }
 

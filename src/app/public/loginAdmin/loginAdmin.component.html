@@ -1,7 +1,5 @@
 <app-header></app-header>
 
-<div class="clearfix"></div>
-
 <div id="login" class="mb-5 mt-5">
   <div class="container">
     <div class="row">
@@ -12,10 +10,10 @@
               <form [formGroup]='loginForm' (ngSubmit)="onLogin()">
                 <h1 class="h3 mb-3 font-weight-normal"><b>Inicio de Sesión</b></h1>
                 <!--Campo Email-->
-                <b><span>Correo Electrónico:</span></b>
+                <span>Correo Electrónico:</span>
                 <div class="form-group">
                   <input type="email" name="email" class="form-control"
-                         placeholder="Ingrese su Correo Electrónico..." formControlName="email"
+                         formControlName="email"
                          [ngClass]="{ 'is-invalid': form['email'].errors && form['email'].touched}">
                   <div *ngIf="form['email'].errors" class="invalid-feedback">
                     <div *ngIf="form['email'].errors['required']">
@@ -27,11 +25,11 @@
                   </div>
                 </div>
                 <!--Campo contraseña-->
-                <b><span>Contraseña:</span></b>
+                <span>Contraseña:</span>
                 <div class="form-group">
                   <div class="input-group">
                     <input type="password" [type]="hide ? 'password' : 'text'" name="password"
-                           class="form-control" placeholder="Ingrese su contraseña..."
+                           class="form-control"
                            formControlName="password"
                            [ngClass]="{ 'is-invalid': form['password'].errors && form['password'].touched }">
                     <span class="input-group-text">
@@ -59,7 +57,5 @@
   </div>
 </div>
 <!--Fin Seccion Login-->
-
-<div class="clearfix"></div>
 
 <app-footer></app-footer>

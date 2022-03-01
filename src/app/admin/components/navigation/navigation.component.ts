@@ -1,68 +1,61 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthService } from "src/app/services/auth.service";
-import { NavigationExtras, Router } from '@angular/router';
+import {Component, OnInit} from "@angular/core";
+import {AuthService} from "src/app/services/auth.service";
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.css']
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.css']
 })
 
 export class NavigationComponent implements OnInit {
 
-    idAministrador: any = '';
-    condominio: any[] = [];
+  condominio: any[] = [];
 
-    NavigationExtras: NavigationExtras = {
-        state: {
+  NavigationExtras: NavigationExtras = {
+    state: {}
+  }
 
-        }
-    }
+  constructor(
+    private router: Router,
+  ) {
+    this.recoverData();
+  }
 
-    constructor(
-        private router: Router,
-        private authSvc: AuthService
-    ) {
-        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.condominio = navigations;
-        //this.idAministrador = navigations.uid;
-        //console.log('Dato obtenido en /navigation', this.condominio);
-    }
+  ngOnInit() {
+  }
 
-    ngOnInit() { }
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.condominio = navigations;
+    this.NavigationExtras.state = this.condominio;
+  }
 
-    onGoInicio(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/inicio'], this.NavigationExtras);
-    }
+  onGoInicio() {
+    this.router.navigate(['/admin/inicio'], this.NavigationExtras);
+  }
 
-    onGoAdministracion(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/administracion'], this.NavigationExtras);
-    }
-    
-    onGoComunicacion(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/comunicacion'], this.NavigationExtras);
-    }
+  onGoAdministracion() {
+    this.router.navigate(['/admin/administracion'], this.NavigationExtras);
+  }
 
-    onGoReportes(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/reportes'], this.NavigationExtras);
-    }
+  onGoComunicacion() {
+    this.router.navigate(['/admin/comunicacion'], this.NavigationExtras);
+  }
 
-    onGoFinanzas(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/finanzas'], this.NavigationExtras);
-    }
+  onGoReportes() {
+    this.router.navigate(['/admin/reportes'], this.NavigationExtras);
+  }
 
-    onGoAjustes(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes'], this.NavigationExtras);
-    }
+  onGoFinanzas() {
+    this.router.navigate(['/admin/finanzas'], this.NavigationExtras);
+  }
 
-    onLogout(): void {
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/selectCondominio'], this.NavigationExtras)
-    }
+  onGoAjustes() {
+    this.router.navigate(['/admin/ajustes'], this.NavigationExtras);
+  }
+
+  onLogout(): void {
+    this.router.navigate(['/selectCondominio'], this.NavigationExtras)
+  }
 }

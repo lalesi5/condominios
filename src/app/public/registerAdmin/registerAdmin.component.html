@@ -13,7 +13,7 @@
                 <h1 class="h3 mb-3 font-weight-normal"><b>Registrar Administrador </b></h1>
                 <b><span>Nombres:</span></b>
                 <div class="form-group">
-                  <input type="text" name="name" class="form-control" placeholder="Ingrese sus nombres..." formControlName="name"
+                  <input type="text" name="name" class="form-control" formControlName="name"
                     [(ngModel)]="datos.name"
                     [ngClass]="{ 'is-invalid': !registerForm.controls['name'].valid  && registerForm.controls['name'].touched }">
                   <div *ngIf=" registerForm.controls['name'].touched  && !registerForm.controls['name'].valid"
@@ -23,7 +23,7 @@
                 </div>
                 <b><span>Apellidos:</span></b>
                 <div class="form-group">
-                  <input type="text" name="lastname" class="form-control" placeholder="Ingrese sus apellidos..."
+                  <input type="text" name="lastname" class="form-control"
                     formControlName="last_name" [(ngModel)]="datos.last_name"
                     [ngClass]="{ 'is-invalid': !registerForm.controls['last_name'].valid  && registerForm.controls['last_name'].touched }">
                   <div *ngIf=" registerForm.controls['last_name'].touched  && !registerForm.controls['last_name'].valid"
@@ -33,7 +33,7 @@
                 </div>
                 <b><span>Correo Electrónico:</span></b>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control" placeholder="Ingrese su correo electrónico"
+                  <input type="email" name="email" class="form-control"
                     formControlName="email" [(ngModel)]="datos.email"
                     [ngClass]="{ 'is-invalid': form['email'].errors && form['email'].touched}">
                   <div *ngIf="form['email'].errors" class="invalid-feedback">
@@ -47,7 +47,7 @@
                 </div>
                 <b><span>Contraseña:</span></b>
                 <div class="form-group">
-                  <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña"
+                  <input type="password" name="password" class="form-control"
                     formControlName="password" [class]="isValidField('password')">
                   <div *ngIf="form['password'].errors" class="invalid-feedback">
                     <div *ngIf="form['password'].errors['required']">

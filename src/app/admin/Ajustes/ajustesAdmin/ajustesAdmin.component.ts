@@ -1,59 +1,71 @@
-import { Component, OnInit } from "@angular/core";
-import { AdminService } from '../../../services/admin.service';
-import { Router, NavigationExtras } from '@angular/router';
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {AdminService} from '../../../services/admin.service';
+import {Router, NavigationExtras} from '@angular/router';
+import {Subscription} from "rxjs";
 
 @Component({
-    selector: 'app-ajustesAdmin',
-    templateUrl: './ajustesAdmin.component.html',
-    styleUrls: ['./ajustesAdmin.component.css']
+  selector: 'app-ajustesAdmin',
+  templateUrl: './ajustesAdmin.component.html',
+  styleUrls: ['./ajustesAdmin.component.css']
 })
 
-export class AjustesAdminComponent implements OnInit {
+export class AjustesAdminComponent implements OnInit, OnDestroy {
 
-    administrador: any[] = [];
-    idAministrador: string = '';
-    condominio: any[] = [];
+  /*Variables*/
 
-    navigationExtras: NavigationExtras = {
-        state: {
+  private subscription: Subscription = new Subscription;
+  administrador: any[] = [];
+  idAministrador: string = '';
+  condominio: any[] = [];
 
-        }
+  /*Variables de retorno*/
+
+  navigationExtras: NavigationExtras = {
+    state: {}
+  }
+
+  constructor(
+    private router: Router,
+    private _adminService: AdminService
+  ) {
+    this.recoverData();
+  }
+
+  ngOnInit(): void {
+    this.getAdministrador();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idAministrador = navigations.idAdministrador;
+    this.condominio = navigations;
+    this.navigationExtras.state = this.condominio;
+  }
+
+  getAdministrador() {
+    try {
+      this.subscription.add(
+        this._adminService
+          .getAdministradorID(this.idAministrador)
+          .subscribe(data => {
+            data.forEach((element: any) => {
+              this.administrador.push({
+                ...element.payload.doc.data()
+              })
+            })
+          })
+      );
+    } catch (err) {
+      console.log(err);
     }
+  }
 
-    constructor(
-        private router: Router,
-        private _adminService: AdminService
-    ) {
-        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations.idAdministrador;
-        this.condominio = navigations;
-        //console.log('Dato obtenido en /ajustes', navigations);
-    }
-
-    ngOnInit(): void {
-        this.getAdministrador();
-    }
-
-    getAdministrador() {
-        try {
-            this._adminService
-                .getAdministradorID(this.idAministrador)
-                .subscribe(data => {
-                    data.forEach((element: any) => {
-                        this.administrador.push({
-                            ...element.payload.doc.data()
-                        })
-                    })
-                })
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-
-    onEdit(): void {
-        this.navigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
-    }
+  onEdit(): void {
+    this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
+  }
 
 }
