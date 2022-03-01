@@ -1,15 +1,16 @@
 <div class="ajustesCondominio">
-    <div class="containerInfo">
-        <mat-card>
-            <h2>Datos del Condominio</h2>
-            <div class="card">
-                <div><b>Nombre: </b>{{nombreCondominio}}</div>
-                <div><b>Ciudad: </b>{{ciudadCondominio}}</div>
-                <div><b>Descripción: </b>{{descripcionCondominio}}</div>
-            </div>
-            <div>
-                <button class="btn btn-primary mt-2" (click)="onEdit()">Editar</button>
-            </div>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Condominio</h2>
+      <h3>Datos del Condominio</h3>
+      <div class="card" *ngFor="let condominio of impCondominios">
+        <div><b>Nombre: </b>{{condominio.nombreCondominio}}</div>
+        <div><b>Ciudad: </b>{{condominio.ciudadCondominio}}</div>
+        <div><b>Descripción: </b>{{condominio.descripcionCondominio}}</div>
+      </div>
+      <div>
+        <button class="btn btn-primary mt-2" (click)="onEdit()">Editar</button>
+      </div>
+    </mat-card>
+  </div>
 </div>

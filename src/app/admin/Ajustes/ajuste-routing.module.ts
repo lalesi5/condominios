@@ -12,6 +12,8 @@ import { AjustesAreasComunalesCreateComponent } from './ajustes-areas-comunales-
 import { AjustesUnidadesComponent } from './ajustes-unidades/ajustes-unidades.component';
 import { AjustesUnidadesEditComponent } from './ajustes-unidades-edit/ajustes-unidades-edit.component';
 import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajustes-unidades-create.component';
+import { AjustesUsuariosComponent } from "./ajustes-usuarios/ajustes-usuarios.component";
+import { AjustesUsuariosCreateComponent } from "./ajustes-usuarios-create/ajustes-usuarios-create.component";
 
 
 const routesAjustes: Routes = [
@@ -28,7 +30,8 @@ const routesAjustes: Routes = [
             {path: 'ajustesUnidades', component: AjustesUnidadesComponent},
             {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},
             {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent},
-
+            {path: 'ajustesUsuarios', component: AjustesUsuariosComponent},
+            {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent}
         ]
     },
 ];

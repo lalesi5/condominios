@@ -6,5 +6,5 @@ export interface AdminI {
     password: string;
     phone: string;
     rol: string;
-    uid: string;
+    idAdministrador: string;
 }

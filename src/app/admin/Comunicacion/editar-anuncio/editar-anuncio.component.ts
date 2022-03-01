@@ -19,13 +19,11 @@ export class EditarAnuncioComponent implements OnInit {
   anunciosForm = new FormGroup({
     tituloAnuncio: new FormControl,
     fechaAnuncio: new FormControl,
-    descripcionAnuncio: new FormControl  
+    descripcionAnuncio: new FormControl
   })
 
   navigationExtras: NavigationExtras = {
-    state: {
-
-    }
+    state: {}
   }
 
   constructor(
@@ -49,7 +47,7 @@ export class EditarAnuncioComponent implements OnInit {
 
   onEditAnuncios(){
     this.navigationExtras.state = this.condominio;
-    this._anuncios.saveAnunciosGenerales(this.anunciosForm.value, this.idAministrador, this.idCondominio, this.idAnuncioGeneral);
+    this._anuncios.updateAnunciosGenerales(this.anunciosForm.value, this.idAministrador, this.idCondominio, this.idAnuncioGeneral);
   }
 
 }

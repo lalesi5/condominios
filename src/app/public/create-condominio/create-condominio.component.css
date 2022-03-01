@@ -1,6 +1,30 @@
 .Condominios {
-    position: absolute;
-    width: 100%;
-    min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.05);
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 130px);
+  background: rgb(40, 133, 255);
+  background: linear-gradient(90deg, rgba(40, 133, 255, 0.8477766106442577) 0%, rgba(40, 82, 255, 0.8477766106442577) 50%, rgba(22, 6, 128, 1) 100%);
 }
+
+.containerInfo mat-card {
+  display: grid;
+  width: 40%;
+  left: 30%;
+  top: 20vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
+}
+
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.centrarBotones {
+  margin-top: 10px;
+  margin-left: 28%;
+}
+

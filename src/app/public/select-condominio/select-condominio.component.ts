@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { CondominioService } from '../../services/condominios.service';
-import { AdminService } from '../../services/admin.service';
-import { AuthService } from '../../services/auth.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NavigationExtras, Router} from '@angular/router';
+import {CondominioService} from '../../services/condominios.service';
+import {AdminService} from '../../services/admin.service';
+import {AuthService} from '../../services/auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-select-condominio',
   templateUrl: './select-condominio.component.html',
   styleUrls: ['./select-condominio.component.css']
 })
-export class SelectCondominioComponent implements OnInit {
+export class SelectCondominioComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription;
   administrador: any[] = [];
   idAministrador: string = '';
   condominios: any[] = [];
   idCondominio: string = '';
 
   NavigationExtras: NavigationExtras = {
-    state: {
-
-    }
+    state: {}
   }
 
   constructor(
@@ -28,57 +28,42 @@ export class SelectCondominioComponent implements OnInit {
     private _adminService: AdminService,
     private _authService: AuthService
   ) {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.administrador = navigations;
-    this.idAministrador = navigations.uid || navigations.idAdministrador;
-    
+    this.recoverData();
   }
 
   ngOnInit(): void {
     this.onListCondominios();
-    this.getAdministrador();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idAministrador = navigations.idAdministrador;
+    this.administrador = navigations;
+  }
 
   onListCondominios() {
     try {
-      this._condominiosService
-        .getCondominios(this.idAministrador)
-        .subscribe(data => {
-          data.forEach((element: any) => {
-            this.condominios.push({
-              ...element.payload.doc.data()
+      this.subscription.add(
+        this._condominiosService
+          .getCondominios(this.idAministrador)
+          .subscribe(data => {
+            data.forEach((element: any) => {
+              this.condominios.push({
+                ...element.payload.doc.data()
+              })
             })
           })
-          this.condominios.forEach((element: any) => {
-            this.idCondominio = element.idCondominio
-          })
-          //console.log(this.condominios);
-        })
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
-
-
-  getAdministrador() {
-    try {
-      this._adminService
-        .getAdministradorID(this.idAministrador)
-        .subscribe(data => {
-          data.forEach((element: any) => {
-            this.administrador = element.payload.doc.data();
-          })
-        })
-    }
-    catch (err) {
+      );
+    } catch (err) {
       console.log(err);
     }
   }
 
   onGoAdmin(item: any) {
-    //console.log('Objeto: ', item);
     this.NavigationExtras.state = item;
     this.router.navigate(['/admin'], this.NavigationExtras);
   }
@@ -88,16 +73,29 @@ export class SelectCondominioComponent implements OnInit {
     this.router.navigate(['/createCondominio'], this.NavigationExtras);
   }
 
-  onLogout(){
-    this._authService
-    .logout();
-    alert('Gracias por usar el sistema');
+  onLogout() {
+    let result = confirm("Esta seguro de salir del Sistema!");
+    if (result) {
+      this._authService.logout();
+      alert('Gracias por usar el sistema');
+    }
   }
 
-  onDelete(item: any){
-    const idCondominioEliminar = item.idCondominio;
-    this._condominiosService
-    .deleteCondominios(idCondominioEliminar);
+  onDelete(item: any) {
+
+    this.NavigationExtras.state = this.administrador;
+    let result = confirm("Esta seguro de eliminar el Condominio!");
+    if (result) {
+      const idCondominioEliminar = item.idCondominio;
+      this._condominiosService
+        .deleteCondominios(idCondominioEliminar);
+
+      /*recargar componente*/
+
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([this.router.url], this.NavigationExtras);
+    }
   }
 
 }

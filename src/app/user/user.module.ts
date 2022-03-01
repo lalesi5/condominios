@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { UsuarioRoutingModule } from './user-routing.module';
 
-import {MatCardModule} from '@angular/material/card'; 
-import {MatIconModule} from '@angular/material/icon'; 
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';  
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 
 import { InicioUsuarioComponent } from './inicio/inicioUsuario.component';
 import { UserAnunciosComponent } from './Anuncios/userAnuncios.component';
@@ -15,7 +16,7 @@ import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario
 import { AjustesUsuarioComponent } from './Ajustes/ajustesUsuario.component';
 import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario.component';
 import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
-import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
@@ -47,4 +48,4 @@ import { CommonModule } from '@angular/common';
     providers: []
 })
 
-export class UserModule {}
+export class UserModule { }

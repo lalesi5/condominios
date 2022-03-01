@@ -54,7 +54,7 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
 
   onEditAreaComunal() {
     this.navigationExtras.state = this.condominio;
-    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio, this.idAreaComunal );
+    this._AreaComunalService.updateAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio, this.idAreaComunal );
   }
 
 }

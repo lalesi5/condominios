@@ -14,21 +14,23 @@ export class AjustesComponent implements OnInit{
     condominio: any[] = [];
 
     NavigationExtras: NavigationExtras = {
-        state: {
-
-        }
+        state: {}
     }
 
     constructor(
         private router: Router,
     ) {
-        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations.uid;
-        this.condominio = navigations;
+      this.recoverData();
     }
-    
+
     ngOnInit(){
 
+    }
+
+    recoverData(){
+      const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+      this.idAministrador = navigations.idAdministrador;
+      this.condominio = navigations;
     }
 
     onGoAjustesAdmin(){
@@ -54,7 +56,10 @@ export class AjustesComponent implements OnInit{
     onGoAjustesajustesUsuarios(){
         this.NavigationExtras.state = this.condominio;
         this.router.navigate(['/admin/ajustes/ajustesUsuariosUnidades'], this.NavigationExtras);
-    }   
+    }
 
-
+    onGoAjustesUsuarios(){
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+    }
 }
