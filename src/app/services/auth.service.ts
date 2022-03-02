@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { first } from "rxjs";
-import { AdminI } from "../models/administrador";
-import { UsuarioI } from "../models/usuario";
-import { Router } from '@angular/router';
+import {Injectable} from "@angular/core";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {first} from "rxjs";
+import {AdminI} from "../models/administrador";
+import {UsuarioI} from "../models/usuario";
+import {Router} from '@angular/router';
 import { deleteUser } from "firebase/auth";
 
 @Injectable({
@@ -16,10 +16,9 @@ export class AuthService {
   //public userData$: Observable<AdminI> | undefined;
 
   constructor(public afAuth: AngularFireAuth,
-    private firestore: AngularFirestore,
-    private router: Router
+              private firestore: AngularFirestore,
+              private router: Router
   ) {
-
   }
 
   //Metodo para registrar usuario administrador
@@ -48,11 +47,11 @@ export class AuthService {
   }
 
   /**
- * Metodo para inicio de sesión desde Firebase
- * @param param0 
- * @returns result
- */
-  async loginByEmailAdmin({ email, password }: AdminI) {
+   * Metodo para inicio de sesión desde Firebase
+   * @param param0
+   * @returns result
+   */
+  async loginByEmailAdmin({email, password}: AdminI) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       return result;
@@ -64,10 +63,10 @@ export class AuthService {
 
   /**
    * Metodo para registro de usuario en Firebase
-   * @param param0 
+   * @param param0
    * @returns result
    */
-  async registerByEmailAdmin({ email, password }: AdminI) {
+  async registerByEmailAdmin({email, password}: AdminI) {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
       return result;
@@ -77,13 +76,12 @@ export class AuthService {
     }
   }
 
-
   /**
    * Metodo para inicio de sesión desde Firebase
-   * @param param0 
+   * @param param0
    * @returns result
    */
-  async loginByEmailUser({ email, password }: UsuarioI) {
+  async loginByEmailUser({email, password}: UsuarioI) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       return result;
@@ -95,10 +93,10 @@ export class AuthService {
 
   /**
    * Metodo para registro de usuario en Firebase
-   * @param param0 
+   * @param param0
    * @returns result
    */
-  async registerByEmailUser({ email, password }: UsuarioI) {
+  async registerByEmailUser({email, password}: UsuarioI) {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
       return result;
@@ -110,10 +108,10 @@ export class AuthService {
 
   /**
    * Metodo para cierre de sesion de usuario
-   * @returns 
+   * @returns
    */
-  logout() {
-    this.afAuth.signOut().then(() => {
+  async logout() {
+    await this.afAuth.signOut().then(() => {
       this.router.navigate(['']);
     }).catch((error) => {
       console.log(error);

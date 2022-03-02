@@ -1,48 +1,49 @@
-.comunicacion{
-    position: absolute;
-    width: calc(100% - 231px);
-    left: 231px;
-    min-height: 100vh;
-    background: rgba(0,0,0,0.08);
-    transition: 0.5s;
+.comunicacion {
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  min-height: 100vh;
+  transition: 0.5s;
+  background: rgb(40,133,255);
+  background: linear-gradient(90deg, rgba(40,133,255,0.8477766106442577) 0%, rgba(40,82,255,0.8477766106442577) 50%, rgba(22,6,128,1) 100%);
 }
 
-.headerComunicacion mat-card{
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    background:#287bff;
-    width: 99%;
-    top: 15px;
-    left: 8px;
-    border-radius: 10px;
+.headerComunicacion mat-card {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  background: #287bff;
+  width: 99%;
+  top: 15px;
+  left: 8px;
+  border-radius: 10px;
 }
 
 #menu {
-    font-size: 20px;
+  font-size: 20px;
 }
 
-#menu ul{
-    line-height: 20px;
-    width: 100%;
-    float: initial;
-    margin-bottom: 0rem;
+#menu ul {
+  line-height: 20px;
+  width: 100%;
+  float: initial;
+  margin-bottom: 0rem;
 }
 
-#menu ul li{
-    display: inline-block;
-    list-style: none;
-    margin-left: 20px;
-    margin-right: 20px;
+#menu ul li {
+  display: inline-block;
+  list-style: none;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-#menu a{
-    text-decoration: none;
-    padding-top: 10px;
-    transition: 300ms all;
-    color: white;
+#menu a {
+  text-decoration: none;
+  padding-top: 10px;
+  transition: 300ms all;
+  color: white;
 }
 
-#menu a:hover{
-    color: black;
+#menu a:hover {
+  color: black;
 }

@@ -1,34 +1,58 @@
-import { Injectable } from "@angular/core";
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
+import {Injectable} from "@angular/core";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class AnunciosGeneralesService {
 
-    constructor(
-        public firestore: AngularFirestore,
-    ) { }
+  constructor(
+    public firestore: AngularFirestore,
+  ) {
+  }
 
-    getAnunciosGenerales(idCondo: string) {
-        return this.firestore.collection('AnunciosGenerales', ref => ref.where('idCondominio', '==', idCondo))
-            .snapshotChanges();
-    }
+  getAnunciosGenerales(idCondo: string) {
+    return this.firestore.collection(
+      'AnunciosGenerales',
+      ref => ref.where(
+        'idCondominio',
+        '==', idCondo))
+      .snapshotChanges();
+  }
 
-    deleteAnunciosGenerales(idAnuncioGeneral: string) {
-        return this.firestore.collection('AnunciosGenerales')
-            .doc(idAnuncioGeneral)
-            .delete();
-    }
+  deleteAnunciosGenerales(idAnuncioGeneral: string) {
+    return this.firestore.collection(
+      'AnunciosGenerales')
+      .doc(idAnuncioGeneral)
+      .delete();
+  }
 
-    saveAnunciosGenerales(anuncioGeneral: any, idAdmin: string, idCondo: string, idAnuncioGene?: string) {
-        const idAdministrador = idAdmin;
-        const idCondominio = idCondo;
-        const idAnuncioGeneral = idAnuncioGene || this.firestore.createId();
-        const data = { idAdministrador, idCondominio, idAnuncioGeneral, ...anuncioGeneral }
-        return this.firestore.collection('AnunciosGenerales')
-            .doc(idAnuncioGeneral)
-            .set(data);
-    }
+  saveAnunciosGenerales(anuncioGeneral: any,
+                        idAdmin: string,
+                        idCondo: string,
+  ) {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
+    const idAnuncioGeneral = this.firestore.createId();
+    const data = {idAdministrador, idCondominio, idAnuncioGeneral, ...anuncioGeneral}
+    return this.firestore.collection(
+      'AnunciosGenerales')
+      .doc(idAnuncioGeneral)
+      .set(data);
+  }
+
+  updateAnunciosGenerales(anuncioGeneral: any,
+                        idAdmin: string,
+                        idCondo: string,
+                        idAnuncioGene: string) {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
+    const idAnuncioGeneral = idAnuncioGene;
+    const data = {idAdministrador, idCondominio, idAnuncioGeneral, ...anuncioGeneral}
+    return this.firestore.collection(
+      'AnunciosGenerales')
+      .doc(idAnuncioGeneral)
+      .update(data);
+  }
 }

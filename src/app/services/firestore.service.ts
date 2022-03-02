@@ -29,7 +29,11 @@ export class FirestoreService {
 
   //si no se usa borrar este metodo getAll parametrizado ya esta parametrizado
   getAllUsuarios(idCondo: string) {
-    return this.database.collection('Administrador', ref => ref.where('idCondominio', '==', idCondo))
+    return this.database.collection(
+      'Administrador',
+        ref => ref.where(
+          'idCondominio',
+          '==', idCondo))
       .snapshotChanges();
   }
 

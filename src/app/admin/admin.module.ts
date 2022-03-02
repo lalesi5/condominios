@@ -13,7 +13,7 @@ import { ReportesComponent } from './Reportes/reportes.component';
 import { FinanzasComponent } from './Finanzas/finanzas.component';
 
 import { MatCardModule } from '@angular/material/card'; 
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -42,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         CommonModule
     ],
     providers: [
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
     ]
 })
 

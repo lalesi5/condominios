@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
-import { CondominioService } from '../../services/condominios.service';
-import { FirestoreService } from 'src/app/services/firestore.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {Component, OnInit} from '@angular/core';
+import {NavigationExtras, Router} from '@angular/router';
+import {FormGroup, FormControl} from '@angular/forms';
+import {CondominioService} from '../../services/condominios.service';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-create-condominio',
@@ -13,10 +12,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class CreateCondominioComponent implements OnInit {
 
   /*Variables*/
-
   administrador: any[] = [];
   idAministrador: string = '';
-
 
   /*Formularios*/
 
@@ -29,38 +26,39 @@ export class CreateCondominioComponent implements OnInit {
   /*Variables de retorno*/
 
   NavigationExtras: NavigationExtras = {
-    state: {
-
-    }
+    state: {}
   }
 
   constructor(
     private router: Router,
-    private _condominioService: CondominioService,
-    private fService: FirestoreService,
-    private database: AngularFirestore
+    private _condominioService: CondominioService
   ) {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.administrador = navigations;
-    this.idAministrador = navigations.idAdministrador;
-    //console.log('Dato obtenido en /createCondominio', navigations);
+    this.recoverData();
   }
 
   ngOnInit(): void {
   }
 
-  onGoBackToList() {
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.administrador = navigations;
+    this.idAministrador = navigations.idAdministrador;
     this.NavigationExtras.state = this.administrador;
+  }
+
+  onGoBackToList() {
     this.router.navigate(['/selectCondominio'], this.NavigationExtras);
   }
 
   onCreate() {
-    //console.log(this.condominioForm.value, 'idAdmin: ', this.idAministrador);
-    this.fService.createDocData(this.condominioForm.value, 'Condominios', this.idAministrador);
-    alert('Condominio Creado con Exito!');
-    //this._condominioService.saveCondominios(this.condominioForm.value, this.idAministrador);
-    //const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    //this.router.navigate(['/selectCondominio'], this.NavigationExtras);
+    let result = confirm("Esta seguro de agregar el condominio")
+    if (result) {
+      this._condominioService.saveCondominios(this.condominioForm.value, this.idAministrador);
+      alert('El condominio se ha agregado satisfactoriamente');
+    }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/createCondominio'], this.NavigationExtras);
   }
 
 }
