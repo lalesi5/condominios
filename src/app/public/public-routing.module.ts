@@ -22,8 +22,6 @@ const routes: Routes = [
             {path: 'home', component: HomeComponent},
             {path: 'loginAdmin', component: LoginAdminComponent},
             {path: 'registerAdmin', component: RegisterAdminComponent},
-            {path: 'loginUser', component: LoginUserComponent},
-            {path: 'registerUser', component: RegisterUserComponent},
             {path: 'selectCondominio', component: SelectCondominioComponent, canActivate:[CheckLoginGuard]},
             {path: 'createCondominio', component: CreateCondominioComponent, canActivate:[CheckLoginGuard]},
             {path: 'selectRol', component: SelectRolComponent, canActivate:[CheckLoginGuard]}
