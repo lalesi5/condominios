@@ -48,6 +48,20 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
     this.authSvc.loginByEmailAdmin(formValue).then((res) => {
       if (res) {
         const idAdministrador = res.user.uid;
+
+        //Comprueba si el usuario ha verificado su correo al momento de registrarse
+        /*this.subscription.add(
+          this.authSvc.getCurrentUser().subscribe((user => {
+            if (user?.emailVerified == true) {
+              this.getDatosUser(idAdministrador);
+            } else {
+              alert('Por favor verifique el correo electronico');
+              this.authSvc.logout();
+              this.router.navigate(['../loginAdmin']);
+            }
+          }))
+        )*/
+
         this.getDatosUser(idAdministrador);
       } else {
         alert('Usuario no autenticado');
@@ -65,6 +79,8 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
           this.router.navigate(['/selectCondominio'], this.NavigationExtras);
         } else if (this.rolUser === 'user') {
           this.router.navigate(['/user/home'], this.NavigationExtras);
+        } else if (this.rolUser === 'admin-user') {
+
         }
       })
     )
