@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
-import {NavigationExtras, Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {AdminI} from "src/app/models/administrador";
-import {AuthService} from "src/app/services/auth.service";
-import {FirestoreService} from "src/app/services/firestore.service";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
+import { NavigationExtras, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { AdminI } from "src/app/models/administrador";
+import { AuthService } from "src/app/services/auth.service";
+import { FirestoreService } from "src/app/services/firestore.service";
 
 @Component({
   selector: 'app-loginAdmin',
@@ -19,7 +19,6 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
   verifyEmail: boolean = false;
   rolUser: any;
   hide: boolean = true;
-  perfilUsuario: string = '';
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
@@ -31,9 +30,9 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
   }
 
   constructor(private authSvc: AuthService,
-              private fstore: FirestoreService,
-              private fb: FormBuilder,
-              private router: Router) {
+    private fstore: FirestoreService,
+    private fb: FormBuilder,
+    private router: Router) {
   }
 
   ngOnDestroy(): void {
@@ -43,16 +42,29 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-
   onLogin() {
     const formValue = this.loginForm.value;
 
     this.authSvc.loginByEmailAdmin(formValue).then((res) => {
       if (res) {
         const idAdministrador = res.user.uid;
+
+        //Comprueba si el usuario ha verificado su correo al momento de registrarse
+        /*this.subscription.add(
+          this.authSvc.getCurrentUser().subscribe((user => {
+            if (user?.emailVerified == true) {
+              this.getDatosUser(idAdministrador);
+            } else {
+              alert('Por favor verifique el correo electronico');
+              this.authSvc.logout();
+              this.router.navigate(['../loginAdmin']);
+            }
+          }))
+        )*/
+
         this.getDatosUser(idAdministrador);
       } else {
-        alert('Usuario autenticado');
+        alert('Usuario no autenticado');
       }
     })
   }
@@ -67,6 +79,8 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
           this.router.navigate(['/selectCondominio'], this.NavigationExtras);
         } else if (this.rolUser === 'user') {
           this.router.navigate(['/user/home'], this.NavigationExtras);
+        } else if (this.rolUser === 'admin-user') {
+
         }
       })
     )

@@ -10,6 +10,7 @@ import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component'
 import { SelectCondominioComponent } from "./select-condominio/select-condominio.component";
 import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 import { CheckLoginGuard } from "../core/shared/guards/check-login.guard";
+import { SelectRolComponent } from "./select-rol/select-rol.component";
 
 
 
@@ -22,7 +23,8 @@ const routes: Routes = [
             {path: 'loginAdmin', component: LoginAdminComponent},
             {path: 'registerAdmin', component: RegisterAdminComponent},
             {path: 'selectCondominio', component: SelectCondominioComponent, canActivate:[CheckLoginGuard]},
-            {path: 'createCondominio', component: CreateCondominioComponent, canActivate:[CheckLoginGuard]}
+            {path: 'createCondominio', component: CreateCondominioComponent, canActivate:[CheckLoginGuard]},
+            {path: 'selectRol', component: SelectRolComponent, canActivate:[CheckLoginGuard]}
         ]
     },
 ];

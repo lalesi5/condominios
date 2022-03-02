@@ -5,12 +5,15 @@ import {first} from "rxjs";
 import {AdminI} from "../models/administrador";
 import {UsuarioI} from "../models/usuario";
 import {Router} from '@angular/router';
+import { deleteUser } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+
+  //public userData$: Observable<AdminI> | undefined;
 
   constructor(public afAuth: AngularFireAuth,
               private firestore: AngularFirestore,
@@ -20,7 +23,9 @@ export class AuthService {
 
   //Metodo para registrar usuario administrador
   registerAdmin(datos: AdminI) {
-    return this.afAuth.createUserWithEmailAndPassword(datos.email, datos.password);
+    const { email, password } = datos;
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
+    //return this.afAuth.createUserWithEmailAndPassword(datos.email, datos.password);
   }
 
   //Metodo para registrar usuario administrador
@@ -30,6 +35,15 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
+  }
+
+  loginByEmail(user: AdminI) {
+    const { email, password } = user;
+    this.afAuth.signInWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log('Completado');
+
+      }).catch(err => console.log('Error', err))
   }
 
   /**
@@ -140,5 +154,12 @@ export class AuthService {
     }
 
   };
+
+  async deletUser(userItem: any) {
+    
+    deleteUser(userItem.idUsuario).then(res => {
+      alert('usuario eliminado')
+    })
+  }
 
 }

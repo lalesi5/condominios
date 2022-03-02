@@ -17,11 +17,11 @@ export class CreateCondominioComponent implements OnInit {
 
   /*Formularios*/
 
-  condominioForm = new FormGroup({
+  condominioForm: FormGroup = new FormGroup({
     nombreCondominio: new FormControl,
     ciudadCondominio: new FormControl,
     descripcionCondominio: new FormControl
-  })
+  });
 
   /*Variables de retorno*/
 

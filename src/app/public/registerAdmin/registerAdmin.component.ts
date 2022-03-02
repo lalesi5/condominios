@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { AdminI } from "src/app/models/administrador";
 import { AuthService } from "src/app/services/auth.service";
 import { FirestoreService } from "src/app/services/firestore.service";
+import Validation from "../confirm.validator";
 
 @Component({
     selector: 'app-registerAdmin',
@@ -26,12 +27,14 @@ export class RegisterAdminComponent implements OnInit {
     }
 
     private isEmail = /\S+@\S+\.\S+/;
+    hide: boolean = true;
 
-    registerForm = this.fb.group({
-        email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
-        password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/\d/), Validators.pattern(/[A-Z]/), Validators.pattern(/[a-z]/)]],
-        name: ['', [Validators.required]],
-        last_name: ['', [Validators.required]],
+    registerForm: FormGroup = new FormGroup({
+        name: new FormControl(''),
+        last_name: new FormControl(''),
+        email: new FormControl(''),
+        password: new FormControl(''),
+        confirmPassword: new FormControl('')
     });
 
     constructor(private authSvc: AuthService,
@@ -39,11 +42,33 @@ export class RegisterAdminComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder) { }
 
-    ngOnInit() { }
-
+    ngOnInit() {
+        this.registerForm = this.fb.group(
+            {
+                name: ['', Validators.required],
+                last_name: ['', Validators.required],
+                email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+                password: [
+                    '',
+                    [
+                        Validators.required,
+                        Validators.minLength(6),
+                        Validators.maxLength(15),
+                        Validators.pattern(/\d/),
+                        Validators.pattern(/[A-Z]/),
+                        Validators.pattern(/[a-z]/)
+                    ]
+                ],
+                confirmPassword: ['', Validators.required]
+            },
+            {
+                validators: [Validation.match('password', 'confirmPassword')]
+            }
+        );
+    }
 
     /**
-     * Metodo para registro de usuario administrador
+     * Metodo para registro de usuario
      */
     onRegister() {
         console.log('datos -> ', this.datos);
@@ -73,21 +98,9 @@ export class RegisterAdminComponent implements OnInit {
         }
     }
 
-    /**
-     * Metodo para validar los campos del formulario de registro
-     * @param field 
-     * @returns 
-     */
-    isValidField(field: string): string {
-        const validatedField = this.registerForm.get(field);
-        return (!validatedField!.valid && validatedField!.touched)
-            ? 'is-invalid' : validatedField!.touched ? 'is-valid' : '';
-    }
-
-    obtenerUsuarioLogeado() {
-        this.authSvc.getUserLogged().subscribe(res => {
-            console.log(res?.email);
-        });
+    //Mostrar y ocular contraseña
+    showPassword() {
+        this.hide = !this.hide;
     }
 
     get form(): { [key: string]: AbstractControl; } {
@@ -100,6 +113,10 @@ export class RegisterAdminComponent implements OnInit {
 
     get password() {
         return this.registerForm.get('password');
+    }
+
+    get confirmPassword() {
+        return this.registerForm.get('confirmPassword');
     }
 
     get name() {
