@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Router, NavigationExtras} from '@angular/router';
-import {AdminService} from '../../../services/admin.service';
-import {FormGroup, FormControl} from '@angular/forms';
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router, NavigationExtras } from '@angular/router';
+import { AdminService } from '../../../services/admin.service';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-ajustesAdminEdit',
@@ -25,12 +25,12 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
   /*Formularios*/
 
-  administradorForm = new FormGroup({
-    name: new FormControl,
-    last_name: new FormControl,
-    address: new FormControl,
-    phone: new FormControl
-  })
+  administradorForm = this.fb.group({
+    name: ['', Validators.required],
+    last_name: ['', Validators.required],
+    address: ['', Validators.required],
+    phone: ['', [Validators.pattern(/^\d+$/)]],
+  });
 
   /*Variables de retorno*/
 
@@ -40,7 +40,8 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private fb: FormBuilder
   ) {
     this.recoverData();
   }
@@ -102,4 +103,25 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     }
     this.router.navigate(['/admin'], this.NavigationExtras);
   }
+
+  get form(): { [key: string]: AbstractControl; } {
+    return this.administradorForm.controls;
+  }
+
+  get name() {
+    return this.administradorForm.get('name');
+  }
+
+  get last_name() {
+    return this.administradorForm.get('last_name');
+  }
+
+  get address() {
+    return this.administradorForm.get('address');
+  }
+
+  get phone() {
+    return this.administradorForm.get('phone');
+  }
+
 }

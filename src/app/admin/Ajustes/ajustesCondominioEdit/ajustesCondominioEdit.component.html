@@ -7,20 +7,32 @@
         <div class="form-group">
           <label>Nombre del Condominio</label>
           <input type="text" class="form-control" formControlName="nombreCondominio"
-                 [(ngModel)]="condominio.nombreCondominio">
+            [(ngModel)]="condominio.nombreCondominio"
+            [ngClass]="{ 'is-invalid': !condominioForm.controls['nombreCondominio'].valid  && condominioForm.controls['nombreCondominio'].touched }">
+          <div
+            *ngIf=" condominioForm.controls['nombreCondominio'].touched  && !condominioForm.controls['nombreCondominio'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
         </div>
         <div class="form-group">
           <label>Ciudad</label>
           <input type="text" class="form-control" formControlName="ciudadCondominio"
-                 [(ngModel)]="condominio.ciudadCondominio">
+            [(ngModel)]="condominio.ciudadCondominio"
+            [ngClass]="{ 'is-invalid': !condominioForm.controls['ciudadCondominio'].valid  && condominioForm.controls['ciudadCondominio'].touched }">
+          <div
+            *ngIf=" condominioForm.controls['ciudadCondominio'].touched  && !condominioForm.controls['ciudadCondominio'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
         </div>
         <div class="form-group">
           <label>Descripción</label>
           <input type="text" class="form-control" formControlName="descripcionCondominio"
-                 [(ngModel)]="condominio.descripcionCondominio">
+            [(ngModel)]="condominio.descripcionCondominio">
         </div>
         <div class="centrarBotones">
-          <button type="submit" class="btn btn-success mr-2">Guardar</button>
+          <button type="submit" class="btn btn-success mr-2" [disabled]="condominioForm.invalid">Guardar</button>
           <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
         </div>
       </form>

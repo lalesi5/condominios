@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { AreasComunalesService } from 'src/app/services/areasComunales.service';
 
@@ -17,20 +17,21 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
 
   /*Formularios*/
 
-  areaComunalForm = new FormGroup({
-    nombre: new FormControl,
-    descripcion: new FormControl
-  })
+  areaComunalForm = this.fb.group({
+    nombre: ['', Validators.required],
+    descripcion: ['', Validators.required],
+  });
 
   navigationExtras: NavigationExtras = {
     state: {
 
     }
   }
-  
-  constructor(    
+
+  constructor(
     private router: Router,
-    private _AreaComunalService: AreasComunalesService
+    private _AreaComunalService: AreasComunalesService,
+    private fb: FormBuilder
   ) {
 
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
@@ -40,6 +41,7 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
     console.log('Dato obtenido en /areasComunalesEdit', navigations);
 
   }
+
   ngOnInit(): void {
   }
 
@@ -50,7 +52,7 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
 
   onCreateAreaComunal() {
     this.navigationExtras.state = this.condominio;
-    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio );
+    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio);
   }
 
 }
