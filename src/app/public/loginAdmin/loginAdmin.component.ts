@@ -19,7 +19,6 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
     verifyEmail: boolean = false;
     rolUser: string | undefined;
     hide: boolean = true;
-    perfilUsuario: string = '';
 
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
@@ -52,7 +51,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
                 const uid = res.user.uid;
                 this.getDatosUser(uid);
             } else {
-                alert('Usuario autenticado');
+                alert('Usuario no autenticado');
             }
         })
     }

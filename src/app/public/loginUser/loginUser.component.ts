@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigationExtras, Router } from "@angular/router";
+import { Subscription } from 'rxjs';
 import { UsuarioI } from 'src/app/models/usuario';
 import { AuthService } from "src/app/services/auth.service";
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -14,10 +15,16 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 
 export class LoginUserComponent implements OnInit {
 
+    private subscription: Subscription = new Subscription;
     private isEmail = /\S+@\S+\.\S+/;
     verifyEmail: boolean = false;
-    rol: string = '';
     hide: boolean = true;
+    rolUser: string | undefined;
+
+    NavigationExtras: NavigationExtras = {
+        state: {
+        }
+    }
 
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
@@ -45,15 +52,42 @@ export class LoginUserComponent implements OnInit {
             this.authSvc.loginByEmailUser(formValue).then((res) => {
                 if (res) {
                     //console.log('usuario - ', res);
-                    this.comprobarVerificacionEmail();
-                const uid = res?.user.uid;
-                this.comprobarRol(uid);
+                    //this.comprobarVerificacionEmail();
+                    //this.comprobarRol(uid);
                     //this.router.navigate(['/user/home']);
+                    const uid = res.user.uid;
+                    this.getDatosUser(uid);
+                } else {
+                    alert('Usuario no autenticado');
                 }
             })
         } else {
             //console.log('Datos no validos');
         }
+    }
+
+    getDatosUser(uid: string) {
+        const path = 'Administrador';
+        const id = uid;
+        this.subscription.add(
+            this.fstore.getDoc<UsuarioI>(path, id).subscribe(res => {
+                this.rolUser = res?.rol;
+
+                if (this.rolUser === 'administrador') {
+                    this.NavigationExtras.state = res;
+                    this.router.navigate(['/selectCondominio'], this.NavigationExtras);
+                    console.log('Dato enviado', this.NavigationExtras);
+                }
+                else if (this.rolUser === 'user') {
+                    this.NavigationExtras.state = res;
+                    this.router.navigate(['/selectRol'], this.NavigationExtras)
+                    //this.router.navigate(['/user/home']);
+                }
+                else if (this.rolUser == 'admin-user') {
+                    alert('El usuario tiene ambos roles')
+                }
+            })
+        )
     }
 
     comprobarVerificacionEmail() {
@@ -67,26 +101,6 @@ export class LoginUserComponent implements OnInit {
                 this.router.navigate(['../loginUser']);
             }
         }))
-    }
-
-    comprobarRol(uid: string) {
-        const path = 'user';
-        const id = uid;
-        this.fstore.getDoc<UsuarioI>(path, id).subscribe(res => {
-            //console.log('datos1 -> ', res);
-            if (res) {
-                this.rol = res.rol;
-                if (this.rol === 'usuario') {
-                    console.log('el usuario tiene permisos');
-
-                    this.router.navigate(['/user']);
-                } else {
-                    console.log('El usuario no tiene permisos');
-                    this.authSvc.logout();
-                    this.router.navigate(['../loginUser']);
-                }
-            }
-        })
     }
 
     //Mostrar y ocular contraseña
