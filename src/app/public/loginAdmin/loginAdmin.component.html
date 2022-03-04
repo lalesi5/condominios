@@ -19,7 +19,7 @@
                       Campo requerido
                     </div>
                     <div *ngIf="form['email'].errors['pattern']">
-                      Por favor ingrese un email valido
+                      Por favor ingrese un email válido
                     </div>
                   </div>
                 </div>
@@ -46,6 +46,9 @@
                   [disabled]="loginForm.invalid">Login</button>
                 <div class="form-group">
                   <a routerLink="../registerAdmin" class="form-control login-user">Eres Nuevo?</a>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                  <span><a routerLink="../forgotPassword" style="text-decoration: none;">¿Olvidaste tu contraseña?</a></span>
                 </div>
               </form>
             </div>
