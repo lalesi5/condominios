@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {first} from "rxjs";
-import {AdminI} from "../models/administrador";
-import {UsuarioI} from "../models/usuario";
-import {Router} from '@angular/router';
+import { Injectable } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { first } from "rxjs";
+import { AdminI } from "../models/administrador";
+import { UsuarioI } from "../models/usuario";
+import { Router } from '@angular/router';
 import { deleteUser } from "firebase/auth";
 
 @Injectable({
@@ -16,8 +16,8 @@ export class AuthService {
   //public userData$: Observable<AdminI> | undefined;
 
   constructor(public afAuth: AngularFireAuth,
-              private firestore: AngularFirestore,
-              private router: Router
+    private firestore: AngularFirestore,
+    private router: Router
   ) {
   }
 
@@ -51,7 +51,7 @@ export class AuthService {
    * @param param0
    * @returns result
    */
-  async loginByEmailAdmin({email, password}: AdminI) {
+  async loginByEmailAdmin({ email, password }: AdminI) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       return result;
@@ -66,7 +66,7 @@ export class AuthService {
    * @param param0
    * @returns result
    */
-  async registerByEmailAdmin({email, password}: AdminI) {
+  async registerByEmailAdmin({ email, password }: AdminI) {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
       return result;
@@ -81,7 +81,7 @@ export class AuthService {
    * @param param0
    * @returns result
    */
-  async loginByEmailUser({email, password}: UsuarioI) {
+  async loginByEmailUser({ email, password }: UsuarioI) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       return result;
@@ -96,7 +96,7 @@ export class AuthService {
    * @param param0
    * @returns result
    */
-  async registerByEmailUser({email, password}: UsuarioI) {
+  async registerByEmailUser({ email, password }: UsuarioI) {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
       return result;
@@ -112,6 +112,7 @@ export class AuthService {
    */
   async logout() {
     await this.afAuth.signOut().then(() => {
+      localStorage.removeItem('user');
       this.router.navigate(['']);
     }).catch((error) => {
       console.log(error);
@@ -132,6 +133,27 @@ export class AuthService {
         user.sendEmailVerification();
       }
     })
+  }
+
+  /* Send email verfificaiton when new user sign up
+  sendVerificationMail() {
+    return this.afAuth.currentUser
+      .then((u: any) => u.sendEmailVerification())
+      .then(() => {
+        this.router.navigate(['verify-email-address']);
+      });
+  }*/
+
+  // Reestablecer contraseña
+  forgotPassword(passwordResetEmail: string) {
+    return this.afAuth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Correo electrónico de restablecimiento de contraseña enviado, verifique su bandeja de entrada.');
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
   }
 
   //metodo para recuperar el usuario logeado
@@ -156,7 +178,7 @@ export class AuthService {
   };
 
   async deletUser(userItem: any) {
-    
+
     deleteUser(userItem.idUsuario).then(res => {
       alert('usuario eliminado')
     })

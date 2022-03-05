@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { AreasComunalesService } from '../../../services/areasComunales.service';
 
@@ -19,8 +19,8 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   /*Formularios*/
 
   areaComunalForm = new FormGroup({
-    nombre: new FormControl,
-    descripcion: new FormControl
+    nombre: new FormControl(''),
+    descripcion: new FormControl(''),
   })
 
   navigationExtras: NavigationExtras = {
@@ -31,7 +31,8 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _AreaComunalService: AreasComunalesService
+    private _AreaComunalService: AreasComunalesService,
+    private fb: FormBuilder
   ) {
 
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
@@ -44,6 +45,10 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.areaComunalForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+    })
   }
 
 
@@ -54,7 +59,7 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
 
   onEditAreaComunal() {
     this.navigationExtras.state = this.condominio;
-    this._AreaComunalService.updateAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio, this.idAreaComunal );
+    this._AreaComunalService.updateAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio, this.idAreaComunal);
   }
 
 }
