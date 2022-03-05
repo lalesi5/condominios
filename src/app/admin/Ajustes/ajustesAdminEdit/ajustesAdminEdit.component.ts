@@ -161,11 +161,15 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
   onChangePassword() {
     //this.passwordAministrador = this.cambioPasswordForm.value('password');
-    const password = this.cambioPasswordForm.value;
-    const user = this.auth.afAuth.currentUser.then(user => {
-      user?.updatePassword(password);
-    });
-    //this.auth.updatePassword(user, password);
+    const userAuth = getAuth();
+    const password = this.cambioPasswordForm.get('password')?.value;
+    let result = confirm("Esta seguro de cambiar su contraseña");
+    if (result) {
+      alert('Contraseña actualizada correctamente');
+      this.auth.updatePassword(userAuth.currentUser, password);
+    }
+
+    this.router.navigate(['/admin'], this.NavigationExtras);
   }
 
   onChangeEmail() {
@@ -174,17 +178,17 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     const data = { email };
     console.log('email - ', email);
 
-    this.auth.updateEmail(userAuth.currentUser, email);
-
     this.administrador.forEach((element: any) => {
       this.emailAministrador = element.email;
     })
 
-    let result = confirm("Esta seguro de modificar la información")
+    let result = confirm("Esta seguro de modificar su correo electrónico")
     if (result) {
-      this.firestoreService.updateDoc(data, 'Administrador', this.idAministrador)
-      alert('Administrador actualizado correctamente');
+      this.firestoreService.updateDoc(data, 'Administrador', this.idAministrador);
+      this.auth.updateEmail(userAuth.currentUser, email);
+      alert('Correo electrónico actualizado correctamente');
     }
+    
     this.router.navigate(['/admin'], this.NavigationExtras);
   }
 
