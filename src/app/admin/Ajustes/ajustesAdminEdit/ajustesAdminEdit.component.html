@@ -47,9 +47,84 @@
         </div>
         <div class="centrarBotones">
           <button type="submit" class="btn btn-success mr-2" [disabled]="administradorForm.invalid">Guardar</button>
-          <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+          <!--<button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>-->
         </div>
       </form>
+      <h3>Cambiar correo electrónico</h3>
+      <form [formGroup]='emailForm' (ngSubmit)="onChangeEmail()" *ngFor="let admin of administrador">
+        <!--Campo correo electrónico'-->
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" class="form-control" formControlName="email" [(ngModel)]="admin.email"
+            [ngClass]="{ 'is-invalid': !emailForm.controls['email'].valid && emailForm.controls['email'].touched}">
+          <div *ngIf="formEmail['email'].errors" class="invalid-feedback">
+            <div *ngIf="formEmail['email'].errors['required']">
+              Campo requerido
+            </div>
+            <div *ngIf="formEmail['email'].errors['pattern']">
+              Por favor ingrese un email válido
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-success mr-2" [disabled]="emailForm.invalid">Guardar</button>
+        </div>
+      </form>
+      <h3>Cambiar contraseña</h3>
+      <form [formGroup]='cambioPasswordForm' (ngSubmit)="onChangePassword()">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="password" [type]="hide ? 'password' : 'text'" name="password" class="form-control"
+              formControlName="password"
+              [ngClass]="{ 'is-invalid': formPassword['password'].errors && formPassword['password'].touched }" />
+            <span class="input-group-text">
+              <mat-icon class="placeholder" (click)="showPassword()">{{hide ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+            </span>
+            <div *ngIf="formPassword['password'].errors" class="invalid-feedback">
+              <div *ngIf="formPassword['password'].errors['required']">
+                Campo requerido
+              </div>
+              <div *ngIf="formPassword['password'].errors['minlength']">
+                La contraseña no puede tener menos de 6 caracteres
+              </div>
+              <div *ngIf="formPassword['password'].errors['maxlength']">
+                La contraseña no puede exceder de los 15 caracteres
+              </div>
+              <div *ngIf="formPassword['password'].errors['pattern']">
+                Debe tener al menos una mayúscula, una minúscula y un dígito
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Campo confirmPassword-->
+        <div class="form-group">
+          <label>Confirmar Contraseña</label>
+          <div class="input-group">
+            <input type="password" [type]="hide ? 'password' : 'text'" name="passwordConfirm" class="form-control"
+              formControlName="confirmPassword"
+              [ngClass]="{ 'is-invalid': formPassword['confirmPassword'].errors && formPassword['confirmPassword'].touched }">
+            <span class="input-group-text">
+              <mat-icon class="placeholder" (click)="showPassword()">{{hide ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+            </span>
+            <div *ngIf="formPassword['confirmPassword'].errors" class="invalid-feedback">
+              <div *ngIf="formPassword['confirmPassword'].errors['required']">
+                Campo requerido
+              </div>
+              <div *ngIf="formPassword['confirmPassword'].errors['matching']">
+                Las contraseñas no coinciden!
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-success mr-2" [disabled]="cambioPasswordForm.invalid">Guardar</button>
+        </div>
+      </form>
+      <div>
+        <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+      </div>
     </mat-card>
   </div>
 </div>

@@ -5,7 +5,7 @@ import { first } from "rxjs";
 import { AdminI } from "../models/administrador";
 import { UsuarioI } from "../models/usuario";
 import { Router } from '@angular/router';
-import { deleteUser } from "firebase/auth";
+import { deleteUser, updatePassword, updateEmail } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -178,10 +178,27 @@ export class AuthService {
   };
 
   async deletUser(userItem: any) {
-
     deleteUser(userItem.idUsuario).then(res => {
       alert('usuario eliminado')
     })
+  }
+
+  updatePassword(user: any, newPassword: string) {
+    updatePassword(user, newPassword).then(() => {
+      console.log('contrasenia cambiada');
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  updateEmail(user: any, newEmail: string) {
+    updateEmail(user, newEmail).then(() => {
+      console.log('email cambiado');
+
+    }).catch((error) => {
+      console.log(error);
+
+    });
   }
 
 }
