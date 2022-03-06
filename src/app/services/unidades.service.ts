@@ -22,6 +22,11 @@ export class UnidadesService {
         .snapshotChanges();
     }
 
+    getAllUnidadesOrdenadas(idCondo: string){
+        return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo).orderBy("numeroUnidad"))
+        .snapshotChanges();
+    }
+
     deleteUnidades(idUni: string){
         return this.firestore.collection('Unidades')
         .doc(idUni)

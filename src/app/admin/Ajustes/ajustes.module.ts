@@ -19,6 +19,8 @@ import { AjustesUnidadesEditComponent } from './ajustes-unidades-edit/ajustes-un
 import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajustes-unidades-create.component';
 import { AjustesUsuariosComponent } from './ajustes-usuarios/ajustes-usuarios.component';
 import { AjustesUsuariosCreateComponent } from './ajustes-usuarios-create/ajustes-usuarios-create.component';
+import { MatCommonModule } from "@angular/material/core";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
 
@@ -30,7 +32,9 @@ import { AjustesUsuariosCreateComponent } from './ajustes-usuarios-create/ajuste
         MatCardModule,
         MatIconModule,
         MatSelectModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatCommonModule,
+        MatInputModule
     ],
 
     declarations: [
