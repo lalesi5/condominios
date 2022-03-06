@@ -40,7 +40,7 @@ export class InicioComponent implements OnInit{
     getUnidades() {
         try {
           this._unidades
-            .getAllUnidades(this.idCondominio)
+            .getAllUnidadesOrdenadas(this.idCondominio)
             .subscribe(data => {
               data.forEach((element: any) => {
                 this.unidades.push({
