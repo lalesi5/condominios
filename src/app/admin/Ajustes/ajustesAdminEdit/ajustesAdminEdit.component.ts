@@ -69,8 +69,7 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       address: ['', Validators.required],
-      phone: ['', [Validators.pattern(/^\d+$/)]],
-      email: ['', [Validators.required, Validators.pattern(this.isEmail)]]
+      phone: ['', [Validators.pattern(/^\d+$/)]]
     });
 
     this.emailForm = this.fb.group({
