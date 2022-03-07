@@ -1,31 +1,30 @@
 <div class="ajustesAreasComunales">
-    <div class="containerInfo">
-        <mat-card>
-            <h2>Lista de Areas Comunales</h2>
-            <div>
-                <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let area of areasComunales">
-                    <tr>
-                        <td>{{area.nombre}}</td>
-                        <td>{{area.descripcion}}</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-warning mr-2" (click)="onGoEdit(area)">Editar</button>
-                                <button type="button" class="btn btn-danger ml-2" (click)="onDelete(area)">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Areas Comunales</h2>
+      <h3>Datos del Area Comunal</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripcion</th>
+          <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let area of areasComunales">
+        <tr>
+          <td>{{area.nombre}}</td>
+          <td>{{area.descripcion}}</td>
+          <td>
+            <mat-icon (click)="onGoEdit(area)" class="btn-info">edit</mat-icon>
+            <mat-icon (click)="onDelete(area)" class="btn-danger">delete</mat-icon>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </mat-card>
+  </div>
 </div>

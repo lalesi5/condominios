@@ -150,8 +150,8 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
         this.passwordAministrador,
         this.rolAministrador);
       alert('Administrador actualizado correctamente');
+      this.router.navigate(['/admin'], this.NavigationExtras);
     }
-    this.router.navigate(['/admin'], this.NavigationExtras);
   }
 
   //Mostrar y ocular contraseña
@@ -167,9 +167,8 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     if (result) {
       alert('Contraseña actualizada correctamente');
       this.auth.updatePassword(userAuth.currentUser, password);
+      this.router.navigate(['/admin'], this.NavigationExtras);
     }
-
-    this.router.navigate(['/admin'], this.NavigationExtras);
   }
 
   onChangeEmail() {
@@ -187,9 +186,8 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
       this.firestoreService.updateDoc(data, 'Administrador', this.idAministrador);
       this.auth.updateEmail(userAuth.currentUser, email);
       alert('Correo electrónico actualizado correctamente');
+      this.router.navigate(['/admin'], this.NavigationExtras);
     }
-    
-    this.router.navigate(['/admin'], this.NavigationExtras);
   }
 
   get form(): { [key: string]: AbstractControl; } {

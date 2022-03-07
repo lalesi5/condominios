@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { AreasComunalesService } from '../../../services/areasComunales.service';
+import {Component, OnInit} from '@angular/core';
+import {NavigationExtras, Router} from '@angular/router';
+import {AreasComunalesService} from '../../../services/areasComunales.service';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-ajustes-areas-comunales',
@@ -9,66 +10,71 @@ import { AreasComunalesService } from '../../../services/areasComunales.service'
 })
 export class AjustesAreasComunalesComponent implements OnInit {
 
-  idAministrador: string = '';
-  idCondominio: string = ';'
+  private subscription: Subscription = new Subscription;
+  idCondominio: string = ''
   areasComunales: any[] = [];
   condominio: any[] = [];
 
-  navigationExtras: NavigationExtras = {
-    state: {
-
-    }
+  NavigationExtras: NavigationExtras = {
+    state: {}
   }
 
   constructor(
     private router: Router,
     private _areaComunalService: AreasComunalesService
   ) {
-
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
+    this.recoverData();
   }
 
   ngOnInit(): void {
     this.getAreasComunales();
   }
 
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idCondominio = navigations.idCondominio;
+    this.condominio = navigations;
+    this.NavigationExtras.state = this.condominio;
+  }
+
   getAreasComunales() {
     try {
-      this._areaComunalService
-        .getAreasComunales(this.idCondominio)
-        .subscribe(data => {
-          data.forEach((element: any) => {
-            this.areasComunales.push({
-              ...element.payload.doc.data()
+      this.subscription.add(
+        this._areaComunalService
+          .getAreasComunales(this.idCondominio)
+          .subscribe(data => {
+            data.forEach((element: any) => {
+              this.areasComunales.push({
+                ...element.payload.doc.data()
+              })
             })
           })
-        })
-    }
-    catch (err) {
+      );
+    } catch (err) {
       console.log(err);
     }
   }
 
-  onGoCreate(){
-    this.navigationExtras.state = this.condominio;
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesCreate'], this.navigationExtras);
+  onGoCreate() {
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesCreate'], this.NavigationExtras);
   }
 
-  onDelete(item: any){
-    const idAreaComunalEliminar = item.idAreaComunal;
-    this._areaComunalService
-    .deleteAreasComunales(idAreaComunalEliminar);
-    alert('Area comunal eliminada correctamente');
-  }
-  
-  onGoEdit(item: any){
-    this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit'], this.navigationExtras);
+  onDelete(item: any) {
+    let result = confirm("Esta seguro de eliminar el Area Comunal!");
+    if (result) {
+      const idAreaComunalEliminar = item.idAreaComunal;
+      this._areaComunalService
+        .deleteAreasComunales(idAreaComunalEliminar);
+    }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([this.router.url], this.NavigationExtras);
   }
 
+  onGoEdit(item: any) {
+    this.NavigationExtras.state = item;
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit'], this.NavigationExtras);
+  }
 
 
 }
