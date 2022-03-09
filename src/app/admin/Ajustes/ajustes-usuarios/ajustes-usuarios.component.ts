@@ -50,7 +50,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
       const idCampo = 'idCondominio'
       this.subscription.add(
         this.firestoreService
-          .getAll(path, idCampo, this.idCondominio)
+          .getUsuariosOrdenados(path, idCampo, this.idCondominio)
           .subscribe(data => {
             data.forEach((element: any) => {
               this.usuarios.push({

@@ -60,6 +60,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     const idAdministrador = idAdmin;
     const idCondominio = idCondo;
     const formValue = this.usuariosForm.value;
+    
     this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
       if (res) {
         const path = 'Administrador';
