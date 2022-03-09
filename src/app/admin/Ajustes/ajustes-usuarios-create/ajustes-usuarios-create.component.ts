@@ -50,6 +50,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
 
   onCreateUsuarios() {
     this.navigationExtras.state = this.condominio;
+    this.usuariosForm
 
     this.crearUsuarios(this.usuariosForm.value, this.idAministrador, this.idCondominio);
     this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
@@ -60,6 +61,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     const idAdministrador = idAdmin;
     const idCondominio = idCondo;
     const formValue = this.usuariosForm.value;
+    
     this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
       if (res) {
         console.log('usuario - ', res);
