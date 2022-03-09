@@ -1,0 +1,26 @@
+<div class="ajustesUsuariosEdit">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Usuarios</h2>
+      <h3>Editar Datos del Usuarios</h3>
+      <form [formGroup]='usuariosForm' (ngSubmit)="onEditUser()" *ngFor="let user of usuarios">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" class="form-control" formControlName="nombre" [(ngModel)]="user.nombre">
+        </div>
+        <div class="form-group">
+          <label>Apellido</label>
+          <input type="text" class="form-control" formControlName="apellido" [(ngModel)]="user.apellido">
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="text" class="form-control" formControlName="telefono" [(ngModel)]="user.telefono">
+        </div>
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+          <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

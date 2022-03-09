@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { FirestoreService } from 'src/app/services/firestore.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {NavigationExtras, Router} from '@angular/router';
+import {AuthService} from 'src/app/services/auth.service';
+import {FirestoreService} from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-ajustes-usuarios-create',
@@ -25,8 +25,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   });
 
   navigationExtras: NavigationExtras = {
-    state: {
-    }
+    state: {}
   }
 
   constructor(
@@ -34,26 +33,27 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     private firestoreService: FirestoreService,
     private authSvc: AuthService
   ) {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
+    this.recoverData();
   }
 
   ngOnInit(): void {
   }
 
-  onBacktoList(): void {
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idAministrador = navigations.idAdministrador;
+    this.idCondominio = navigations.idCondominio;
+    this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
+  }
+
+  onBacktoList(): void {
     this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
   }
 
   onCreateUsuarios() {
-    this.navigationExtras.state = this.condominio;
-
     this.crearUsuarios(this.usuariosForm.value, this.idAministrador, this.idCondominio);
-    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
-    //this._unidadesService.saveUnidades(this.unidadesForm.value, this.idAministrador, this.idCondominio);
+    this.router.navigate(['/admin/ajustes'], this.navigationExtras);
   }
 
   crearUsuarios(usuario: any, idAdmin: string, idCondo: string) {
@@ -62,14 +62,12 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     const formValue = this.usuariosForm.value;
     this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
       if (res) {
-        console.log('usuario - ', res);
         const path = 'Administrador';
         const idUsuario = res.user.uid;
         const rol = 'user';
-        const data = { idAdministrador, idCondominio, idUsuario, rol, ...usuario }
+        const data = {idAdministrador, idCondominio, idUsuario, rol, ...usuario}
         await this.firestoreService.createDoc(data, path, idUsuario);
       }
-      alert('usuario creado');
     })
   }
 

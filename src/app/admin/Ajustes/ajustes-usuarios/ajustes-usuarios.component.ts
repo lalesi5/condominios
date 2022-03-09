@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationExtras, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FirestoreService} from 'src/app/services/firestore.service';
+import {AdminService} from "../../../services/admin.service";
 
 @Component({
   selector: 'app-ajustes-usuarios',
@@ -22,7 +23,8 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private _adminService: AdminService
   ) {
     this.recoverData();
   }
@@ -67,12 +69,20 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   onDelete(item: any) {
-    const idAreaUnidadAEliminar = item.idUsuario;
-    alert('Unidad eliminada correctamente');
+    let result = confirm("Esta seguro de eliminar el Usuario");
+    if (result) {
+      const idAUsuarioEliminar = item.idUsuario;
+      this._adminService
+        .deleteAdministrador(idAUsuarioEliminar);
+    }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([this.router.url], this.navigationExtras);
   }
 
   onGoEdit(item: any) {
     this.navigationExtras.state = item;
+    this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit'], this.navigationExtras);
   }
 
 }

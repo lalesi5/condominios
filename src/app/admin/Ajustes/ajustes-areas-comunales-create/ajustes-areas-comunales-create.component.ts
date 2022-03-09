@@ -50,7 +50,9 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
   }
 
   onCreateAreaComunal() {
-    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value, this.idAministrador, this.idCondominio);
+    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value,
+      this.idAministrador,
+        this.idCondominio);
     this.router.navigate(['/admin/ajustes'], this.navigationExtras);
   }
 
