@@ -9,23 +9,71 @@
             <form [formGroup]='createUsuarioForm' (ngSubmit)="agregarUsuario()">
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" class="form-control" formControlName="name">
+                    <input type="text" class="form-control" formControlName="name"
+                        [ngClass]="{ 'is-invalid': !createUsuarioForm.controls['name'].valid  && createUsuarioForm.controls['name'].touched }">
+                    <div *ngIf=" createUsuarioForm.controls['name'].touched  && !createUsuarioForm.controls['name'].valid"
+                        class="invalid-feedback">
+                        Campo requerido
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Apellido</label>
-                    <input type="text" class="form-control" formControlName="last_name">
+                    <input type="text" class="form-control" formControlName="last_name"
+                        [ngClass]="{ 'is-invalid': !createUsuarioForm.controls['last_name'].valid  && createUsuarioForm.controls['last_name'].touched }">
+                    <div *ngIf=" createUsuarioForm.controls['last_name'].touched  && !createUsuarioForm.controls['last_name'].valid"
+                        class="invalid-feedback">
+                        Campo requerido
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" formControlName="email">
+                    <input type="email" class="form-control" formControlName="email"
+                        [ngClass]="{ 'is-invalid': !createUsuarioForm.controls['email'].valid && createUsuarioForm.controls['email'].touched}">
+                    <div *ngIf="form['email'].errors" class="invalid-feedback">
+                        <div *ngIf="form['email'].errors['required']">
+                            Campo requerido
+                        </div>
+                        <div *ngIf="form['email'].errors['pattern']">
+                            Por favor ingrese un email válido
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Contraseña</label>
-                    <input type="password" class="form-control" formControlName="password">
+                    <div class="input-group">
+                        <input type="password" [type]="hide ? 'password' : 'text'" name="password" class="form-control"
+                          formControlName="password"
+                          [ngClass]="{ 'is-invalid': form['password'].errors && form['password'].touched }" />
+                        <span class="input-group-text">
+                          <mat-icon class="placeholder" (click)="showPassword()">{{hide ? 'visibility_off' : 'visibility'}}
+                          </mat-icon>
+                        </span>
+                        <div *ngIf="form['password'].errors" class="invalid-feedback">
+                          <div *ngIf="form['password'].errors['required']">
+                            Campo requerido
+                          </div>
+                          <div *ngIf="form['password'].errors['minlength']">
+                            La contraseña no puede tener menos de 6 caracteres
+                          </div>
+                          <div *ngIf="form['password'].errors['maxlength']">
+                            La contraseña no puede exceder de los 15 caracteres
+                          </div>
+                        </div>
+                      </div>
                 </div>
                 <div class="form-group">
                     <label>Teléfono</label>
-                    <input type="number" class="form-control" formControlName="phone">
+                    <input type="text" class="form-control" formControlName="phone"
+                        [ngClass]="{ 'is-invalid': !createUsuarioForm.controls['phone'].valid  && createUsuarioForm.controls['phone'].touched }">
+                    <div *ngIf="form['phone'].errors" class="invalid-feedback">
+                        <div *ngIf="form['phone'].errors['pattern']">
+                            El campo solo debe contener números!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Direccion</label>
+                    <input type="text" class="form-control" formControlName="address">
                 </div>
                 <div class="btn-group">
                     <button type="submit" class="btn btn-primary mr-2">Crear</button>

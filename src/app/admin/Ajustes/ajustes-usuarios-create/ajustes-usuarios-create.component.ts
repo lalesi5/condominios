@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -21,15 +21,8 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   createUsuarioForm: FormGroup;
   submitted = false;
   loading = false;
-
-
-  usuariosForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    last_name: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    phone: new FormControl('')
-  });
+  private isEmail = /\S+@\S+\.\S+/;
+  hide: boolean = true;
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -38,7 +31,6 @@ export class AjustesUsuariosCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private firestoreService: FirestoreService,
     private authSvc: AuthService,
     private fb: FormBuilder,
     private _usuarioService: UsuariosService,
@@ -47,10 +39,13 @@ export class AjustesUsuariosCreateComponent implements OnInit {
 
     this.createUsuarioForm = this.fb.group({
       name: ['', Validators.required],
-      last_name: [''],
-      email: [''],
-      password: [''],
-      phone: ['']
+      last_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+      password: ['', [Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(15)]],
+      phone: ['', [Validators.pattern(/^\d+$/)]],
+      address: [''],
     })
 
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
@@ -63,11 +58,16 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   }
 
   agregarUsuario() {
-    
+
     this.submitted = true;
+    
+    const nombre = String(this.createUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const apellido = String(this.createUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const direccion = String(this.createUsuarioForm.value.address).charAt(0).toLocaleUpperCase() + String(this.createUsuarioForm.value.address).slice(1);
+
     const usuario: any = {
-      name: this.createUsuarioForm.value.name,
-      last_name: this.createUsuarioForm.value.last_name,
+      name: nombre,
+      last_name: apellido,
       email: this.createUsuarioForm.value.email,
       password: this.createUsuarioForm.value.password,
       phone: this.createUsuarioForm.value.phone,
@@ -76,7 +76,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
       rol: 'Usuario',
       idAdministrador: this.idAministrador,
       idCondominio: this.idCondominio,
-      addres: ''
+      address: direccion
     }
 
     //Crea el usuario
@@ -84,6 +84,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
       if (res) {
         const idUsuario = res.user.uid;
+        
         const data = { idUsuario, ...usuario }
 
         //Crea el documento
@@ -110,32 +111,37 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
   }
 
-  onCreateUsuarios() {
-    this.navigationExtras.state = this.condominio;
-
-
-    this.crearUsuarios(this.usuariosForm.value, this.idAministrador, this.idCondominio);
-    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
-    //this._unidadesService.saveUnidades(this.unidadesForm.value, this.idAministrador, this.idCondominio);
+  //Mostrar y ocular contraseña
+  showPassword() {
+    this.hide = !this.hide;
   }
 
-  crearUsuarios(usuario: any, idAdmin: string, idCondo: string) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
-    const formValue = this.usuariosForm.value;
+  get form(): { [key: string]: AbstractControl; } {
+    return this.createUsuarioForm.controls;
+  }
 
-    this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
-      if (res) {
-        console.log('usuario - ', res);
-        const path = 'Administrador';
-        const idUsuario = res.user.uid;
-        const rol = 'user';
-        const address = '';
-        const data = { idAdministrador, idCondominio, idUsuario, rol, address, ...usuario }
-        await this.firestoreService.createDoc(data, path, idUsuario).then(() => this.usuariosForm.reset());
-      }
-      alert('usuario creado');
-    })
+  get name() {
+    return this.createUsuarioForm.get('name');
+  }
+
+  get last_name() {
+    return this.createUsuarioForm.get('last_name');
+  }
+
+  get address() {
+    return this.createUsuarioForm.get('address');
+  }
+
+  get phone() {
+    return this.createUsuarioForm.get('phone');
+  }
+
+  get email() {
+    return this.createUsuarioForm.get('email');
+  }
+
+  get password() {
+    return this.createUsuarioForm.get('password');
   }
 
 }
