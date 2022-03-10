@@ -18,10 +18,10 @@
         </thead>
         <tbody *ngFor="let user of usuarios">
         <tr>
-          <td>{{user.nombre}}</td>
-          <td>{{user.apellido}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.last_name}}</td>
           <td>{{user.email}}</td>
-          <td>{{user.telefono}}</td>
+          <td>{{user.phone}}</td>
           <td>
             <mat-icon (click)="onGoEdit(user)" class="btn-info">edit</mat-icon>
             <mat-icon (click)="onDelete(user)" class="btn-danger">delete</mat-icon>

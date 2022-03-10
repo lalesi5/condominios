@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {FirestoreService} from 'src/app/services/firestore.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios',
@@ -22,13 +23,32 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private _usuarioService: UsuariosService
   ) {
     this.recoverData();
   }
 
   ngOnInit(): void {
-    this.getUsuarios();
+    this.getUsuariosPrueba();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  getUsuariosPrueba() {
+    this.subscription.add(
+      this._usuarioService.getUsuarios(this.idCondominio).subscribe(data => {
+        this.usuarios = [];
+        data.forEach((element: any) => {
+          this.usuarios.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    );
   }
 
   recoverData() {
@@ -36,10 +56,6 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   getUsuarios() {
