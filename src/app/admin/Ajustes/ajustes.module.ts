@@ -21,6 +21,7 @@ import { AjustesUsuariosComponent } from './ajustes-usuarios/ajustes-usuarios.co
 import { AjustesUsuariosCreateComponent } from './ajustes-usuarios-create/ajustes-usuarios-create.component';
 import { MatCommonModule } from "@angular/material/core";
 import { MatInputModule } from "@angular/material/input";
+import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-usuarios-edit.component';
 
 @NgModule({
 
@@ -50,6 +51,7 @@ import { MatInputModule } from "@angular/material/input";
         AjustesUnidadesCreateComponent,
         AjustesUsuariosComponent,
         AjustesUsuariosCreateComponent,
+        AjustesUsuariosEditComponent,
     ],
 
     exports: [

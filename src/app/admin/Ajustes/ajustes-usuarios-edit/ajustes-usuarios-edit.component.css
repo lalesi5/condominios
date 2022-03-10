@@ -1,4 +1,4 @@
-.ajustesUsuariosCreate {
+.ajustesUsuariosEdit {
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
@@ -9,7 +9,7 @@
   display: grid;
   width: 50%;
   left: 25%;
-  top: 9vh;
+  top: 17vh;
   border-radius: 20px;
   padding-bottom: 25px;
 }
@@ -29,3 +29,4 @@
   padding: 5px;
   text-align: center;
 }
+

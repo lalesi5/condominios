@@ -25,8 +25,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   hide: boolean = true;
 
   navigationExtras: NavigationExtras = {
-    state: {
-    }
+    state: {}
   }
 
   constructor(
@@ -52,6 +51,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
+    this.navigationExtras.state = this.condominio;
   }
 
   ngOnInit(): void {
@@ -107,7 +107,6 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   }
 
   onBacktoList(): void {
-    this.navigationExtras.state = this.condominio;
     this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
   }
 
