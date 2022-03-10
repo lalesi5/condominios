@@ -16,18 +16,10 @@ export class UsuariosService {
     }
 
     getUsuarios(idCondominio: string): Observable<any> {
-        return this.firestore.collection('Administrador', ref => ref.where('idCondominio', '==', idCondominio).orderBy('name','asc')).snapshotChanges();
+        return this.firestore.collection('Administrador', ref => ref.where('idCondominio', '==', idCondominio).orderBy('name', 'asc')).snapshotChanges();
     }
 
-    saveUsuario(usuario: any, idAdmin: string, idCondo: string, idUni: string, idUser?: string) {
-        const idAdministrador = idAdmin;
-        const idCondominio = idCondo;
-        const idUnidad = idUni;
-        const idUsuario = idUser || this.firestore.createId();
-        const data = { idAdministrador, idCondominio, idUnidad, idUsuario, ...usuario }
-        return this.firestore.collection('Usuarios')
-            .doc(idUnidad)
-            .set(data);
+    eliminarUsuario(id: string): Promise<any> {
+        return this.firestore.collection('Administrador').doc(id).delete();
     }
-
 }

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -23,21 +24,21 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private firestoreService: FirestoreService,
-    private _usuarioService: UsuariosService
+    private _usuarioService: UsuariosService,
+    private toastr: ToastrService
   ) {
     this.recoverData();
   }
 
   ngOnInit(): void {
-    this.getUsuariosPrueba();
+    this.getUsuarios();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  getUsuariosPrueba() {
+  getUsuarios() {
     this.subscription.add(
       this._usuarioService.getUsuarios(this.idCondominio).subscribe(data => {
         this.usuarios = [];
@@ -51,6 +52,17 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     );
   }
 
+  eliminarUsuario(id: string) {
+    this._usuarioService.eliminarUsuario(id).then(() => {
+      this.toastr.success('El usuario fue eliminado con exito', 'Registro eliminado', {
+        positionClass: 'toast-bottom-right'
+      });
+    }).catch(error => {
+      console.log(error);
+
+    })
+  }
+
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idCondominio = navigations.idCondominio;
@@ -58,33 +70,8 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     this.navigationExtras.state = this.condominio;
   }
 
-  getUsuarios() {
-    try {
-      const path = 'Administrador'
-      const idCampo = 'idCondominio'
-      this.subscription.add(
-        this.firestoreService
-          .getUsuariosOrdenados(path, idCampo, this.idCondominio)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.usuarios.push({
-                ...element.payload.doc.data()
-              })
-            })
-          })
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   onGoCreate() {
     this.router.navigate(['/admin/ajustes/ajustesUsuariosCreate'], this.navigationExtras);
-  }
-
-  onDelete(item: any) {
-    const idAreaUnidadAEliminar = item.idUsuario;
-    alert('Unidad eliminada correctamente');
   }
 
   onGoEdit(item: any) {
