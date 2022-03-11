@@ -6,25 +6,28 @@
       <div>
         <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
       </div>
-      <table class="table table-striped">
+      <h5 style="margin-top: 30px;" *ngIf='usuarios.length == 0'>No hay datos para mostrar</h5>
+      <table *ngIf="usuarios.length > 0" class="table table-striped">
         <thead>
         <tr>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Email</th>
           <th>Teléfono</th>
+          <th>Direccion</th>
           <th>Opciones</th>
         </tr>
         </thead>
         <tbody *ngFor="let user of usuarios">
         <tr>
-          <td>{{user.nombre}}</td>
-          <td>{{user.apellido}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.last_name}}</td>
           <td>{{user.email}}</td>
-          <td>{{user.telefono}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.address}}</td>
           <td>
             <mat-icon (click)="onGoEdit(user)" class="btn-info">edit</mat-icon>
-            <mat-icon (click)="onDelete(user)" class="btn-danger">delete</mat-icon>
+            <mat-icon (click)="eliminarUsuario(user.id)" class="btn-danger">delete</mat-icon>
           </td>
         </tr>
         </tbody>

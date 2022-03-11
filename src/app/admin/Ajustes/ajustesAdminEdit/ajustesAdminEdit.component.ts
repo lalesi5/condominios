@@ -143,7 +143,21 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
     let result = confirm("Esta seguro de modificar la información")
     if (result) {
-      this._adminService.saveAdministrador(this.administradorForm.value,
+      //nombre
+      const nombre = String(this.administradorForm.get('name')?.value);
+      //Mayuscula la primera letra de cada palabra
+      const name = String(nombre).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())
+      //apellido
+      const apellido = String(this.administradorForm.get('last_name')?.value);
+      const last_name = String(apellido).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())
+      //direccion
+      const dir = this.administradorForm.get('address')?.value;
+      const address = String(dir).charAt(0).toLocaleUpperCase() + String(dir).slice(1);
+      //telefono
+      const phone = this.administradorForm.get('phone')?.value;
+      //informaciona guardar en el documento
+      const data = { name, last_name, address, phone }
+      this._adminService.saveAdministrador(data,
         this.idAministrador,
         this.emailAministrador,
         this.passwordAministrador,
@@ -173,7 +187,9 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   onChangeEmail() {
     const userAuth = getAuth();
     const email = this.emailForm.get('email')?.value;
+
     const data = { email };
+
     console.log('email - ', email);
 
     this.administrador.forEach((element: any) => {
