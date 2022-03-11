@@ -6,6 +6,30 @@ import { AdminI } from "../models/administrador";
 import { UsuarioI } from "../models/usuario";
 import { Router } from '@angular/router';
 import { deleteUser, updatePassword, updateEmail } from "firebase/auth";
+import { ToastrService } from "ngx-toastr";
+
+export namespace ErroAuthEn {
+  export function convertMessage(code: string): string {
+
+    switch (code) {
+      case 'auth/user-disabled': {
+        return 'Sorry your user is disabled.';
+      }
+
+      case 'auth/user-not-found': {
+        return 'Sorry user not found.';
+      }
+
+      case 'auth/wrong-password': {
+        return 'Sorry, incorrect password entered. Please try again.';
+      }
+
+      default: {
+        return 'Login error try again later.';
+      }
+    }
+  }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +41,8 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    public toastr: ToastrService
   ) {
   }
 
@@ -37,13 +62,21 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  loginByEmail(user: AdminI) {
+  async loginByEmail(user: AdminI) {
     const { email, password } = user;
-    this.afAuth.signInWithEmailAndPassword(email, password)
+    await this.afAuth.signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Completado');
 
-      }).catch(err => console.log('Error', err))
+      }).catch(function (error) {
+        console.error("Error en login: ", error);
+
+        // An error happened.
+        //ToastrService.prototype.error(ErroAuthEn.convertMessage(error['code']), 'Usuario registrado', {
+        //positionClass: 'toast-bottom-right'
+        //});
+        //alert(ErroAuthEn.convertMessage(error['code']));
+      });
   }
 
   /**
@@ -55,8 +88,11 @@ export class AuthService {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       return result;
-    } catch (error) {
-      console.error("Error en login: ", error);
+    } catch (error: any) {
+      this.toastr.error(this.convertMessage(error['code']), 'Error de inicio de sesión', {
+        positionClass: 'toast-bottom-right', timeOut: 8000
+      });
+      //console.error("Error en login: ", error);
       return null;
     }
   }
@@ -71,7 +107,7 @@ export class AuthService {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
       return result;
     } catch (error) {
-      console.error("Error en Registro: ", error);
+      console.error("Error en login: ", error);
       return null;
     }
   }
@@ -201,4 +237,23 @@ export class AuthService {
     });
   }
 
+  convertMessage(code: string): string {
+    switch (code) {
+      case 'auth/user-disabled': {
+        return 'Lo sentimos, su usuario está deshabilitado.';
+      }
+
+      case 'auth/user-not-found': {
+        return 'Lo sentimos usuario no encontrado.';
+      }
+
+      case 'auth/wrong-password': {
+        return 'Lo sentimos, se ingresó una contraseña incorrecta. Inténtalo de nuevo.';
+      }
+
+      default: {
+        return 'Error de inicio de sesión inténtalo de nuevo más tarde.';
+      }
+    }
+  }
 }

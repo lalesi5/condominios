@@ -95,7 +95,8 @@ export class AjustesUsuariosCreateComponent implements OnInit {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          //this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
+          this.navigationExtras.state = this.condominio;
+          this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
 
         }).catch(error => {
           console.log(error);

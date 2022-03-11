@@ -7,4 +7,6 @@ export interface AdminI {
     phone: string;
     rol: string;
     idAdministrador: string;
+    fechaCreacion: any;
+    fechaActualizacion: any;
 }
