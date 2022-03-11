@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { UnidadesService } from '../../../services/unidades.service';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormControl} from '@angular/forms';
+import {NavigationExtras, Router} from '@angular/router';
+import {UnidadesService} from '../../../services/unidades.service';
 
 @Component({
   selector: 'app-ajustes-unidades-create',
@@ -11,7 +11,7 @@ import { UnidadesService } from '../../../services/unidades.service';
 export class AjustesUnidadesCreateComponent implements OnInit {
 
   idAministrador: string = '';
-  idCondominio: string = ''
+  idCondominio: string = '';
   unidades: any[] = [];
   condominio: any[] = [];
   usuario: any[] = [];
@@ -22,42 +22,44 @@ export class AjustesUnidadesCreateComponent implements OnInit {
     areaUnidad: new FormControl,
     nombreArrendatario: new FormControl,
     apellidoArrendatario: new FormControl,
-    telefonoArrendatario: new FormControl,
     celularArrendatario: new FormControl,
-    passwordArrendatario: new FormControl,
     emailArrendatario: new FormControl,
     nombreArrendador: new FormControl,
     ApellidoArrendador: new FormControl,
-    emailArrendador: new FormControl
-
+    emailArrendador: new FormControl,
+    celularArrendador: new FormControl
   })
 
   navigationExtras: NavigationExtras = {
-    state: {
-
-    }
+    state: {}
   }
 
-  constructor(    
+  constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
   ) {
+  this.recoverData();
+  }
 
+  ngOnInit(): void {
+  }
+
+  recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
-  }
-  ngOnInit(): void {
+    this.navigationExtras.state = this.condominio;
   }
 
   onBacktoList(): void {
-    this.navigationExtras.state = this.condominio;
     this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.navigationExtras);
   }
 
   onCreateUnidades() {
-    this.navigationExtras.state = this.condominio;
-    this._unidadesService.saveUnidades(this.unidadesForm.value, this.idAministrador, this.idCondominio);
+    this._unidadesService.saveUnidades(this.unidadesForm.value,
+      this.idAministrador,
+      this.idCondominio);
+    this.router.navigate(['/admin/ajustes'], this.navigationExtras);
   }
 }

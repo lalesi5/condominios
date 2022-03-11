@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { UnidadesService } from 'src/app/services/unidades.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormGroup, FormControl} from '@angular/forms';
+import {NavigationExtras, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {UnidadesService} from 'src/app/services/unidades.service';
 
 @Component({
   selector: 'app-ajustes-unidades-edit',
@@ -24,32 +24,23 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
     areaUnidad: new FormControl,
     nombreArrendatario: new FormControl,
     apellidoArrendatario: new FormControl,
-    telefonoArrendatario: new FormControl,
     celularArrendatario: new FormControl,
-    passwordArrendatario: new FormControl,
     emailArrendatario: new FormControl,
     nombreArrendador: new FormControl,
     ApellidoArrendador: new FormControl,
-    emailArrendador: new FormControl
-
+    emailArrendador: new FormControl,
+    celularArrendador: new FormControl
   })
 
   navigationExtras: NavigationExtras = {
-    state: {
-
-    }
+    state: {}
   }
 
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService
   ) {
-
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUnidad = navigations.idUnidad;
-    this.condominio = navigations;
+    this.recoverData();
   }
 
   ngOnInit(): void {
@@ -58,6 +49,15 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idAministrador = navigations.idAdministrador;
+    this.idCondominio = navigations.idCondominio;
+    this.idUnidad = navigations.idUnidad;
+    this.condominio = navigations;
+    this.navigationExtras.state = this.condominio;
   }
 
   getUnidades() {
@@ -73,20 +73,17 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
             })
           })
       )
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   }
 
   onBacktoList(): void {
-    this.navigationExtras.state = this.condominio;
+
     this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.navigationExtras);
   }
 
   onEditUnidades() {
-    console.log(this.unidadesForm);
-    this.navigationExtras.state = this.condominio;
     this._unidadesService.saveUnidades(this.unidadesForm.value, this.idAministrador, this.idCondominio, this.idUnidad);
   }
 

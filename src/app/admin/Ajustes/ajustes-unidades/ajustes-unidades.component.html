@@ -1,37 +1,36 @@
 <div class="ajustesUnidades">
-    <div class="containerInfo">
-        <mat-card>
-            <h2>Lista de Unidades</h2>
-            <div>
-                <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Numero de Unidad</th>
-                        <th>Area Unidad</th>
-                        <th>Tipo de Unidad</th>
-                        <th>Nombre Usuario</th>
-                        <th>Apellido Usuario</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let unidad of unidades">
-                    <tr>
-                        <td>{{unidad.numeroUnidad}}</td>
-                        <td>{{unidad.areaUnidad}}</td>
-                        <td>{{unidad.tipoUnidad}}</td>
-                        <td>{{unidad.nombreArrendatario}}</td>
-                        <td>{{unidad.apellidoArrendatario}}</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-warning mr-2" (click)="onGoEdit(unidad)">Editar</button>
-                                <button type="button" class="btn btn-danger ml-2" (click)="onDelete(unidad)">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Unidades</h2>
+      <h3>Datos de las Unidades</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Numero de Unidad</th>
+          <th>Area Unidad</th>
+          <th>Tipo de Unidad</th>
+          <th>Nombre Usuario</th>
+          <th>Apellido Usuario</th>
+          <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let unidad of unidades">
+        <tr>
+          <td>{{unidad.numeroUnidad}}</td>
+          <td>{{unidad.areaUnidad}}</td>
+          <td>{{unidad.tipoUnidad}}</td>
+          <td>{{unidad.nombreArrendatario}}</td>
+          <td>{{unidad.apellidoArrendatario}}</td>
+          <td>
+            <mat-icon (click)="onGoEdit(unidad)" class="btn-info">edit</mat-icon>
+            <mat-icon (click)="onDelete(unidad)" class="btn-danger">delete</mat-icon>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </mat-card>
+  </div>
 </div>

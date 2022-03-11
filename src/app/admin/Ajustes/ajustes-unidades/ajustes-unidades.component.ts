@@ -26,11 +26,7 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
     private router: Router,
     private _unidadesService: UnidadesService
   ) {
-
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
+    this.recoverData();
   }
 
   ngOnInit(): void {
@@ -39,6 +35,14 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  recoverData(){
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idAministrador = navigations.idAdministrador;
+    this.idCondominio = navigations.idCondominio;
+    this.condominio = navigations;
+    this.navigationExtras.state = this.condominio;
   }
 
   getUnidades() {
@@ -61,15 +65,19 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   }
 
   onGoCreate() {
-    this.navigationExtras.state = this.condominio;
     this.router.navigate(['/admin/ajustes/ajustesUnidadesCreate'], this.navigationExtras);
   }
 
   onDelete(item: any) {
-    const idAreaUnidadAEliminar = item.idUnidad;
-    this._unidadesService
-      .deleteUnidades(idAreaUnidadAEliminar);
-    alert('Unidad eliminada correctamente');
+    let result = confirm("Esta seguro de eliminar el Area Comunal!");
+    if (result) {
+      const idAreaUnidadAEliminar = item.idUnidad;
+      this._unidadesService
+        .deleteUnidades(idAreaUnidadAEliminar);
+    }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([this.router.url], this.navigationExtras);
   }
 
   onGoEdit(item: any) {
