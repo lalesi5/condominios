@@ -14,8 +14,6 @@ import { RegisterAdminComponent } from './registerAdmin/registerAdmin.component'
 import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
 import { SelectCondominioComponent } from './select-condominio/select-condominio.component';
 import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
-import { SelectRolComponent } from './select-rol/select-rol.component';
-import { NavigationComponent } from '../admin/components/navigation/navigation.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
@@ -40,7 +38,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     RegisterAdminComponent,
     SelectCondominioComponent,
     CreateCondominioComponent,
-    SelectRolComponent,
     ForgotPasswordComponent
   ],
   exports: [],

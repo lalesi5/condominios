@@ -77,7 +77,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
         this.NavigationExtras.state = res;
         if (this.rolUser === 'administrador') {
           this.router.navigate(['/selectCondominio'], this.NavigationExtras);
-        } else if (this.rolUser === 'user') {
+        } else if (this.rolUser === 'Usuario') {
           this.router.navigate(['/user/home'], this.NavigationExtras);
         } else if (this.rolUser === 'admin-user') {
 
