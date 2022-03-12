@@ -15,7 +15,10 @@ import { environment } from '../environments/environment';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCommonModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
 
@@ -30,7 +33,11 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatDialogModule,
+    MatIconModule,
+    MatCommonModule,
+    MatButtonModule
   ],
   declarations: [
     AppComponent
@@ -38,7 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [
     AngularFirestore
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 export class AppModule { }

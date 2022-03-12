@@ -64,7 +64,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
           }))
         )*/
         this.toastr.success('Usuario logeado Correctamente', 'Inicio de Sesión', {
-          positionClass: 'toast-bottom-right', timeOut: 10000
+          positionClass: 'toast-bottom-right', timeOut: 5000
         });
         this.getDatosUser(idAdministrador);
       } //else {

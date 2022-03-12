@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 
-
-
 @NgModule({
   declarations: [],
   imports: [],
   exports: [],
-  providers:[]
+  providers: []
 })
 export class CoreModule {
 
-  constructor(){
-    
+  constructor() {
+
   }
 
- }
+}

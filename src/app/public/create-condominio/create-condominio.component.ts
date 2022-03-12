@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
-import {FormGroup, FormControl} from '@angular/forms';
-import {CondominioService} from '../../services/condominios.service';
-import {Subscription} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { CondominioService } from '../../services/condominios.service';
+import { Subscription } from "rxjs";
+import { DialogService } from 'src/app/services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-condominio',
@@ -17,11 +19,18 @@ export class CreateCondominioComponent implements OnInit {
 
   /*Formularios*/
 
-  condominioForm: FormGroup = new FormGroup({
+  //condominioForm: FormGroup;
+
+  /*condominioForm: FormGroup = new FormGroup({
     nombreCondominio: new FormControl,
     ciudadCondominio: new FormControl,
     descripcionCondominio: new FormControl
-  });
+  });*/
+  condominioForm = this.fb.group({
+    nombreCondominio: ['', Validators.required],
+    ciudadCondominio: ['', Validators.required],
+    descripcionCondominio: [''],
+  })
 
   /*Variables de retorno*/
 
@@ -31,8 +40,12 @@ export class CreateCondominioComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _condominioService: CondominioService
+    private _condominioService: CondominioService,
+    private fb: FormBuilder,
+    private _dialogService: DialogService,
+    private toastr: ToastrService
   ) {
+
     this.recoverData();
   }
 
@@ -51,14 +64,53 @@ export class CreateCondominioComponent implements OnInit {
   }
 
   onCreate() {
-    let result = confirm("Esta seguro de agregar el condominio")
+    //this._dialogService.confirmDialog();
+    this._dialogService.confirmDialog({
+      title: 'Agregar Condominio',
+      message: '¿Está seguro de agregar el condominio?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        const nombreCondominio = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
+        const ciudadCondominio = String(this.condominioForm.value.ciudadCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.ciudadCondominio).slice(1);
+        const descripcionCondominio = this.condominioForm.value.descripcionCondominio;
+        const data = { nombreCondominio, ciudadCondominio, descripcionCondominio }
+
+        this._condominioService.saveCondominios(data, this.idAministrador);
+
+        this.toastr.success('El condominio se ha creado exitosamente', 'Registro exitoso', {
+          positionClass: 'toast-bottom-right', timeOut: 10000
+        });
+      }
+    });
+
+    /*let result = confirm("Esta seguro de agregar el condominio")
     if (result) {
-      this._condominioService.saveCondominios(this.condominioForm.value, this.idAministrador);
+      const nombreCondominio = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
+      const ciudadCondominio = String(this.condominioForm.value.ciudadCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.ciudadCondominio).slice(1);
+      const descripcionCondominio = this.condominioForm.value.descripcionCondominio;
+      const data = { nombreCondominio, ciudadCondominio, descripcionCondominio }
+
+      this._condominioService.saveCondominios(data, this.idAministrador);
       alert('El condominio se ha agregado satisfactoriamente');
-    }
+    }*/
+
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/createCondominio'], this.NavigationExtras);
+  }
+
+  get form(): { [key: string]: AbstractControl; } {
+    return this.condominioForm.controls;
+  }
+
+  get nombreCondominio() {
+    return this.condominioForm.get('nombreCondominio');
+  }
+
+  get ciudadCondominio() {
+    return this.condominioForm.get('ciudadCondominio');
   }
 
 }
