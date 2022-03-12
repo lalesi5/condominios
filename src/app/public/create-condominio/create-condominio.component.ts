@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { CondominioService } from '../../services/condominios.service';
@@ -11,21 +11,15 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './create-condominio.component.html',
   styleUrls: ['./create-condominio.component.css']
 })
-export class CreateCondominioComponent implements OnInit {
+export class CreateCondominioComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription;
   /*Variables*/
   administrador: any[] = [];
   idAministrador: string = '';
 
   /*Formularios*/
 
-  //condominioForm: FormGroup;
-
-  /*condominioForm: FormGroup = new FormGroup({
-    nombreCondominio: new FormControl,
-    ciudadCondominio: new FormControl,
-    descripcionCondominio: new FormControl
-  });*/
   condominioForm = this.fb.group({
     nombreCondominio: ['', Validators.required],
     ciudadCondominio: ['', Validators.required],
@@ -52,6 +46,10 @@ export class CreateCondominioComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.administrador = navigations;
@@ -64,7 +62,7 @@ export class CreateCondominioComponent implements OnInit {
   }
 
   onCreate() {
-    //this._dialogService.confirmDialog();
+
     this._dialogService.confirmDialog({
       title: 'Agregar Condominio',
       message: '¿Está seguro de agregar el condominio?',
@@ -85,17 +83,6 @@ export class CreateCondominioComponent implements OnInit {
       }
     });
 
-    /*let result = confirm("Esta seguro de agregar el condominio")
-    if (result) {
-      const nombreCondominio = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
-      const ciudadCondominio = String(this.condominioForm.value.ciudadCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.ciudadCondominio).slice(1);
-      const descripcionCondominio = this.condominioForm.value.descripcionCondominio;
-      const data = { nombreCondominio, ciudadCondominio, descripcionCondominio }
-
-      this._condominioService.saveCondominios(data, this.idAministrador);
-      alert('El condominio se ha agregado satisfactoriamente');
-    }*/
-
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/createCondominio'], this.NavigationExtras);
@@ -112,5 +99,4 @@ export class CreateCondominioComponent implements OnInit {
   get ciudadCondominio() {
     return this.condominioForm.get('ciudadCondominio');
   }
-
 }
