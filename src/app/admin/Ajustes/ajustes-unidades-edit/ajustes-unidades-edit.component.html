@@ -4,52 +4,52 @@
       <h2>Unidades</h2>
       <h3>Editar Unidades</h3>
       <form [formGroup]='unidadesForm' (ngSubmit)="onEditUnidades()">
-        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+        <div class="input-group">
           <label>Numero de la Unidad: </label>
           <input type="number" min="1" step="1" class="form-control" formControlName="numeroUnidad" [(ngModel)]="unidad.numeroUnidad">
         </div>
-        <div class="input-group mb-2 mb-sm-2">
+        <div class="input-group">
           <label>Tipo de Unidad: </label>
           <select class="form-control" formControlName="tipoUnidad" [(ngModel)]="unidad.tipoUnidad">
             <option value="Departamento" selected>Departamento</option>
             <option value="Casa">Casa</option>
           </select>
         </div>
-        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+        <div class="input-group">
           <label>Area Unidad: </label>
           <input type="number" class="form-control" formControlName="areaUnidad" [(ngModel)]="unidad.areaUnidad">
         </div>
-        <div class="input-group mb-2 mb-sm-2">
-          <label>Nombre del Arrendatario: </label>
-          <input type="text" class="form-control" formControlName="nombreArrendatario" [(ngModel)]="unidad.nombreArrendatario">
-        </div>
-        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
-          <label>Apellido Arrendatario: </label>
-          <input type="text" class="form-control" formControlName="apellidoArrendatario" [(ngModel)]="unidad.apellidoArrendatario">
-        </div>
-        <div class="input-group mb-2 mb-sm-2">
-          <label>Celular del Arrendatario: </label>
-          <input type="number" class="form-control" formControlName="celularArrendatario" [(ngModel)]="unidad.celularArrendatario">
-        </div>
-        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
-          <label>Email Arrendatario: </label>
-          <input type="text" class="form-control" formControlName="emailArrendatario" [(ngModel)]="unidad.emailArrendatario">
-        </div>
-        <div class="input-group mb-2 mb-sm-2">
+        <div class="input-group">
           <label>Nombre Arrendador: </label>
           <input type="text" class="form-control" formControlName="nombreArrendador" [(ngModel)]="unidad.nombreArrendador">
         </div>
-        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+        <div class="input-group">
           <label>Apellido Arrendador: </label>
           <input type="text" class="form-control" formControlName="ApellidoArrendador" [(ngModel)]="unidad.ApellidoArrendador">
         </div>
-        <div class="input-group mb-2 mb-sm-2">
+        <div class="input-group">
           <label>EmailArrendador: </label>
           <input type="text" class="form-control" formControlName="emailArrendador" [(ngModel)]="unidad.emailArrendador">
         </div>
-        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+        <div class="input-group">
           <label>Celular del Arrendador: </label>
           <input type="number" class="form-control" formControlName="celularArrendador" [(ngModel)]="unidad.celularArrendador">
+        </div>
+        <div class="input-group">
+          <label>Nombre del Arrendatario: </label>
+          <input type="text" class="form-control" formControlName="nombreArrendatario" [(ngModel)]="unidad.nombreArrendatario">
+        </div>
+        <div class="input-group">
+          <label>Apellido Arrendatario: </label>
+          <input type="text" class="form-control" formControlName="apellidoArrendatario" [(ngModel)]="unidad.apellidoArrendatario">
+        </div>
+        <div class="input-group">
+          <label>Email Arrendatario: </label>
+          <input type="text" class="form-control" formControlName="emailArrendatario" [(ngModel)]="unidad.emailArrendatario">
+        </div>
+        <div class="input-group">
+          <label>Celular del Arrendatario: </label>
+          <input type="number" class="form-control" formControlName="celularArrendatario" [(ngModel)]="unidad.celularArrendatario">
         </div>
         <div></div>
         <div class="btn-group">

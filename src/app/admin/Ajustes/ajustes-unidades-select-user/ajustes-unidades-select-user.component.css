@@ -1,0 +1,99 @@
+.Usuarios {
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 150px;
+}
+
+.containerInfo mat-card {
+  display: grid;
+  width: 60%;
+  left: 20%;
+  top: 5vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
+}
+
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.headerUser {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.headerUser .card {
+  position: relative;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 60%;
+  border-radius: 20px;
+  display: flex;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.headerUser .card:hover {
+  background: #287bff;
+}
+
+.headerUser .card .cardName {
+  font-size: 1.4em;
+  margin-top: 10px;
+  text-align: center;
+  color: #287bff
+}
+
+.headerUser .card .iconBx {
+  color: #545151;
+  background-color: white;
+  position: relative;
+  margin: 20px;
+  min-width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.headerUser .card .iconBx mat-icon {
+  font-size: 85px;
+  margin-left: 3px;
+}
+
+.headerUser .card .iconBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.headerUser .card:hover .numbers,
+.headerUser .card:hover .cardName{
+  color: #fff;
+}
+.headerUser .card:hover .iconBx {
+  color: #287bff
+}
+
+
+

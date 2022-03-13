@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { CondominioService } from '../../services/condominios.service';
-import { AdminService } from '../../services/admin.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -46,6 +45,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.administrador = navigations;
+    this.NavigationExtras.state = this.administrador;
   }
 
   onListCondominios() {
@@ -72,7 +72,6 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   }
 
   onGoCreate() {
-    this.NavigationExtras.state = this.administrador;
     this.router.navigate(['/createCondominio'], this.NavigationExtras);
   }
 
@@ -95,8 +94,6 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   }
 
   onDelete(item: any) {
-
-    this.NavigationExtras.state = this.administrador;
 
     this.subscription.add(
       this._dialogService.confirmDialog({
@@ -123,6 +120,6 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
       })
     )
 
-    
+
   }
 }

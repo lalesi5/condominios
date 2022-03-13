@@ -1,46 +1,64 @@
-import { Injectable } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
+import {Injectable} from "@angular/core";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class UnidadesService {
 
 
-    constructor(
-        public firestore: AngularFirestore,
-    ) { }
+  constructor(
+    public firestore: AngularFirestore,
+  ) {
+  }
 
-    getUnidadesById(idUni: string){
-        return this.firestore.collection('Unidades', ref => ref.where('idUnidad', '==', idUni))
-        .snapshotChanges();
-    }
+  getUnidadesById(idUni: string) {
+    return this.firestore.collection('Unidades', ref => ref.where('idUnidad', '==', idUni))
+      .snapshotChanges();
+  }
 
-    getAllUnidades(idCondo: string){
-        return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo))
-        .snapshotChanges();
-    }
+  getAllUnidades(idCondo: string) {
+    return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo))
+      .snapshotChanges();
+  }
 
-    getAllUnidadesOrdenadas(idCondo: string){
-        return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo).orderBy("numeroUnidad"))
-        .snapshotChanges();
-    }
+  getAllUnidadesIdUser(idUser: string) {
+    return this.firestore.collection('Unidades', ref => ref.where('idUsuario', '==', idUser))
+      .snapshotChanges();
+  }
 
-    deleteUnidades(idUni: string){
-        return this.firestore.collection('Unidades')
-        .doc(idUni)
-        .delete();
-    }
+  getAllUnidadesOrdenadas(idCondo: string) {
+    return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo).orderBy("numeroUnidad"))
+      .snapshotChanges();
+  }
 
-    saveUnidades(unidad: any, idAdmin: string, idCondo: string, idUni?: string){
-        const idAdministrador = idAdmin;
-        const idCondominio = idCondo;
-        const idUnidad = idUni || this.firestore.createId();
-        const data = {idAdministrador, idCondominio, idUnidad, ...unidad}
-        return this.firestore.collection('Unidades')
-        .doc(idUnidad)
-        .set(data);
-    }
+  deleteUnidades(idUni: string) {
+    return this.firestore.collection('Unidades')
+      .doc(idUni)
+      .delete();
+  }
+
+  createUnidades(unidad: any, idAdmin: string, idCondo: string, idUser: string) {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
+    const idUsuario = idUser;
+    const idUnidad = this.firestore.createId();
+    const data = {idAdministrador, idCondominio, idUsuario, idUnidad, ...unidad}
+    return this.firestore.collection('Unidades')
+      .doc(idUnidad)
+      .set(data);
+  }
+
+  updateUnidades(unidad: any, idAdmin: string, idCondo: string, idUser: string, idUni?: string) {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
+    const idUsuario = idUser;
+    const idUnidad = idUni || this.firestore.createId();
+    const data = {idAdministrador, idCondominio, idUsuario, idUnidad, ...unidad}
+    return this.firestore.collection('Unidades')
+      .doc(idUnidad)
+      .update(data);
+  }
 
 }

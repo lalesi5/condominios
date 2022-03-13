@@ -15,6 +15,7 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
   idAministrador: string = '';
   idCondominio: string = '';
   idUnidad: string = '';
+  idUsuario: string = '';
   unidades: any[] = [];
   condominio: any[] = [];
 
@@ -55,6 +56,7 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
+    this.idUsuario = navigations.idUsuario;
     this.idUnidad = navigations.idUnidad;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
@@ -84,7 +86,7 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
   }
 
   onEditUnidades() {
-    this._unidadesService.saveUnidades(this.unidadesForm.value, this.idAministrador, this.idCondominio, this.idUnidad);
+    this._unidadesService.updateUnidades(this.unidadesForm.value, this.idAministrador, this.idCondominio, this.idUsuario, this.idUnidad);
   }
 
 }

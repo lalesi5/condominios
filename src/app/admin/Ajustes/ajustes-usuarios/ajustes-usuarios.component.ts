@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/services/dialog.service';
-import { FirestoreService } from 'src/app/services/firestore.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NavigationExtras, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
+import {DialogService} from 'src/app/services/dialog.service';
+import {FirestoreService} from 'src/app/services/firestore.service';
+import {UsuariosService} from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios',
@@ -38,6 +38,13 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idCondominio = navigations.idCondominio;
+    this.condominio = navigations;
+    this.navigationExtras.state = this.condominio;
   }
 
   getUsuarios() {
@@ -74,13 +81,6 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
       }
     });
 
-  }
-
-  recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
   }
 
   onGoCreate() {

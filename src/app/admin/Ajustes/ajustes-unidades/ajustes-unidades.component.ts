@@ -12,7 +12,9 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
   idAministrador: string = '';
-  idCondominio: string = ''
+  idCondominio: string = '';
+  idUsuario: string = '';
+  usuario: any[] = [];
   unidades: any[] = [];
   condominio: any[] = [];
 
@@ -41,6 +43,7 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
+    this.idUsuario = navigations.idUsuario;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
   }
@@ -49,7 +52,7 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
     try {
       this.subscription.add(
         this._unidadesService
-          .getAllUnidades(this.idCondominio)
+          .getAllUnidadesIdUser(this.idUsuario)
           .subscribe(data => {
             data.forEach((element: any) => {
               this.unidades.push({
@@ -83,6 +86,10 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   onGoEdit(item: any) {
     this.navigationExtras.state = item;
     this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit'], this.navigationExtras);
+  }
+
+  onBacktoList(): void {
+    this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser'], this.navigationExtras);
   }
 
 }

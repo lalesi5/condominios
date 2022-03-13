@@ -1,0 +1,20 @@
+<div class="Usuarios">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Unidades</h2>
+      <h3>Seleccione el usuario que desea agregar la unidad</h3>
+      <div class="headerUser">
+        <div class="card" *ngFor="let usuario of usuarios">
+          <div>
+          </div>
+          <div class="iconBx">
+            <img src="../../../../assets/user.png"  alt="userImage" (click)="onGoSelectUnidad(usuario)">
+          </div>
+          <div>
+            <div class="cardName" (click)="onGoSelectUnidad(usuario)">{{usuario.name}}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
