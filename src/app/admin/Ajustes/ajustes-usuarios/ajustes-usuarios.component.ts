@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/services/dialog.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -25,7 +26,8 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private _usuarioService: UsuariosService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _dialogService: DialogService
   ) {
     this.recoverData();
   }
@@ -53,14 +55,25 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   eliminarUsuario(id: string) {
-    this._usuarioService.eliminarUsuario(id).then(() => {
-      this.toastr.success('El usuario fue eliminado con exito', 'Registro eliminado', {
-        positionClass: 'toast-bottom-right'
-      });
-    }).catch(error => {
-      console.log(error);
 
-    })
+    this._dialogService.confirmDialog({
+      title: 'Eliminar usuario',
+      message: '¿Está seguro de eliminar el usuario?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this._usuarioService.eliminarUsuario(id).then(() => {
+          this.toastr.success('El usuario fue eliminado con exito', 'Registro eliminado', {
+            positionClass: 'toast-bottom-right'
+          });
+        }).catch(error => {
+          console.log(error);
+
+        })
+      }
+    });
+
   }
 
   recoverData() {
@@ -76,7 +89,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   onGoEdit(item: any) {
     this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit', item.id], this.navigationExtras);
   }
 
 }
