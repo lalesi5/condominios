@@ -17,7 +17,7 @@ export class AdminService {
       'Administrador',
       ref => ref.where(
         'idAdministrador',
-        '==', idAdmin).where('rol', '==', 'administrador'))
+        '==', idAdmin).where('rol', '==', 'Administrador'))
       .snapshotChanges();
   }
 

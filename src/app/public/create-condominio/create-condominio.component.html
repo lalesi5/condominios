@@ -7,18 +7,30 @@
       <form [formGroup]='condominioForm' (ngSubmit)="onCreate()">
         <span>Nombre del Condominio:</span>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="nombreCondominio">
+          <input type="text" class="form-control" formControlName="nombreCondominio"
+            [ngClass]="{ 'is-invalid': form['nombreCondominio'].errors && form['nombreCondominio'].touched}">
+          <div *ngIf="form['nombreCondominio'].errors" class="invalid-feedback">
+            <div *ngIf="form['nombreCondominio'].errors['required']">
+              Campo requerido
+            </div>
+          </div>
         </div>
         <span>Ciudad del Condominio:</span>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="ciudadCondominio">
+          <input type="text" class="form-control" formControlName="ciudadCondominio"
+            [ngClass]="{ 'is-invalid': form['ciudadCondominio'].errors && form['ciudadCondominio'].touched}">
+          <div *ngIf="form['ciudadCondominio'].errors" class="invalid-feedback">
+            <div *ngIf="form['ciudadCondominio'].errors['required']">
+              Campo requerido
+            </div>
+          </div>
         </div>
         <span>Descripción del Condominio:</span>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="descripcionCondominio">
         </div>
         <div class="centrarBotones">
-          <button type="submit" class="btn btn-success btn-lg mr-4">Guardar</button>
+          <button type="submit" class="btn btn-success btn-lg mr-4" [disabled]="condominioForm.invalid">Guardar</button>
           <button type="button" class="btn btn-primary btn-lg ml-4" (click)="onGoBackToList()">Volver</button>
         </div>
       </form>

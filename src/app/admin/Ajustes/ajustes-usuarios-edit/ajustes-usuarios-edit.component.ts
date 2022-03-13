@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from "@angular/router";
-import {FirestoreService} from "../../../services/firestore.service";
-import {AuthService} from "../../../services/auth.service";
-import {FormControl, FormGroup} from "@angular/forms";
-import {Subscription} from "rxjs";
-import {AdminService} from "../../../services/admin.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { FirestoreService } from "../../../services/firestore.service";
+import { AuthService } from "../../../services/auth.service";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { AdminService } from "../../../services/admin.service";
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from 'src/app/services/dialog.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios-edit',
@@ -19,12 +22,10 @@ export class AjustesUsuariosEditComponent implements OnInit {
   idUsuario: string = '';
   usuarios: any[] = [];
   condominio: any[] = [];
-
-  usuariosForm: FormGroup = new FormGroup({
-    nombre: new FormControl(''),
-    apellido: new FormControl(''),
-    telefono: new FormControl('')
-  });
+  id: string | null;
+  editUsuarioForm: FormGroup;
+  loading = false;
+  private isEmail = /\S+@\S+\.\S+/;
 
   NavigationExtras: NavigationExtras = {
     state: {}
@@ -32,13 +33,27 @@ export class AjustesUsuariosEditComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _administradorService: AdminService
+    private aRoute: ActivatedRoute,
+    private _dialogService: DialogService,
+    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private _usuarioService: UsuariosService
   ) {
+    this.editUsuarioForm = this.fb.group({
+      name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+      phone: ['', [Validators.pattern(/^\d+$/)]],
+      address: [''],
+    })
+
+    this.id = aRoute.snapshot.paramMap.get('id');
+
     this.recoverData();
   }
 
   ngOnInit(): void {
-    this.onListUsuarios();
+    this.getDatosUsuario();
   }
 
   recoverData() {
@@ -50,37 +65,92 @@ export class AjustesUsuariosEditComponent implements OnInit {
     this.NavigationExtras.state = this.condominio;
   }
 
-  onListUsuarios() {
-    try {
-      this.subscription.add(
-        this._administradorService
-          .getUsuarioID(this.idUsuario)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.usuarios.push({
-                ...element.payload.doc.data()
-              })
-              console.log(this.usuarios);
-            })
-          })
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   onBacktoList(): void {
     this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
   }
 
   onEditUser() {
 
-    let result = confirm("Esta seguro de modificar la información")
-    if (result) {
+    const nombre = String(this.editUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const direccion = String(this.editUsuarioForm.value.address).charAt(0).toLocaleUpperCase() + String(this.editUsuarioForm.value.address).slice(1);
 
-      alert('Usuario actualizado correctamente');
-      this.router.navigate(['/admin/ajustes'], this.NavigationExtras);
+    const idUser = this.aRoute.snapshot.paramMap.get('id');
+
+    const usuario: any = {
+      name: nombre,
+      last_name: apellido,
+      email: this.editUsuarioForm.value.email,
+      phone: this.editUsuarioForm.value.phone,
+      fechaActualizacion: new Date(),
+      address: direccion
     }
+
+    //if (this.id !== null) {
+      this._dialogService.confirmDialog({
+        title: 'Modificar Usuario',
+        message: '¿Está seguro de modificar el usuario?',
+        confirmText: 'Si',
+        cancelText: 'No',
+      }).subscribe(res => {
+        if (res) {
+          this.loading = true;
+          this._usuarioService.actualizarUsuario(idUser!, usuario).then(() => {
+            this.loading = false;
+            this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
+              positionClass: 'toast-bottom-right'
+            });
+          })
+          this.loading = false;
+          this.NavigationExtras.state = this.condominio;
+          this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+        }
+      });
+
+    //}
+  }
+
+  getDatosUsuario() {
+    if (this.id !== null) {
+      this.loading = true;
+      this.subscription.add(
+        this._usuarioService.getUsuario(this.id).subscribe(data => {
+          this.loading = false;
+          console.log(data.payload.data()['name']);
+          this.editUsuarioForm.setValue({
+            name: data.payload.data()['name'],
+            last_name: data.payload.data()['last_name'],
+            email: data.payload.data()['email'],
+            phone: data.payload.data()['phone'],
+            address: data.payload.data()['address'],
+          })
+        })
+      )
+    }
+  }
+
+  get form(): { [key: string]: AbstractControl; } {
+    return this.editUsuarioForm.controls;
+  }
+
+  get name() {
+    return this.editUsuarioForm.get('name');
+  }
+
+  get last_name() {
+    return this.editUsuarioForm.get('last_name');
+  }
+
+  get address() {
+    return this.editUsuarioForm.get('address');
+  }
+
+  get phone() {
+    return this.editUsuarioForm.get('phone');
+  }
+
+  get email() {
+    return this.editUsuarioForm.get('email');
   }
 
 }

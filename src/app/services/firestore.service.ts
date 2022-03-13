@@ -8,7 +8,7 @@ export class FirestoreService {
 
   constructor(public database: AngularFirestore) { }
 
-  createDoc(data: any, path: string, id: string) {
+  createDoc(data: any, path: string, id: string): Promise<any> {
     const collection = this.database.collection(path);
     return collection.doc(id).set(data);
   }

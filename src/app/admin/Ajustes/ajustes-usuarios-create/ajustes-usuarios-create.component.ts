@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { DialogService } from 'src/app/services/dialog.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -19,7 +20,6 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   condominio: any[] = [];
 
   createUsuarioForm: FormGroup;
-  submitted = false;
   loading = false;
   private isEmail = /\S+@\S+\.\S+/;
   hide: boolean = true;
@@ -33,6 +33,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     private authSvc: AuthService,
     private fb: FormBuilder,
     private _usuarioService: UsuariosService,
+    private _dialogService: DialogService,
     private toastr: ToastrService
   ) {
 
@@ -59,51 +60,60 @@ export class AjustesUsuariosCreateComponent implements OnInit {
 
   agregarUsuario() {
 
-    this.submitted = true;
-    
     const nombre = String(this.createUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const apellido = String(this.createUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const direccion = String(this.createUsuarioForm.value.address).charAt(0).toLocaleUpperCase() + String(this.createUsuarioForm.value.address).slice(1);
 
-    const usuario: any = {
-      name: nombre,
-      last_name: apellido,
-      email: this.createUsuarioForm.value.email,
-      password: this.createUsuarioForm.value.password,
-      phone: this.createUsuarioForm.value.phone,
-      fechaCreacion: new Date(),
-      fechaActualizacion: new Date(),
-      rol: 'Usuario',
-      idAdministrador: this.idAministrador,
-      idCondominio: this.idCondominio,
-      address: direccion
-    }
-
-    //Crea el usuario
-    const formValue = this.createUsuarioForm.value
-    this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
+    this._dialogService.confirmDialog({
+      title: 'Agregar Usuario',
+      message: '¿Está seguro de agregar el usuario?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
       if (res) {
-        const idUsuario = res.user.uid;
-        
-        const data = { idUsuario, ...usuario }
 
-        //Crea el documento
-        this.loading = true;
-        this._usuarioService.agregarUsuario(data, idUsuario).then(() => {
-          console.log('usuario registrado con exito');
-          this.toastr.success('El usuario fue registrado con exito', 'Usuario registrado', {
-            positionClass: 'toast-bottom-right'
-          });
-          this.loading = false;
-          //this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
+        const usuario: any = {
+          name: nombre,
+          last_name: apellido,
+          email: this.createUsuarioForm.value.email,
+          password: this.createUsuarioForm.value.password,
+          phone: this.createUsuarioForm.value.phone,
+          fechaCreacion: new Date(),
+          fechaActualizacion: new Date(),
+          rol: 'Usuario',
+          idAdministrador: this.idAministrador,
+          idCondominio: this.idCondominio,
+          address: direccion
+        }
 
-        }).catch(error => {
-          console.log(error);
-          this.loading = false;
+        //Crea el usuario
+
+        const formValue = this.createUsuarioForm.value
+        this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
+          if (res) {
+            const idUsuario = res.user.uid;
+
+            const data = { idUsuario, ...usuario }
+
+            //Crea el documento
+            this.loading = true;
+            this._usuarioService.agregarUsuario(data, idUsuario).then(() => {
+              console.log('usuario registrado con exito');
+              this.toastr.success('El usuario fue registrado con exito', 'Usuario registrado', {
+                positionClass: 'toast-bottom-right'
+              });
+              this.loading = false;
+              this.navigationExtras.state = this.condominio;
+              this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
+
+            }).catch(error => {
+              console.log(error);
+              this.loading = false;
+            });
+          }
         });
       }
     });
-    this.createUsuarioForm.reset();
   }
 
   onBacktoList(): void {

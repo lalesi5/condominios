@@ -33,7 +33,7 @@ const routesAjustes: Routes = [
         {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},
         {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent},
         {path: 'ajustesUsuarios', component: AjustesUsuariosComponent},
-        {path: 'ajustesUsuariosEdit', component: AjustesUsuariosEditComponent},
+        {path: 'ajustesUsuariosEdit/:id', component: AjustesUsuariosEditComponent},
         {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent}
       ]
   },

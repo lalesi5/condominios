@@ -19,7 +19,15 @@ export class UsuariosService {
         return this.firestore.collection('Administrador', ref => ref.where('idCondominio', '==', idCondominio).orderBy('name', 'asc')).snapshotChanges();
     }
 
+    getUsuario(id: string): Observable<any> {
+        return this.firestore.collection('Administrador').doc(id).snapshotChanges();
+    }
+
     eliminarUsuario(id: string): Promise<any> {
         return this.firestore.collection('Administrador').doc(id).delete();
+    }
+
+    actualizarUsuario(id: string, data: any): Promise<any> {
+        return this.firestore.collection('Administrador').doc(id).update(data);
     }
 }
