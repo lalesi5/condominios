@@ -15,6 +15,9 @@ import {AjustesUnidadesCreateComponent} from './ajustes-unidades-create/ajustes-
 import {AjustesUsuariosComponent} from "./ajustes-usuarios/ajustes-usuarios.component";
 import {AjustesUsuariosCreateComponent} from "./ajustes-usuarios-create/ajustes-usuarios-create.component";
 import {AjustesUsuariosEditComponent} from "./ajustes-usuarios-edit/ajustes-usuarios-edit.component";
+import {
+  AjustesUnidadesSelectUserComponent
+} from "./ajustes-unidades-select-user/ajustes-unidades-select-user.component";
 
 
 const routesAjustes: Routes = [
@@ -32,6 +35,7 @@ const routesAjustes: Routes = [
         {path: 'ajustesUnidades', component: AjustesUnidadesComponent},
         {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},
         {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent},
+        {path: 'ajustesUnidadesSelectUser', component: AjustesUnidadesSelectUserComponent},
         {path: 'ajustesUsuarios', component: AjustesUsuariosComponent},
         {path: 'ajustesUsuariosEdit/:id', component: AjustesUsuariosEditComponent},
         {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent}

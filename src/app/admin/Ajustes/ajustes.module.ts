@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { AjustesAdminComponent } from "./ajustesAdmin/ajustesAdmin.component";
 import { AjustesCondominioComponent } from './ajustesCondominio/ajustesCondominio.component';
 
-import {MatIconModule} from '@angular/material/icon'; 
-import {MatSelectModule} from '@angular/material/select';  
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 import { AjustesRoutingModule } from './ajuste-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AjustesAdminEditComponent } from './ajustesAdminEdit/ajustesAdminEdit.component';
@@ -17,11 +17,13 @@ import { AjustesAreasComunalesCreateComponent } from './ajustes-areas-comunales-
 import { AjustesUnidadesComponent } from './ajustes-unidades/ajustes-unidades.component';
 import { AjustesUnidadesEditComponent } from './ajustes-unidades-edit/ajustes-unidades-edit.component';
 import { AjustesUnidadesCreateComponent } from './ajustes-unidades-create/ajustes-unidades-create.component';
+import { AjustesUnidadesSelectUserComponent } from './ajustes-unidades-select-user/ajustes-unidades-select-user.component';
 import { AjustesUsuariosComponent } from './ajustes-usuarios/ajustes-usuarios.component';
 import { AjustesUsuariosCreateComponent } from './ajustes-usuarios-create/ajustes-usuarios-create.component';
 import { MatCommonModule } from "@angular/material/core";
 import { MatInputModule } from "@angular/material/input";
 import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-usuarios-edit.component';
+import { AjustesUnidadesSelectUnidadComponent } from './ajustes-unidades-select-unidad/ajustes-unidades-select-unidad.component';
 
 @NgModule({
 
@@ -52,6 +54,8 @@ import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-us
         AjustesUsuariosComponent,
         AjustesUsuariosCreateComponent,
         AjustesUsuariosEditComponent,
+        AjustesUnidadesSelectUserComponent,
+        AjustesUnidadesSelectUnidadComponent,
     ],
 
     exports: [
