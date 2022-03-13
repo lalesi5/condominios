@@ -1,21 +1,33 @@
 <div class="ajustesAreasComunalesCreate">
-    <div class="containerInfo">
-        <mat-card>
-            <h2>Crear Areas Comunales</h2>
-            <form [formGroup]='areaComunalForm' (ngSubmit)="onCreateAreaComunal()">
-                <div class="form-group">
-                    <label>Nombre del Area Comunal</label>
-                    <input type="text" class="form-control" formControlName="nombre">
-                </div>
-                <div class="form-group">
-                    <label>Descripción</label>
-                    <input type="text" class="form-control" formControlName="descripcion">
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
-                </div>
-            </form>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Areas Comunales</h2>
+      <h3>Crear Area Comunal</h3>
+      <form [formGroup]='areaComunalForm' (ngSubmit)="onCreateAreaComunal()">
+        <div class="form-group">
+          <label>Nombre del Area Comunal</label>
+          <input type="text" class="form-control" formControlName="nombre"
+                 [ngClass]="{ 'is-invalid': !areaComunalForm.controls['nombre'].valid  && areaComunalForm.controls['nombre'].touched }">
+          <div *ngIf=" areaComunalForm.controls['nombre'].touched  && !areaComunalForm.controls['nombre'].valid"
+               class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <input type="text" class="form-control" formControlName="descripcion"
+                 [ngClass]="{ 'is-invalid': !areaComunalForm.controls['descripcion'].valid  && areaComunalForm.controls['descripcion'].touched }">
+          <div
+            *ngIf=" areaComunalForm.controls['descripcion'].touched  && !areaComunalForm.controls['descripcion'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-success mr-2" [disabled]="areaComunalForm.invalid">Guardar</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 </div>

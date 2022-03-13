@@ -31,35 +31,26 @@ export class AjustesComponent implements OnInit{
       const navigations: any = this.router.getCurrentNavigation()?.extras.state;
       this.idAministrador = navigations.idAdministrador;
       this.condominio = navigations;
+      this.NavigationExtras.state = this.condominio;
     }
 
     onGoAjustesAdmin(){
-        this.NavigationExtras.state = this.condominio;
         this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
     }
 
     onGoAjustesCondominio(){
-        this.NavigationExtras.state = this.condominio;
         this.router.navigate(['/admin/ajustes/ajustesCondominio'], this.NavigationExtras);
     }
 
     onGoAjustesAreasComunales(){
-        this.NavigationExtras.state = this.condominio;
         this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.NavigationExtras);
     }
 
     onGoAjustesajustesUnidades(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.NavigationExtras);
-    }
-
-    onGoAjustesajustesUsuarios(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes/ajustesUsuariosUnidades'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser'], this.NavigationExtras);
     }
 
     onGoAjustesUsuarios(){
-        this.NavigationExtras.state = this.condominio;
         this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
     }
 }

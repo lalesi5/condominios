@@ -8,9 +8,18 @@ export class FirestoreService {
 
   constructor(public database: AngularFirestore) { }
 
-  createDoc(data: any, path: string, id: string) {
+  createDoc(data: any, path: string, id: string): Promise<any> {
     const collection = this.database.collection(path);
     return collection.doc(id).set(data);
+  }
+
+  createDocData(condominio: any, path: string, idAdmin: string) {
+    //console.log(idCondo);
+    const idAdministrador = idAdmin;
+    const idCondominio = this.database.createId();
+    const data = { idAdministrador, idCondominio, ...condominio }
+    const collection = this.database.collection(path)
+    return collection.doc(idCondominio).set(data);
   }
 
   getDoc<tipo>(path: string, id: string) {
@@ -18,17 +27,24 @@ export class FirestoreService {
     return collection.doc(id).valueChanges();
   }
 
+  //si no se usa borrar este metodo getAll parametrizado ya esta parametrizado
   getAllUsuarios(idCondo: string) {
     return this.database.collection(
       'Administrador',
-        ref => ref.where(
-          'idCondominio',
-          '==', idCondo))
+      ref => ref.where(
+        'idCondominio',
+        '==', idCondo))
       .snapshotChanges();
   }
 
-  getAll(path:string, idCampo: string, idBusqueda:string) {
+  //Busca informacion en el documento con alguna condicion
+  getAll(path: string, idCampo: string, idBusqueda: string) {
     return this.database.collection(path, ref => ref.where(idCampo, '==', idBusqueda))
+      .snapshotChanges();
+  }
+
+  getUsuariosOrdenados(path: string, idCampo: string, idBusqueda: string) {
+    return this.database.collection(path, ref => ref.where(idCampo, '==', idBusqueda).where('Administrador', '==', 'name'))
       .snapshotChanges();
   }
 

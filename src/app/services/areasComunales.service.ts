@@ -22,6 +22,15 @@ export class AreasComunalesService {
       .snapshotChanges();
   }
 
+  getAreasComunalesID(idAreaComun: string) {
+    return this.firestore.collection(
+      'AreasComunales',
+      ref => ref.where(
+        'idAreaComunal',
+        '==', idAreaComun))
+      .snapshotChanges();
+  }
+
   deleteAreasComunales(idAreaComunal: string) {
     return this.firestore.collection(
       'AreasComunales')

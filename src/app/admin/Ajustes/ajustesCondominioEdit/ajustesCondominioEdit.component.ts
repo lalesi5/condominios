@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
-import {FormControl, FormGroup} from '@angular/forms';
-import {CondominioService} from '../../../services/condominios.service';
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { NavigationExtras, Router } from "@angular/router";
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CondominioService } from '../../../services/condominios.service';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-ajustesCondominioEdit',
@@ -26,11 +26,11 @@ export class AjustesCondominioEditComponent implements OnInit, OnDestroy {
 
   /*Formularios*/
 
-  condominioForm = new FormGroup({
-    nombreCondominio: new FormControl,
-    ciudadCondominio: new FormControl,
-    descripcionCondominio: new FormControl
-  })
+  condominioForm = this.fb.group({
+    nombreCondominio: ['', Validators.required],
+    ciudadCondominio: ['', Validators.required],
+    descripcionCondominio: [''],
+  });
 
   /*Variables de retorno*/
 
@@ -40,13 +40,14 @@ export class AjustesCondominioEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private _condominiosService: CondominioService
+    private _condominiosService: CondominioService,
+    private fb: FormBuilder
   ) {
     this.recoverData();
   }
 
   ngOnInit(): void {
-  this.onListCondminios();
+    this.onListCondminios();
   }
 
   ngOnDestroy(): void {
@@ -84,12 +85,12 @@ export class AjustesCondominioEditComponent implements OnInit, OnDestroy {
 
   onSaveCondominio() {
 
-    this.impCondominio.forEach((element:any) => {
+    this.impCondominio.forEach((element: any) => {
       this.idAdministrador = element.idAdministrador;
     })
 
     let result = confirm("Esta seguro de modificar la información")
-    if(result){
+    if (result) {
       this._condominiosService.updateCondominios(this.condominioForm.value,
         this.idAdministrador,
         this.idCondominio);

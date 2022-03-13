@@ -17,7 +17,16 @@ export class AdminService {
       'Administrador',
       ref => ref.where(
         'idAdministrador',
-        '==', idAdmin))
+        '==', idAdmin).where('rol', '==', 'Administrador'))
+      .snapshotChanges();
+  }
+
+  getUsuarioID(idUser: string) {
+    return this.firestore.collection(
+      'Administrador',
+      ref => ref.where(
+        'idUsuario',
+        '==', idUser))
       .snapshotChanges();
   }
 
@@ -37,6 +46,12 @@ export class AdminService {
       .update(data);
   }
 
+  deleteAdministrador(idAdministrador: string) {
+    return this.firestore.collection(
+      'Administrador')
+      .doc(idAdministrador)
+      .delete();
+  }
 
 }
 

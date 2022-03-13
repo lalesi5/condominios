@@ -1,8 +1,12 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Router, NavigationExtras} from '@angular/router';
-import {AdminService} from '../../../services/admin.service';
-import {FormGroup, FormControl} from '@angular/forms';
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router, NavigationExtras } from '@angular/router';
+import { AdminService } from '../../../services/admin.service';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { first, Subscription } from "rxjs";
+import Validation from "src/app/public/confirm.validator";
+import { AuthService } from "src/app/services/auth.service";
+import { getAuth } from "firebase/auth";
+import { FirestoreService } from "src/app/services/firestore.service";
 
 @Component({
   selector: 'app-ajustesAdminEdit',
@@ -15,8 +19,11 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   /*Variables*/
 
   private subscription: Subscription = new Subscription;
+  private isEmail = /\S+@\S+\.\S+/;
+  hide: boolean = true;
   condominio: any[] = [];
   administrador: any[] = [];
+  user: any;
 
   idAministrador: string = '';
   emailAministrador: string = '';
@@ -24,13 +31,21 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   rolAministrador: string = '';
 
   /*Formularios*/
+  administradorForm: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    last_name: new FormControl(''),
+    address: new FormControl(''),
+    phone: new FormControl('')
+  });
 
-  administradorForm = new FormGroup({
-    name: new FormControl,
-    last_name: new FormControl,
-    address: new FormControl,
-    phone: new FormControl
+  emailForm = this.fb.group({
+    email: new FormControl('')
   })
+
+  cambioPasswordForm: FormGroup = new FormGroup({
+    password: new FormControl(''),
+    confirmPassword: new FormControl('')
+  });
 
   /*Variables de retorno*/
 
@@ -40,12 +55,47 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private firestoreService: FirestoreService
   ) {
     this.recoverData();
   }
 
   ngOnInit(): void {
+
+    this.administradorForm = this.fb.group({
+      name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', [Validators.pattern(/^\d+$/)]]
+    });
+
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+    });
+
+    this.cambioPasswordForm = this.fb.group(
+      {
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(15),
+            Validators.pattern(/\d/),
+            Validators.pattern(/[A-Z]/),
+            Validators.pattern(/[a-z]/)
+          ]
+        ],
+        confirmPassword: ['', Validators.required]
+      },
+      {
+        validators: [Validation.match('password', 'confirmPassword')]
+      }
+    );
+
     this.onListAdmin();
   }
 
@@ -93,13 +143,106 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
     let result = confirm("Esta seguro de modificar la información")
     if (result) {
-      this._adminService.saveAdministrador(this.administradorForm.value,
+      //nombre
+      const nombre = String(this.administradorForm.get('name')?.value);
+      //Mayuscula la primera letra de cada palabra
+      const name = String(nombre).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())
+      //apellido
+      const apellido = String(this.administradorForm.get('last_name')?.value);
+      const last_name = String(apellido).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())
+      //direccion
+      const dir = this.administradorForm.get('address')?.value;
+      const address = String(dir).charAt(0).toLocaleUpperCase() + String(dir).slice(1);
+      //telefono
+      const phone = this.administradorForm.get('phone')?.value;
+      //informaciona guardar en el documento
+      const data = { name, last_name, address, phone }
+      this._adminService.saveAdministrador(data,
         this.idAministrador,
         this.emailAministrador,
         this.passwordAministrador,
         this.rolAministrador);
       alert('Administrador actualizado correctamente');
+      this.router.navigate(['/admin'], this.NavigationExtras);
     }
-    this.router.navigate(['/admin'], this.NavigationExtras);
   }
+
+  //Mostrar y ocular contraseña
+  showPassword() {
+    this.hide = !this.hide;
+  }
+
+  onChangePassword() {
+    //this.passwordAministrador = this.cambioPasswordForm.value('password');
+    const userAuth = getAuth();
+    const password = this.cambioPasswordForm.get('password')?.value;
+    let result = confirm("Esta seguro de cambiar su contraseña");
+    if (result) {
+      alert('Contraseña actualizada correctamente');
+      this.auth.updatePassword(userAuth.currentUser, password);
+      this.router.navigate(['/admin'], this.NavigationExtras);
+    }
+  }
+
+  onChangeEmail() {
+    const userAuth = getAuth();
+    const email = this.emailForm.get('email')?.value;
+
+    const data = { email };
+
+    console.log('email - ', email);
+
+    this.administrador.forEach((element: any) => {
+      this.emailAministrador = element.email;
+    })
+
+    let result = confirm("Esta seguro de modificar su correo electrónico")
+    if (result) {
+      this.firestoreService.updateDoc(data, 'Administrador', this.idAministrador);
+      this.auth.updateEmail(userAuth.currentUser, email);
+      alert('Correo electrónico actualizado correctamente');
+      this.router.navigate(['/admin'], this.NavigationExtras);
+    }
+  }
+
+  get form(): { [key: string]: AbstractControl; } {
+    return this.administradorForm.controls;
+  }
+
+  get name() {
+    return this.administradorForm.get('name');
+  }
+
+  get last_name() {
+    return this.administradorForm.get('last_name');
+  }
+
+  get address() {
+    return this.administradorForm.get('address');
+  }
+
+  get phone() {
+    return this.administradorForm.get('phone');
+  }
+
+  get formEmail(): { [key: string]: AbstractControl; } {
+    return this.emailForm.controls;
+  }
+
+  get email() {
+    return this.emailForm.get('email');
+  }
+
+  get formPassword(): { [key: string]: AbstractControl; } {
+    return this.cambioPasswordForm.controls;
+  }
+
+  get password() {
+    return this.cambioPasswordForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.cambioPasswordForm.get('confirmPassword');
+  }
+
 }

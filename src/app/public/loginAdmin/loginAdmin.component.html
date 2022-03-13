@@ -12,15 +12,14 @@
                 <!--Campo Email-->
                 <span>Correo Electrónico:</span>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control"
-                         formControlName="email"
-                         [ngClass]="{ 'is-invalid': form['email'].errors && form['email'].touched}">
+                  <input type="email" name="email" class="form-control" formControlName="email"
+                    [ngClass]="{ 'is-invalid': form['email'].errors && form['email'].touched}">
                   <div *ngIf="form['email'].errors" class="invalid-feedback">
                     <div *ngIf="form['email'].errors['required']">
                       Campo requerido
                     </div>
                     <div *ngIf="form['email'].errors['pattern']">
-                      Por favor ingrese un email valido
+                      Por favor ingrese un email válido
                     </div>
                   </div>
                 </div>
@@ -28,10 +27,9 @@
                 <span>Contraseña:</span>
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="password" [type]="hide ? 'password' : 'text'" name="password"
-                           class="form-control"
-                           formControlName="password"
-                           [ngClass]="{ 'is-invalid': form['password'].errors && form['password'].touched }">
+                    <input type="password" [type]="hide ? 'password' : 'text'" name="password" class="form-control"
+                      formControlName="password"
+                      [ngClass]="{ 'is-invalid': form['password'].errors && form['password'].touched }">
                     <span class="input-group-text">
                       <mat-icon class="placeholder" (click)="showPassword()">{{hide ?
                         'visibility_off' : 'visibility'}}
@@ -44,9 +42,13 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+                <button type="submit" class="btn btn-lg btn-primary btn-block"
+                  [disabled]="loginForm.invalid">Login</button>
                 <div class="form-group">
                   <a routerLink="../registerAdmin" class="form-control login-user">Eres Nuevo?</a>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                  <span><a routerLink="../forgotPassword" style="text-decoration: none;">¿Olvidaste tu contraseña?</a></span>
                 </div>
               </form>
             </div>

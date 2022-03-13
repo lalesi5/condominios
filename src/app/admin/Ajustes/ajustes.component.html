@@ -1,28 +1,33 @@
 <div class="ajustes">
-    <app-topbar></app-topbar>
+  <app-topbar></app-topbar>
 
-    <div class="headerAjustes">
-        <mat-card>
-            <nav id="menu">
-                <ul>
-                    <li>
-                        <a [routerLink]="['/admin/ajustes/ajustesAdmin']" [routerLinkActive]="['active']" (click)="onGoAjustesAdmin()">Cuenta</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/admin/ajustes/ajustesCondominio']" [routerLinkActive]="['active']" (click)="onGoAjustesCondominio()">Condominio</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/admin/ajustes/ajustesAreasComunales']" [routerLinkActive]="['active']" (click)="onGoAjustesAreasComunales()">Areas Comunales</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/admin/ajustes/ajustesUnidades']" [routerLinkActive]="['active']" (click)="onGoAjustesajustesUnidades()">Unidades</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/admin/ajustes/ajustesUsuarios']" [routerLinkActive]="['active']" (click)="onGoAjustesUsuarios()">Usuarios</a>
-                    </li>
-                </ul>
-            </nav>
-        </mat-card>
-    </div>
+  <div class="headerAjustes">
+    <mat-card>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/admin/ajustes/ajustesAdmin']" [routerLinkActive]="['active']"
+               (click)="onGoAjustesAdmin()">Cuenta</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/ajustes/ajustesCondominio']" [routerLinkActive]="['active']"
+               (click)="onGoAjustesCondominio()">Condominio</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/ajustes/ajustesAreasComunales']" [routerLinkActive]="['active']"
+               (click)="onGoAjustesAreasComunales()">Areas Comunales</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/ajustes/ajustesUsuarios']" [routerLinkActive]="['active']"
+               (click)="onGoAjustesUsuarios()">Usuarios</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/ajustes/ajustesUnidadesSelectUser']" [routerLinkActive]="['active']"
+               (click)="onGoAjustesajustesUnidades()">Unidades</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-card>
+  </div>
 </div>
 <router-outlet></router-outlet>

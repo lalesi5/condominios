@@ -1,35 +1,37 @@
 <div class="ajustesUsuarios">
-    <div class="containerInfo">
-        <mat-card>
-            <h2>Lista de Usuarios</h2>
-            <div>
-                <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let user of usuarios">
-                    <tr>
-                        <td>{{user.nombre}}</td>
-                        <td>{{user.apellido}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.telefono}}</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-warning mr-2" (click)="onGoEdit(user)">Editar</button>
-                                <button type="button" class="btn btn-danger ml-2" (click)="onDelete(user)">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Usuarios</h2>
+      <h3>Datos de los Usuarios</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+      </div>
+      <h5 style="margin-top: 30px;" *ngIf='usuarios.length == 0'>No hay datos para mostrar</h5>
+      <table *ngIf="usuarios.length > 0" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Direccion</th>
+          <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let user of usuarios">
+        <tr>
+          <td>{{user.name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.address}}</td>
+          <td>
+            <mat-icon (click)="onGoEdit(user)" class="btn-info">edit</mat-icon>
+            <mat-icon (click)="eliminarUsuario(user.id)" class="btn-danger">delete</mat-icon>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </mat-card>
+  </div>
 </div>

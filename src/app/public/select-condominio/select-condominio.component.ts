@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
-import {CondominioService} from '../../services/condominios.service';
-import {AdminService} from '../../services/admin.service';
-import {AuthService} from '../../services/auth.service';
-import {Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { CondominioService } from '../../services/condominios.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-select-condominio',
@@ -25,8 +26,9 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private _condominiosService: CondominioService,
-    private _adminService: AdminService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _dialogService: DialogService,
+    private toastr: ToastrService
   ) {
     this.recoverData();
   }
@@ -43,6 +45,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.administrador = navigations;
+    this.NavigationExtras.state = this.administrador;
   }
 
   onListCondominios() {
@@ -69,33 +72,54 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   }
 
   onGoCreate() {
-    this.NavigationExtras.state = this.administrador;
     this.router.navigate(['/createCondominio'], this.NavigationExtras);
   }
 
   onLogout() {
-    let result = confirm("Esta seguro de salir del Sistema!");
-    if (result) {
-      this._authService.logout();
-      alert('Gracias por usar el sistema');
-    }
+    this.subscription.add(
+      this._dialogService.confirmDialog({
+        title: 'Cerrar Sesión',
+        message: '¿Está seguro de salir del Sistema?',
+        confirmText: 'Si',
+        cancelText: 'No',
+      }).subscribe(res => {
+        if (res) {
+          this._authService.logout();
+          this.toastr.info('Gracias por usar el sistema', 'Ha cerrado Sesión', {
+            positionClass: 'toast-bottom-right'
+          });
+        }
+      })
+    )
   }
 
   onDelete(item: any) {
 
-    this.NavigationExtras.state = this.administrador;
-    let result = confirm("Esta seguro de eliminar el Condominio!");
-    if (result) {
-      const idCondominioEliminar = item.idCondominio;
-      this._condominiosService
-        .deleteCondominios(idCondominioEliminar);
+    this.subscription.add(
+      this._dialogService.confirmDialog({
+        title: 'Eliminar condominio',
+        message: '¿Está seguro de eliminar el Condominio?',
+        confirmText: 'Si',
+        cancelText: 'No',
+      }).subscribe(res => {
+        if (res) {
 
-      /*recargar componente*/
+          const idCondominioEliminar = item.idCondominio;
+          this._condominiosService.deleteCondominios(idCondominioEliminar);
 
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate([this.router.url], this.NavigationExtras);
-    }
+          /*recargar componente*/
+
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([this.router.url], this.NavigationExtras);
+
+          this.toastr.success('El condominio se ha eliminado exitosamente', 'Registro eliminado', {
+            positionClass: 'toast-bottom-right'
+          });
+        }
+      })
+    )
+
+
   }
-
 }
