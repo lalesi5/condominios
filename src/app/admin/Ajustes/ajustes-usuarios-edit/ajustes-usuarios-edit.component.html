@@ -1,8 +1,8 @@
 <div class="ajustesUsuariosEdit">
   <div class="containerInfo">
     <mat-card>
-      <h2>usuarios</h2>
-      <h3>Editar informacion del usuario
+      <h2>Usuarios</h2>
+      <h3>Editar informacion del Usuario
         <div *ngIf="loading" class="spinner-border float-right" role="status">
           <span class="sr-only">Procesando...</span>
         </div>
@@ -76,7 +76,7 @@
           <label>Direccion</label>
           <input type="text" class="form-control" formControlName="address">
         </div>
-        <div class="btn-group">
+        <div class="centrarBotones">
           <button type="submit" class="btn btn-primary mr-2" [disabled]="editUsuarioForm.invalid">Modificar</button>
           <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
         </div>

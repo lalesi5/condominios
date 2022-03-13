@@ -1,59 +1,61 @@
 <div class="ajustesUnidadesCreate">
-  <div class="containerInfo">
+  <div class="containerInfo" id="advanced-search-form">
     <mat-card *ngFor="let usuario of usuarios">
       <h2>Unidades</h2>
       <h3>Crear Unidades</h3>
       <form [formGroup]='unidadesForm' (ngSubmit)="onCreateUnidades()">
-        <div class="input-group">
+        <div class="form-group">
           <label>Numero de la Unidad: </label>
           <input type="number" min="1" step="1" class="form-control" formControlName="numeroUnidad">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Tipo de Unidad: </label>
           <select class="form-control" formControlName="tipoUnidad">
             <option value="Departamento" selected>Departamento</option>
             <option value="Casa">Casa</option>
           </select>
         </div>
-        <div class="input-group">
-          <label>Area Unidad: </label>
+        <div class="form-group">
+          <label>Area Unidad: (metros)</label>
           <input type="number" class="form-control" formControlName="areaUnidad">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Nombre Arrendador: </label>
           <input type="text" class="form-control" formControlName="nombreArrendador" [(ngModel)]="usuario.name">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Apellido Arrendador: </label>
           <input type="text" class="form-control" formControlName="ApellidoArrendador" [(ngModel)]="usuario.last_name">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>emailArrendador: </label>
           <input type="text" class="form-control" formControlName="emailArrendador" [(ngModel)]="usuario.email">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Celular del Arrendador: </label>
           <input type="number" class="form-control" formControlName="celularArrendador" [(ngModel)]="usuario.phone">
         </div>
-        <div class="input-group">
+        <div class="clearfix"></div>
+        <div class="form-group">
           <label>Nombre del Arrendatario: </label>
           <input type="text" class="form-control" formControlName="nombreArrendatario">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Apellido Arrendatario: </label>
           <input type="text" class="form-control" formControlName="apellidoArrendatario">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Email Arrendatario: </label>
           <input type="text" class="form-control" formControlName="emailArrendatario">
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Celular del Arrendatario: </label>
           <input type="number" class="form-control" formControlName="celularArrendatario">
         </div>
-        <div class="btn-group">
-          <button type="submit" class="btn btn-primary mr-2">Submit</button>
-          <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
+        <div class="clearfix"></div>
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-success mr-2 btn-responsive">Submit</button>
+          <button class="btn btn-primary ml-2 btn-responsive" (click)="onBacktoList()">Volver</button>
         </div>
       </form>
     </mat-card>

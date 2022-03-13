@@ -57,7 +57,6 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
 
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    console.log(navigations);
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.idUsuario = navigations.idUsuario;
