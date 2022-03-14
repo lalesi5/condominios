@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {NavigationExtras, Router} from '@angular/router';
 import {AreasComunalesService} from '../../../services/areasComunales.service';
 import {Subscription} from "rxjs";
+import { DialogService } from 'src/app/services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ajustes-areas-comunales',
@@ -21,7 +23,9 @@ export class AjustesAreasComunalesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _areaComunalService: AreasComunalesService
+    private _areaComunalService: AreasComunalesService,
+    private toastr: ToastrService,
+    private _dialogService: DialogService
   ) {
     this.recoverData();
   }
@@ -38,43 +42,46 @@ export class AjustesAreasComunalesComponent implements OnInit {
   }
 
   getAreasComunales() {
-    try {
-      this.subscription.add(
-        this._areaComunalService
-          .getAreasComunales(this.idCondominio)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.areasComunales.push({
-                ...element.payload.doc.data()
-              })
-            })
+    this.subscription.add(
+      this._areaComunalService.getAreasComunales(this.idCondominio).subscribe(data => {
+        this.areasComunales = [];
+        data.forEach((element: any) => {
+          this.areasComunales.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
           })
-      );
-    } catch (err) {
-      console.log(err);
-    }
+        })
+      })
+    );
+  }
+
+  onDelete(id: string) {
+
+    this._dialogService.confirmDialog({
+      title: 'Eliminar área',
+      message: '¿Está seguro de eliminar el área?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this._areaComunalService.deleteAreasComunales(id).then(() => {
+          this.toastr.success('El registro fue eliminado con exito', 'Registro eliminado', {
+            positionClass: 'toast-bottom-right'
+          });
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    });
+
   }
 
   onGoCreate() {
     this.router.navigate(['/admin/ajustes/ajustesAreasComunalesCreate'], this.NavigationExtras);
   }
 
-  onDelete(item: any) {
-    let result = confirm("Esta seguro de eliminar el Area Comunal!");
-    if (result) {
-      const idAreaComunalEliminar = item.idAreaComunal;
-      this._areaComunalService
-        .deleteAreasComunales(idAreaComunalEliminar);
-    }
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([this.router.url], this.NavigationExtras);
-  }
-
   onGoEdit(item: any) {
     this.NavigationExtras.state = item;
     this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit'], this.NavigationExtras);
   }
-
-
 }

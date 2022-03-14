@@ -85,7 +85,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           address: direccion
         }
 
-        //Crea el usuario
+        //Crea el usuario en la parte de autenticacion
 
         const formValue = this.createUsuarioForm.value
         this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
