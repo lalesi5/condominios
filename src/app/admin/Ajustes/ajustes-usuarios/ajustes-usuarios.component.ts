@@ -62,7 +62,6 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   eliminarUsuario(id: string) {
-
     this._dialogService.confirmDialog({
       title: 'Eliminar usuario',
       message: '¿Está seguro de eliminar el usuario?',

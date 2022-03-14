@@ -1,33 +1,35 @@
 <div class="ajustesAreasComunalesEdit">
-    <div class="containerInfo">
-        <mat-card>
-          <h2>Areas Comunales</h2>
-          <h3>Editar Datos del Area Comunal</h3>
-            <form [formGroup]='areaComunalForm' (ngSubmit)="onEditAreaComunal()" *ngFor="let area of areasComunales">
-                <div class="form-group">
-                    <label>Nombre del Area Comunal</label>
-                    <input type="text" class="form-control" formControlName="nombre" [(ngModel)]="area.nombre"
-                        [ngClass]="{ 'is-invalid': !areaComunalForm.controls['nombre'].valid  && areaComunalForm.controls['nombre'].touched }">
-                    <div *ngIf=" areaComunalForm.controls['nombre'].touched  && !areaComunalForm.controls['nombre'].valid"
-                        class="invalid-feedback">
-                        Campo requerido
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Descripción</label>
-                    <input type="text" class="form-control" formControlName="descripcion" [(ngModel)]="area.descripcion"
-                        [ngClass]="{ 'is-invalid': !areaComunalForm.controls['descripcion'].valid  && areaComunalForm.controls['descripcion'].touched }">
-                    <div *ngIf=" areaComunalForm.controls['descripcion'].touched  && !areaComunalForm.controls['descripcion'].valid"
-                        class="invalid-feedback">
-                        Campo requerido
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary mr-2"
-                        [disabled]="areaComunalForm.invalid">Guardar</button>
-                    <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
-                </div>
-            </form>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Areas Comunales</h2>
+      <h3>Editar Datos del Area Comunal</h3>
+      <form [formGroup]='areaComunalForm' (ngSubmit)="onEditAreaComunal()" *ngFor="let area of areasComunales">
+        <div class="form-group">
+          <label>Nombre del Area Comunal</label>
+          <input type="text" class="form-control" formControlName="nombre" [(ngModel)]="area.nombre"
+                 [ngClass]="{ 'is-invalid': !areaComunalForm.controls['nombre'].valid  && areaComunalForm.controls['nombre'].touched }">
+          <div *ngIf=" areaComunalForm.controls['nombre'].touched  && !areaComunalForm.controls['nombre'].valid"
+               class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <input type="text" class="form-control" formControlName="descripcion" [(ngModel)]="area.descripcion"
+                 [ngClass]="{ 'is-invalid': !areaComunalForm.controls['descripcion'].valid  && areaComunalForm.controls['descripcion'].touched }">
+          <div
+            *ngIf=" areaComunalForm.controls['descripcion'].touched  && !areaComunalForm.controls['descripcion'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary mr-2"
+                  [disabled]="areaComunalForm.invalid">Guardar
+          </button>
+          <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 </div>

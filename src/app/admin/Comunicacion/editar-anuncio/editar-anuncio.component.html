@@ -1,24 +1,27 @@
 <div class="editarAnuncio">
-    <div class="containerAnuncio">
-        <mat-card>
-            <form [formGroup]='anunciosForm'>
-                <div class="form-group">
-                    <label>Título</label>
-                    <input type="text" class="form-control" formControlName="tituloAnuncio">
-                </div>
-                <div class="form-group">
-                    <label>Fecha</label>
-                    <input type="datetime-local" class="form-control" min="2022-01-01" max="2040-12-31" formControlName="fechaAnuncio">
-                </div>
-                <div class="form-group">
-                    <label>Descripcion</label><br>
-                    <textarea formControlName="descripcionAnuncio" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary mr-2" (click)="onEditAnuncios()">Submit</button>
-                    <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
-                </div>
-            </form>
-        </mat-card>
-    </div>
+  <div class="containerAnuncio">
+    <mat-card>
+      <h2>Anuncios Generales</h2>
+      <h3>Editar Anuncio General</h3>
+      <form [formGroup]='anunciosForm' (ngSubmit)="onEditAnuncios()" *ngFor="let anuncio of anuncios">
+        <div class="form-group">
+          <label>Título</label>
+          <input type="text" class="form-control" formControlName="tituloAnuncio" [(ngModel)]="anuncio.tituloAnuncio">
+        </div>
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="datetime-local" class="form-control" min="2022-01-01" max="2040-12-31"
+                 formControlName="fechaAnuncio" [(ngModel)]="anuncio.fechaAnuncio">
+        </div>
+        <div class="form-group">
+          <label>Descripcion</label><br>
+          <textarea formControlName="descripcionAnuncio" class="form-control" rows="3" [(ngModel)]="anuncio.descripcionAnuncio"></textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-success mr-2" (click)="onEditAnuncios()">Guardar</button>
+          <button class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 </div>

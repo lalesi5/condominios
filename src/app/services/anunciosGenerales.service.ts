@@ -17,7 +17,17 @@ export class AnunciosGeneralesService {
       'AnunciosGenerales',
       ref => ref.where(
         'idCondominio',
-        '==', idCondo))
+        '==', idCondo)
+        .orderBy('fechaAnuncio', 'desc'))
+      .snapshotChanges();
+  }
+
+  getAnuncioGeneral(idAnunG: string) {
+    return this.firestore.collection(
+      'AnunciosGenerales',
+      ref => ref.where(
+        'idAnuncioGeneral',
+        '==', idAnunG))
       .snapshotChanges();
   }
 
@@ -43,9 +53,9 @@ export class AnunciosGeneralesService {
   }
 
   updateAnunciosGenerales(anuncioGeneral: any,
-                        idAdmin: string,
-                        idCondo: string,
-                        idAnuncioGene: string) {
+                          idAdmin: string,
+                          idCondo: string,
+                          idAnuncioGene: string) {
     const idAdministrador = idAdmin;
     const idCondominio = idCondo;
     const idAnuncioGeneral = idAnuncioGene;
