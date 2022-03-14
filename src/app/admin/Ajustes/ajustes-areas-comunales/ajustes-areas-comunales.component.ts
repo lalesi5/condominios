@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
-import {AreasComunalesService} from '../../../services/areasComunales.service';
-import {Subscription} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { AreasComunalesService } from '../../../services/areasComunales.service';
+import { Subscription } from "rxjs";
 import { DialogService } from 'src/app/services/dialog.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -82,6 +82,6 @@ export class AjustesAreasComunalesComponent implements OnInit {
 
   onGoEdit(item: any) {
     this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit', item.id], this.NavigationExtras);
   }
 }
