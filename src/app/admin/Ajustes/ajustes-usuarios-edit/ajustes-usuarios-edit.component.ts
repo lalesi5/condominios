@@ -86,28 +86,26 @@ export class AjustesUsuariosEditComponent implements OnInit {
       address: direccion
     }
 
-    //if (this.id !== null) {
-      this._dialogService.confirmDialog({
-        title: 'Modificar Usuario',
-        message: '¿Está seguro de modificar el usuario?',
-        confirmText: 'Si',
-        cancelText: 'No',
-      }).subscribe(res => {
-        if (res) {
-          this.loading = true;
-          this._usuarioService.actualizarUsuario(idUser!, usuario).then(() => {
-            this.loading = false;
-            this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
-              positionClass: 'toast-bottom-right'
-            });
-          })
+    this._dialogService.confirmDialog({
+      title: 'Modificar Usuario',
+      message: '¿Está seguro de modificar el usuario?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this.loading = true;
+        this._usuarioService.actualizarUsuario(idUser!, usuario).then(() => {
           this.loading = false;
-          this.NavigationExtras.state = this.condominio;
-          this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
-        }
-      });
+          this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
+            positionClass: 'toast-bottom-right'
+          });
+        })
+        this.loading = false;
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+      }
+    });
 
-    //}
   }
 
   getDatosUsuario() {
@@ -116,7 +114,6 @@ export class AjustesUsuariosEditComponent implements OnInit {
       this.subscription.add(
         this._usuarioService.getUsuario(this.id).subscribe(data => {
           this.loading = false;
-          console.log(data.payload.data()['name']);
           this.editUsuarioForm.setValue({
             name: data.payload.data()['name'],
             last_name: data.payload.data()['last_name'],
