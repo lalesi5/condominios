@@ -51,13 +51,6 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
     this.navigationExtras.state = this.condominio;
   }
 
-  /*onCreateAreaComunal() {
-    this._AreaComunalService.saveAreasComunales(this.areaComunalForm.value,
-      this.idAministrador,
-        this.idCondominio);
-    this.router.navigate(['/admin/ajustes'], this.navigationExtras);
-  }*/
-
   onCreateAreaComunal() {
 
     const nombreArea = String(this.areaComunalForm.value.nombre).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.nombre).slice(1);

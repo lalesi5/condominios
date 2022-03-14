@@ -1,9 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
-import {NavigationExtras, Router} from '@angular/router';
-import {UnidadesService} from '../../../services/unidades.service';
-import {Subscription} from "rxjs";
-import {UsuariosService} from "../../../services/usuarios.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
+import { UnidadesService } from '../../../services/unidades.service';
+import { Subscription } from "rxjs";
+import { UsuariosService } from "../../../services/usuarios.service";
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-ajustes-unidades-create',
@@ -42,7 +44,10 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
-    private _usuarioService: UsuariosService
+    private _usuarioService: UsuariosService,
+    private fb: FormBuilder,
+    private _dialogService: DialogService,
+    private toastr: ToastrService
   ) {
     this.recoverData();
   }
@@ -82,10 +87,30 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   }
 
   onCreateUnidades() {
-    this._unidadesService.createUnidades(this.unidadesForm.value,
-      this.idAministrador,
-      this.idCondominio,
-      this.idUsuario);
-    this.router.navigate(['/admin/ajustes'], this.navigationExtras);
+
+    this._dialogService.confirmDialog({
+      title: 'Crear unidad',
+      message: '¿Está seguro de crear la unidad?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this._unidadesService.createUnidades(this.unidadesForm.value,
+          this.idAministrador,
+          this.idCondominio,
+          this.idUsuario).then(() => {
+
+            this.toastr.success('La unidad fue creada con exito', 'Unidad registrada', {
+              positionClass: 'toast-bottom-right'
+            });
+            //this.loading = false;
+            //this.navigationExtras.state = this.condominio;
+            this.router.navigate(['/admin/ajustes'], this.navigationExtras);
+
+          }).catch(error => {
+            console.log(error);
+          })
+      }
+    });
   }
 }
