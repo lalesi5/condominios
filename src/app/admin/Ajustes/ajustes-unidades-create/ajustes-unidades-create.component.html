@@ -21,19 +21,19 @@
         </div>
         <div class="form-group">
           <label>Nombre Arrendador: </label>
-          <input type="text" class="form-control" formControlName="nombreArrendador" [(ngModel)]="usuario.name">
+          <input type="text" class="form-control" formControlName="nombreArrendador" [(ngModel)]="usuario.name" [readonly]="true">
         </div>
         <div class="form-group">
           <label>Apellido Arrendador: </label>
-          <input type="text" class="form-control" formControlName="ApellidoArrendador" [(ngModel)]="usuario.last_name">
+          <input type="text" class="form-control" formControlName="ApellidoArrendador" [(ngModel)]="usuario.last_name" [readonly]="true">
         </div>
         <div class="form-group">
           <label>emailArrendador: </label>
-          <input type="text" class="form-control" formControlName="emailArrendador" [(ngModel)]="usuario.email">
+          <input type="text" class="form-control" formControlName="emailArrendador" [(ngModel)]="usuario.email" [readonly]="true">
         </div>
         <div class="form-group">
           <label>Celular del Arrendador: </label>
-          <input type="number" class="form-control" formControlName="celularArrendador" [(ngModel)]="usuario.phone">
+          <input type="text" class="form-control" formControlName="celularArrendador" [(ngModel)]="usuario.phone" [readonly]="true">
         </div>
         <div class="clearfix"></div>
         <div class="form-group">
@@ -54,7 +54,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="centrarBotones">
-          <button type="submit" class="btn btn-success mr-2 btn-responsive">Submit</button>
+          <button type="submit" class="btn btn-success mr-2 btn-responsive">Guardar</button>
           <button class="btn btn-primary ml-2 btn-responsive" (click)="onBacktoList()">Volver</button>
         </div>
       </form>

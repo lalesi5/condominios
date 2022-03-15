@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NavigationExtras, Router} from '@angular/router';
-import {AreasComunalesService} from '../../../services/areasComunales.service';
-import {Subscription} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AreasComunalesService } from '../../../services/areasComunales.service';
+import { Subscription } from "rxjs";
+import { DialogService } from 'src/app/services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ajustes-areas-comunales-edit',
@@ -17,13 +19,11 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   idAreaComunal: string = '';
   areasComunales: any[] = [];
   condominio: any[] = [];
+  loading = false;
+  id: string | null;
 
   /*Formularios*/
-
-  areaComunalForm = new FormGroup({
-    nombre: new FormControl(''),
-    descripcion: new FormControl(''),
-  })
+  areaComunalForm: FormGroup;
 
   navigationExtras: NavigationExtras = {
     state: {}
@@ -31,18 +31,24 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private aRoute: ActivatedRoute,
     private _AreaComunalService: AreasComunalesService,
+    private _dialogService: DialogService,
+    private toastr: ToastrService,
     private fb: FormBuilder
   ) {
+    this.areaComunalForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+    })
+
+    this.id = aRoute.snapshot.paramMap.get('id');
+
     this.recoverData();
   }
 
   ngOnInit(): void {
     this.onListAreaComunal();
-    this.areaComunalForm = this.fb.group({
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
-    })
   }
 
   recoverData() {
@@ -55,39 +61,55 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   }
 
   onListAreaComunal() {
-    try {
+    if (this.id !== null) {
+      this.loading = true;
       this.subscription.add(
-        this._AreaComunalService
-          .getAreasComunalesID(this.idAreaComunal)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.areasComunales.push({
-                ...element.payload.doc.data()
-              })
-            })
+        this._AreaComunalService.getArea(this.id).subscribe(data => {
+          this.loading = false;
+          this.areaComunalForm.setValue({
+            nombre: data.payload.data()['nombre'],
+            descripcion: data.payload.data()['descripcion'],
           })
-      );
-    } catch (err) {
-      console.log(err);
+        })
+      )
     }
-  }
-
-  onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
   }
 
   onEditAreaComunal() {
 
-    let result = confirm("Esta seguro de modificar la información")
-    if (result) {
-      this._AreaComunalService.updateAreasComunales(this.areaComunalForm.value,
-        this.idAministrador,
-        this.idCondominio,
-        this.idAreaComunal);
-      alert('Area Comunal actualizada correctamente');
-      this.router.navigate(['/admin/ajustes'], this.navigationExtras);
+    const nombreArea = String(this.areaComunalForm.value.nombre).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.nombre).slice(1);
+    const descripcionArea = String(this.areaComunalForm.value.descripcion).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.descripcion).slice(1);
 
+    const idArea = this.aRoute.snapshot.paramMap.get('id');
+
+    const areaComunal: any = {
+      nombre: nombreArea,
+      descripcion: descripcionArea,
     }
+
+    this._dialogService.confirmDialog({
+      title: 'Modificar área',
+      message: '¿Está seguro de modificar el área?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this.loading = true;
+        this._AreaComunalService.actualizarArea(idArea!, areaComunal).then(() => {
+          this.loading = false;
+          this.toastr.success('La información del área comunal fue modificada con exito', 'Área modificada', {
+            positionClass: 'toast-bottom-right'
+          });
+        })
+        this.loading = false;
+        this.navigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
+      }
+    });
+  }
+
+  onBacktoList(): void {
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
   }
 
 }

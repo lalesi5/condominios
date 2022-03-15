@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,17 @@ export class CondominioService {
       .snapshotChanges();
   }
 
-  getCondominiosID(idCondominio: string) {
+  /*getCondominiosID(idCondominio: string) {
     return this.firestore.collection(
       'Condominios',
       ref => ref.where(
         'idCondominio',
         '==', idCondominio))
       .snapshotChanges();
+  }*/
+
+  getCondominiosID(idCondominio: string): Observable<any> {
+    return this.firestore.collection('Condominios', ref => ref.where('idCondominio', '==', idCondominio)).snapshotChanges();
   }
 
   deleteCondominios(idCondominio: string) {
@@ -47,7 +52,7 @@ export class CondominioService {
       .set(data);
   }
 
-  updateCondominios(condominio: any, idAdmin: string, idCondo: string) {
+  /*updateCondominios(condominio: any, idAdmin: string, idCondo: string) {
     const idAdministrador = idAdmin;
     const idCondominio = idCondo;
     const data = {idAdministrador, idCondominio, ...condominio}
@@ -55,6 +60,10 @@ export class CondominioService {
       'Condominios')
       .doc(idCondominio)
       .update(data);
+  }*/
+
+  updateCondominios(id: string, data: any): Promise<any> {
+    return this.firestore.collection('Condominios').doc(id).update(data);
   }
 
 }

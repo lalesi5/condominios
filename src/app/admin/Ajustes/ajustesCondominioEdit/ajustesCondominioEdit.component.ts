@@ -3,6 +3,8 @@ import { NavigationExtras, Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CondominioService } from '../../../services/condominios.service';
 import { Subscription } from "rxjs";
+import { ToastrService } from "ngx-toastr";
+import { DialogService } from "src/app/services/dialog.service";
 
 @Component({
   selector: 'app-ajustesCondominioEdit',
@@ -23,14 +25,10 @@ export class AjustesCondominioEditComponent implements OnInit, OnDestroy {
   nombreCondominio: string = '';
   ciudadCondominio: string = '';
   descripcionCondominio: string = '';
+  loading = false;
 
   /*Formularios*/
-
-  condominioForm = this.fb.group({
-    nombreCondominio: ['', Validators.required],
-    ciudadCondominio: ['', Validators.required],
-    descripcionCondominio: [''],
-  });
+  condominioForm: FormGroup;
 
   /*Variables de retorno*/
 
@@ -41,8 +39,17 @@ export class AjustesCondominioEditComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private _condominiosService: CondominioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _dialogService: DialogService,
+    private toastr: ToastrService
   ) {
+
+    this.condominioForm = this.fb.group({
+      nombreCondominio: ['', Validators.required],
+      ciudadCondominio: ['', Validators.required],
+      descripcionCondominio: [''],
+    });
+
     this.recoverData();
   }
 
@@ -85,17 +92,35 @@ export class AjustesCondominioEditComponent implements OnInit, OnDestroy {
 
   onSaveCondominio() {
 
-    this.impCondominio.forEach((element: any) => {
-      this.idAdministrador = element.idAdministrador;
-    })
+    const nombre = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
+    const ciudad = String(this.condominioForm.value.ciudadCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.ciudadCondominio).slice(1);
 
-    let result = confirm("Esta seguro de modificar la información")
-    if (result) {
-      this._condominiosService.updateCondominios(this.condominioForm.value,
-        this.idAdministrador,
-        this.idCondominio);
-      alert('Condominio actualizado correctamente');
+    const condominio: any = {
+      nombreCondominio: nombre,
+      ciudadCondominio: ciudad,
+      descripcionCondominio: this.condominioForm.value.descripcionCondominio,
     }
-    this.router.navigate(['/admin'], this.NavigationExtras);
+
+    //this.subscription.add(
+      this._dialogService.confirmDialog({
+        title: 'Modificar información de condominio',
+        message: '¿Está seguro de modificar la información del condominio?',
+        confirmText: 'Si',
+        cancelText: 'No',
+      }).subscribe(res => {
+        if (res) {
+          this.loading = true;
+          this._condominiosService.updateCondominios(this.idCondominio, condominio).then(() => {
+            this.loading = false;
+            this.toastr.success('La información del condominio fue modificada con exito', 'Condominio modificado', {
+              positionClass: 'toast-bottom-right'
+            });
+          })
+          this.loading = false;
+         this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin'], this.NavigationExtras);
+        }
+      })
+    //)
   }
 }

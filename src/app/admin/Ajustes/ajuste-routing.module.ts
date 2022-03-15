@@ -30,7 +30,7 @@ const routesAjustes: Routes = [
         {path: 'ajustesCondominio', component: AjustesCondominioComponent},
         {path: 'ajustesCondominioEdit', component: AjustesCondominioEditComponent},
         {path: 'ajustesAreasComunales', component: AjustesAreasComunalesComponent},
-        {path: 'ajustesAreasComunalesEdit', component: AjustesAreasComunalesEditComponent},
+        {path: 'ajustesAreasComunalesEdit/:id', component: AjustesAreasComunalesEditComponent},
         {path: 'ajustesAreasComunalesCreate', component: AjustesAreasComunalesCreateComponent},
         {path: 'ajustesUnidades', component: AjustesUnidadesComponent},
         {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},

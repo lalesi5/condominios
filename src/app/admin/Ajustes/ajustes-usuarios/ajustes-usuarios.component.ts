@@ -14,7 +14,6 @@ import {UsuariosService} from 'src/app/services/usuarios.service';
 export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
-  idAministrador: string = '';
   idCondominio: string = ''
   usuarios: any[] = [];
   condominio: any[] = [];

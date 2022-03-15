@@ -6,23 +6,24 @@
       <div>
         <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
       </div>
-      <table class="table table-striped">
+      <h5 style="margin-top: 30px;" *ngIf='areasComunales.length == 0'>No hay datos para mostrar</h5>
+      <table *ngIf="areasComunales.length > 0" class="table table-striped">
         <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>Opciones</th>
-        </tr>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Opciones</th>
+          </tr>
         </thead>
         <tbody *ngFor="let area of areasComunales">
-        <tr>
-          <td>{{area.nombre}}</td>
-          <td>{{area.descripcion}}</td>
-          <td>
-            <mat-icon (click)="onGoEdit(area)" class="btn-info">edit</mat-icon>
-            <mat-icon (click)="onDelete(area)" class="btn-danger">delete</mat-icon>
-          </td>
-        </tr>
+          <tr>
+            <td>{{area.nombre}}</td>
+            <td>{{area.descripcion}}</td>
+            <td>
+              <mat-icon (click)="onGoEdit(area)" class="btn-info">edit</mat-icon>
+              <mat-icon (click)="onDelete(area.id)" class="btn-danger">delete</mat-icon>
+            </td>
+          </tr>
         </tbody>
       </table>
     </mat-card>
