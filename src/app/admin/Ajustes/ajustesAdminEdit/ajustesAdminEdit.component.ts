@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { first, Subscription } from "rxjs";
@@ -32,23 +32,14 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   passwordAministrador: string = '';
   rolAministrador: string = '';
   loading = false;
+  id: string | null;
 
   /*Formularios*/
-  administradorForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    last_name: new FormControl(''),
-    address: new FormControl(''),
-    phone: new FormControl('')
-  });
+  administradorForm: FormGroup;
 
-  emailForm = this.fb.group({
-    email: new FormControl('')
-  })
+  emailForm: FormGroup;
 
-  cambioPasswordForm: FormGroup = new FormGroup({
-    password: new FormControl(''),
-    confirmPassword: new FormControl('')
-  });
+  cambioPasswordForm: FormGroup;
 
   /*Variables de retorno*/
 
@@ -63,12 +54,9 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private firestoreService: FirestoreService,
     private _dialogService: DialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private aRoute: ActivatedRoute
   ) {
-    this.recoverData();
-  }
-
-  ngOnInit(): void {
 
     this.administradorForm = this.fb.group({
       name: ['', Validators.required],
@@ -101,7 +89,13 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.onListAdmin();
+    this.id = aRoute.snapshot.paramMap.get('id');
+
+    this.recoverData();
+  }
+
+  ngOnInit(): void {
+    this.getDatosAdministrador();
   }
 
   ngOnDestroy(): void {
@@ -115,21 +109,20 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     this.NavigationExtras.state = this.condominio;
   }
 
-  onListAdmin() {
-    try {
+  getDatosAdministrador() {
+    if (this.id !== null) {
+      this.loading = true;
       this.subscription.add(
-        this._adminService
-          .getAdministradorID(this.idAministrador)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.administrador.push({
-                ...element.payload.doc.data()
-              })
-            })
+        this._adminService.getAdministrador(this.id).subscribe(data => {
+          this.loading = false;          
+          this.administradorForm.setValue({
+            name: data.payload.data()['name'],
+            last_name: data.payload.data()['last_name'],
+            address: data.payload.data()['address'],
+            phone: data.payload.data()['phone'],
           })
-      );
-    } catch (err) {
-      console.log(err);
+        })
+      )
     }
   }
 
@@ -138,13 +131,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   }
 
   onCreateAdmin() {
-
-    this.administrador.forEach((element: any) => {
-      this.idAministrador = element.idAdministrador;
-      this.emailAministrador = element.email;
-      this.passwordAministrador = element.password;
-      this.rolAministrador = element.rol;
-    })
 
     //nombre
     const nombre = String(this.administradorForm.get('name')?.value);
@@ -161,6 +147,8 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     //informaciona guardar en el documento
     const data = { name, last_name, address, phone }
 
+    const idAdmin = this.aRoute.snapshot.paramMap.get('id');
+
     this._dialogService.confirmDialog({
       title: 'Modificar información',
       message: '¿Está seguro de modificar la información?',
@@ -169,11 +157,7 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     }).subscribe(res => {
       if (res) {
         this.loading = true;
-        this._adminService.saveAdministrador(data,
-          this.idAministrador,
-          this.emailAministrador,
-          this.passwordAministrador,
-          this.rolAministrador).then(() => {
+        this._adminService.updateAdministrador(this.idAministrador, data).then(() => {
             this.loading = false;
             this.toastr.success('La información del usuario fue modificada con exito', 'Usuario modificado', {
               positionClass: 'toast-bottom-right'
@@ -181,7 +165,7 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
           })
         this.loading = false;
         this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
       }
     })
   }
@@ -207,7 +191,7 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
         this.toastr.success('Su contraseña fue modificada con exito', 'Contraseña cambiada', {
           positionClass: 'toast-bottom-right'
         });
-        this.router.navigate(['/admin'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
       }
     })
   }

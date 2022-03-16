@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {AdminService} from '../../../services/admin.service';
-import {Router, NavigationExtras} from '@angular/router';
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { AdminService } from '../../../services/admin.service';
+import { Router, NavigationExtras } from '@angular/router';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-ajustesAdmin',
@@ -47,25 +47,22 @@ export class AjustesAdminComponent implements OnInit, OnDestroy {
   }
 
   getAdministrador() {
-    try {
-      this.subscription.add(
-        this._adminService
-          .getAdministradorID(this.idAministrador)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.administrador.push({
-                ...element.payload.doc.data()
-              })
-            })
+    this.subscription.add(
+      this._adminService.getAdministradorID(this.idAministrador).subscribe(data => {
+        this.administrador = [];
+        data.forEach((element: any) => {
+          this.administrador.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
           })
-      );
-    } catch (err) {
-      console.log(err);
-    }
+        })        
+      })
+    );
   }
 
-  onEdit(): void {
-    this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
+  onEdit(item: any){
+    this.navigationExtras.state = item;
+    this.router.navigate(['/admin/ajustes/ajustesAdminEdit', item.idAdministrador], this.navigationExtras);
   }
 
 }

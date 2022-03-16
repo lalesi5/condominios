@@ -46,16 +46,6 @@ export class CondominioService {
       .set(data);
   }
 
-  /*updateCondominios(condominio: any, idAdmin: string, idCondo: string) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
-    const data = {idAdministrador, idCondominio, ...condominio}
-    return this.firestore.collection(
-      'Condominios')
-      .doc(idCondominio)
-      .update(data);
-  }*/
-
   updateCondominios(id: string, data: any): Promise<any> {
     return this.firestore.collection('Condominios').doc(id).update(data);
   }

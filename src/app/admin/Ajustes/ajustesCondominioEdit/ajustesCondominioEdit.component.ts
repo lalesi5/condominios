@@ -89,6 +89,7 @@ export class AjustesCondominioEditComponent implements OnInit {
     const nombre = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
     const ciudad = String(this.condominioForm.value.ciudadCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.ciudadCondominio).slice(1);
     const idCondo = this.aRoute.snapshot.paramMap.get('id');
+    
     const condominio: any = {
       nombreCondominio: nombre,
       ciudadCondominio: ciudad,

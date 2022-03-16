@@ -1,5 +1,6 @@
-import {Injectable} from "@angular/core";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +10,14 @@ export class AdminService {
 
   constructor(
     public firestore: AngularFirestore,
-  ) {
+  ) { }
+
+  getAdministradorID(idCondominio: string): Observable<any> {
+    return this.firestore.collection('Administrador', ref => ref.where('idAdministrador', '==', idCondominio).where('rol', '==', 'Administrador')).snapshotChanges();
   }
 
-  getAdministradorID(idAdmin: string) {
-    return this.firestore.collection(
-      'Administrador',
-      ref => ref.where(
-        'idAdministrador',
-        '==', idAdmin).where('rol', '==', 'Administrador'))
-      .snapshotChanges();
+  getAdministrador(id: string): Observable<any> {
+    return this.firestore.collection('Administrador').doc(id).snapshotChanges();
   }
 
   getUsuarioID(idUser: string) {
@@ -30,20 +29,8 @@ export class AdminService {
       .snapshotChanges();
   }
 
-  saveAdministrador(formulario: any,
-                    idAdministrador: string,
-                    emailAdministrador: string,
-                    passwordAdministrador: string,
-                    rolAdministrador: string
-  ) {
-    const email = emailAdministrador;
-    const password = passwordAdministrador;
-    const rol = rolAdministrador;
-    const data = {idAdministrador, email, password, rol, ...formulario}
-    return this.firestore.collection(
-      'Administrador')
-      .doc(idAdministrador)
-      .update(data);
+  updateAdministrador(id: string, data: any): Promise<any> {
+    return this.firestore.collection('Administrador').doc(id).update(data);
   }
 
   deleteAdministrador(idAdministrador: string) {
