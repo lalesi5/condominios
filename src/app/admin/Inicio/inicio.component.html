@@ -22,7 +22,7 @@
         </div>
         <div class="card" [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']">
             <div>
-                <div class="numbers"> 10 </div>
+                <div class="numbers"> {{unidades.length}} </div>
                 <div class="cardName">Unidades</div>
             </div>
             <div class="iconBx">
@@ -117,7 +117,8 @@
                         <div class="imgBx"> <img src="../../../assets/casa.jpg"> </div>
                     </td>
                     <td>
-                        <h4>Unidad # {{unidad.numeroUnidad}}<br><span>{{unidad.nombreArrendatario}} {{unidad.apellidoArrendatario}}</span></h4>
+                        <h4>Unidad # {{unidad.numeroUnidad}}<br><span>{{unidad.nombreArrendatario}}
+                                {{unidad.apellidoArrendatario}}</span></h4>
                     </td>
                 </tr>
             </table>
