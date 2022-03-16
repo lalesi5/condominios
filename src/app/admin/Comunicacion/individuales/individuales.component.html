@@ -12,6 +12,7 @@
             <th>Correo</th>
             <th>Opciones</th>
           </tr>
+          <h5 style="margin-top: 30px;" *ngIf='unidades.length == 0'>No hay datos para mostrar</h5>
           </thead>
           <tbody *ngFor="let unidad of unidades">
           <tr>

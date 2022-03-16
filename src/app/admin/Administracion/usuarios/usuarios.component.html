@@ -13,6 +13,7 @@
                         <th>Área</th>
                     </tr>
                 </thead>
+                <h5 style="margin-top: 30px;" *ngIf='unidades.length == 0'>No hay datos para mostrar</h5>
                 <tbody>
                     <tr *ngFor="let unidad of unidades">
                         <td>{{unidad.numeroUnidad}}</td>
