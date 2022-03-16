@@ -1,27 +1,26 @@
 <div class="anuncioGeneral">
-    <div class="containerGeneral">
-        <mat-card>
-            <div class="botonAtras">
-                <button type="button" class="btn btn-primary" (click)="onGoCreate()">Nuevo</button>
-            </div>
-        </mat-card>
-    </div>
-
-    <div class="containerMensajes">
-        <mat-card *ngFor="let anuncio of anunciosGenerales">
+  <div class="containerGeneral">
+    <mat-card>
+      <div class="containerMensajes">
+        <h2>Anuncios Generales</h2>
+        <h3>Datos de los Anuncios Generales</h3>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Nuevo</button>
+        <div layout="row">
+          <mat-card *ngFor="let anuncio of anunciosGenerales" class="mb-2">
             <mat-card-title><b>Título: </b> {{anuncio.tituloAnuncio}}</mat-card-title>
-            <br>
+            <div class="clearfix"></div>
             <mat-card-subtitle><b>Fecha: </b> {{anuncio.fechaAnuncio}}</mat-card-subtitle>
             <mat-card-subtitle><b>Escrito por: </b> Administrador</mat-card-subtitle>
             <mat-card-content>
-                <p>{{anuncio.descripcionAnuncio}}</p>
+              <p>{{anuncio.descripcionAnuncio}}</p>
             </mat-card-content>
-            <mat-card-actions>
-                <div class="btn-group align-items-end">
-                    <button type="button" class="btn btn-success mr-2" (click)="onGoEdit(anuncio)">Editar</button>
-                    <button type="button" class="btn btn-danger ml-2" (click)="onDelete(anuncio)">Eliminar</button>
-                </div>
-            </mat-card-actions>
-        </mat-card>
-    </div>
+            <div>
+              <button class="btn btn-success mr-2" (click)="onGoEdit(anuncio)">Editar</button>
+              <button class="btn btn-danger" (click)="onDelete(anuncio)">Eliminar</button>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 </div>

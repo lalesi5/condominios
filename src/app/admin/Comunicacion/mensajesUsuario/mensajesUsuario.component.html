@@ -1,29 +1,26 @@
 <div class="mensajesUsuario">
-    <div class="headerMensajesUsuario">
-        <mat-card>
-            <div class="botonAtras">
-                <button type="button" class="btn btn-primary" (click)="onBackToUnits()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+  <div class="headerMensajesUsuario">
+    <mat-card>
+      <div class="containerMensajes">
+        <h2>Comunicados Individuales</h2>
+        <h3> Mensajes Pertenecientes a:  </h3>
+        <button class="btn btn-primary mb-2" (click)="onBackToUnits()">Volver</button>
+        <div>
+          <mat-card *ngFor="let mensaje of mensajes">
+            <mat-card-title><b>Título: </b> {{mensaje.tituloMensaje}}</mat-card-title>
+            <div class="clearfix"></div>
+            <mat-card-subtitle><b>Fecha: </b> {{mensaje.fechaMensaje}} </mat-card-subtitle>
+            <mat-card-subtitle><b>Escrito por: </b> Administrador</mat-card-subtitle>
+            <mat-card-content>
+              <p>{{mensaje.descripcionMensaje}}</p>
+            </mat-card-content>
+            <div>
+              <button class="btn btn-success mr-2">Editar</button>
+              <button class="btn btn-danger">Eliminar</button>
             </div>
-        </mat-card>
-    </div>
-
-    <div class="cuerpoMensajesUsuario">
-        <div class="headerUser">
-            <mat-card>
-                <mat-card-title>Alex Carrera</mat-card-title>
-                <mat-card-subtitle>Unidad 1</mat-card-subtitle>
-            </mat-card>
+          </mat-card>
         </div>
-        <div class="bodyUser">
-            <mat-card *ngFor="let mensaje of mensajes">
-                <mat-card-title>{{mensaje.tituloMensaje}}</mat-card-title>
-                <mat-card-content>
-                    <p>{{mensaje.descripcionMensaje}}</p>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button type="button" class="btn btn-danger mr-2">Eliminar</button>
-                </mat-card-actions>
-            </mat-card>
-        </div>
-    </div>
+      </div>
+    </mat-card>
+  </div>
 </div>

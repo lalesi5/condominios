@@ -12,13 +12,42 @@ export class MensajesService {
   ) {
   }
 
-  getMensajes(idUni: string) {
+  getMensajes(idUser: string) {
     return this.firestore.collection(
       'Mensajes',
       ref => ref.where(
-        'idUnidad',
-        '==', idUni))
+        'idUsuario',
+        '==', idUser)
+        .orderBy('fechaMensaje', 'desc'))
       .snapshotChanges();
+  }
+
+  saveMensajes(mensaje: any,
+                        idAdmin: string,
+                        idCondo: string,
+  ) {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
+    const idMensaje = this.firestore.createId();
+    const data = {idAdministrador, idCondominio, idMensaje, ...mensaje}
+    return this.firestore.collection(
+      'Mensajes')
+      .doc(idMensaje)
+      .set(data);
+  }
+
+  updateMensajes(mensaje: any,
+                          idAdmin: string,
+                          idCondo: string,
+                          idAnuncioGene: string) {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
+    const idMensaje = idAnuncioGene;
+    const data = {idAdministrador, idCondominio, idMensaje, ...mensaje}
+    return this.firestore.collection(
+      'Mensajes')
+      .doc(idMensaje)
+      .update(data);
   }
 
 }
