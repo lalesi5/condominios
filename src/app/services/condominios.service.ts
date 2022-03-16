@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
+import { Injectable } from "@angular/core";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -10,8 +10,7 @@ export class CondominioService {
 
   constructor(
     public firestore: AngularFirestore,
-  ) {
-  }
+  ) { }
 
   getCondominios(idAdministrador: string) {
     return this.firestore.collection(
@@ -22,17 +21,12 @@ export class CondominioService {
       .snapshotChanges();
   }
 
-  /*getCondominiosID(idCondominio: string) {
-    return this.firestore.collection(
-      'Condominios',
-      ref => ref.where(
-        'idCondominio',
-        '==', idCondominio))
-      .snapshotChanges();
-  }*/
-
   getCondominiosID(idCondominio: string): Observable<any> {
     return this.firestore.collection('Condominios', ref => ref.where('idCondominio', '==', idCondominio)).snapshotChanges();
+  }
+
+  getCondominio(id: string): Observable<any> {
+    return this.firestore.collection('Condominios').doc(id).snapshotChanges();
   }
 
   deleteCondominios(idCondominio: string) {
@@ -45,7 +39,7 @@ export class CondominioService {
   saveCondominios(condominio: any, idAdmin: string) {
     const idAdministrador = idAdmin;
     const idCondominio = this.firestore.createId();
-    const data = {idAdministrador, idCondominio, ...condominio}
+    const data = { idAdministrador, idCondominio, ...condominio }
     return this.firestore.collection(
       'Condominios')
       .doc(idCondominio)
