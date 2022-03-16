@@ -1,8 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
-import {AnunciosGeneralesService} from '../../../services/anunciosGenerales.service';
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { NavigationExtras, Router } from "@angular/router";
+import { AnunciosGeneralesService } from '../../../services/anunciosGenerales.service';
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-generales',
@@ -10,8 +11,9 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./generales.component.css']
 })
 
-export class GeneralesComponent implements OnInit {
+export class GeneralesComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription;
   idAministrador: string = '';
   idCondominio: string = ''
   anunciosGenerales: any[] = [];
@@ -34,6 +36,10 @@ export class GeneralesComponent implements OnInit {
     this.getAnunciosGenerales();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
@@ -43,44 +49,45 @@ export class GeneralesComponent implements OnInit {
   }
 
   getAnunciosGenerales() {
-    try {
-      this._anunciosGeneralesService
-        .getAnunciosGenerales(this.idCondominio)
-        .subscribe(data => {
-          data.forEach((element: any) => {
-            this.anunciosGenerales.push({
-              ...element.payload.doc.data()
-            })
+    this.subscription.add(
+      this._anunciosGeneralesService.getAnunciosGenerales(this.idCondominio).subscribe(data => {
+        this.anunciosGenerales = [];
+        data.forEach((element: any) => {
+          this.anunciosGenerales.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
           })
         })
-    } catch (err) {
-      console.log(err);
-    }
+      })
+    );
   }
 
   onGoCreate() {
     this.router.navigate(['/admin/comunicacion/nuevoAnuncio'], this.navigationExtras);
   }
 
-  onDelete(item: any) {
-    let idAnuncio = item.idAnuncioGeneral;
-    let result = confirm("Esta seguro de eliminar el Area Comunal!");
-    if (result) {
-      this._anunciosGeneralesService.deleteAnunciosGenerales(idAnuncio).then(() => {
-        this.toastr.success('El Anuncio fue eliminado con exito', 'Anuncio Elminado', {
-          positionClass: 'toast-bottom-right'
-        });
-      }).catch(error => {
-        console.log(error);
-      })
-    }
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([this.router.url], this.navigationExtras);
+  onDelete(id: string) {
+
+    this._dialogService.confirmDialog({
+      title: 'Eliminar área',
+      message: '¿Está seguro de eliminar el anuncio general?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this._anunciosGeneralesService.deleteAnunciosGenerales(id).then(() => {
+          this.toastr.success('El anuncio fue eliminado con exito', 'Anuncio eliminado', {
+            positionClass: 'toast-bottom-right'
+          });
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    });
   }
 
   onGoEdit(item: any) {
     this.navigationExtras.state = item;
-    this.router.navigate(['/admin/comunicacion/editarAnuncio'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion/editarAnuncio', item.idAnuncioGeneral], this.navigationExtras);
   }
 }
