@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { UnidadesService } from "src/app/services/unidades.service";
 
 
@@ -11,6 +12,7 @@ import { UnidadesService } from "src/app/services/unidades.service";
 
 export class UsuariosComponent implements OnInit {
 
+    private subscription: Subscription = new Subscription;
     idAministrador: string = '';
     idCondominio: string = ';'
     unidades: any[] = [];
@@ -30,32 +32,26 @@ export class UsuariosComponent implements OnInit {
         this.idAministrador = navigations.idAdministrador;
         this.idCondominio = navigations.idCondominio;
         this.condominio = navigations;
-
     }
 
 
     ngOnInit(): void {
-        this.getUnidades();
+        this.getListUsuarios();
     }
 
-    getUnidades() {
-        try {
-            this._unidades
-                .getAllUnidades(this.idCondominio)
-                .subscribe(data => {
-                    data.forEach((element: any) => {
-                        this.unidades.push({
-                            ...element.payload.doc.data()
-                        })
+    getListUsuarios() {
+        this.subscription.add(
+            this._unidades.getAllUnidades(this.idCondominio).subscribe(data => {
+                this.unidades = [];
+                data.forEach((element: any) => {
+                    this.unidades.push({
+                        id: element.payload.doc.id,
+                        ...element.payload.doc.data()
                     })
                 })
-        }
-        catch (err) {
-            console.log(err);
-        }
+            })
+        );
     }
-
-
 
 }
 

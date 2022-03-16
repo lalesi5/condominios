@@ -26,9 +26,9 @@ const routesAjustes: Routes = [
       [
         {path: '', redirectTo: 'ajustesAdmin', pathMatch: 'full'},
         {path: 'ajustesAdmin', component: AjustesAdminComponent},
-        {path: 'ajustesAdminEdit', component: AjustesAdminEditComponent},
+        {path: 'ajustesAdminEdit/:id', component: AjustesAdminEditComponent},
         {path: 'ajustesCondominio', component: AjustesCondominioComponent},
-        {path: 'ajustesCondominioEdit', component: AjustesCondominioEditComponent},
+        {path: 'ajustesCondominioEdit/:id', component: AjustesCondominioEditComponent},
         {path: 'ajustesAreasComunales', component: AjustesAreasComunalesComponent},
         {path: 'ajustesAreasComunalesEdit/:id', component: AjustesAreasComunalesEditComponent},
         {path: 'ajustesAreasComunalesCreate', component: AjustesAreasComunalesCreateComponent},

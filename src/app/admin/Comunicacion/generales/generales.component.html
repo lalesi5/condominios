@@ -5,6 +5,7 @@
         <h2>Anuncios Generales</h2>
         <h3>Datos de los Anuncios Generales</h3>
         <button class="btn btn-primary mb-2" (click)="onGoCreate()">Nuevo</button>
+        <h5 style="margin-top: 30px;" *ngIf='anunciosGenerales.length == 0'>No hay anuncios para mostrar</h5>
         <div layout="row">
           <mat-card *ngFor="let anuncio of anunciosGenerales" class="mb-2">
             <mat-card-title><b>Título: </b> {{anuncio.tituloAnuncio}}</mat-card-title>
@@ -16,7 +17,7 @@
             </mat-card-content>
             <div>
               <button class="btn btn-success mr-2" (click)="onGoEdit(anuncio)">Editar</button>
-              <button class="btn btn-danger" (click)="onDelete(anuncio)">Eliminar</button>
+              <button class="btn btn-danger" (click)="onDelete(anuncio.id)">Eliminar</button>
             </div>
           </mat-card>
         </div>

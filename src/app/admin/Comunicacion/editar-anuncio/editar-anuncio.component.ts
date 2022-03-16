@@ -1,8 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
-import {NavigationExtras, Router} from '@angular/router';
-import {AnunciosGeneralesService} from 'src/app/services/anunciosGenerales.service';
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AnunciosGeneralesService } from 'src/app/services/anunciosGenerales.service';
+import { Subscription } from "rxjs";
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-editar-anuncio',
@@ -17,12 +19,10 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
   idAnuncioGeneral: string = '';
   anuncios: any[] = [];
   condominio: any[] = [];
+  loading = false;
+  id: string | null;
 
-  anunciosForm = new FormGroup({
-    tituloAnuncio: new FormControl,
-    fechaAnuncio: new FormControl,
-    descripcionAnuncio: new FormControl
-  })
+  anunciosForm: FormGroup;
 
   navigationExtras: NavigationExtras = {
     state: {}
@@ -30,8 +30,21 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private _anuncios: AnunciosGeneralesService
+    private _anuncios: AnunciosGeneralesService,
+    private fb: FormBuilder,
+    private aRoute: ActivatedRoute,
+    private _dialogService: DialogService,
+    private toastr: ToastrService
   ) {
+
+    this.anunciosForm = this.fb.group({
+      tituloAnuncio: ['', Validators.required],
+      fechaAnuncio: ['', Validators.required],
+      descripcionAnuncio: [''],
+    })
+
+    this.id = aRoute.snapshot.paramMap.get('id');
+
     this.recoverData();
   }
 
@@ -40,6 +53,7 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   recoverData() {
@@ -52,35 +66,55 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
   }
 
   getAnuncioGeneral() {
-    try {
+    if (this.id !== null) {
+      this.loading = true;
       this.subscription.add(
-        this._anuncios
-          .getAnuncioGeneral(this.idAnuncioGeneral)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.anuncios.push({
-                ...element.payload.doc.data()
-              })
-            })
+        this._anuncios.getAnuncioGeneral(this.id).subscribe(data => {
+          this.loading = false;
+          this.anunciosForm.setValue({
+            tituloAnuncio: data.payload.data()['tituloAnuncio'],
+            fechaAnuncio: data.payload.data()['fechaAnuncio'],
+            descripcionAnuncio: data.payload.data()['descripcionAnuncio'],
           })
-      );
-    } catch (err) {
-      console.log(err);
+        })
+      )
     }
+  }
+
+  onEditAnuncios() {
+    const titulo = String(this.anunciosForm.value.tituloAnuncio).charAt(0).toLocaleUpperCase() + String(this.anunciosForm.value.tituloAnuncio).slice(1);
+
+    const anuncio: any = {
+      descripcionAnuncio: this.anunciosForm.value.descripcionAnuncio,
+      fechaAnuncio: this.anunciosForm.value.fechaAnuncio,
+      tituloAnuncio: titulo
+    }
+
+    this.subscription.add(
+      this._dialogService.confirmDialog({
+        title: 'Agregar área',
+        message: '¿Esta seguro de modificar la información?',
+        confirmText: 'Si',
+        cancelText: 'No',
+      }).subscribe(res => {
+        if (res) {
+          this.loading = true;
+          this._anuncios.updateAnunciosGenerales(this.idAnuncioGeneral, anuncio).then(() => {
+            this.loading = false;
+            this.toastr.success('La información fue modificada con exito', 'Anuncio modificado', {
+              positionClass: 'toast-bottom-right'
+            });
+          })
+          this.loading = false;
+          this.navigationExtras.state = this.condominio;
+          this.router.navigate(['/admin/comunicacion'], this.navigationExtras);
+        }
+      })
+    )
+
   }
 
   onBacktoList(): void {
     this.router.navigate(['/admin/comunicacion'], this.navigationExtras);
-  }
-
-  onEditAnuncios() {
-    let result = confirm("Esta seguro de modificar la información")
-    if (result) {
-      this._anuncios.updateAnunciosGenerales(this.anunciosForm.value,
-        this.idAministrador,
-        this.idCondominio,
-        this.idAnuncioGeneral);
-      this.router.navigate(['/admin/comunicacion'], this.navigationExtras)
-    }
   }
 }
