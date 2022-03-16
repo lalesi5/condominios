@@ -16,7 +16,7 @@ export class NuevoAnuncioComponent implements OnInit {
   anuncios: any[] = [];
   condominio: any[] = [];
 
-  anunciosForm = new FormGroup({
+  mensajesForm = new FormGroup({
     tituloAnuncio: new FormControl,
     fechaAnuncio: new FormControl,
     descripcionAnuncio: new FormControl
@@ -49,7 +49,7 @@ export class NuevoAnuncioComponent implements OnInit {
   }
 
   onCreateAnuncios() {
-    this._anuncios.saveAnunciosGenerales(this.anunciosForm.value,
+    this._anuncios.saveAnunciosGenerales(this.mensajesForm.value,
       this.idAministrador,
       this.idCondominio);
     this.router.navigate(['/admin/comunicacion'], this.navigationExtras);

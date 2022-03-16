@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<div class="Condominios">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Seleccione la Unidad que desea administrar</h2>
+      <div class="headerCondominio">
+        <div class="card" *ngFor="let unidad of unidades">
+          <div>
+            <div class="cardName" (click)="onGoAdmin(unidad)">Unidad: {{unidad.numeroUnidad}}</div>
+          </div>
+          <div class="iconBx">
+            <img src="../../../../assets/logoCondominio.jpg" (click)="onGoAdmin(unidad)" alt="userImage" >
+          </div>
+        </div>
+      </div>
+      <div class="botonFinalizar">
+        <button type="button" class="btn btn-info" (click)="onLogout()" >Finalizar Sesion</button>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<app-footer></app-footer>

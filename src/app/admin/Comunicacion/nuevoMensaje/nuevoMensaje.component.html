@@ -1,37 +1,25 @@
-<div class="nuevoMensaje">
-  <div class="headerMensaje">
+<div class="nuevoAnuncio">
+  <div class="containerAnuncio">
     <mat-card>
-      <div class="botonAtras">
-        <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']" class="btn">
-          <mat-icon>keyboard_arrow_left</mat-icon>
-        </a>
-      </div>
-    </mat-card>
-  </div>
-  <div class="containerMensaje">
-    <mat-card>
-      <form class="formularioMensaje">
-        <mat-form-field appearance="fill">
-          <mat-label>Usuarios</mat-label>
-          <mat-select multiple>
-            <mat-option>afcalvarez@hotmail.com</mat-option>
-            <mat-option>alex.carrera@epn.edu.ec</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Titulo</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <div id="insertFile">
-          <input type="file">
+      <h2>Comunicados Individuales</h2>
+      <h3>Crear Mensaje Individual</h3>
+      <form [formGroup]="mensajesForm" (ngSubmit)="onCreateMensaje()">
+        <div class="form-group">
+          <label>Título</label>
+          <input type="text" class="form-control" formControlName="tituloMensaje">
         </div>
-        <mat-form-field class="textAreaMensaje" appearance="fill">
-          <mat-label>Mensaje</mat-label>
-          <textarea matInput placeholder="Ingrese su Mensaje"></textarea>
-        </mat-form-field>
-        <div class="botonesSubmit">
-          <button type="submit" class="btn">Enviar</button>
-          <button class="btn">Cancelar</button>
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="datetime-local" class="form-control" min="2022-01-01" max="2040-12-31"
+                 formControlName="fechaMensaje">
+        </div>
+        <div class="form-group">
+          <label>Descripcion</label><br>
+          <textarea formControlName="descripcionMensaje" class="form-control" rows="3"></textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-success mr-2">Guardar</button>
+          <button class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
         </div>
       </form>
     </mat-card>

@@ -15,6 +15,7 @@ import { LoginAdminComponent } from './loginAdmin/loginAdmin.component';
 import { SelectCondominioComponent } from './select-condominio/select-condominio.component';
 import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SelectUnidadesComponent } from './select-unidades/select-unidades.component';
 
 
 
@@ -38,7 +39,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     RegisterAdminComponent,
     SelectCondominioComponent,
     CreateCondominioComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SelectUnidadesComponent
   ],
   exports: [],
   providers: [

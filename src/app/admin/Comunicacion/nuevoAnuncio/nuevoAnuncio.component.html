@@ -3,7 +3,7 @@
     <mat-card>
       <h2>Anuncios Generales</h2>
       <h3>Crear Anuncio General</h3>
-      <form [formGroup]='anunciosForm' (ngSubmit)="onCreateAnuncios()">
+      <form [formGroup]='mensajesForm' (ngSubmit)="onCreateAnuncios()">
         <div class="form-group">
           <label>Título</label>
           <input type="text" class="form-control" formControlName="tituloAnuncio">
@@ -18,7 +18,7 @@
           <textarea formControlName="descripcionAnuncio" class="form-control" rows="3"></textarea>
         </div>
         <div>
-          <button type="submit" class="btn btn-success mr-2" (click)="onCreateAnuncios()">Guardar</button>
+          <button type="submit" class="btn btn-success mr-2">Guardar</button>
           <button class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
         </div>
       </form>

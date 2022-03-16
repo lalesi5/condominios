@@ -1,35 +1,34 @@
 <div class="anuncioindividual">
-    <div class="containerMensajes">
-        <mat-card>
-            <div class="unidadesPrivativas">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Usuario</th>
-                            <th>Unidad Privativa</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngFor="let unidad of unidades">
-                        <tr>
-                            <td>
-                                <mat-icon>person_pin</mat-icon>
-                            </td>
-                            <td>{{unidad.numeroUnidad}}</td>
-                            <td>{{unidad.nombreArrendatario}} {{unidad.apellidoArrendatario}}</td>
-                            <td>{{unidad.emailArrendatario}}</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-info mr-2" (click)="onGoMensajesUsuarios(unidad)">Ver Mensajes</button>
-                                    <button type="button" class="btn btn-primary ml-2" (click)="onGoNuevoMensaje(unidad)">Nuevo</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </mat-card>
-    </div>
+  <div class="containerMensajes">
+    <mat-card>
+      <div class="unidadesPrivativas">
+        <h2>Comunicados Individuales</h2>
+        <h3>Datos de los Usuarios</h3>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Unidad Privativa</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Opciones</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let unidad of unidades">
+          <tr>
+            <td>{{unidad.numeroUnidad}}</td>
+            <td>{{unidad.nombreArrendatario}} {{unidad.apellidoArrendatario}}</td>
+            <td>{{unidad.emailArrendatario}}</td>
+            <td>
+              <div>
+                <button class="btn btn-info mr-2" (click)="onGoMensajesUsuarios(unidad)">Ver Mensajes
+                </button>
+                <button class="btn btn-primary ml-2" (click)="onGoNuevoMensaje(unidad)">Nuevo</button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-card>
+  </div>
 </div>
