@@ -11,6 +11,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';  
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from "@angular/forms";
+import { ReservasComponent } from './reservas/reservas.component';
+import { ReservasCreateComponent } from './reservas-create/reservas-create.component';
 
 
 
@@ -27,7 +29,9 @@ import { ReactiveFormsModule } from "@angular/forms";
     declarations:[
         UnidadesComponent,
         UsuariosComponent,
-        AreasComunesComponent
+        AreasComunesComponent,
+        ReservasComponent,
+        ReservasCreateComponent
     ],
     exports: [
         MatCardModule,

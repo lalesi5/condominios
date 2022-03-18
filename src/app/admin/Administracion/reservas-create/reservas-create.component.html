@@ -1,0 +1,50 @@
+<div class="ajustesReservasEdit">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Usuarios</h2>
+      <h3>Editar informacion del Usuario
+        <div *ngIf="loading" class="spinner-border float-right" role="status">
+          <span class="sr-only">Procesando...</span>
+        </div>
+      </h3>
+      <form>
+        <div class="form-group">
+          <label>Fecha de Reserva Inicio</label>
+          <input type="datetime-local" class="form-control" formControlName="fechaReserva">
+          <div class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Fecha de Reserva Fin</label>
+          <input type="datetime-local" class="form-control" formControlName="fechaReserva">
+          <div class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Estado Reserva</label>
+          <select class="form-control" formControlName="estadoReserva">
+            <option value="Aceptado">Aceptado</option>
+            <option value="Rechazado">Rechazado</option>
+            <option selected="Selected">Pendiente</option>
+          </select>
+          <div class="invalid-feedback">
+            Campo requerido
+          </div>
+          <div class="form-group">
+            <label>Detalle de la Reserva</label>
+            <input type="text" class="form-control" formControlName="detalleReserva">
+            <div class="invalid-feedback">
+              Campo requerido
+            </div>
+          </div>
+        </div>
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-primary mr-2">Crear</button>
+          <button class="btn btn-success">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

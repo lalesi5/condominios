@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { FirestoreService } from "../../../services/firestore.service";
-import { AuthService } from "../../../services/auth.service";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { AdminService } from "../../../services/admin.service";
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';

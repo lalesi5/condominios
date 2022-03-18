@@ -90,6 +90,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
         const formValue = this.createUsuarioForm.value
         this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
           if (res) {
+            // @ts-ignore
             const idUsuario = res.user.uid;
 
             const data = { idUsuario, ...usuario }
