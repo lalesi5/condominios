@@ -35,7 +35,6 @@ export class NuevoAnuncioComponent implements OnInit {
 
     this.mensajesForm = this.fb.group({
       tituloAnuncio: ['', Validators.required],
-      fechaAnuncio: ['', Validators.required],
       descripcionAnuncio: [''],
     })
 
@@ -55,6 +54,7 @@ export class NuevoAnuncioComponent implements OnInit {
 
   onCreateAnuncios() {
     const titulo = String(this.mensajesForm.value.tituloAnuncio).charAt(0).toLocaleUpperCase() + String(this.mensajesForm.value.tituloAnuncio).slice(1);
+    var date = new Date();
 
     this._dialogService.confirmDialog({
       title: 'Crear anuncio general',
@@ -65,7 +65,7 @@ export class NuevoAnuncioComponent implements OnInit {
       if (res) {
         const anuncio: any = {
           descripcionAnuncio: this.mensajesForm.value.descripcionAnuncio,
-          fechaAnuncio: this.mensajesForm.value.fechaAnuncio,
+          fechaAnuncio: date.toLocaleString(),
           idAdministrador: this.idAministrador,
           idCondominio: this.idCondominio,
           tituloAnuncio: titulo

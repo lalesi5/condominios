@@ -83,10 +83,11 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
 
   onEditAnuncios() {
     const titulo = String(this.anunciosForm.value.tituloAnuncio).charAt(0).toLocaleUpperCase() + String(this.anunciosForm.value.tituloAnuncio).slice(1);
+    var date = new Date();
 
     const anuncio: any = {
       descripcionAnuncio: this.anunciosForm.value.descripcionAnuncio,
-      fechaAnuncio: this.anunciosForm.value.fechaAnuncio,
+      fechaAnuncio: date.toLocaleString(),
       tituloAnuncio: titulo
     }
 
