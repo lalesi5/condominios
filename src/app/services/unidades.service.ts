@@ -1,5 +1,6 @@
-import {Injectable} from "@angular/core";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,17 @@ export class UnidadesService {
       .snapshotChanges();
   }
 
+  //para recuperar en el componente editar
+  getUnidad(id: string): Observable<any> {
+    return this.firestore.collection('Unidades').doc(id).snapshotChanges();
+  }
+
   getAllUnidades(idCondo: string) {
     return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo))
       .snapshotChanges();
   }
 
-  getAllUnidadesIdUser(idUser: string) {
+  getAllUnidadesIdUser(idUser: string): Observable<any> {
     return this.firestore.collection('Unidades', ref => ref.where('idUsuario', '==', idUser))
       .snapshotChanges();
   }
@@ -33,32 +39,18 @@ export class UnidadesService {
       .snapshotChanges();
   }
 
-  deleteUnidades(idUni: string) {
-    return this.firestore.collection('Unidades')
-      .doc(idUni)
-      .delete();
+  deleteUnidades(id: string): Promise<any> {
+    return this.firestore.collection('Unidades').doc(id).delete();
   }
 
-  createUnidades(unidad: any, idAdmin: string, idCondo: string, idUser: string) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
-    const idUsuario = idUser;
+  createUnidades(unidad: any): Promise<any> {
     const idUnidad = this.firestore.createId();
-    const data = {idAdministrador, idCondominio, idUsuario, idUnidad, ...unidad}
-    return this.firestore.collection('Unidades')
-      .doc(idUnidad)
-      .set(data);
+    const data = { idUnidad, ...unidad }
+    return this.firestore.collection('Unidades').doc(idUnidad).set(data);
   }
 
-  updateUnidades(unidad: any, idAdmin: string, idCondo: string, idUser: string, idUni?: string) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
-    const idUsuario = idUser;
-    const idUnidad = idUni || this.firestore.createId();
-    const data = {idAdministrador, idCondominio, idUsuario, idUnidad, ...unidad}
-    return this.firestore.collection('Unidades')
-      .doc(idUnidad)
-      .update(data);
+  actualizarUnidad(id: string, data: any): Promise<any> {
+    return this.firestore.collection('Unidades').doc(id).update(data);
   }
 
 }

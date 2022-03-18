@@ -13,21 +13,21 @@
           <th>Numero de Unidad</th>
           <th>Area Unidad</th>
           <th>Tipo de Unidad</th>
-          <th>Nombre Usuario</th>
-          <th>Apellido Usuario</th>
+          <th>Nombre Propietario</th>
+          <th>Apellido Propietario</th>
           <th>Opciones</th>
         </tr>
         </thead>
         <tbody *ngFor="let unidad of unidades">
         <tr>
           <td>{{unidad.numeroUnidad}}</td>
-          <td>{{unidad.areaUnidad}}</td>
+          <td>{{unidad.areaUnidad}} m2</td>
           <td>{{unidad.tipoUnidad}}</td>
-          <td>{{unidad.nombreArrendatario}}</td>
-          <td>{{unidad.apellidoArrendatario}}</td>
+          <td>{{unidad.nombrePropietario}}</td>
+          <td>{{unidad.apellidoPropietario}}</td>
           <td>
             <mat-icon (click)="onGoEdit(unidad)" class="btn-info">edit</mat-icon>
-            <mat-icon (click)="onDelete(unidad)" class="btn-danger">delete</mat-icon>
+            <mat-icon (click)="onDelete(unidad.id)" class="btn-danger">delete</mat-icon>
           </td>
         </tr>
         </tbody>

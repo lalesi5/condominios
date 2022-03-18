@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
-import {Subscription} from "rxjs";
-import {UsuariosService} from "../../../services/usuarios.service";
-import {ToastrService} from "ngx-toastr";
+import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { Subscription } from "rxjs";
+import { UsuariosService } from "../../../services/usuarios.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-ajustes-unidades-select-user',
@@ -46,22 +46,20 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
   }
 
   getUsuarios() {
-    try {
-      this.subscription.add(
-        this._usuarioService.getUsuarios(this.idCondominio).subscribe(data => {
-          data.forEach((element: any) => {
-            this.usuarios.push({
-              ...element.payload.doc.data()
-            })
+    this.subscription.add(
+      this._usuarioService.getUsuarios(this.idCondominio).subscribe(data => {
+        this.usuarios = [];
+        data.forEach((element: any) => {
+          this.usuarios.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
           })
         })
-      );
-    } catch (err) {
-      console.log(err);
-    }
+      })
+    );
   }
 
-  onGoSelectUnidad(item: any){
+  onGoSelectUnidad(item: any) {
     this.NavigationExtras.state = item;
     this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.NavigationExtras);
   }
