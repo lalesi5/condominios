@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { UnidadesService } from '../../../services/unidades.service';
 import { Subscription } from "rxjs";
@@ -22,20 +22,10 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   unidades: any[] = [];
   usuarios: any[] = [];
   condominio: any[] = [];
+  private isEmail = /\S+@\S+\.\S+/;
+  loading = false;
 
-  unidadesForm = new FormGroup({
-    numeroUnidad: new FormControl,
-    tipoUnidad: new FormControl,
-    areaUnidad: new FormControl,
-    nombreArrendatario: new FormControl,
-    apellidoArrendatario: new FormControl,
-    celularArrendatario: new FormControl,
-    emailArrendatario: new FormControl,
-    nombreArrendador: new FormControl,
-    ApellidoArrendador: new FormControl,
-    emailArrendador: new FormControl,
-    celularArrendador: new FormControl
-  })
+  unidadesForm: FormGroup;
 
   navigationExtras: NavigationExtras = {
     state: {}
@@ -49,6 +39,22 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
     private _dialogService: DialogService,
     private toastr: ToastrService
   ) {
+
+    this.unidadesForm = this.fb.group({
+      numeroUnidad: ['', Validators.required],
+      tipoUnidad: ['', Validators.required],
+      areaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      nombreResidente: [''],
+      apellidoResidente: [''],
+      telefonoResidente: [''],
+      emailResidente: [''],
+      nombrePropietario: ['', Validators.required],
+      apellidoPropietario: ['', Validators.required],
+      telefonoPropietario: ['', [Validators.pattern(/^\d+$/)]],
+      emailPropietario: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+    });
+
+
     this.recoverData();
   }
 
@@ -82,11 +88,10 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
     );
   }
 
-  onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.navigationExtras);
-  }
-
   onCreateUnidades() {
+
+    const nombre = String(this.unidadesForm.value.nombrePropietario).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const apellido = String(this.unidadesForm.value.apellidoPropietario).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
 
     this._dialogService.confirmDialog({
       title: 'Crear unidad',
@@ -95,22 +100,63 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
       cancelText: 'No',
     }).subscribe(res => {
       if (res) {
-        this._unidadesService.createUnidades(this.unidadesForm.value,
-          this.idAministrador,
-          this.idCondominio,
-          this.idUsuario).then(() => {
 
-            this.toastr.success('La unidad fue creada con exito', 'Unidad registrada', {
-              positionClass: 'toast-bottom-right'
-            });
-            //this.loading = false;
-            //this.navigationExtras.state = this.condominio;
-            this.router.navigate(['/admin/ajustes'], this.navigationExtras);
+        const unidad: any = {
+          numeroUnidad: this.unidadesForm.value.numeroUnidad,
+          tipoUnidad: this.unidadesForm.value.tipoUnidad,
+          areaUnidad: this.unidadesForm.value.areaUnidad,
+          nombreResidente: this.unidadesForm.value.nombreResidente,
+          apellidoResidente: this.unidadesForm.value.apellidoResidente,
+          telefonoResidente: this.unidadesForm.value.telefonoResidente,
+          emailResidente: this.unidadesForm.value.emailResidente,
+          nombrePropietario: nombre,
+          apellidoPropietario: apellido,
+          telefonoPropietario: this.unidadesForm.value.telefonoPropietario,
+          emailPropietario: this.unidadesForm.value.emailPropietario,
+          idAdministrador: this.idAministrador,
+          idCondominio: this.idCondominio,
+          idUsuario: this.idUsuario
+        }
 
-          }).catch(error => {
-            console.log(error);
-          })
+        //Crea el documento
+        this.loading = true;
+        this._unidadesService.createUnidades(unidad).then(() => {
+
+          this.toastr.success('La unidad fue creada con exito', 'Unidad registrada', {
+            positionClass: 'toast-bottom-right'
+          });
+          this.loading = false;
+          this.navigationExtras.state = this.condominio;
+          this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.navigationExtras);
+
+        }).catch(error => {
+          console.log(error);
+        })
       }
     });
+  }
+
+  onBacktoList(): void {
+    this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.navigationExtras);
+  }
+
+  get form(): { [key: string]: AbstractControl; } {
+    return this.unidadesForm.controls;
+  }
+
+  get numeroUnidad() {
+    return this.unidadesForm.get('numeroUnidad');
+  }
+
+  get areaUnidad() {
+    return this.unidadesForm.get('areaUnidad');
+  }
+
+  get emailPropietario() {
+    return this.unidadesForm.get('emailPropietario');
+  }
+
+  get telefonoPropietario() {
+    return this.unidadesForm.get('telefonoPropietario');
   }
 }
