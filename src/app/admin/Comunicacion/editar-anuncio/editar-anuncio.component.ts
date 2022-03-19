@@ -39,7 +39,6 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
 
     this.anunciosForm = this.fb.group({
       tituloAnuncio: ['', Validators.required],
-      fechaAnuncio: ['', Validators.required],
       descripcionAnuncio: [''],
     })
 
@@ -73,7 +72,6 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.anunciosForm.setValue({
             tituloAnuncio: data.payload.data()['tituloAnuncio'],
-            fechaAnuncio: data.payload.data()['fechaAnuncio'],
             descripcionAnuncio: data.payload.data()['descripcionAnuncio'],
           })
         })

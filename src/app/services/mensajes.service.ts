@@ -1,5 +1,6 @@
-import {Injectable} from "@angular/core";
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
+import { Injectable } from "@angular/core";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,42 +13,27 @@ export class MensajesService {
   ) {
   }
 
-  getMensajes(idUser: string) {
-    return this.firestore.collection(
-      'Mensajes',
-      ref => ref.where(
-        'idUsuario',
-        '==', idUser)
-        .orderBy('fechaMensaje', 'desc'))
+  getMensajes(idUser: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser)
+      .orderBy('fechaMensaje', 'desc'))
       .snapshotChanges();
   }
 
-  saveMensajes(mensaje: any,
-                        idAdmin: string,
-                        idCondo: string,
-  ) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
+  getMensaje(id: string): Observable<any> {
+    return this.firestore.collection('Mensajes').doc(id).snapshotChanges();
+  }
+
+  guardarMensaje(mensaje: any) {
     const idMensaje = this.firestore.createId();
-    const data = {idAdministrador, idCondominio, idMensaje, ...mensaje}
-    return this.firestore.collection(
-      'Mensajes')
-      .doc(idMensaje)
-      .set(data);
+    const data = { idMensaje, ...mensaje }
+    return this.firestore.collection('Mensajes').doc(idMensaje).set(data);
   }
 
-  updateMensajes(mensaje: any,
-                          idAdmin: string,
-                          idCondo: string,
-                          idAnuncioGene: string) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
-    const idMensaje = idAnuncioGene;
-    const data = {idAdministrador, idCondominio, idMensaje, ...mensaje}
-    return this.firestore.collection(
-      'Mensajes')
-      .doc(idMensaje)
-      .update(data);
+  updateMensajes(id: string, data: any): Promise<any> {
+    return this.firestore.collection('Mensajes').doc(id).update(data);
   }
 
+  eliminarMensaje(id: string): Promise<any> {
+    return this.firestore.collection('Mensajes').doc(id).delete();
+  }
 }

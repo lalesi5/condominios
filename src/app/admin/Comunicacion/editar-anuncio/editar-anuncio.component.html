@@ -11,8 +11,8 @@
         <div class="form-group">
           <label>Título</label>
           <input type="text" class="form-control" formControlName="tituloAnuncio"
-            [ngClass]="{ 'is-invalid': !anunciosForm.controls['fechaAnuncio'].valid  && anunciosForm.controls['fechaAnuncio'].touched }">
-          <div *ngIf=" anunciosForm.controls['fechaAnuncio'].touched  && !anunciosForm.controls['fechaAnuncio'].valid"
+            [ngClass]="{ 'is-invalid': !anunciosForm.controls['tituloAnuncio'].valid  && anunciosForm.controls['tituloAnuncio'].touched }">
+          <div *ngIf=" anunciosForm.controls['tituloAnuncio'].touched  && !anunciosForm.controls['tituloAnuncio'].valid"
             class="invalid-feedback">
             Campo requerido
           </div>

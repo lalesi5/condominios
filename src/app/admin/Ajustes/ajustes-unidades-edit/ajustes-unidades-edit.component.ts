@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UnidadesService } from 'src/app/services/unidades.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-unidades-edit',
@@ -20,12 +21,14 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
   idUsuario: string = '';
   unidades: any[] = [];
   condominio: any[] = [];
+  usuarios: any[] = [];
 
   loading = false;
   id: string | null;
   private isEmail = /\S+@\S+\.\S+/;
 
   unidadesForm: FormGroup;
+  usuariosForm: FormGroup;
 
   navigationExtras: NavigationExtras = {
     state: {}
@@ -37,21 +40,25 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
     private aRoute: ActivatedRoute,
     private _dialogService: DialogService,
     private toastr: ToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _usuarioService: UsuariosService
   ) {
 
     this.unidadesForm = this.fb.group({
       numeroUnidad: ['', Validators.required],
       tipoUnidad: ['', Validators.required],
       areaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      nombreResidente: [''],
-      apellidoResidente: [''],
-      telefonoResidente: [''],
-      emailResidente: [''],
       nombrePropietario: ['', Validators.required],
       apellidoPropietario: ['', Validators.required],
       telefonoPropietario: ['', [Validators.pattern(/^\d+$/)]],
       emailPropietario: ['', [Validators.required, Validators.pattern(this.isEmail)]],
+    });
+
+    this.usuariosForm = this.fb.group({
+      nombreResidente: [''],
+      apellidoResidente: [''],
+      telefonoResidente: [''],
+      emailResidente: [''],
     });
 
     this.id = aRoute.snapshot.paramMap.get('id');
@@ -61,6 +68,7 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getDatosUnidade();
+
   }
 
   ngOnDestroy(): void {
@@ -87,18 +95,49 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
             numeroUnidad: data.payload.data()['numeroUnidad'],
             tipoUnidad: data.payload.data()['tipoUnidad'],
             areaUnidad: data.payload.data()['areaUnidad'],
-            nombreResidente: data.payload.data()['nombreResidente'],
-            apellidoResidente: data.payload.data()['apellidoResidente'],
-            telefonoResidente: data.payload.data()['telefonoResidente'],
-            emailResidente: data.payload.data()['emailResidente'],
+            //nombreResidente: data.payload.data()['nombreResidente'],
+            //apellidoResidente: data.payload.data()['apellidoResidente'],
+            //telefonoResidente: data.payload.data()['telefonoResidente'],
+            //emailResidente: data.payload.data()['emailResidente'],
             nombrePropietario: data.payload.data()['nombrePropietario'],
             apellidoPropietario: data.payload.data()['apellidoPropietario'],
             telefonoPropietario: data.payload.data()['telefonoPropietario'],
             emailPropietario: data.payload.data()['emailPropietario'],
           })
         })
+
       )
+      this.getDatosUsuario();
     }
+  }
+
+  getDatosUsuario() {
+    this.loading = true;
+    this.subscription.add(
+      this._usuarioService.getUsuario(this.idUsuario).subscribe(data => {
+        this.loading = false;
+        this.usuariosForm.setValue({
+          nombreResidente: data.payload.data()['name'],
+          apellidoResidente: data.payload.data()['last_name'],
+          emailResidente: data.payload.data()['email'],
+          telefonoResidente: data.payload.data()['phone'],
+        })
+      })
+    )
+
+  }
+
+  getUsuarios() {
+    this.subscription.add(
+      this._usuarioService.getUsuariosID(this.idUsuario).subscribe(data => {
+        data.forEach((element: any) => {
+          this.usuarios.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    );
   }
 
   onEditUnidades() {
@@ -121,6 +160,10 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
           apellidoPropietario: apellido,
           telefonoPropietario: this.unidadesForm.value.telefonoPropietario,
           emailPropietario: this.unidadesForm.value.emailPropietario,
+          nombreResidente: this.usuariosForm.value.nombreResidente,
+          apellidoResidente: this.usuariosForm.value.apellidoResidente,
+          telefonoResidente: this.usuariosForm.value.telefonoResidente,
+          emailResidente: this.usuariosForm.value.emailResidente,
         }
 
         //Crea el documento
