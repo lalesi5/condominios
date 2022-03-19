@@ -44,21 +44,16 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   getUnidades() {
-    try {
-      this.subscription.add(
-        this._unidades
-          .getAllUnidadesOrdenadas(this.idCondominio)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.unidades.push({
-                ...element.payload.doc.data()
-              })
-            })
+    this.subscription.add(
+      this._unidades.getAllUnidadesOrdenadas(this.idCondominio).subscribe(data => {
+        this.unidades = [];
+        data.forEach((element: any) => {
+          this.unidades.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
           })
-      )
-    }
-    catch (err) {
-      console.log(err);
-    }
+        })
+      })
+    );
   }
 }
