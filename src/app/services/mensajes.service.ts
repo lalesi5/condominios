@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,9 @@ export class MensajesService {
   ) {
   }
 
-  getMensajes(idUser: string) {
-    return this.firestore.collection(
-      'Mensajes',
-      ref => ref.where(
-        'idUsuario',
-        '==', idUser)
-        .orderBy('fechaMensaje', 'desc'))
+  getMensajes(idUser: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser)
+      .orderBy('fechaMensaje', 'desc'))
       .snapshotChanges();
   }
 

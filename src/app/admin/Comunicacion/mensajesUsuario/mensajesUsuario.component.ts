@@ -1,6 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
-import {MensajesService} from '../../../services/mensajes.service';
+import { Component, OnInit } from "@angular/core";
+import { NavigationExtras, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { MensajesService } from '../../../services/mensajes.service';
 
 @Component({
   selector: 'app-mensajesUsuario',
@@ -10,9 +11,11 @@ import {MensajesService} from '../../../services/mensajes.service';
 
 export class MensajeUsuarioComponent implements OnInit {
 
+  private subscription: Subscription = new Subscription;
   idAministrador: string = '';
   idCondominio: string = '';
   idUnidad: string = '';
+  idUsuario: string = '';
   mensajes: any[] = [];
   condominio: any[] = [];
 
@@ -36,14 +39,15 @@ export class MensajeUsuarioComponent implements OnInit {
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.idUnidad = navigations.idUnidad;
+    this.idUsuario = navigations.idUsuario;
     this.condominio = navigations;
     this.NavigationExtras.state = this.condominio;
   }
 
   getMensajes() {
-    try {
+    this.subscription.add(
       this._mensajesService
-        .getMensajes(this.idUnidad)
+        .getMensajes(this.idUsuario)
         .subscribe(data => {
           data.forEach((element: any) => {
             this.mensajes.push({
@@ -51,9 +55,7 @@ export class MensajeUsuarioComponent implements OnInit {
             })
           })
         })
-    } catch (err) {
-      console.log(err);
-    }
+    )
   }
 
   onBackToUnits() {
