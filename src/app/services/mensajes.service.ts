@@ -19,24 +19,18 @@ export class MensajesService {
       .snapshotChanges();
   }
 
+  getMensaje(id: string): Observable<any> {
+    return this.firestore.collection('Mensajes').doc(id).snapshotChanges();
+  }
+
   guardarMensaje(mensaje: any) {
     const idMensaje = this.firestore.createId();
     const data = { idMensaje, ...mensaje }
     return this.firestore.collection('Mensajes').doc(idMensaje).set(data);
   }
 
-  updateMensajes(mensaje: any,
-    idAdmin: string,
-    idCondo: string,
-    idAnuncioGene: string) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
-    const idMensaje = idAnuncioGene;
-    const data = { idAdministrador, idCondominio, idMensaje, ...mensaje }
-    return this.firestore.collection(
-      'Mensajes')
-      .doc(idMensaje)
-      .update(data);
+  updateMensajes(id: string, data: any): Promise<any> {
+    return this.firestore.collection('Mensajes').doc(id).update(data);
   }
 
   eliminarMensaje(id: string): Promise<any> {

@@ -53,6 +53,7 @@ export class MensajeUsuarioComponent implements OnInit {
       this._mensajesService
         .getMensajes(this.idUsuario)
         .subscribe(data => {
+          this.mensajes = [];
           data.forEach((element: any) => {
             this.mensajes.push({
               id: element.payload.doc.id,
@@ -82,6 +83,11 @@ export class MensajeUsuarioComponent implements OnInit {
         })
       }
     });
+  }
+
+  onGoEdit(item: any) {
+    this.NavigationExtras.state = item;
+    this.router.navigate(['/admin/comunicacion/editarMensaje', item.idMensaje], this.NavigationExtras);
   }
 
   onBackToUnits() {
