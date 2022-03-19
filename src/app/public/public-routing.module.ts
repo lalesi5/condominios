@@ -25,7 +25,7 @@ const routes: Routes = [
         {path: 'forgotPassword', component: ForgotPasswordComponent},
         {path: 'selectCondominio', component: SelectCondominioComponent, canActivate: [CheckLoginGuard]},
         {path: 'createCondominio', component: CreateCondominioComponent, canActivate: [CheckLoginGuard]},
-        {path: 'selectUnidad', component: SelectUnidadesComponent}
+        {path: 'selectUnidad', component: SelectUnidadesComponent, canActivate: [CheckLoginGuard]}
       ]
   },
 ];

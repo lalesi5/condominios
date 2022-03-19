@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from "rxjs";
-import { NavigationExtras, Router } from "@angular/router";
-import { UnidadesService } from "../../services/unidades.service";
-import { DialogService } from "../../services/dialog.service";
-import { AuthService } from "../../services/auth.service";
-import { ToastrService } from "ngx-toastr";
-
+import {Component, OnInit} from '@angular/core';
+import {Subscription} from "rxjs";
+import {NavigationExtras, Router} from "@angular/router";
+import {UnidadesService} from "../../services/unidades.service";
+import {DialogService} from "../../services/dialog.service";
+import {AuthService} from "../../services/auth.service";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -51,19 +50,23 @@ export class SelectUnidadesComponent implements OnInit {
   }
 
   onListUnidades() {
-    this.subscription.add(
-      this._unidadService
-        .getAllUnidadesIdUser(this.idUsuario)
-        .subscribe(data => {
-          this.unidades = [];
-          data.forEach((element: any) => {
-            this.unidades.push({
-              id: element.payload.doc.id,
-              ...element.payload.doc.data()
+    try {
+      this.subscription.add(
+        this._unidadService
+          .getAllUnidadesIdUser(this.idUsuario)
+          .subscribe(data => {
+            this.unidades = [];
+            data.forEach((element: any) => {
+              this.unidades.push({
+                id: element.payload.doc.id,
+                ...element.payload.doc.data()
+              })
             })
           })
-        })
-    )
+      )
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   onGoAdmin(item: any) {
