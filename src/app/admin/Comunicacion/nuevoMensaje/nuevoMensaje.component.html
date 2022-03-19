@@ -6,19 +6,19 @@
       <form [formGroup]="mensajesForm" (ngSubmit)="onCreateMensaje()">
         <div class="form-group">
           <label>Título</label>
-          <input type="text" class="form-control" formControlName="tituloMensaje">
-        </div>
-        <div class="form-group">
-          <label>Fecha</label>
-          <input type="datetime-local" class="form-control" min="2022-01-01" max="2040-12-31"
-                 formControlName="fechaMensaje">
+          <input type="text" class="form-control" formControlName="tituloMensaje"
+            [ngClass]="{ 'is-invalid': !mensajesForm.controls['tituloMensaje'].valid  && mensajesForm.controls['tituloMensaje'].touched }">
+          <div *ngIf=" mensajesForm.controls['tituloMensaje'].touched  && !mensajesForm.controls['tituloMensaje'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
         </div>
         <div class="form-group">
           <label>Descripcion</label><br>
           <textarea formControlName="descripcionMensaje" class="form-control" rows="3"></textarea>
         </div>
         <div>
-          <button type="submit" class="btn btn-success mr-2">Guardar</button>
+          <button type="submit" class="btn btn-success mr-2" [disabled]="mensajesForm.invalid">Guardar</button>
           <button class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
         </div>
       </form>

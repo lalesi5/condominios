@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
+import { Injectable } from "@angular/core";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -22,28 +22,20 @@ export class MensajesService {
       .snapshotChanges();
   }
 
-  saveMensajes(mensaje: any,
-                        idAdmin: string,
-                        idCondo: string,
-  ) {
-    const idAdministrador = idAdmin;
-    const idCondominio = idCondo;
+  guardarMensaje(mensaje: any) {
     const idMensaje = this.firestore.createId();
-    const data = {idAdministrador, idCondominio, idMensaje, ...mensaje}
-    return this.firestore.collection(
-      'Mensajes')
-      .doc(idMensaje)
-      .set(data);
+    const data = { idMensaje, ...mensaje }
+    return this.firestore.collection('Mensajes').doc(idMensaje).set(data);
   }
 
   updateMensajes(mensaje: any,
-                          idAdmin: string,
-                          idCondo: string,
-                          idAnuncioGene: string) {
+    idAdmin: string,
+    idCondo: string,
+    idAnuncioGene: string) {
     const idAdministrador = idAdmin;
     const idCondominio = idCondo;
     const idMensaje = idAnuncioGene;
-    const data = {idAdministrador, idCondominio, idMensaje, ...mensaje}
+    const data = { idAdministrador, idCondominio, idMensaje, ...mensaje }
     return this.firestore.collection(
       'Mensajes')
       .doc(idMensaje)
