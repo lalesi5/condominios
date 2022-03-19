@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs";
+import { DialogService } from "src/app/services/dialog.service";
 import { MensajesService } from '../../../services/mensajes.service';
 
 @Component({
@@ -25,7 +27,9 @@ export class MensajeUsuarioComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _mensajesService: MensajesService
+    private _mensajesService: MensajesService,
+    private _dialogService: DialogService,
+    private toastr: ToastrService
   ) {
     this.recoverData();
   }
@@ -51,11 +55,33 @@ export class MensajeUsuarioComponent implements OnInit {
         .subscribe(data => {
           data.forEach((element: any) => {
             this.mensajes.push({
+              id: element.payload.doc.id,
               ...element.payload.doc.data()
             })
           })
         })
     )
+  }
+
+  onDelete(id: string) {
+    this._dialogService.confirmDialog({
+      title: 'Eliminar mensaje',
+      message: '¿Está seguro de eliminar el mensaje?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this._mensajesService.eliminarMensaje(id).then(() => {
+          this.toastr.success('El mensaje fue eliminado con exito', 'Mensaje eliminado', {
+            positionClass: 'toast-bottom-right'
+          });
+          this.NavigationExtras.state = this.condominio;
+          this.router.navigate(['/admin/comunicacion/individuales'], this.NavigationExtras);
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    });
   }
 
   onBackToUnits() {

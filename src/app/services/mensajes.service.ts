@@ -39,4 +39,7 @@ export class MensajesService {
       .update(data);
   }
 
+  eliminarMensaje(id: string): Promise<any> {
+    return this.firestore.collection('Mensajes').doc(id).delete();
+  }
 }

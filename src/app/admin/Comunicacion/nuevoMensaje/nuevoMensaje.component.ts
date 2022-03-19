@@ -76,7 +76,8 @@ export class NuevoMensajeComponent implements OnInit {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           tituloMensaje: titulo,
-          idUsuario: this.idUsuario
+          idUsuario: this.idUsuario,
+          estado: 'Activo'
         }
         //Crea el documento
         this.loading = true;
