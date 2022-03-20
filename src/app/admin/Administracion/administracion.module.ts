@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from "@angular/forms";
 import { ReservasComponent } from './reservas/reservas.component';
 import { ReservasCreateComponent } from './reservas-create/reservas-create.component';
+import { GridModule } from "@syncfusion/ej2-angular-grids";
 
 
 
@@ -24,7 +25,8 @@ import { ReservasCreateComponent } from './reservas-create/reservas-create.compo
         MatInputModule,
         MatSelectModule,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        GridModule
     ],
     declarations:[
         UnidadesComponent,

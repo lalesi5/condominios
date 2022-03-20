@@ -12,9 +12,10 @@ import { ComunicacionComponent } from './Comunicacion/comunicacion.component';
 import { ReportesComponent } from './Reportes/reportes.component';
 import { FinanzasComponent } from './Finanzas/finanzas.component';
 
-import { MatCardModule } from '@angular/material/card'; 
+import { MatCardModule } from '@angular/material/card';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ExcelExportService, FilterService, GridModule, GroupService, PageService, PdfExportService, SortService, ToolbarService } from '@syncfusion/ej2-angular-grids';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         SharedModule,
         MatCardModule,
         CommonModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule, 
+        GridModule
     ],
     declarations: [
         AdminComponent,
@@ -35,15 +37,15 @@ import { ReactiveFormsModule } from '@angular/forms';
         ComunicacionComponent,
         ReportesComponent,
         FinanzasComponent,
-        AjustesComponent,
+        AjustesComponent
     ],
     exports: [
         MatCardModule,
         CommonModule
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy}
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
     ]
 })
 
-export class AdminModule {}
+export class AdminModule { }
