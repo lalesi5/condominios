@@ -14,7 +14,6 @@ import { Subscription } from "rxjs";
 export class GeneralesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
-  idAministrador: string = '';
   idCondominio: string = ''
   anunciosGenerales: any[] = [];
   condominio: any[] = [];
@@ -42,7 +41,6 @@ export class GeneralesComponent implements OnInit, OnDestroy {
 
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;

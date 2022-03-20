@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
     selector: 'app-areasComunesUsuario',
@@ -7,7 +8,20 @@ import { Component, OnInit } from "@angular/core";
 })
 
 export class AreasComunesUsuarioComponent implements OnInit{
-    constructor(){}
-    
-    ngOnInit(){}
+
+  unidad: any[] = [];
+
+  constructor(
+    private router: Router
+  ){
+    this.recoverData()
+  }
+
+  ngOnInit(){}
+
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.unidad = navigations;
+  }
+
 }

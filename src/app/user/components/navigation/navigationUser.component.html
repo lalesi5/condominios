@@ -1,12 +1,6 @@
 <div class="navigation">
     <ul>
         <li>
-            <!--<a href="#">
-                <span class="icon">
-                    <mat-icon>donut_small</mat-icon>
-                </span>
-                <span class="title">Alex Carrera</span>
-            </a>-->
             <a href="#">
                 <span class="icon">
                     <mat-icon>donut_small</mat-icon>
@@ -15,7 +9,7 @@
             </a>
         </li>
         <li>
-            <a [routerLink]="['/user/home']" [routerLinkActive]="['active']">
+            <a [routerLink]="['/user/home']" [routerLinkActive]="['active']" (click)="onGoInicio()">
                 <span class="icon">
                     <mat-icon>home</mat-icon>
                 </span>
@@ -23,7 +17,7 @@
             </a>
         </li>
         <li>
-            <a [routerLink]="['/user/comunicacion']" [routerLinkActive]="['active']">
+            <a [routerLink]="['/user/comunicacion']" [routerLinkActive]="['active']" (click)="onGoComunicacion()">
                 <span class="icon">
                     <mat-icon> chat</mat-icon>
                 </span>
@@ -31,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a [routerLink]="['/user/areasComunes']" [routerLinkActive]="['active']">
+            <a [routerLink]="['/user/areasComunes']" [routerLinkActive]="['active']" (click)="onGoAreasComunales()">
                 <span class="icon">
                     <mat-icon>folder</mat-icon>
                 </span>
@@ -39,7 +33,7 @@
             </a>
         </li>
         <li>
-            <a [routerLink]="['/user/finanzas']" [routerLinkActive]="['active']">
+            <a [routerLink]="['/user/finanzas']" [routerLinkActive]="['active']" (click)="onGoFinanzas()">
                 <span class="icon">
                     <mat-icon> attach_money</mat-icon>
                 </span>
@@ -47,7 +41,7 @@
             </a>
         </li>
         <li>
-            <a [routerLink]="['/user/ajustes']" [routerLinkActive]="['active']">
+            <a [routerLink]="['/user/ajustes']" [routerLinkActive]="['active']" (click)="onGoAjustes()">
                 <span class="icon">
                     <mat-icon>settings</mat-icon>
                 </span>
@@ -55,7 +49,7 @@
             </a>
         </li>
         <li>
-            <a [routerLink]="['/home']" [routerLinkActive]="['active']" (click)="onLogout()">
+            <a [routerLink]="['/selectUnidad']" [routerLinkActive]="['active']" (click)="onLogout()">
                 <span class="icon">
                     <mat-icon>exit_to_app</mat-icon>
                 </span>

@@ -2,8 +2,8 @@
   position: relative;
   width: 100%;
   min-height: calc(100vh - 130px);
-  background: rgb(40,133,255);
-  background: linear-gradient(90deg, rgba(40,133,255,0.8477766106442577) 0%, rgba(40,82,255,0.8477766106442577) 50%, rgba(22,6,128,1) 100%);
+  background: rgb(36,149,193);
+  background: linear-gradient(90deg, rgba(36,149,193,1) 0%, rgba(40,137,175,1) 50%, rgba(43,133,168,1) 100%);
 }
 
 .containerInfo mat-card {
@@ -16,7 +16,7 @@
 }
 
 .containerInfo mat-card h2 {
-  background-color: #287bff;
+  background-color: #2b85a8;
   color: #fff;
   border-radius: 10px;
   padding: 5px;
@@ -44,14 +44,14 @@
 }
 
 .headerCondominio .card:hover {
-  background: #287bff;
+  background: #2b85a8;
 }
 
 .headerCondominio .card .cardName {
   font-size: 1.4em;
   margin-top: 10px;
   text-align: center;
-  color: #287bff
+  color: #2b85a8
 }
 
 .headerCondominio .card .iconBx {
@@ -85,7 +85,7 @@
   color: #fff;
 }
 .headerCondominio .card:hover .iconBx {
-  color: #287bff
+  color: #2b85a8
 }
 
 .botonFinalizar {

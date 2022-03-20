@@ -49,6 +49,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
 
     this.authSvc.loginByEmailAdmin(formValue).then((res) => {
       if (res) {
+        // @ts-ignore
         const idAdministrador = res.user.uid;
 
         //Comprueba si el usuario ha verificado su correo al momento de registrarse

@@ -1,91 +1,26 @@
-<div class="mensajesUsuario">
+<div class="comunicacion">
   <app-topbarUser></app-topbarUser>
-  <div class="cuerpoMensajesUsuario">
-    <div class="headerUser">
+  <div class="mensajesUsuario">
+    <div class="headerMensajesUsuario">
       <mat-card>
-        <mat-card-title>Alex Carrera</mat-card-title>
-        <mat-card-subtitle>Unidad 1</mat-card-subtitle>
+        <div class="containerMensajes">
+          <h2>Comunicados Individuales</h2>
+          <h3> Mensajes Pertenecientes a: {{nombreUsuario}}</h3>
+          <h5 style="margin-top: 30px;" *ngIf='mensajes.length == 0'>No hay datos para mostrar</h5>
+          <button class="btn btn-primary mb-2" (click)="onAnswer()">Responder</button>
+          <div>
+            <mat-card *ngFor="let mensaje of mensajes">
+              <mat-card-title><b>Título: </b> {{mensaje.tituloMensaje}}</mat-card-title>
+              <div class="clearfix"></div>
+              <mat-card-subtitle><b>Fecha: </b> {{mensaje.fechaMensaje}} </mat-card-subtitle>
+              <mat-card-subtitle><b>Escrito por: </b> {{mensaje.escritoPor}}</mat-card-subtitle>
+              <mat-card-content>
+                <p>{{mensaje.descripcionMensaje}}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
       </mat-card>
     </div>
   </div>
-
-  <div class="containerMensajes">
-    <mat-card>
-      <mat-card-title>Bienvenidos a Condominios EPN</mat-card-title>
-      <mat-card-subtitle>Fecha Comunicado: 22/06/2022</mat-card-subtitle>
-      <mat-card-content>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vulputate, 
-          congue semper sollicitudin eleifend venenatis ut hendrerit fames vivamus, 
-          ullamcorper sagittis at dictum pellentesque quis feugiat. 
-          odales habitasse fames orci mauris interdum mollis cras, 
-          montes dis neque ornare magnis feugiat, curae cubilia cum pharetra pellentesque nisl. 
-          Elementum nisl vel aptent lacus varius lectus enenatis taciti duis, 
-          quis rhoncus orci penatibus tempus sociosqu porta magna, 
-          arcu lacinia curae erat a facilisi laoreet etiam. Sociis per lectus posuere potenti dictumst quam, 
-          maecenas eget obortis ociosqu auctor fusce viverra, tortor tincidunt in curae arcu.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button class="btn">Responder</button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
-      <mat-card-title>Bienvenidos a Condominios EPN</mat-card-title>
-      <mat-card-subtitle>Fecha Comunicado: 22/06/2022</mat-card-subtitle>
-      <mat-card-content>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vulputate, 
-          congue semper sollicitudin eleifend venenatis ut hendrerit fames vivamus, 
-          ullamcorper sagittis at dictum pellentesque quis feugiat. 
-          odales habitasse fames orci mauris interdum mollis cras, 
-          montes dis neque ornare magnis feugiat, curae cubilia cum pharetra pellentesque nisl. 
-          Elementum nisl vel aptent lacus varius lectus enenatis taciti duis, 
-          quis rhoncus orci penatibus tempus sociosqu porta magna, 
-          arcu lacinia curae erat a facilisi laoreet etiam. Sociis per lectus posuere potenti dictumst quam, 
-          maecenas eget obortis ociosqu auctor fusce viverra, tortor tincidunt in curae arcu.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button class="btn">Responder</button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
-        <mat-card-title>Bienvenidos a Condominios EPN</mat-card-title>
-        <mat-card-subtitle>Fecha Comunicado: 22/06/2022</mat-card-subtitle>
-        <mat-card-content>
-          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vulputate, 
-            congue semper sollicitudin eleifend venenatis ut hendrerit fames vivamus, 
-            ullamcorper sagittis at dictum pellentesque quis feugiat. 
-            odales habitasse fames orci mauris interdum mollis cras, 
-            montes dis neque ornare magnis feugiat, curae cubilia cum pharetra pellentesque nisl. 
-            Elementum nisl vel aptent lacus varius lectus enenatis taciti duis, 
-            quis rhoncus orci penatibus tempus sociosqu porta magna, 
-            arcu lacinia curae erat a facilisi laoreet etiam. Sociis per lectus posuere potenti dictumst quam, 
-            maecenas eget obortis ociosqu auctor fusce viverra, tortor tincidunt in curae arcu.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button class="btn">Responder</button>
-          </mat-card-actions>
-      </mat-card>
-      <mat-card>
-        <mat-card-title>Bienvenidos a Condominios EPN</mat-card-title>
-        <mat-card-subtitle>Fecha Comunicado: 22/06/2022</mat-card-subtitle>
-        <mat-card-content>
-          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vulputate, 
-            congue semper sollicitudin eleifend venenatis ut hendrerit fames vivamus, 
-            ullamcorper sagittis at dictum pellentesque quis feugiat. 
-            odales habitasse fames orci mauris interdum mollis cras, 
-            montes dis neque ornare magnis feugiat, curae cubilia cum pharetra pellentesque nisl. 
-            Elementum nisl vel aptent lacus varius lectus enenatis taciti duis, 
-            quis rhoncus orci penatibus tempus sociosqu porta magna, 
-            arcu lacinia curae erat a facilisi laoreet etiam. Sociis per lectus posuere potenti dictumst quam, 
-            maecenas eget obortis ociosqu auctor fusce viverra, tortor tincidunt in curae arcu.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button class="btn">Responder</button>
-          </mat-card-actions>
-      </mat-card>   
-  </div>
-
 </div>

@@ -1,22 +1,20 @@
-.mensajesUsuario {
+.ajustesReservas {
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
   top: 150px;
 }
 
-.headerMensajesUsuario mat-card {
+.containerInfo mat-card {
   display: grid;
   width: 70%;
   left: 15%;
   top: 5vh;
   border-radius: 20px;
   padding-bottom: 25px;
-  overflow: auto;
-  max-height: 800px;
 }
 
-.headerMensajesUsuario mat-card h2 {
+.containerInfo mat-card h2 {
   background-color: #287bff;
   color: #fff;
   border-radius: 10px;
@@ -24,21 +22,10 @@
   text-align: center;
 }
 
-.headerMensajesUsuario mat-card h3 {
+.containerInfo mat-card h3 {
   background-color: #2ba846;
   color: #fff;
   border-radius: 10px;
   padding: 5px;
   text-align: center;
-}
-
-.containerMensajes mat-card {
-  display: grid;
-  width: 98%;
-  left: 1%;
-  top: 1vh;
-  margin-bottom: 7px;
-  border-radius: 20px;
-  padding-bottom: 25px;
-  background-color: #eeebeb;
 }
