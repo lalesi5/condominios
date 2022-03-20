@@ -58,7 +58,7 @@ export class AjustesUsuarioComponent implements OnInit, OnDestroy {
 
   onEdit(item: any) {
     this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesUsuarioEdit', item.idUsuario], this.navigationExtras);
+    this.router.navigate(['/user/editarUsuario', item.idUsuario], this.navigationExtras);
   }
 
 }

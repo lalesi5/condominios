@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { first, Subscription } from "rxjs";
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { Subscription } from "rxjs";
 import Validation from "src/app/public/confirm.validator";
 import { AuthService } from "src/app/services/auth.service";
 import { getAuth } from "firebase/auth";
