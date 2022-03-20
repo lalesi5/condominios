@@ -7,17 +7,17 @@
           <span class="sr-only">Procesando...</span>
         </div>
       </h3>
-      <form>
+      <form [formGroup]="reservaForm" (ngSubmit)="onCreateReserva()">
         <div class="form-group">
           <label>Fecha de Reserva Inicio</label>
-          <input type="datetime-local" class="form-control" formControlName="fechaReserva">
+          <input type="datetime-local" class="form-control" formControlName="fechaReservaInicio">
           <div class="invalid-feedback">
             Campo requerido
           </div>
         </div>
         <div class="form-group">
           <label>Fecha de Reserva Fin</label>
-          <input type="datetime-local" class="form-control" formControlName="fechaReserva">
+          <input type="datetime-local" class="form-control" formControlName="fechaReservaFin">
           <div class="invalid-feedback">
             Campo requerido
           </div>
@@ -32,6 +32,16 @@
           <div class="invalid-feedback">
             Campo requerido
           </div>
+        </div>
+        <div class="form-group">
+          <label>Numero de Unidade</label>
+          <select class="form-control" formControlName="idUnidad">
+            <option *ngFor="let unidad of unidades" [ngValue]="unidad.numeroUnidad">Unidad: {{unidad.numeroUnidad}}</option>
+          </select>
+          <div class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
           <div class="form-group">
             <label>Detalle de la Reserva</label>
             <input type="text" class="form-control" formControlName="detalleReserva">
@@ -39,10 +49,9 @@
               Campo requerido
             </div>
           </div>
-        </div>
         <div class="centrarBotones">
           <button type="submit" class="btn btn-primary mr-2">Crear</button>
-          <button class="btn btn-success">Volver</button>
+          <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
         </div>
       </form>
     </mat-card>
