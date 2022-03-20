@@ -5,7 +5,7 @@ import { UnidadesService } from "src/app/services/unidades.service";
 import { ClickEventArgs } from '@syncfusion/ej2-navigations'
 import { ExcelExportService, GridComponent, PageSettingsModel, PdfExportProperties, PdfExportService, ToolbarItems, ToolbarService } from "@syncfusion/ej2-angular-grids";
 import { Query } from '@syncfusion/ej2-data';
-import { L10n, loadCldr, setCulture, setCurrencyCode } from '@syncfusion/ej2-base';
+import { L10n, setCulture } from '@syncfusion/ej2-base';
 
 L10n.load({
     'es': {
@@ -121,7 +121,7 @@ export class UsuariosComponent implements OnInit {
         private _unidades: UnidadesService
     ) {
         this.pageSettings = { pageSize: 6 }
-        
+
         //this.toolbarOptions = ['PdfExport', 'ExcelExport'];
         this.toolbarOptions = ['ExcelExport'];
 

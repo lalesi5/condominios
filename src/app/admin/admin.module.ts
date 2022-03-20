@@ -15,7 +15,7 @@ import { FinanzasComponent } from './Finanzas/finanzas.component';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ExcelExportService, FilterService, GridModule, GroupService, PageService, PdfExportService, SortService, ToolbarService } from '@syncfusion/ej2-angular-grids';
+import { GridModule } from '@syncfusion/ej2-angular-grids';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { ExcelExportService, FilterService, GridModule, GroupService, PageServic
         SharedModule,
         MatCardModule,
         CommonModule,
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         GridModule
     ],
     declarations: [
