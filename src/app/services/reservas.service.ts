@@ -11,13 +11,14 @@ export class ReservasService {
   constructor(public firestore: AngularFirestore) {
   }
 
-  agregarReserva(reserva: any, idReser:string): Promise<any> {
-    const idReserva = idReser || this.firestore.createId();
-    return this.firestore.collection('Reservas').doc(idReserva).set(reserva);
+  agregarReserva(reserva: any): Promise<any> {
+    const idReserva = this.firestore.createId();
+    const data = { idReserva, ...reserva}
+    return this.firestore.collection('Reservas').doc(idReserva).set(data);
   }
 
-  getReserva(idCondominio: string): Observable<any> {
-    return this.firestore.collection('Reservas', ref => ref.where('idCondominio','==', idCondominio).orderBy('fechaReserva', 'desc')).snapshotChanges();
+  getReserva(idAreaComun: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idAreaComunal','==', idAreaComun).orderBy('fechaReservaInicio', 'desc')).snapshotChanges();
   }
 
   eliminarReserva(idReser: string): Promise<any>{

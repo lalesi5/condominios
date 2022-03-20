@@ -18,13 +18,13 @@
           <th>Opciones</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let reserva of reservas">
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{reserva.fechaReservaInicio}}</td>
+          <td>{{reserva.fechaReservaFin}}</td>
+          <td>{{reserva.estadoReserva}}</td>
+          <td>{{reserva.idUnidad}}</td>
+          <td>{{reserva.detalleReserva}}</td>
           <td>
             <mat-icon class="btn-info">edit</mat-icon>
             <mat-icon  class="btn-danger">delete</mat-icon>
