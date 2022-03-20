@@ -18,6 +18,7 @@ export class MensajeUsuarioComponent implements OnInit {
   idCondominio: string = '';
   idUnidad: string = '';
   idUsuario: string = '';
+  nombreUsuario: string = '';
   mensajes: any[] = [];
   condominio: any[] = [];
 
@@ -44,6 +45,7 @@ export class MensajeUsuarioComponent implements OnInit {
     this.idCondominio = navigations.idCondominio;
     this.idUnidad = navigations.idUnidad;
     this.idUsuario = navigations.idUsuario;
+    this.nombreUsuario = navigations.nombreResidente + ' ' + navigations.apellidoResidente;
     this.condominio = navigations;
     this.NavigationExtras.state = this.condominio;
   }
@@ -76,8 +78,6 @@ export class MensajeUsuarioComponent implements OnInit {
           this.toastr.success('El mensaje fue eliminado con exito', 'Mensaje eliminado', {
             positionClass: 'toast-bottom-right'
           });
-          this.NavigationExtras.state = this.condominio;
-          this.router.navigate(['/admin/comunicacion/individuales'], this.NavigationExtras);
         }).catch(error => {
           console.log(error);
         })

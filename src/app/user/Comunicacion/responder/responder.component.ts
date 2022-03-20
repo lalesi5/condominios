@@ -1,23 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { DialogService } from "src/app/services/dialog.service";
-import { MensajesService } from "../../../services/mensajes.service";
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NavigationExtras, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {DialogService} from "src/app/services/dialog.service";
+import {MensajesService} from "../../../services/mensajes.service";
 
 @Component({
-  selector: 'app-nuevoMensaje',
-  templateUrl: './nuevoMensaje.component.html',
-  styleUrls: ['./nuevoMensaje.component.css']
+  selector: 'app-responder',
+  templateUrl: './responder.component.html',
+  styleUrls: ['./responder.component.css']
 })
-
-export class NuevoMensajeComponent implements OnInit {
+export class ResponderComponent implements OnInit {
 
   idAdministrador: string = '';
   idCondominio: string = '';
   idUsuario: string = '';
+  nombreUser: string = '';
   mensajes: any[] = [];
-  condominio: any[] = [];
+  unidad: any[] = [];
 
   loading = false;
 
@@ -49,12 +49,13 @@ export class NuevoMensajeComponent implements OnInit {
     this.idAdministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.idUsuario = navigations.idUsuario;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.unidad = navigations;
+    this.nombreUser = navigations.nombreResidente + ' ' + navigations.apellidoResidente;
+    this.navigationExtras.state = this.unidad;
   }
 
-  onBacktoList() {
-    this.router.navigate(['/admin/comunicacion/individuales'], this.navigationExtras);
+  volver() {
+    this.router.navigate(['/user/comunicacion'], this.navigationExtras);
   }
 
   onCreateMensaje() {
@@ -77,7 +78,7 @@ export class NuevoMensajeComponent implements OnInit {
           tituloMensaje: titulo,
           idUsuario: this.idUsuario,
           estado: 'Activo',
-          escritoPor: 'Administrador'
+          escritoPor: this.nombreUser
         }
         //Crea el documento
         this.loading = true;
@@ -87,7 +88,7 @@ export class NuevoMensajeComponent implements OnInit {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          this.router.navigate(['/admin/comunicacion/individuales'], this.navigationExtras);
+          this.router.navigate(['/user/comunicacion'], this.navigationExtras);
 
         }).catch(error => {
           console.log(error);

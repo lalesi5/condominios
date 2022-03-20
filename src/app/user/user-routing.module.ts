@@ -9,6 +9,7 @@ import {FinanzasUsuarioComponent} from './Finanzas/finanzasUsuario.component';
 import {AreasComunesUsuarioComponent} from './AreasComunes/areasComunesUsuario.component';
 import {AjustesUsuarioComponent} from './Ajustes/ajustesUsuario.component';
 import {CheckLoginGuard} from "../core/shared/guards/check-login.guard";
+import {ResponderComponent} from "./Comunicacion/responder/responder.component";
 
 const routesUsuarios: Routes = [
   {
@@ -21,7 +22,7 @@ const routesUsuarios: Routes = [
         {path: 'finanzas', component: FinanzasUsuarioComponent, canActivate: [CheckLoginGuard]},
         {path: 'areasComunes', component: AreasComunesUsuarioComponent, canActivate: [CheckLoginGuard]},
         {path: 'ajustes', component: AjustesUsuarioComponent, canActivate: [CheckLoginGuard]},
-
+        {path: 'responder', component: ResponderComponent, canActivate: [CheckLoginGuard]}
       ]
   },
 ];

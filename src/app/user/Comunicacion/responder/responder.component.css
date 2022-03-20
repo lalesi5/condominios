@@ -1,4 +1,4 @@
-.comunicacion {
+.responder {
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
@@ -8,25 +8,24 @@
   background: linear-gradient(90deg, rgba(36,149,193,1) 0%, rgba(40,137,175,1) 50%, rgba(43,133,168,1) 100%);
 }
 
-.mensajesUsuario {
+.nuevoAnuncio {
   position: absolute;
-  width: calc(100% - 10vh);
-  left: 5vh;
-  top: 10vh;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 150px;
 }
 
-.headerMensajesUsuario mat-card {
+.containerAnuncio mat-card {
   display: grid;
-  width: 70%;
-  left: 15%;
+  width: 50%;
+  left: 25%;
   top: 5vh;
   border-radius: 20px;
   padding-bottom: 25px;
   overflow: auto;
-  max-height: 800px;
 }
 
-.headerMensajesUsuario mat-card h2 {
+.containerAnuncio mat-card h2 {
   background-color: #287bff;
   color: #fff;
   border-radius: 10px;
@@ -34,21 +33,10 @@
   text-align: center;
 }
 
-.headerMensajesUsuario mat-card h3 {
+.containerAnuncio mat-card h3 {
   background-color: #2ba846;
   color: #fff;
   border-radius: 10px;
   padding: 5px;
   text-align: center;
-}
-
-.containerMensajes mat-card {
-  display: grid;
-  width: 98%;
-  left: 1%;
-  top: 1vh;
-  margin-bottom: 7px;
-  border-radius: 20px;
-  padding-bottom: 25px;
-  background-color: #eeebeb;
 }

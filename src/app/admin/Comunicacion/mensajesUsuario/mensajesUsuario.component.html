@@ -3,7 +3,7 @@
     <mat-card>
       <div class="containerMensajes">
         <h2>Comunicados Individuales</h2>
-        <h3> Mensajes Pertenecientes a:  </h3>
+        <h3> Mensajes Pertenecientes a:  {{nombreUsuario}}</h3>
         <h5 style="margin-top: 30px;" *ngIf='mensajes.length == 0'>No hay datos para mostrar</h5>
         <button class="btn btn-primary mb-2" (click)="onBackToUnits()">Volver</button>
         <div>
@@ -11,7 +11,7 @@
             <mat-card-title><b>Título: </b> {{mensaje.tituloMensaje}}</mat-card-title>
             <div class="clearfix"></div>
             <mat-card-subtitle><b>Fecha: </b> {{mensaje.fechaMensaje}} </mat-card-subtitle>
-            <mat-card-subtitle><b>Escrito por: </b> Administrador</mat-card-subtitle>
+            <mat-card-subtitle><b>Escrito por: </b> {{mensaje.escritoPor}}</mat-card-subtitle>
             <mat-card-content>
               <p>{{mensaje.descripcionMensaje}}</p>
             </mat-card-content>

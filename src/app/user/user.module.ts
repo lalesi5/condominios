@@ -16,19 +16,22 @@ import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario
 import { AjustesUsuarioComponent } from './Ajustes/ajustesUsuario.component';
 import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario.component';
 import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
+import { ResponderComponent } from './Comunicacion/responder/responder.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
 @NgModule({
 
-    imports: [
-        UsuarioRoutingModule,
-        MatCardModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        CommonModule
-    ],
+  imports: [
+    UsuarioRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    CommonModule,
+    ReactiveFormsModule
+  ],
     declarations: [
         UserComponent,
         UserAnunciosComponent,
@@ -38,7 +41,8 @@ import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
         ComunicacionUsuarioComponent,
         AjustesUsuarioComponent,
         AreasComunesUsuarioComponent,
-        FinanzasUsuarioComponent
+        FinanzasUsuarioComponent,
+        ResponderComponent
     ],
     exports: [
         MatCardModule,
