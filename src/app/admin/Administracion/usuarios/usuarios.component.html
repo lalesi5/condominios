@@ -1,7 +1,7 @@
 <div class="bodyUnidades">
     <div class="tablaUsuarios">
         <mat-card>
-            <table class="table table-striped">
+            <!--<table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Unidad</th>
@@ -9,7 +9,6 @@
                         <th>Usuario</th>
                         <th>Email</th>
                         <th>Teléfono</th>
-                        <th>Celular</th>
                         <th>Área</th>
                     </tr>
                 </thead>
@@ -18,14 +17,30 @@
                     <tr *ngFor="let unidad of unidades">
                         <td>{{unidad.numeroUnidad}}</td>
                         <td>{{unidad.tipoUnidad}}</td>
-                        <td>{{unidad.nombreArrendatario}} {{unidad.apellidoArrendatario}}</td>
-                        <td>{{unidad.emailArrendatario}}</td>
-                        <td>{{unidad.telefonoArrendatario}}</td>
-                        <td>{{unidad.celularArrendatario}}</td>
-                        <td>{{unidad.areaUnidad}} m.</td>
+                        <td>{{unidad.nombreResidente}} {{unidad.apellidoResidente}}</td>
+                        <td>{{unidad.emailResidente}}</td>
+                        <td>{{unidad.telefonoResidente}}</td>
+                        <td>{{unidad.areaUnidad}} m2.</td>
                     </tr>
                 </tbody>
-            </table>
+            </table>-->
+
+            <div class="control-section">
+                <ejs-grid #grid id='Grid' [allowPaging]="true" [dataSource]='unidades' [allowSorting]="true"
+                    [allowFiltering]="true" [pageSettings]="pageSettings" [toolbar]='toolbarOptions' height='272px'
+                    [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()'
+                    (toolbarClick)='toolbarClick($event)'>
+                    <!--[allowPdfExport]='true' (pdfExportComplete)='pdfExportComplete()'-->
+                    <e-columns>
+                        <e-column field='numeroUnidad' headerText='Unidad' textAlign='Left' width=120> </e-column>
+                        <e-column field='tipoUnidad' headerText='Tipo' width=120> </e-column>
+                        <e-column field='nombreResidente' headerText='Usuario' width=120> </e-column>
+                        <e-column field='emailResidente' headerText='Eamil' width=120> </e-column>
+                        <e-column field='telefonoResidente' headerText='Teléfono' width=120> </e-column>
+                        <e-column field='areaUnidad' headerText='Area' width=120> </e-column>
+                    </e-columns>
+                </ejs-grid>`
+            </div>
         </mat-card>
     </div>
 </div>

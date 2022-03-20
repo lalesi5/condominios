@@ -45,6 +45,7 @@ export class IndividualesComponent implements OnInit {
       this._unidadesService
         .getAllUnidadesOrdenadas(this.idCondominio)
         .subscribe(data => {
+          this.unidades = [];
           data.forEach((element: any) => {
             this.unidades.push({
               ...element.payload.doc.data()
