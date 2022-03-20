@@ -4,8 +4,8 @@
   left: 231px;
   min-height: 100vh;
   transition: 0.5s;
-  background: rgb(40,133,255);
-  background: linear-gradient(90deg, rgba(40,133,255,0.8477766106442577) 0%, rgba(40,82,255,0.8477766106442577) 50%, rgba(22,6,128,1) 100%);
+  background: rgb(40, 133, 255);
+  background: linear-gradient(90deg, rgba(40, 133, 255, 0.8477766106442577) 0%, rgba(40, 82, 255, 0.8477766106442577) 50%, rgba(22, 6, 128, 1) 100%);
 }
 
 

@@ -3,8 +3,8 @@
   width: calc(100% - 231px);
   left: 231px;
   min-height: 100vh;
-  background: rgba(0,0,0,0.08);
-  transition: 0.5s;
+  background: rgb(36, 149, 193);
+  background: linear-gradient(90deg, rgba(36, 149, 193, 1) 0%, rgba(40, 137, 175, 1) 50%, rgba(43, 133, 168, 1) 100%);
 }
 
 .headerMensajesUsuario mat-card {
@@ -17,35 +17,34 @@
 }
 
 .headerUser mat-card {
-    top: 15px;
-    margin-top: 15px;
-    width: 99%;
-    left: 8px;
-    border-radius: 20px;
-    padding: 20px 20px;
-    text-align: center;
-    background: #2b85a8;
-    color: #fff;
-  }
+  top: 15px;
+  margin-top: 15px;
+  width: 99%;
+  left: 8px;
+  border-radius: 20px;
+  padding: 20px 20px;
+  text-align: center;
+  background: #2b85a8;
+  color: #fff;
+}
 
-  .containerMensajes mat-card {
-    top: 15px;
-    margin-top: 15px;
-    width: 99%;
-    left: 8px;
-    border-radius: 20px;
-    padding: 20px 20px;
-    margin-top: 20px;
+.containerMensajes mat-card {
+  top: 15px;
+  margin-top: 15px;
+  width: 99%;
+  left: 8px;
+  border-radius: 20px;
+  padding: 20px 20px;
+  margin-top: 20px;
 }
 
 .btn {
-    position: relative;
-    margin-top: 8px;
-    margin-right: 8px;
-    padding: 5px 4px;
-    background: #2b85a8;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 6px;
-  }
-  
+  position: relative;
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 5px 4px;
+  background: #2b85a8;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 6px;
+}

@@ -31,24 +31,24 @@
     </div>
   </div>
 
-  <div class="containerMensajes">
+  <div class="anuncioGeneral">
     <div class="containerGeneral">
       <mat-card>
-        <div class="containerInfo">
-        <h2>Areas Comunales</h2>
-        <h3>Datos del Area Comunal</h3>
-        <mat-card>
-          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vulputate,
-            congue semper sollicitudin eleifend venenatis ut hendrerit fames vivamus,
-            ullamcorper sagittis at dictum pellentesque quis feugiat.
-            odales habitasse fames orci mauris interdum mollis cras,
-            montes dis neque ornare magnis feugiat, curae cubilia cum pharetra pellentesque nisl.
-            Elementum nisl vel aptent lacus varius lectus enenatis taciti duis,
-            quis rhoncus orci penatibus tempus sociosqu porta magna,
-            arcu lacinia curae erat a facilisi laoreet etiam. Sociis per lectus posuere potenti dictumst quam,
-            maecenas eget obortis ociosqu auctor fusce viverra, tortor tincidunt in curae arcu.
-          </p>
-        </mat-card>
+        <div class="containerMensajes">
+          <h2>Anuncios Generales</h2>
+          <h3>Datos de los Anuncios Generales</h3>
+          <h5 style="margin-top: 30px;" *ngIf='anunciosGenerales.length == 0'>No hay anuncios para mostrar</h5>
+          <div layout="row">
+            <mat-card *ngFor="let anuncio of anunciosGenerales" class="mb-2">
+              <mat-card-title><b>Título: </b> {{anuncio.tituloAnuncio}}</mat-card-title>
+              <div class="clearfix"></div>
+              <mat-card-subtitle><b>Fecha: </b> {{anuncio.fechaAnuncio}}</mat-card-subtitle>
+              <mat-card-subtitle><b>Escrito por: </b> Administrador</mat-card-subtitle>
+              <mat-card-content>
+                <p>{{anuncio.descripcionAnuncio}}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
         </div>
       </mat-card>
     </div>

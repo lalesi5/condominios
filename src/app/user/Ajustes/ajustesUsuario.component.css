@@ -3,6 +3,6 @@
   width: calc(100% - 231px);
   left: 231px;
   min-height: 100vh;
-  background: rgba(0,0,0,0.08);
-  transition: 0.5s;
+  background: rgb(36, 149, 193);
+  background: linear-gradient(90deg, rgba(36, 149, 193, 1) 0%, rgba(40, 137, 175, 1) 50%, rgba(43, 133, 168, 1) 100%);
   }
