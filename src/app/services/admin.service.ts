@@ -12,8 +12,12 @@ export class AdminService {
     public firestore: AngularFirestore,
   ) { }
 
-  getAdministradorID(idCondominio: string): Observable<any> {
-    return this.firestore.collection('Administrador', ref => ref.where('idAdministrador', '==', idCondominio).where('rol', '==', 'Administrador')).snapshotChanges();
+  getAdministradorID(id: string): Observable<any> {
+    return this.firestore.collection('Administrador', ref => ref.where('idAdministrador', '==', id).where('rol', '==', 'Administrador')).snapshotChanges();
+  }
+
+  getUserID(id: string): Observable<any> {
+    return this.firestore.collection('Administrador', ref => ref.where('idUsuario', '==', id).where('rol', '==', 'Usuario')).snapshotChanges();
   }
 
   getAdministrador(id: string): Observable<any> {

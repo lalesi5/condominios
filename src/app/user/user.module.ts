@@ -18,6 +18,7 @@ import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario
 import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
 import { ResponderComponent } from './Comunicacion/responder/responder.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { AjustesUserEditComponent } from './Ajustes/ajustes-user-edit/ajustes-user-edit.component';
 
 
 
@@ -42,7 +43,8 @@ import {ReactiveFormsModule} from "@angular/forms";
         AjustesUsuarioComponent,
         AreasComunesUsuarioComponent,
         FinanzasUsuarioComponent,
-        ResponderComponent
+        ResponderComponent,
+        AjustesUserEditComponent
     ],
     exports: [
         MatCardModule,
