@@ -1,0 +1,137 @@
+<div class="ajustes">
+    <app-topbarUser></app-topbarUser>
+    <div class="ajustesUsuario">
+        <div class="containerInfo">
+          <mat-card>
+            <h2>Cuenta</h2>
+            <h3>Editar Datos del Administrador
+              <div *ngIf="loading" class="spinner-border float-right" role="status">
+                <span class="sr-only">Procesando...</span>
+              </div>
+            </h3>
+            <form [formGroup]='administradorForm' (ngSubmit)="onEdit()">
+              <div class="form-group">
+                <label>Nombres</label>
+                <input type="text" class="form-control" formControlName="name"
+                  [ngClass]="{ 'is-invalid': !administradorForm.controls['name'].valid  && administradorForm.controls['name'].touched }">
+                <div *ngIf=" administradorForm.controls['name'].touched  && !administradorForm.controls['name'].valid"
+                  class="invalid-feedback">
+                  Campo requerido
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" formControlName="last_name"
+                  [ngClass]="{ 'is-invalid': !administradorForm.controls['last_name'].valid  && administradorForm.controls['last_name'].touched }">
+                <div
+                  *ngIf=" administradorForm.controls['last_name'].touched  && !administradorForm.controls['last_name'].valid"
+                  class="invalid-feedback">
+                  Campo requerido
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Dirección</label>
+                <input type="text" class="form-control" formControlName="address"
+                  [ngClass]="{ 'is-invalid': !administradorForm.controls['address'].valid  && administradorForm.controls['address'].touched }">
+                <div *ngIf=" administradorForm.controls['address'].touched  && !administradorForm.controls['address'].valid"
+                  class="invalid-feedback">
+                  Campo requerido
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" formControlName="phone"
+                  [ngClass]="{ 'is-invalid': !administradorForm.controls['phone'].valid  && administradorForm.controls['phone'].touched }">
+                <div *ngIf="form['phone'].errors" class="invalid-feedback">
+                  <!--<div *ngIf="form['phone'].errors['required']">
+                    Campo requerido
+                  </div>-->
+                  <div *ngIf="form['phone'].errors['pattern']">
+                    El campo solo debe contener números!
+                  </div>
+                </div>
+              </div>
+              <div class="centrarBotones">
+                <button type="submit" class="btn btn-success mr-2" [disabled]="administradorForm.invalid">Guardar</button>
+              </div>
+            </form>
+            <!--      <h3>Cambiar correo electrónico</h3>
+                  <form [formGroup]='emailForm' (ngSubmit)="onChangeEmail()" *ngFor="let admin of administrador">
+                    &lt;!&ndash;Campo correo electrónico'&ndash;&gt;
+                    <div class="form-group">
+                      <label>Correo electrónico</label>
+                      <input type="email" class="form-control" formControlName="email" [(ngModel)]="admin.email"
+                        [ngClass]="{ 'is-invalid': !emailForm.controls['email'].valid && emailForm.controls['email'].touched}">
+                      <div *ngIf="formEmail['email'].errors" class="invalid-feedback">
+                        <div *ngIf="formEmail['email'].errors['required']">
+                          Campo requerido
+                        </div>
+                        <div *ngIf="formEmail['email'].errors['pattern']">
+                          Por favor ingrese un email válido
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <button type="submit" class="btn btn-success mr-2" [disabled]="emailForm.invalid">Guardar</button>
+                    </div>
+                  </form>-->
+            <div class="cambiarContrasena">
+              <h4>Cambiar contraseña</h4>
+              <form [formGroup]='cambioPasswordForm' (ngSubmit)="onChangePassword()">
+                <div class="form-group">
+                  <label>Escriba su nueva Contraseña</label>
+                  <div class="input-group">
+                    <input type="password" [type]="hide ? 'password' : 'text'" name="password" class="form-control"
+                      formControlName="password"
+                      [ngClass]="{ 'is-invalid': formPassword['password'].errors && formPassword['password'].touched }" />
+                    <span class="input-group-text">
+                      <mat-icon class="placeholder" (click)="showPassword()">{{hide ? 'visibility_off' : 'visibility'}}
+                      </mat-icon>
+                    </span>
+                    <div *ngIf="formPassword['password'].errors" class="invalid-feedback">
+                      <div *ngIf="formPassword['password'].errors['required']">
+                        Campo requerido
+                      </div>
+                      <div *ngIf="formPassword['password'].errors['minlength']">
+                        La contraseña no puede tener menos de 6 caracteres
+                      </div>
+                      <div *ngIf="formPassword['password'].errors['maxlength']">
+                        La contraseña no puede exceder de los 15 caracteres
+                      </div>
+                      <div *ngIf="formPassword['password'].errors['pattern']">
+                        Debe tener al menos una mayúscula, una minúscula y un dígito
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--Campo confirmPassword-->
+                <div class="form-group">
+                  <label>Confirmar Contraseña</label>
+                  <div class="input-group">
+                    <input type="password" [type]="hide ? 'password' : 'text'" name="passwordConfirm" class="form-control"
+                      formControlName="confirmPassword"
+                      [ngClass]="{ 'is-invalid': formPassword['confirmPassword'].errors && formPassword['confirmPassword'].touched }">
+                    <span class="input-group-text">
+                      <mat-icon class="placeholder" (click)="showPassword()">{{hide ? 'visibility_off' : 'visibility'}}
+                      </mat-icon>
+                    </span>
+                    <div *ngIf="formPassword['confirmPassword'].errors" class="invalid-feedback">
+                      <div *ngIf="formPassword['confirmPassword'].errors['required']">
+                        Campo requerido
+                      </div>
+                      <div *ngIf="formPassword['confirmPassword'].errors['matching']">
+                        Las contraseñas no coinciden!
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-success mr-2" [disabled]="cambioPasswordForm.invalid">Guardar</button>
+                  <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+                </div>
+              </form>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+</div>

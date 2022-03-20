@@ -84,7 +84,7 @@ L10n.load({
             "pagerDropDown": "Registros por página",
             "pagerAllDropDown": "Registros",
             "All": "Todos",
-            "totalItemInfo": "({0} artículo)"
+            "totalItemInfo": "({0} registros)"
         }
     }
 });
