@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ReservasComponent } from './reservas/reservas.component';
 import { ReservasCreateComponent } from './reservas-create/reservas-create.component';
 import { GridModule } from "@syncfusion/ej2-angular-grids";
+import { ListarUnidadesComponent } from './unidades/listar-unidades/listar-unidades.component';
 
 
 
@@ -33,7 +34,8 @@ import { GridModule } from "@syncfusion/ej2-angular-grids";
         UsuariosComponent,
         AreasComunesComponent,
         ReservasComponent,
-        ReservasCreateComponent
+        ReservasCreateComponent,
+        ListarUnidadesComponent
     ],
     exports: [
         MatCardModule,

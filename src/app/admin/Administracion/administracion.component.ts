@@ -30,7 +30,7 @@ export class AdministracionComponent implements OnInit {
 
   onGoAjustesUnidades() {
     this.NavigationExtras.state = this.condominio;
-    this.router.navigate(['/admin/administracion/unidades'], this.NavigationExtras);
+    this.router.navigate(['/admin/administracion/listarUnidades'], this.NavigationExtras);
   }
 
   onGoAjustesUsuarios() {

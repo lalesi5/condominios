@@ -6,38 +6,47 @@
   min-height: 82vh;
 }
 
-.containerSelector mat-card {
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  width: 99%;
-  left: 8px;
-  padding-bottom: 1px;
+.containerInfo mat-card {
+  display: grid;
+  width: 70%;
+  top: 10vh;
+  left: 15%;
   border-radius: 20px;
+  padding-bottom: 25px;
 }
 
-.containerSelector mat-card h2 {
-  padding-top: 10px;
-  padding-right: 30px;
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
 }
 
-.bodyUnidades mat-card {
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  width: 99%;
-  left: 9px;
-  top: 15px;
-  padding-bottom: 10px;
-  border-radius: 20px;
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
 }
+
+.containerInfo mat-card h4 {
+  background-color: #2b99a8;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
 
 .cardsDatosUnidades {
-  width: 80%;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
   padding: 1px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 35px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5vh;
 }
 
 .cardsDatosUnidades .card {
@@ -47,7 +56,6 @@
   border-radius: 20px;
   display: flex;
   cursor: pointer;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
 .cardsDatosUnidades .card:hover {
@@ -75,56 +83,19 @@
   color: #fff;
 }
 
-.datosArrendador mat-card {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  width: 99%;
-  left: 9px;
-  top: 30px;
-  border-radius: 20px;
-}
-
-.datosArrendador .card {
+ .card {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 10px;
   bottom: 10px;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.08);
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
-.datosArrendador .card .name {
+.card .name {
   padding-bottom: 10px;
 }
 
-.datosArrendador .card .email {
-  padding-bottom: 10px;
-}
-
-.datosArrendatario mat-card {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  width: 99%;
-  left: 9px;
-  top: 45px;
-  border-radius: 20px;
-}
-
-.datosArrendatario .card {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 10px;
-  bottom: 10px;
-  border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-}
-
-.datosArrendatario .card .name {
-  padding-bottom: 10px;
-}
-
-.datosArrendatario .card .email {
+.card .email {
   padding-bottom: 10px;
 }
