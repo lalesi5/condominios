@@ -9,17 +9,19 @@ import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ReservasComponent} from "./reservas/reservas.component";
 import {ReservasCreateComponent} from "./reservas-create/reservas-create.component";
+import {ListarUnidadesComponent} from "./unidades/listar-unidades/listar-unidades.component";
 
 const routerAdministracion: Routes = [
   {
     path: '', component: AdministracionComponent, children:
       [
-        {path: '', redirectTo: 'unidades', pathMatch: 'full'},
+        {path: '', redirectTo: 'listarUnidades', pathMatch: 'full'},
         {path: 'unidades', component: UnidadesComponent},
         {path: 'usuarios', component: UsuariosComponent},
         {path: 'areasComunes', component: AreasComunesComponent},
         {path: 'reservas/:id', component: ReservasComponent},
-        {path: 'reservasCreate', component: ReservasCreateComponent}
+        {path: 'reservasCreate', component: ReservasCreateComponent},
+        {path: 'listarUnidades', component: ListarUnidadesComponent}
       ]
   }
 ]

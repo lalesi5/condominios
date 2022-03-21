@@ -1,0 +1,45 @@
+<div class="areasComunales">
+  <app-topbarUser></app-topbarUser>
+  <div class="areas">
+    <div class="containerInfo">
+
+      <mat-card>
+        <h2>Reservas</h2>
+        <h3>Información de la Reserva
+          <div *ngIf="loading" class="spinner-border float-right" role="status">
+            <span class="sr-only">Procesando...</span>
+          </div>
+        </h3>
+        <form [formGroup]="reservaForm" (ngSubmit)="onCreateReserva()">
+          <div class="form-group">
+            <label>Fecha de Reserva Inicio</label>
+            <input type="datetime-local" class="form-control" formControlName="fechaReservaInicio">
+            <div class="invalid-feedback">
+              Campo requerido
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Fecha de Reserva Fin</label>
+            <input type="datetime-local" class="form-control" formControlName="fechaReservaFin">
+            <div class="invalid-feedback">
+              Campo requerido
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Detalle de la Reserva</label>
+            <input type="text" class="form-control" formControlName="detalleReserva">
+            <div class="invalid-feedback">
+              Campo requerido
+            </div>
+          </div>
+          <div class="centrarBotones">
+            <button type="submit" class="btn btn-primary mr-2">Crear</button>
+            <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
+          </div>
+        </form>
+      </mat-card>
+
+    </div>
+  </div>
+
+</div>

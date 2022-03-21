@@ -19,6 +19,8 @@ import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
 import { ResponderComponent } from './Comunicacion/responder/responder.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { AjustesUserEditComponent } from './Ajustes/ajustes-user-edit/ajustes-user-edit.component';
+import { ReservasComponent } from './AreasComunes/reservas/reservas.component';
+import { ReservasCreateComponent } from './AreasComunes/reservas-create/reservas-create.component';
 
 
 
@@ -44,7 +46,9 @@ import { AjustesUserEditComponent } from './Ajustes/ajustes-user-edit/ajustes-us
         AreasComunesUsuarioComponent,
         FinanzasUsuarioComponent,
         ResponderComponent,
-        AjustesUserEditComponent
+        AjustesUserEditComponent,
+        ReservasComponent,
+        ReservasCreateComponent
     ],
     exports: [
         MatCardModule,

@@ -1,25 +1,16 @@
-.areasComunales {
+.selectorUnidades {
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
-  min-height: 100vh;
-  transition: 0.5s;
-  background: rgb(36,149,193);
-  background: linear-gradient(90deg, rgba(36,149,193,1) 0%, rgba(40,137,175,1) 50%, rgba(43,133,168,1) 100%);
-}
-
-.areas {
-  position: absolute;
-  width: calc(100% - 10vh);
-  left: 5vh;
-  top: 10vh;
+  top: 165px;
+  min-height: 82vh;
 }
 
 .containerInfo mat-card {
   display: grid;
-  width: 80%;
-  left: 10%;
-  top: 7vh;
+  width: 60%;
+  left: 20%;
+  top: 5vh;
   border-radius: 20px;
   padding-bottom: 25px;
 }
@@ -40,15 +31,14 @@
   text-align: center;
 }
 
-
-.headerAreaComunal {
+.headerCondominio {
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
 }
 
-.headerAreaComunal .card {
+.headerCondominio .card {
   position: relative;
   align-items: center;
   padding: 10px;
@@ -61,18 +51,18 @@
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
-.headerAreaComunal .card:hover {
+.headerCondominio .card:hover {
   background: #287bff;
 }
 
-.headerAreaComunal .card .cardName {
+.headerCondominio .card .cardName {
   font-size: 1.4em;
   margin-top: 10px;
   text-align: center;
   color: #287bff
 }
 
-.headerAreaComunal .card .iconBx {
+.headerCondominio .card .iconBx {
   color: #545151;
   background-color: white;
   position: relative;
@@ -84,12 +74,12 @@
   cursor: pointer;
 }
 
-.headerAreaComunal .card .iconBx mat-icon {
+.headerCondominio .card .iconBx mat-icon {
   font-size: 85px;
   margin-left: 3px;
 }
 
-.headerAreaComunal .card .iconBx img {
+.headerCondominio .card .iconBx img {
   position: absolute;
   top: 0;
   left: 0;
@@ -98,11 +88,16 @@
   object-fit: cover;
 }
 
-.headerAreaComunal .card:hover .numbers,
-.headerAreaComunal .card:hover .cardName{
+.headerCondominio .card:hover .numbers,
+.headerCondominio .card:hover .cardName{
   color: #fff;
 }
-.headerAreaComunal .card:hover .iconBx {
+.headerCondominio .card:hover .iconBx {
   color: #287bff
+}
+
+.botonFinalizar {
+  margin-top: 10px;
+  margin-left: 44.8%;
 }
 
