@@ -11,6 +11,8 @@ import {AjustesUsuarioComponent} from './Ajustes/ajustesUsuario.component';
 import {CheckLoginGuard} from "../core/shared/guards/check-login.guard";
 import {ResponderComponent} from "./Comunicacion/responder/responder.component";
 import { AjustesUserEditComponent } from "./Ajustes/ajustes-user-edit/ajustes-user-edit.component";
+import {ReservasComponent} from "./AreasComunes/reservas/reservas.component";
+import {ReservasCreateComponent} from "./AreasComunes/reservas-create/reservas-create.component";
 
 const routesUsuarios: Routes = [
   {
@@ -24,7 +26,9 @@ const routesUsuarios: Routes = [
         {path: 'areasComunes', component: AreasComunesUsuarioComponent, canActivate: [CheckLoginGuard]},
         {path: 'ajustes', component: AjustesUsuarioComponent, canActivate: [CheckLoginGuard]},
         {path: 'responder', component: ResponderComponent, canActivate: [CheckLoginGuard]},
-        {path: 'editarUsuario/:id', component: AjustesUserEditComponent, canActivate: [CheckLoginGuard]}
+        {path: 'editarUsuario/:id', component: AjustesUserEditComponent, canActivate: [CheckLoginGuard]},
+        {path: 'reservas', component: ReservasComponent, canActivate: [CheckLoginGuard]},
+        {path: 'reservasCreate', component: ReservasCreateComponent, canActivate: [CheckLoginGuard]}
       ]
   },
 ];

@@ -57,7 +57,7 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
 
   onGoReservas(item: any){
     this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/administracion/reservas', item.idAreaComunal], this.NavigationExtras);
+    this.router.navigate(['/user/reservas'], this.NavigationExtras);
   }
 
 }
