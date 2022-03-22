@@ -8,7 +8,7 @@
         <button class="btn btn-primary mb-2" (click)="onBackToUnits()">Volver</button>
         <div>
           <mat-card *ngFor="let mensaje of mensajes">
-            <mat-card-title><b>Título: </b> {{mensaje.tituloMensaje}}</mat-card-title>
+            <mat-card-title><b>Asunto: </b> {{mensaje.tituloMensaje}}</mat-card-title>
             <div class="clearfix"></div>
             <mat-card-subtitle><b>Fecha: </b> {{mensaje.fechaMensaje}} </mat-card-subtitle>
             <mat-card-subtitle><b>Escrito por: </b> {{mensaje.escritoPor}}</mat-card-subtitle>
