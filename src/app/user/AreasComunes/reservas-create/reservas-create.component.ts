@@ -52,9 +52,9 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
 
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    console.log(navigations);
     this.idAdministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
+    this.numeroUnidad = navigations.idUnidad;
     this.areaComunal = navigations;
     this.idAreaComunal = navigations.idAreaComunal;
     this.NavigationExtras.state = this.areaComunal;
@@ -75,8 +75,8 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
         const reserva: any = {
           fechaReservaInicio: date.toLocaleString(),
           fechaReservaFin: this.reservaForm.value.fechaReservaFin,
-          estadoReserva: 'pendiente',
-          idUnidad: 'dato',
+          estadoReserva: 'Pendiente',
+          idUnidad: this.numeroUnidad,
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idAreaComunal: this.idAreaComunal,
@@ -89,7 +89,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
             positionClass: 'toast-bottom-rigth'
           });
           this.loading = false;
-          this.router.navigate(['/user/reservas', this.idAreaComunal], this.NavigationExtras);
+          this.router.navigate(['/user/reservas'], this.NavigationExtras);
         }).catch(error => {
           console.log(error);
         })
@@ -98,7 +98,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['user/reservas', this.idAreaComunal], this.NavigationExtras);
+    this.router.navigate(['user/reservas'], this.NavigationExtras);
   }
 
 }

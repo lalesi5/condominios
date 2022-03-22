@@ -25,7 +25,7 @@
 }
 
 .containerInfo mat-card h2 {
-  background-color: #287bff;
+  background-color: #2b85a8;
   color: #fff;
   border-radius: 10px;
   padding: 5px;
@@ -62,14 +62,14 @@
 }
 
 .headerAreaComunal .card:hover {
-  background: #287bff;
+  background: #2b85a8;
 }
 
 .headerAreaComunal .card .cardName {
   font-size: 1.4em;
   margin-top: 10px;
   text-align: center;
-  color: #287bff
+  color: #2b85a8
 }
 
 .headerAreaComunal .card .iconBx {
@@ -103,6 +103,6 @@
   color: #fff;
 }
 .headerAreaComunal .card:hover .iconBx {
-  color: #287bff
+  color: #2b85a8
 }
 
