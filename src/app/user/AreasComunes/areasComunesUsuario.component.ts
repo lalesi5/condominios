@@ -14,6 +14,7 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
   private suscription: Subscription = new Subscription;
   areasComunes: any[] = [];
   unidad: any[] = [];
+  numeroUnidad: string = '';
   idCondominio: string = '';
 
   NavigationExtras: NavigationExtras = {
@@ -37,6 +38,7 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
 
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.numeroUnidad = navigations.numeroUnidad;
     this.idCondominio = navigations.idCondominio;
     this.unidad = navigations;
     this.NavigationExtras.state = this.unidad;
@@ -56,7 +58,12 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
   }
 
   onGoReservas(item: any){
-    this.NavigationExtras.state = item;
+    const unidad = { idUnidad: this.numeroUnidad};
+    const data = {
+      ...unidad,
+      ...item
+    }
+    this.NavigationExtras.state = data;
     this.router.navigate(['/user/reservas'], this.NavigationExtras);
   }
 
