@@ -91,11 +91,6 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
 
       this.getUnidadID(this.reservaForm.value.idUnidad);
 
-      this.unidad.map( data => {
-        this.numeroUnidad = data.numeroUnidad
-        console.log(this.numeroUnidad);
-      })
-
         const reserva: any = {
           fechaReservaInicio: date.toLocaleString(),
           fechaReservaFin: this.reservaForm.value.fechaReservaFin,
