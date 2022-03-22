@@ -40,7 +40,7 @@
           <h5 style="margin-top: 30px;" *ngIf='anunciosGenerales.length == 0'>No hay anuncios para mostrar</h5>
           <div layout="row">
             <mat-card *ngFor="let anuncio of anunciosGenerales" class="mb-2">
-              <mat-card-title><b>Título: </b> {{anuncio.tituloAnuncio}}</mat-card-title>
+              <mat-card-title><b>Asunto: </b> {{anuncio.tituloAnuncio}}</mat-card-title>
               <div class="clearfix"></div>
               <mat-card-subtitle><b>Fecha: </b> {{anuncio.fechaAnuncio}}</mat-card-subtitle>
               <mat-card-subtitle><b>Escrito por: </b> Administrador</mat-card-subtitle>

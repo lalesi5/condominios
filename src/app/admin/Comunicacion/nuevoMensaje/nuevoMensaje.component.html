@@ -5,7 +5,7 @@
       <h3>Crear Mensaje Individual</h3>
       <form [formGroup]="mensajesForm" (ngSubmit)="onCreateMensaje()">
         <div class="form-group">
-          <label>Título</label>
+          <label>Asunto</label>
           <input type="text" class="form-control" formControlName="tituloMensaje"
             [ngClass]="{ 'is-invalid': !mensajesForm.controls['tituloMensaje'].valid  && mensajesForm.controls['tituloMensaje'].touched }">
           <div *ngIf=" mensajesForm.controls['tituloMensaje'].touched  && !mensajesForm.controls['tituloMensaje'].valid"

@@ -10,7 +10,7 @@
         </div>
         <form [formGroup]="mensajesForm" (ngSubmit)="onCreateMensaje()">
           <div class="form-group">
-            <label>Título</label>
+            <label>Asunto</label>
             <input type="text" class="form-control" formControlName="tituloMensaje"
                    [ngClass]="{ 'is-invalid': !mensajesForm.controls['tituloMensaje'].valid  && mensajesForm.controls['tituloMensaje'].touched }">
             <div
