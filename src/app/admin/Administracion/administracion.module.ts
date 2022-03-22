@@ -15,6 +15,7 @@ import { ReservasComponent } from './reservas/reservas.component';
 import { ReservasCreateComponent } from './reservas-create/reservas-create.component';
 import { GridModule } from "@syncfusion/ej2-angular-grids";
 import { ListarUnidadesComponent } from './unidades/listar-unidades/listar-unidades.component';
+import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 
 
 
@@ -27,7 +28,8 @@ import { ListarUnidadesComponent } from './unidades/listar-unidades/listar-unida
         MatSelectModule,
         CommonModule,
         ReactiveFormsModule,
-        GridModule
+        GridModule,
+        DateTimePickerModule
     ],
     declarations:[
         UnidadesComponent,
