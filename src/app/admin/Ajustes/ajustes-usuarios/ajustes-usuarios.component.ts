@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Subscription} from 'rxjs';
-import {DialogService} from 'src/app/services/dialog.service';
-import {UsuariosService} from 'src/app/services/usuarios.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { NavigationExtras, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/services/dialog.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios',
@@ -25,7 +26,8 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     private router: Router,
     private _usuarioService: UsuariosService,
     private toastr: ToastrService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    public firestore: AngularFirestore
   ) {
     this.recoverData();
   }
@@ -60,21 +62,34 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   eliminarUsuario(id: string) {
+
     this._dialogService.confirmDialog({
-      title: 'Eliminar usuario',
-      message: '¿Está seguro de eliminar el usuario?',
+      title: 'Atención!',
+      message: 'DEBE ELIMINAR PRIMERO LA UNIDAD A LA QUE PERTENECE EL USUARIO ¿Ha realizado esta acción?',
       confirmText: 'Si',
       cancelText: 'No',
     }).subscribe(res => {
       if (res) {
-        this._usuarioService.eliminarUsuario(id).then(() => {
-          this.toastr.success('El usuario fue eliminado con exito', 'Registro eliminado', {
-            positionClass: 'toast-bottom-right'
-          });
-        }).catch(error => {
-          console.log(error);
 
-        })
+        this._dialogService.confirmDialog({
+          title: 'Eliminar usuario',
+          message: '¿Está seguro de eliminar el usuario?',
+          confirmText: 'Si',
+          cancelText: 'No',
+        }).subscribe(res => {
+          if (res) {
+
+            this._usuarioService.eliminarUsuario(id).then(() => {
+              this.toastr.success('El usuario fue eliminado con exito', 'Registro eliminado', {
+                positionClass: 'toast-bottom-right'
+              });
+            }).catch(error => {
+              console.log(error);
+
+            })
+          }
+        });
+
       }
     });
 
