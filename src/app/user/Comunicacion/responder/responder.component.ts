@@ -15,6 +15,7 @@ export class ResponderComponent implements OnInit {
   idAdministrador: string = '';
   idCondominio: string = '';
   idUsuario: string = '';
+  idUnidad: string = '';
   nombreUser: string = '';
   mensajes: any[] = [];
   unidad: any[] = [];
@@ -49,6 +50,7 @@ export class ResponderComponent implements OnInit {
     this.idAdministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.idUsuario = navigations.idUsuario;
+    this.idUnidad = navigations.idUnidad;
     this.unidad = navigations;
     this.nombreUser = navigations.nombreResidente + ' ' + navigations.apellidoResidente;
     this.navigationExtras.state = this.unidad;
@@ -78,7 +80,8 @@ export class ResponderComponent implements OnInit {
           tituloMensaje: titulo,
           idUsuario: this.idUsuario,
           estado: 'Activo',
-          escritoPor: this.nombreUser
+          escritoPor: this.nombreUser,
+          idUnidad: this.idUnidad
         }
         //Crea el documento
         this.loading = true;

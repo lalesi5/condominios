@@ -16,6 +16,7 @@ export class NuevoMensajeComponent implements OnInit {
   idAdministrador: string = '';
   idCondominio: string = '';
   idUsuario: string = '';
+  idUnidad: string = '';
   mensajes: any[] = [];
   condominio: any[] = [];
 
@@ -49,6 +50,7 @@ export class NuevoMensajeComponent implements OnInit {
     this.idAdministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.idUsuario = navigations.idUsuario;
+    this.idUnidad = navigations.idUnidad;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
   }
@@ -76,6 +78,7 @@ export class NuevoMensajeComponent implements OnInit {
           idCondominio: this.idCondominio,
           tituloMensaje: titulo,
           idUsuario: this.idUsuario,
+          idUnidad: this.idUnidad,
           estado: 'Activo',
           escritoPor: 'Administrador'
         }

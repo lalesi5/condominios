@@ -13,8 +13,8 @@ export class MensajesService {
   ) {
   }
 
-  getMensajes(idUser: string): Observable<any> {
-    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser)
+  getMensajes(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad)
       .orderBy('fechaMensaje', 'desc'))
       .snapshotChanges();
   }
