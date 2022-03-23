@@ -29,4 +29,8 @@ export class ReservasService {
     return this.firestore.collection('Reservas').doc(idReser).update(data);
   }
 
+  getReservas(idCondo:string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', idCondo)).snapshotChanges();
+  }
+
 }

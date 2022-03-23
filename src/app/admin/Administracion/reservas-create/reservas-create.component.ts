@@ -18,6 +18,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   idAdministrador: string = '';
   idCondominio: string = '';
   idAreaComunal: string = '';
+  nombreAreaComunal: string = '';
   numeroUnidad: string = '';
   loading = false;
   areaComunal: any[] = [];
@@ -60,6 +61,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAdministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
+    this.nombreAreaComunal = navigations.nombre;
     this.areaComunal = navigations;
     this.idAreaComunal = navigations.idAreaComunal;
     this.NavigationExtras.state = this.areaComunal;
@@ -100,6 +102,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idAreaComunal: this.idAreaComunal,
+          nombreAreaComunal: this.nombreAreaComunal,
           detalleReserva: descripcionArea
         }
 

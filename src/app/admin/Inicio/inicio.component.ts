@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { UnidadesService } from '../../services/unidades.service';
+import {ReservasService} from "../../services/reservas.service";
 
 @Component({
   selector: 'app-inicio',
@@ -15,6 +16,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   idAministrador: string = '';
   idCondominio: string = ';'
   unidades: any[] = [];
+  reservas: any[] = [];
   condominio: any[] = [];
 
   navigationExtras: NavigationExtras = {
@@ -25,18 +27,21 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private _unidades: UnidadesService
+    private _unidades: UnidadesService,
+    private _reservas: ReservasService
   ) {
 
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
+    this.navigationExtras.state =  this.condominio;
 
   }
 
   ngOnInit(): void {
     this.getUnidades();
+    this.getReservas();
   }
 
   ngOnDestroy(): void {
@@ -55,5 +60,30 @@ export class InicioComponent implements OnInit, OnDestroy {
         })
       })
     );
+  }
+
+  getReservas(){
+    this.subscription.add(
+      this._reservas.getReservas(this.idCondominio).subscribe(data => {
+        this.reservas = [];
+        data.forEach((element:any) => {
+          this.reservas.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    )
+  }
+
+  onGoUnidades(){
+    this.router.navigate(['/admin/administracion'], this.navigationExtras);
+  }
+
+  onGoReservas(){
+    this.router.navigate(['/admin/administracion/areasComunes'], this.navigationExtras);
+  }
+
+  onGoMensajes(){
+    this.router.navigate(['/admin/comunicacion/individuales'], this.navigationExtras);
   }
 }
