@@ -21,6 +21,7 @@ import { MatCommonModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 //syncfusion library
 import { ExcelExportService, FilterService, GridAllModule, GridModule, GroupService, PageService, PdfExportService, SortService, ToolbarService } from '@syncfusion/ej2-angular-grids';
+import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
 
@@ -41,7 +42,8 @@ import { ExcelExportService, FilterService, GridAllModule, GridModule, GroupServ
     MatCommonModule,
     MatButtonModule,
     GridModule,
-    GridAllModule
+    GridAllModule,
+    DateTimePickerModule
   ],
   declarations: [
     AppComponent
