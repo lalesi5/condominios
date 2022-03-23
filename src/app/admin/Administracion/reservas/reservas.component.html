@@ -26,8 +26,9 @@
           <td>{{reserva.idUnidad}}</td>
           <td>{{reserva.detalleReserva}}</td>
           <td>
-            <mat-icon class="btn-info">edit</mat-icon>
-            <mat-icon  class="btn-danger">delete</mat-icon>
+            <mat-icon class="btn-info" (click)="onAcept(reserva.idReserva)">check_circle</mat-icon>
+            <mat-icon  class="btn-warning" (click)="onDeny(reserva.idReserva)">cancel</mat-icon>
+            <mat-icon  class="btn-danger" (click)="onDelete(reserva.idReserva)">delete</mat-icon>
           </td>
         </tr>
         </tbody>

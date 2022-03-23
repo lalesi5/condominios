@@ -58,7 +58,9 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
   }
 
   onGoReservas(item: any){
-    const unidad = { idUnidad: this.numeroUnidad};
+    const unidad = {
+      idUnidad: this.numeroUnidad
+    };
     const data = {
       ...unidad,
       ...item

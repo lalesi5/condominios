@@ -18,6 +18,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   idAdministrador: string = '';
   idCondominio: string = '';
   idAreaComunal: string = '';
+  nombreAreaComunal: string = '';
   numeroUnidad: string = '';
   loading = false;
   areaComunal: any[] = [];
@@ -60,6 +61,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAdministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
+    this.nombreAreaComunal = navigations.nombre;
     this.areaComunal = navigations;
     this.idAreaComunal = navigations.idAreaComunal;
     this.NavigationExtras.state = this.areaComunal;
@@ -80,6 +82,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   onCreateReserva(){
     const descripcionArea = String(this.reservaForm.value.detalleReserva).charAt(0).toLocaleUpperCase() + String(this.reservaForm.value.detalleReserva).slice(1);
     const date = this.reservaForm.value.fechaReservaInicio;
+    const date2 = this.reservaForm.value.fechaReservaFin;
 
     this._dialogService.confirmDialog({
       title: 'Agregar reserva',
@@ -91,19 +94,15 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
 
       this.getUnidadID(this.reservaForm.value.idUnidad);
 
-      this.unidad.map( data => {
-        this.numeroUnidad = data.numeroUnidad
-        console.log(this.numeroUnidad);
-      })
-
         const reserva: any = {
           fechaReservaInicio: date.toLocaleString(),
-          fechaReservaFin: this.reservaForm.value.fechaReservaFin,
+          fechaReservaFin: date2.toLocaleString(),
           estadoReserva: this.reservaForm.value.estadoReserva,
           idUnidad: this.reservaForm.value.idUnidad,
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idAreaComunal: this.idAreaComunal,
+          nombreAreaComunal: this.nombreAreaComunal,
           detalleReserva: descripcionArea
         }
 
