@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {MensajesService} from "../../services/mensajes.service";
+import { Component, OnInit } from "@angular/core";
+import { NavigationExtras, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { MensajesService } from "../../services/mensajes.service";
 
 @Component({
   selector: 'app-comunicacionUsuario',
@@ -13,6 +13,7 @@ export class ComunicacionUsuarioComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idUsuario: string = '';
+  idUnidad: string = '';
   nombreUsuario: string = '';
   mensajes: any[] = [];
   unidad: any[] = [];
@@ -35,6 +36,7 @@ export class ComunicacionUsuarioComponent implements OnInit {
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idUsuario = navigations.idUsuario;
+    this.idUnidad = navigations.idUnidad;
     this.unidad = navigations;
     this.nombreUsuario = navigations.nombreResidente + ' ' + navigations.apellidoResidente;
     this.NavigationExtras.state = this.unidad;
@@ -43,7 +45,7 @@ export class ComunicacionUsuarioComponent implements OnInit {
   getMensajes() {
     this.subscription.add(
       this._mensajesService
-        .getMensajes(this.idUsuario)
+        .getMensajes(this.idUsuario, this.idUnidad)
         .subscribe(data => {
           this.mensajes = [];
           data.forEach((element: any) => {
@@ -56,7 +58,7 @@ export class ComunicacionUsuarioComponent implements OnInit {
     )
   }
 
-  onAnswer(){
+  onAnswer() {
     this.router.navigate(['/user/responder'], this.NavigationExtras);
   }
 

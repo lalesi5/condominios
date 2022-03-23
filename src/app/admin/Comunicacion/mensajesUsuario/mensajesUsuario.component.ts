@@ -53,7 +53,7 @@ export class MensajeUsuarioComponent implements OnInit {
   getMensajes() {
     this.subscription.add(
       this._mensajesService
-        .getMensajes(this.idUsuario)
+        .getMensajes(this.idUsuario, this.idUnidad)
         .subscribe(data => {
           this.mensajes = [];
           data.forEach((element: any) => {
