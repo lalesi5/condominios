@@ -80,6 +80,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   onCreateReserva(){
     const descripcionArea = String(this.reservaForm.value.detalleReserva).charAt(0).toLocaleUpperCase() + String(this.reservaForm.value.detalleReserva).slice(1);
     const date = this.reservaForm.value.fechaReservaInicio;
+    const date2 = this.reservaForm.value.fechaReservaFin;
 
     this._dialogService.confirmDialog({
       title: 'Agregar reserva',
@@ -93,7 +94,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
 
         const reserva: any = {
           fechaReservaInicio: date.toLocaleString(),
-          fechaReservaFin: this.reservaForm.value.fechaReservaFin,
+          fechaReservaFin: date2.toLocaleString(),
           estadoReserva: this.reservaForm.value.estadoReserva,
           idUnidad: this.reservaForm.value.idUnidad,
           idAdministrador: this.idAdministrador,
