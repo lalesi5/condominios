@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Numero de Unidad</label>
+          <label>Seleccione la Unidad</label>
           <select class="form-control" formControlName="idUnidad" (ngModelChange)="onUnitChanged($event)"
             [ngClass]="{ 'is-invalid': !reservaForm.controls['idUnidad'].valid  && reservaForm.controls['idUnidad'].touched }">
             <option *ngFor="let unidad of unidades" [ngValue]="unidad.idUnidad">Unidad: {{unidad.numeroUnidad}}
@@ -67,6 +67,10 @@
               <div class="col">
                 <label>Apellido Residente: </label>
                 <input type="text" class="form-control" formControlName="apellidoResidente" [readonly]="true">
+              </div>
+              <div class="col">
+                <label>Numero Unidad: </label>
+                <input type="text" class="form-control" formControlName="numeroUnidad" [readonly]="true">
               </div>
             </div>
           </div>

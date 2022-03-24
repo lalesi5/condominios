@@ -21,6 +21,10 @@ export class ReservasService {
     return this.firestore.collection('Reservas', ref => ref.where('idAreaComunal','==', idAreaComun).orderBy('fechaReservaInicio', 'desc')).snapshotChanges();
   }
 
+  getReservaIdUnit(idAreaComun: string, idUnit: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idAreaComunal','==', idAreaComun).where('idUnidad', '==', idUnit).orderBy('fechaReservaInicio', 'desc')).snapshotChanges();
+  }
+
   eliminarReserva(idReser: string): Promise<any>{
     return this.firestore.collection('Reservas').doc(idReser).delete();
   }
@@ -30,7 +34,7 @@ export class ReservasService {
   }
 
   getReservas(idCondo:string): Observable<any> {
-    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', idCondo)).snapshotChanges();
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', idCondo).where('estadoReserva', '==', 'Pendiente').orderBy('numeroUnidad', 'desc')).snapshotChanges();
   }
 
 }

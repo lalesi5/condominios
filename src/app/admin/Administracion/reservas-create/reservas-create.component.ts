@@ -24,7 +24,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   areaComunal: any[] = [];
   unidades: any[] = [];
   unidad: any[] = [];
-  
+
   reservaForm: FormGroup;
 
   datosUnidadForm: FormGroup;
@@ -52,6 +52,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     this.datosUnidadForm = this.fb.group({
       nombreResidente: [''],
       apellidoResidente: [''],
+      numeroUnidad: ['']
     })
     this.recoverData();
   }
@@ -94,6 +95,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
         this.datosUnidadForm.setValue({
           nombreResidente: data.payload.data()['nombreResidente'],
           apellidoResidente: data.payload.data()['apellidoResidente'],
+          numeroUnidad: data.payload.data()['numeroUnidad']
         })
       })
     )
@@ -118,7 +120,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
           fechaReservaFin: date2.toLocaleString(),
           estadoReserva: this.reservaForm.value.estadoReserva,
           idUnidad: idUnidad,
-          numeroUnidad: this.numeroUnidad,
+          numeroUnidad: this.datosUnidadForm.value.numeroUnidad,
           nombreResidente: this.datosUnidadForm.value.nombreResidente,
           apellidoResidente: this.datosUnidadForm.value.apellidoResidente,
           idAdministrador: this.idAdministrador,

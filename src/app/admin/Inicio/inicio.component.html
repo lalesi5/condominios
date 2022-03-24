@@ -11,10 +11,10 @@
                 <mat-icon>visibility</mat-icon>
             </div>
         </div>
-        <div class="card" [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']" (click)="onGoMensajes()">
+        <div class="card" [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']" (click)="onGoMensajes()">
             <div>
-                <div class="numbers"> 28</div>
-                <div class="cardName">Mensajes</div>
+                <div class="numbers"> {{anuncios.length}}</div>
+                <div class="cardName">Anuncios</div>
             </div>
             <div class="iconBx">
                 <mat-icon> comment</mat-icon>
@@ -49,10 +49,10 @@
                 </thead>
                 <tbody  *ngFor="let reserva of reservas">
                     <tr>
-                        <td>Alex Carrera</td>
-                        <td>{{reserva.idUnidad}}</td>
+                        <td>{{reserva.nombreResidente}} {{reserva.apellidoResidente}}</td>
+                        <td>{{reserva.numeroUnidad}}</td>
                         <td>{{reserva.nombreAreaComunal}}</td>
-                        <td><span class="status aceptado">{{reserva.estadoReserva}}</span></td>
+                        <td><span class="status pendiente">{{reserva.estadoReserva}}</span></td>
                     </tr>
                 </tbody>
             </table>

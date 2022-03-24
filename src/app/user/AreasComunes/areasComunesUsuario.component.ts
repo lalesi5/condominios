@@ -16,6 +16,9 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
   unidad: any[] = [];
   numeroUnidad: string = '';
   idCondominio: string = '';
+  idUnidad: string = '';
+  nombreResidente: string = '';
+  apellidoResidente: string = '';
 
   NavigationExtras: NavigationExtras = {
     state: {}
@@ -40,6 +43,9 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.numeroUnidad = navigations.numeroUnidad;
     this.idCondominio = navigations.idCondominio;
+    this.idUnidad = navigations.idUnidad;
+    this.nombreResidente =  navigations.nombreResidente;
+    this.apellidoResidente = navigations.apellidoResidente;
     this.unidad = navigations;
     this.NavigationExtras.state = this.unidad;
   }
@@ -59,7 +65,10 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
 
   onGoReservas(item: any){
     const unidad = {
-      idUnidad: this.numeroUnidad
+      numeroUnidad: this.numeroUnidad,
+      idUnidad: this.idUnidad,
+      nombreResidente: this.nombreResidente,
+      apellidoResidente: this.apellidoResidente
     };
     const data = {
       ...unidad,

@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NavigationExtras, Router} from "@angular/router";
-import {UnidadesService} from "../../../services/unidades.service";
 import {ReservasService} from "../../../services/reservas.service";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
@@ -18,7 +17,10 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   idAdministrador: string = '';
   idCondominio: string = '';
   idAreaComunal: string = '';
+  idUnidad: string = '';
   nombreAreaComunal: string = '';
+  nombreResidente: string = '';
+  apellidoResidente: string = '';
   numeroUnidad: string = '';
   loading = false;
   areaComunal: any[] = [];
@@ -55,8 +57,11 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAdministrador = navigations.idAdministrador;
     this.idCondominio = navigations.idCondominio;
-    this.numeroUnidad = navigations.idUnidad;
+    this.idUnidad = navigations.idUnidad;
+    this.numeroUnidad = navigations.numeroUnidad;
     this.nombreAreaComunal = navigations.nombre;
+    this.nombreResidente = navigations.nombreResidente;
+    this.apellidoResidente = navigations.apellidoResidente;
     this.areaComunal = navigations;
     this.idAreaComunal = navigations.idAreaComunal;
     this.NavigationExtras.state = this.areaComunal;
@@ -65,6 +70,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   onCreateReserva(){
     const descripcionArea = String(this.reservaForm.value.detalleReserva).charAt(0).toLocaleUpperCase() + String(this.reservaForm.value.detalleReserva).slice(1);
     const date = this.reservaForm.value.fechaReservaInicio;
+    const date2 = this.reservaForm.value.fechaReservaFin;
 
     this._dialogService.confirmDialog({
       title: 'Agregar reserva',
@@ -76,9 +82,12 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
 
         const reserva: any = {
           fechaReservaInicio: date.toLocaleString(),
-          fechaReservaFin: this.reservaForm.value.fechaReservaFin,
+          fechaReservaFin: date2.toLocaleString(),
           estadoReserva: 'Pendiente',
-          idUnidad: this.numeroUnidad,
+          idUnidad: this.idUnidad,
+          numeroUnidad: this.numeroUnidad,
+          nombreResidente: this.nombreResidente,
+          apellidoResidente: this.apellidoResidente,
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idAreaComunal: this.idAreaComunal,

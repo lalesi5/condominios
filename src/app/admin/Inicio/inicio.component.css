@@ -10,7 +10,7 @@
 
 
 .headerReseMenUni {
-  padding: 10px;
+  padding: 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
@@ -80,8 +80,6 @@
 
 .details .recentOrders {
   position: relative;
-  display: grid;
-  min-height: 400px;
   background: #fff;
   padding: 25px;
   border-radius: 25px;
@@ -188,7 +186,7 @@
 .recentCustomers {
   position: relative;
   display: initial;
-  padding: 30px;
+  padding: 25px;
   justify-content: space-between;
   background: #fff;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -197,7 +195,6 @@
 
 .recentCustomers .unidadesHeader {
   display: flex;
-  padding-bottom: 55px;
   text-align: end;
   justify-content: space-between;
   align-items: baseline;
