@@ -12,6 +12,7 @@ export class ReservasComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
   idAreaComunal: string = '';
+  idUnidad: string = '';
   reservas: any[] = [];
   areaComunal: any[] = [];
 
@@ -38,13 +39,14 @@ export class ReservasComponent implements OnInit, OnDestroy {
   recoverData(){
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAreaComunal = navigations.idAreaComunal;
+    this.idUnidad = navigations.idUnidad;
     this.areaComunal = navigations;
     this.NavigationExtras.state = this.areaComunal;
   }
 
   getReservas(){
     this.subscription.add(
-      this._reservaService.getReserva(this.idAreaComunal).subscribe(data =>{
+      this._reservaService.getReservaIdUnit(this.idAreaComunal, this.idUnidad).subscribe(data =>{
         this.reservas = [];
         data.forEach((element: any) => {
           this.reservas.push({

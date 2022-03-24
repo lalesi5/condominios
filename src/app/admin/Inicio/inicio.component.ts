@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { UnidadesService } from '../../services/unidades.service';
 import {ReservasService} from "../../services/reservas.service";
+import {AnunciosGeneralesService} from "../../services/anunciosGenerales.service";
 
 @Component({
   selector: 'app-inicio',
@@ -18,6 +19,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   unidades: any[] = [];
   reservas: any[] = [];
   condominio: any[] = [];
+  anuncios: any[] = [];
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -28,7 +30,8 @@ export class InicioComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private _unidades: UnidadesService,
-    private _reservas: ReservasService
+    private _reservas: ReservasService,
+    private _anuncios: AnunciosGeneralesService
   ) {
 
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
@@ -42,6 +45,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getUnidades();
     this.getReservas();
+    this.getAnuncios();
   }
 
   ngOnDestroy(): void {
@@ -75,6 +79,19 @@ export class InicioComponent implements OnInit, OnDestroy {
     )
   }
 
+  getAnuncios(){
+    this.subscription.add(
+      this._anuncios.getAnunciosGenerales(this.idCondominio).subscribe(data => {
+        this.anuncios = [];
+        data.forEach((element:any) => {
+          this.anuncios.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    )
+  }
+
   onGoUnidades(){
     this.router.navigate(['/admin/administracion'], this.navigationExtras);
   }
@@ -84,6 +101,6 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   onGoMensajes(){
-    this.router.navigate(['/admin/comunicacion/individuales'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion/generales'], this.navigationExtras);
   }
 }

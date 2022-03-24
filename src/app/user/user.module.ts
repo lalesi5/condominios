@@ -21,20 +21,22 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { AjustesUserEditComponent } from './Ajustes/ajustes-user-edit/ajustes-user-edit.component';
 import { ReservasComponent } from './AreasComunes/reservas/reservas.component';
 import { ReservasCreateComponent } from './AreasComunes/reservas-create/reservas-create.component';
+import {DateTimePickerModule} from "@syncfusion/ej2-angular-calendars";
 
 
 
 @NgModule({
 
-  imports: [
-    UsuarioRoutingModule,
-    MatCardModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    CommonModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        UsuarioRoutingModule,
+        MatCardModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        CommonModule,
+        ReactiveFormsModule,
+        DateTimePickerModule
+    ],
     declarations: [
         UserComponent,
         UserAnunciosComponent,
