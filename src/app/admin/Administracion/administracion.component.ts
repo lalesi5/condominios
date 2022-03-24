@@ -1,48 +1,47 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
-    selector: 'app-administracion',
-    templateUrl: './administracion.component.html',
-    styleUrls: ['./administracion.component.css']
+  selector: 'app-administracion',
+  templateUrl: './administracion.component.html',
+  styleUrls: ['./administracion.component.css']
 })
 
-export class AdministracionComponent implements OnInit{
-    
-    
-    idAministrador: string = '';
-    condominio: any[] = [];
+export class AdministracionComponent implements OnInit {
 
-    NavigationExtras: NavigationExtras = {
-        state: {
+  condominio: any[] = [];
 
-        }
-    }
+  NavigationExtras: NavigationExtras = {
+    state: {}
+  }
 
-    constructor(
-        private router: Router,
-    ) {
-        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations.uid;
-        this.condominio = navigations;
-    }
+  constructor(
+    private router: Router
+  ) {
+    this.recoverData();
+  }
 
-    ngOnInit(){}
+  ngOnInit(){}
 
-    onGoAjustesUnidades(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/administracion/unidades'], this.NavigationExtras);
-    }
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.condominio = navigations;
+  }
 
-    onGoAjustesUsuarios(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/administracion/usuarios'], this.NavigationExtras);
-    }
+  onGoAjustesUnidades() {
+    this.NavigationExtras.state = this.condominio;
+    this.router.navigate(['/admin/administracion/listarUnidades'], this.NavigationExtras);
+  }
 
-    onGoAjustesAreasComunales(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/administracion/areasComunes'], this.NavigationExtras);
-    }
+  onGoAjustesUsuarios() {
+    this.NavigationExtras.state = this.condominio;
+    this.router.navigate(['/admin/administracion/usuarios'], this.NavigationExtras);
+  }
+
+  onGoAjustesAreasComunales() {
+    this.NavigationExtras.state = this.condominio;
+    this.router.navigate(['/admin/administracion/areasComunes'], this.NavigationExtras);
+  }
 
 
 }

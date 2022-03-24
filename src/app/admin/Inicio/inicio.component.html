@@ -2,27 +2,27 @@
     <app-topbar></app-topbar>
 
     <div class="headerReseMenUni">
-        <div class="card" [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']">
+        <div class="card" [routerLink]="['/admin/administracion/areasComunes']" [routerLinkActive]="['active']" (click)="onGoReservas()">
             <div>
-                <div class="numbers"> 20 </div>
+                <div class="numbers"> {{reservas.length}} </div>
                 <div class="cardName">Reservas</div>
             </div>
             <div class="iconBx">
                 <mat-icon>visibility</mat-icon>
             </div>
         </div>
-        <div class="card" [routerLink]="['/admin/comunicacion']" [routerLinkActive]="['active']">
+        <div class="card" [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']" (click)="onGoMensajes()">
             <div>
-                <div class="numbers"> 28</div>
-                <div class="cardName">Mensajes</div>
+                <div class="numbers"> {{anuncios.length}}</div>
+                <div class="cardName">Anuncios</div>
             </div>
             <div class="iconBx">
                 <mat-icon> comment</mat-icon>
             </div>
         </div>
-        <div class="card" [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']">
+        <div class="card" [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']" (click)="onGoUnidades()">
             <div>
-                <div class="numbers"> 10 </div>
+                <div class="numbers"> {{unidades.length}} </div>
                 <div class="cardName">Unidades</div>
             </div>
             <div class="iconBx">
@@ -36,7 +36,7 @@
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2> Reservas </h2>
-                <a href="#" class="btn">Ver Todo</a>
+                <a [routerLink]="['/admin/administracion/areasComunes']" [routerLinkActive]="['active']" (click)="onGoReservas()" class="btn">Ver Todo</a>
             </div>
             <table>
                 <thead>
@@ -47,60 +47,12 @@
                         <td>Estado</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  *ngFor="let reserva of reservas">
                     <tr>
-                        <td>Alex Carrera</td>
-                        <td>2</td>
-                        <td>Parqueadero</td>
-                        <td><span class="status aceptado">Aceptado</span></td>
-                    </tr>
-                    <tr>
-                        <td>Alejandro Tupiza</td>
-                        <td>3</td>
-                        <td>Salon Eventos</td>
-                        <td><span class="status pendiente">Pendiente</span></td>
-                    </tr>
-                    <tr>
-                        <td>Javier Gomez</td>
-                        <td>1</td>
-                        <td>Cancha Futbol</td>
-                        <td><span class="status rechazado">Rechazado</span></td>
-                    </tr>
-                    <tr>
-                        <td>Alex Carrera</td>
-                        <td>2</td>
-                        <td>Parqueadero</td>
-                        <td><span class="status aceptado">Aceptado</span></td>
-                    </tr>
-                    <tr>
-                        <td>Alejandro Tupiza</td>
-                        <td>3</td>
-                        <td>Salon Eventos</td>
-                        <td><span class="status pendiente">Pendiente</span></td>
-                    </tr>
-                    <tr>
-                        <td>Javier Gomez</td>
-                        <td>1</td>
-                        <td>Cancha Futbol</td>
-                        <td><span class="status rechazado">Rechazado</span></td>
-                    </tr>
-                    <tr>
-                        <td>Alex Carrera</td>
-                        <td>2</td>
-                        <td>Parqueadero</td>
-                        <td><span class="status aceptado">Aceptado</span></td>
-                    </tr>
-                    <tr>
-                        <td>Alejandro Tupiza</td>
-                        <td>3</td>
-                        <td>Salon Eventos</td>
-                        <td><span class="status pendiente">Pendiente</span></td>
-                    </tr>
-                    <tr>
-                        <td>Javier Gomez</td>
-                        <td>1</td>
-                        <td>Cancha Futbol</td>
-                        <td><span class="status rechazado">Rechazado</span></td>
+                        <td>{{reserva.nombreResidente}} {{reserva.apellidoResidente}}</td>
+                        <td>{{reserva.numeroUnidad}}</td>
+                        <td>{{reserva.nombreAreaComunal}}</td>
+                        <td><span class="status pendiente">{{reserva.estadoReserva}}</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -109,15 +61,16 @@
         <div class="recentCustomers">
             <div class="unidadesHeader">
                 <h2>Unidades</h2>
-                <a href="#" class="btn">Ver Todo</a>
+                <a [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']" (click)="onGoUnidades()" class="btn">Ver Todo</a>
             </div>
             <table *ngFor="let unidad of unidades">
                 <tr>
                     <td>
-                        <div class="imgBx"> <img src="../../../assets/casa.jpg"> </div>
+                        <div class="imgBx"> <img src="../../../assets/casa.jpg" alt="logoCasa"> </div>
                     </td>
                     <td>
-                        <h4>Unidad # {{unidad.numeroUnidad}}<br><span>{{unidad.nombreArrendatario}} {{unidad.apellidoArrendatario}}</span></h4>
+                      <h4>Unidad # {{unidad.numeroUnidad}}</h4>
+                      <p>{{unidad.nombrePropietario}} {{unidad.apellidoPropietario}}</p>
                     </td>
                 </tr>
             </table>

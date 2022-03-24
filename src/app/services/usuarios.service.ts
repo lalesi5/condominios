@@ -13,7 +13,7 @@ export class UsuariosService {
 
   agregarUsuario(usuario: any, idUser: string): Promise<any> {
     const idUsuario = idUser || this.firestore.createId();
-    return this.firestore.collection('Administrador').doc(idUser).set(usuario);
+    return this.firestore.collection('Administrador').doc(idUsuario).set(usuario);
   }
 
   getUsuarios(idCondominio: string): Observable<any> {

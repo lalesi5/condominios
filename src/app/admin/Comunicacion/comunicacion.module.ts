@@ -15,6 +15,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { EditarAnuncioComponent } from './editar-anuncio/editar-anuncio.component';  
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditarMensajeComponent } from './editar-mensaje/editar-mensaje.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         NuevoMensajeComponent,
         MensajeUsuarioComponent,
         NuevoAnuncioComponent,
-        EditarAnuncioComponent
+        EditarAnuncioComponent,
+        EditarMensajeComponent
     ],
     exports: [
         MatCardModule,

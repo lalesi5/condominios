@@ -11,6 +11,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';  
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from "@angular/forms";
+import { ReservasComponent } from './reservas/reservas.component';
+import { ReservasCreateComponent } from './reservas-create/reservas-create.component';
+import { GridModule } from "@syncfusion/ej2-angular-grids";
+import { ListarUnidadesComponent } from './unidades/listar-unidades/listar-unidades.component';
+import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 
 
 
@@ -22,12 +27,17 @@ import { ReactiveFormsModule } from "@angular/forms";
         MatInputModule,
         MatSelectModule,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        GridModule,
+        DateTimePickerModule
     ],
     declarations:[
         UnidadesComponent,
         UsuariosComponent,
-        AreasComunesComponent
+        AreasComunesComponent,
+        ReservasComponent,
+        ReservasCreateComponent,
+        ListarUnidadesComponent
     ],
     exports: [
         MatCardModule,

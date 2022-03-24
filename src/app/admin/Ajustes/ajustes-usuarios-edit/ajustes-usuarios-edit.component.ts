@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { FirestoreService } from "../../../services/firestore.service";
-import { AuthService } from "../../../services/auth.service";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { AdminService } from "../../../services/admin.service";
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -65,8 +62,22 @@ export class AjustesUsuariosEditComponent implements OnInit {
     this.NavigationExtras.state = this.condominio;
   }
 
-  onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+  getDatosUsuario() {
+    if (this.id !== null) {
+      this.loading = true;
+      this.subscription.add(
+        this._usuarioService.getUsuario(this.id).subscribe(data => {
+          this.loading = false;
+          this.editUsuarioForm.setValue({
+            name: data.payload.data()['name'],
+            last_name: data.payload.data()['last_name'],
+            email: data.payload.data()['email'],
+            phone: data.payload.data()['phone'],
+            address: data.payload.data()['address'],
+          })
+        })
+      )
+    }
   }
 
   onEditUser() {
@@ -86,47 +97,29 @@ export class AjustesUsuariosEditComponent implements OnInit {
       address: direccion
     }
 
-    //if (this.id !== null) {
-      this._dialogService.confirmDialog({
-        title: 'Modificar Usuario',
-        message: '¿Está seguro de modificar el usuario?',
-        confirmText: 'Si',
-        cancelText: 'No',
-      }).subscribe(res => {
-        if (res) {
-          this.loading = true;
-          this._usuarioService.actualizarUsuario(idUser!, usuario).then(() => {
-            this.loading = false;
-            this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
-              positionClass: 'toast-bottom-right'
-            });
-          })
+    this._dialogService.confirmDialog({
+      title: 'Modificar Usuario',
+      message: '¿Está seguro de modificar el usuario?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this.loading = true;
+        this._usuarioService.actualizarUsuario(idUser!, usuario).then(() => {
           this.loading = false;
-          this.NavigationExtras.state = this.condominio;
-          this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
-        }
-      });
-
-    //}
+          this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
+            positionClass: 'toast-bottom-right'
+          });
+        })
+        this.loading = false;
+        this.NavigationExtras.state = this.condominio;
+        this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+      }
+    });
   }
 
-  getDatosUsuario() {
-    if (this.id !== null) {
-      this.loading = true;
-      this.subscription.add(
-        this._usuarioService.getUsuario(this.id).subscribe(data => {
-          this.loading = false;
-          console.log(data.payload.data()['name']);
-          this.editUsuarioForm.setValue({
-            name: data.payload.data()['name'],
-            last_name: data.payload.data()['last_name'],
-            email: data.payload.data()['email'],
-            phone: data.payload.data()['phone'],
-            address: data.payload.data()['address'],
-          })
-        })
-      )
-    }
+  onBacktoList(): void {
+    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
   }
 
   get form(): { [key: string]: AbstractControl; } {

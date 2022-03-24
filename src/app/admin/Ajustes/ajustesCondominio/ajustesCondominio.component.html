@@ -3,13 +3,13 @@
     <mat-card>
       <h2>Condominio</h2>
       <h3>Datos del Condominio</h3>
-      <div class="card" *ngFor="let condominio of impCondominios">
+      <div class="card" *ngFor="let condominio of infoCondominio">
         <div><b>Nombre: </b>{{condominio.nombreCondominio}}</div>
         <div><b>Ciudad: </b>{{condominio.ciudadCondominio}}</div>
         <div><b>Descripción: </b>{{condominio.descripcionCondominio}}</div>
       </div>
       <div>
-        <button class="btn btn-primary mt-2" (click)="onEdit()">Editar</button>
+        <button class="btn btn-primary mt-2" (click)="onGoEdit(condominio)">Editar</button>
       </div>
     </mat-card>
   </div>

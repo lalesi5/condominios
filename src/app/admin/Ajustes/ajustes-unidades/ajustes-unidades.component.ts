@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/services/dialog.service';
 import { UnidadesService } from "../../../services/unidades.service";
 
 @Component({
@@ -26,13 +28,15 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private _unidadesService: UnidadesService
+    private _unidadesService: UnidadesService,
+    private toastr: ToastrService,
+    private _dialogService: DialogService
   ) {
     this.recoverData();
   }
 
   ngOnInit(): void {
-    this.getUnidades();
+    this.getDatosUnidades();
   }
 
   ngOnDestroy(): void {
@@ -48,44 +52,46 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
     this.navigationExtras.state = this.condominio;
   }
 
-  getUnidades() {
-    try {
-      this.subscription.add(
-        this._unidadesService
-          .getAllUnidadesIdUser(this.idUsuario)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.unidades.push({
-                ...element.payload.doc.data()
-              })
-            })
+  getDatosUnidades() {
+    this.subscription.add(
+      this._unidadesService.getAllUnidadesIdUser(this.idUsuario).subscribe(data => {
+        this.unidades = [];
+        data.forEach((element: any) => {
+          this.unidades.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
           })
-      )
-    }
-    catch (err) {
-      console.log(err);
-    }
+        })
+      })
+    );
   }
 
   onGoCreate() {
     this.router.navigate(['/admin/ajustes/ajustesUnidadesCreate'], this.navigationExtras);
   }
 
-  onDelete(item: any) {
-    let result = confirm("Esta seguro de eliminar el Area Comunal!");
-    if (result) {
-      const idAreaUnidadAEliminar = item.idUnidad;
-      this._unidadesService
-        .deleteUnidades(idAreaUnidadAEliminar);
-    }
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([this.router.url], this.navigationExtras);
+  onDelete(id: string) {
+    this._dialogService.confirmDialog({
+      title: 'Eliminar Unidad',
+      message: '¿Está seguro de eliminar la información?',
+      confirmText: 'Si',
+      cancelText: 'No',
+    }).subscribe(res => {
+      if (res) {
+        this._unidadesService.deleteUnidades(id).then(() => {
+          this.toastr.success('El registro fue eliminado con exito', 'Registro eliminado', {
+            positionClass: 'toast-bottom-right'
+          });
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    });
   }
 
   onGoEdit(item: any) {
     this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit', item.idUnidad], this.navigationExtras);
   }
 
   onBacktoList(): void {

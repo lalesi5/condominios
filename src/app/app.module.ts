@@ -19,6 +19,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCommonModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+//syncfusion library
+import { ExcelExportService, FilterService, GridAllModule, GridModule, GroupService, PageService, PdfExportService, SortService, ToolbarService } from '@syncfusion/ej2-angular-grids';
+import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
 
@@ -37,15 +40,26 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogModule,
     MatIconModule,
     MatCommonModule,
-    MatButtonModule
+    MatButtonModule,
+    GridModule,
+    GridAllModule,
+    DateTimePickerModule
   ],
   declarations: [
     AppComponent
   ],
   providers: [
-    AngularFirestore
+    AngularFirestore,
+    PageService,
+    SortService,
+    FilterService,
+    GroupService,
+    PdfExportService, 
+    ToolbarService,
+    ExcelExportService
   ],
   bootstrap: [AppComponent],
 })
 
-export class AppModule { }
+export class AppModule {
+}

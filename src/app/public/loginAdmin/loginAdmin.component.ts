@@ -49,6 +49,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
 
     this.authSvc.loginByEmailAdmin(formValue).then((res) => {
       if (res) {
+        // @ts-ignore
         const idAdministrador = res.user.uid;
 
         //Comprueba si el usuario ha verificado su correo al momento de registrarse
@@ -82,7 +83,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
         if (this.rolUser === 'Administrador') {
           this.router.navigate(['/selectCondominio'], this.NavigationExtras);
         } else if (this.rolUser === 'Usuario') {
-          this.router.navigate(['/user/home'], this.NavigationExtras);
+          this.router.navigate(['/selectUnidad'], this.NavigationExtras);
         } else if (this.rolUser === 'admin-user') {
 
         }

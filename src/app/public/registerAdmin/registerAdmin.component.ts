@@ -88,7 +88,8 @@ export class RegisterAdminComponent implements OnInit {
                     console.log('usuario - ', res);
 
                     const path = 'Administrador';
-                    const idAdministrador = res.user.uid;
+                    // @ts-ignore
+                  const idAdministrador = res.user.uid;
                     this.datos.idAdministrador = idAdministrador;
                     this.datos.password = '';
                     this.datos.rol = 'Administrador';

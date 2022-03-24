@@ -14,9 +14,9 @@ export class AjustesCondominioComponent implements OnInit, OnDestroy {
   /*Variables*/
 
   private subscription: Subscription = new Subscription;
-  condominios: any[] = [];
-  impCondominios: any[] = [];
-  idCondominio: string = '';
+  idCondominio: string = ''
+  infoCondominio: any[] = [];
+  condominio: any[] = [];
 
   /*Variables de retorno*/
 
@@ -32,39 +32,36 @@ export class AjustesCondominioComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getCondominio();
+    this.getCondominios();
+  }
+
+  recoverData() {
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.idCondominio = navigations.idCondominio;
+    this.condominio = navigations;
+    this.NavigationExtras.state = this.condominio;
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
-    this.condominios = navigations;
-    this.NavigationExtras.state = this.condominios;
-  }
-
-  getCondominio() {
-    try {
-      this.subscription.add(
-        this._condominioService
-          .getCondominiosID(this.idCondominio)
-          .subscribe(data => {
-            data.forEach((element: any) => {
-              this.impCondominios.push({
-                ...element.payload.doc.data()
-              })
-            })
+  getCondominios() {
+    this.subscription.add(
+      this._condominioService.getCondominiosID(this.idCondominio).subscribe(data => {
+        this.infoCondominio = [];
+        data.forEach((element: any) => {
+          this.infoCondominio.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
           })
-      );
-    } catch (err) {
-      console.log(err);
-    }
+        })        
+      })
+    );
   }
 
-  onEdit(): void {
-    this.router.navigate(['/admin/ajustes/ajustesCondominioEdit'], this.NavigationExtras);
+  onGoEdit(item: any) {
+    this.NavigationExtras.state = item;
+    this.router.navigate(['/admin/ajustes/ajustesCondominioEdit', item.idCondominio], this.NavigationExtras);
   }
 }

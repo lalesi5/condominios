@@ -16,6 +16,12 @@ import { ComunicacionUsuarioComponent } from './Comunicacion/comunicacionUsuario
 import { AjustesUsuarioComponent } from './Ajustes/ajustesUsuario.component';
 import { AreasComunesUsuarioComponent } from './AreasComunes/areasComunesUsuario.component';
 import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
+import { ResponderComponent } from './Comunicacion/responder/responder.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { AjustesUserEditComponent } from './Ajustes/ajustes-user-edit/ajustes-user-edit.component';
+import { ReservasComponent } from './AreasComunes/reservas/reservas.component';
+import { ReservasCreateComponent } from './AreasComunes/reservas-create/reservas-create.component';
+import {DateTimePickerModule} from "@syncfusion/ej2-angular-calendars";
 
 
 
@@ -27,7 +33,9 @@ import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        CommonModule
+        CommonModule,
+        ReactiveFormsModule,
+        DateTimePickerModule
     ],
     declarations: [
         UserComponent,
@@ -38,7 +46,11 @@ import { FinanzasUsuarioComponent } from './Finanzas/finanzasUsuario.component';
         ComunicacionUsuarioComponent,
         AjustesUsuarioComponent,
         AreasComunesUsuarioComponent,
-        FinanzasUsuarioComponent
+        FinanzasUsuarioComponent,
+        ResponderComponent,
+        AjustesUserEditComponent,
+        ReservasComponent,
+        ReservasCreateComponent
     ],
     exports: [
         MatCardModule,
