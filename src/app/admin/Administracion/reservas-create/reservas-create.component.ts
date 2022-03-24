@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {NavigationExtras, Router} from "@angular/router";
-import {UnidadesService} from "../../../services/unidades.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
-import {ReservasService} from "../../../services/reservas.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
+import { NavigationExtras, Router } from "@angular/router";
+import { UnidadesService } from "../../../services/unidades.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
+import { ReservasService } from "../../../services/reservas.service";
 
 @Component({
   selector: 'app-reservas-create',
@@ -24,8 +24,10 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   areaComunal: any[] = [];
   unidades: any[] = [];
   unidad: any[] = [];
-
+  
   reservaForm: FormGroup;
+
+  datosUnidadForm: FormGroup;
 
   NavigationExtras: NavigationExtras = {
     state: {}
@@ -46,6 +48,11 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
       estadoReserva: ['', Validators.required],
       idUnidad: ['', Validators.required],
     });
+
+    this.datosUnidadForm = this.fb.group({
+      nombreResidente: [''],
+      apellidoResidente: [''],
+    })
     this.recoverData();
   }
 
@@ -70,6 +77,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   getDatosUnidades() {
     this.subscription.add(
       this._unidadesService.getAllUnidades(this.idCondominio).subscribe(data => {
+        this.unidades = [];
         data.forEach((element: any) => {
           this.unidades.push({
             ...element.payload.doc.data()
@@ -79,26 +87,40 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCreateReserva(){
+  onUnitChanged(item: any) {
+    this.subscription.add(
+      this._unidadesService.getUnidad(item).subscribe(data => {
+        this.loading = false;
+        this.datosUnidadForm.setValue({
+          nombreResidente: data.payload.data()['nombreResidente'],
+          apellidoResidente: data.payload.data()['apellidoResidente'],
+        })
+      })
+    )
+  }
+
+  onCreateReserva() {
     const descripcionArea = String(this.reservaForm.value.detalleReserva).charAt(0).toLocaleUpperCase() + String(this.reservaForm.value.detalleReserva).slice(1);
     const date = this.reservaForm.value.fechaReservaInicio;
     const date2 = this.reservaForm.value.fechaReservaFin;
+    const idUnidad = this.reservaForm.value.idUnidad;
 
     this._dialogService.confirmDialog({
       title: 'Agregar reserva',
       message: '¿Está seguro de agregar la reserva?',
       confirmText: 'Si',
       cancelText: 'No',
-    }).subscribe( res => {
+    }).subscribe(res => {
       if (res) {
-
-      this.getUnidadID(this.reservaForm.value.idUnidad);
 
         const reserva: any = {
           fechaReservaInicio: date.toLocaleString(),
           fechaReservaFin: date2.toLocaleString(),
           estadoReserva: this.reservaForm.value.estadoReserva,
-          idUnidad: this.reservaForm.value.idUnidad,
+          idUnidad: idUnidad,
+          numeroUnidad: this.numeroUnidad,
+          nombreResidente: this.datosUnidadForm.value.nombreResidente,
+          apellidoResidente: this.datosUnidadForm.value.apellidoResidente,
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idAreaComunal: this.idAreaComunal,
