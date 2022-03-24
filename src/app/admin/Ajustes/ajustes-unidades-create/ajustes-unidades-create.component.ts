@@ -78,6 +78,7 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   getUsuarios() {
     this.subscription.add(
       this._usuarioService.getUsuariosID(this.idUsuario).subscribe(data => {
+        this.usuarios = [];
         data.forEach((element: any) => {
           this.usuarios.push({
             id: element.payload.doc.id,
