@@ -34,7 +34,7 @@ export class ReservasService {
   }
 
   getReservas(idCondo:string): Observable<any> {
-    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', idCondo).where('estadoReserva', '==', 'Pendiente')).snapshotChanges();
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', idCondo).where('estadoReserva', '==', 'Pendiente').orderBy('numeroUnidad', 'desc')).snapshotChanges();
   }
 
 }

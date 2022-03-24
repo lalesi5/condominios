@@ -195,7 +195,6 @@
 
 .recentCustomers .unidadesHeader {
   display: flex;
-  padding-bottom: 55px;
   text-align: end;
   justify-content: space-between;
   align-items: baseline;
