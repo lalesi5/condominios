@@ -46,10 +46,10 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Numero de Unidade</label>
-          <select class="form-control" formControlName="idUnidad"
+          <label>Numero de Unidad</label>
+          <select class="form-control" formControlName="idUnidad" (ngModelChange)="onUnitChanged($event)"
             [ngClass]="{ 'is-invalid': !reservaForm.controls['idUnidad'].valid  && reservaForm.controls['idUnidad'].touched }">
-            <option *ngFor="let unidad of unidades" [ngValue]="unidad.numeroUnidad">Unidad: {{unidad.numeroUnidad}}
+            <option *ngFor="let unidad of unidades" [ngValue]="unidad.idUnidad">Unidad: {{unidad.numeroUnidad}}
             </option>
           </select>
           <div *ngIf=" reservaForm.controls['idUnidad'].touched  && !reservaForm.controls['idUnidad'].valid"
@@ -57,6 +57,20 @@
             Campo requerido
           </div>
         </div>
+        <form [formGroup]='datosUnidadForm'>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label>Nombre Residente: </label>
+                <input type="text" class="form-control" formControlName="nombreResidente" [readonly]="true">
+              </div>
+              <div class="col">
+                <label>Apellido Residente: </label>
+                <input type="text" class="form-control" formControlName="apellidoResidente" [readonly]="true">
+              </div>
+            </div>
+          </div>
+        </form>
         <div class="form-group">
           <label>Detalle de la Reserva</label>
           <input type="text" class="form-control" formControlName="detalleReserva"
