@@ -80,6 +80,7 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
       this.fstore.getDoc<AdminI>(path, idAdministrador).subscribe(res => {
         this.rolUser = res?.rol;
         this.NavigationExtras.state = res;
+        sessionStorage.setItem('idAdministrador', <string>res?.idAdministrador);
         if (this.rolUser === 'Administrador') {
           this.router.navigate(['/selectCondominio'], this.NavigationExtras);
         } else if (this.rolUser === 'Usuario') {

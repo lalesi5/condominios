@@ -43,7 +43,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
 
   recoverData() {
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
+    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
     this.administrador = navigations;
     this.NavigationExtras.state = this.administrador;
   }
