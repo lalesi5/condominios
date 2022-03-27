@@ -76,20 +76,22 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
+    this.idAministrador = <string> sessionStorage.getItem('idAministrador');
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string> sessionStorage.getItem('idUsuario');
+    this.idUnidad = <string> sessionStorage.getItem('idUnidad');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUsuario = navigations.idUsuario;
     this.idUnidad = navigations.idUnidad;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
   }
 
   getDatosUnidade() {
-    if (this.id !== null) {
+    if (this.idUnidad !== null) {
       this.loading = true;
       this.subscription.add(
-        this._unidadesService.getUnidad(this.id).subscribe(data => {
+        this._unidadesService.getUnidad(this.idUnidad).subscribe(data => {
           this.loading = false;
           this.unidadesForm.setValue({
             numeroUnidad: data.payload.data()['numeroUnidad'],
@@ -125,19 +127,6 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
       })
     )
 
-  }
-
-  getUsuarios() {
-    this.subscription.add(
-      this._usuarioService.getUsuariosID(this.idUsuario).subscribe(data => {
-        data.forEach((element: any) => {
-          this.usuarios.push({
-            id: element.payload.doc.id,
-            ...element.payload.doc.data()
-          })
-        })
-      })
-    );
   }
 
   onEditUnidades() {

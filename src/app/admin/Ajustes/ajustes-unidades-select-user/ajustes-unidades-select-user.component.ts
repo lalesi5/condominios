@@ -13,7 +13,6 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idAministrador: string = '';
-  idUnidad: string = '';
   idCondominio: string = '';
   usuarios: any[] = [];
   condominio: any[] = [];
@@ -38,10 +37,10 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
   }
 
   recoverData() {
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUnidad = navigations.idUnidad;
     this.condominio = navigations;
   }
 
@@ -60,6 +59,7 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
   }
 
   onGoSelectUnidad(item: any) {
+    sessionStorage.setItem('idUsuario', <string> item.idUsuario);
     this.NavigationExtras.state = item;
     this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.NavigationExtras);
   }
