@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { UnidadesService } from '../../services/unidades.service';
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {NavigationExtras, Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {UnidadesService} from '../../services/unidades.service';
 import {ReservasService} from "../../services/reservas.service";
 import {AnunciosGeneralesService} from "../../services/anunciosGenerales.service";
 
@@ -14,7 +14,6 @@ import {AnunciosGeneralesService} from "../../services/anunciosGenerales.service
 export class InicioComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
-  idAministrador: string = '';
   idCondominio: string = ';'
   unidades: any[] = [];
   reservas: any[] = [];
@@ -22,9 +21,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   anuncios: any[] = [];
 
   navigationExtras: NavigationExtras = {
-    state: {
-
-    }
+    state: {}
   }
 
   constructor(
@@ -33,13 +30,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     private _reservas: ReservasService,
     private _anuncios: AnunciosGeneralesService
   ) {
-
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state =  this.condominio;
-
+    this.recoverData();
   }
 
   ngOnInit(): void {
@@ -50,6 +41,14 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  recoverData() {
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.condominio = navigations;
+    this.navigationExtras.state =  this.condominio;
   }
 
   getUnidades() {
@@ -66,11 +65,11 @@ export class InicioComponent implements OnInit, OnDestroy {
     );
   }
 
-  getReservas(){
+  getReservas() {
     this.subscription.add(
       this._reservas.getReservas(this.idCondominio).subscribe(data => {
         this.reservas = [];
-        data.forEach((element:any) => {
+        data.forEach((element: any) => {
           this.reservas.push({
             ...element.payload.doc.data()
           })
@@ -79,11 +78,11 @@ export class InicioComponent implements OnInit, OnDestroy {
     )
   }
 
-  getAnuncios(){
+  getAnuncios() {
     this.subscription.add(
       this._anuncios.getAnunciosGenerales(this.idCondominio).subscribe(data => {
         this.anuncios = [];
-        data.forEach((element:any) => {
+        data.forEach((element: any) => {
           this.anuncios.push({
             ...element.payload.doc.data()
           })
@@ -92,15 +91,15 @@ export class InicioComponent implements OnInit, OnDestroy {
     )
   }
 
-  onGoUnidades(){
+  onGoUnidades() {
     this.router.navigate(['/admin/administracion'], this.navigationExtras);
   }
 
-  onGoReservas(){
+  onGoReservas() {
     this.router.navigate(['/admin/administracion/areasComunes'], this.navigationExtras);
   }
 
-  onGoMensajes(){
+  onGoMensajes() {
     this.router.navigate(['/admin/comunicacion/generales'], this.navigationExtras);
   }
 }

@@ -20,7 +20,6 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   areasComunales: any[] = [];
   condominio: any[] = [];
   loading = false;
-  id: string | null;
 
   /*Formularios*/
   areaComunalForm: FormGroup;
@@ -42,8 +41,6 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
       descripcion: ['', Validators.required],
     })
 
-    this.id = aRoute.snapshot.paramMap.get('id');
-
     this.recoverData();
   }
 
@@ -52,19 +49,20 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   }
 
   recoverData() {
+    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    this.idAreaComunal = <string> sessionStorage.getItem('idAreaComunal');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idAreaComunal = navigations.idAreaComunal;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
   }
 
   onListAreaComunal() {
-    if (this.id !== null) {
+    if (this.idAreaComunal !== null) {
       this.loading = true;
       this.subscription.add(
-        this._AreaComunalService.getArea(this.id).subscribe(data => {
+        this._AreaComunalService.getArea(this.idAreaComunal).subscribe(data => {
           this.loading = false;
           this.areaComunalForm.setValue({
             nombre: data.payload.data()['nombre'],
@@ -80,7 +78,7 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
     const nombreArea = String(this.areaComunalForm.value.nombre).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.nombre).slice(1);
     const descripcionArea = String(this.areaComunalForm.value.descripcion).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.descripcion).slice(1);
 
-    const idArea = this.aRoute.snapshot.paramMap.get('id');
+    const idArea = this.idAreaComunal;
 
     const areaComunal: any = {
       nombre: nombreArea,

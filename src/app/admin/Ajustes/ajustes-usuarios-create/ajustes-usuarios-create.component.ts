@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth.service';
-import { DialogService } from 'src/app/services/dialog.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {NavigationExtras, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {AuthService} from 'src/app/services/auth.service';
+import {DialogService} from 'src/app/services/dialog.service';
+import {UsuariosService} from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios-create',
@@ -41,20 +41,24 @@ export class AjustesUsuariosCreateComponent implements OnInit {
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       password: ['', [Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(15)]],
+        Validators.minLength(6),
+        Validators.maxLength(15)]],
       phone: ['', [Validators.pattern(/^\d+$/)]],
       address: [''],
     })
-
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.recoverData();
   }
 
   ngOnInit(): void {
+  }
+
+  recoverData() {
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
+    this.condominio = navigations;
+    this.navigationExtras.state = this.condominio;
   }
 
   agregarUsuario() {
@@ -85,6 +89,8 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           address: direccion
         }
 
+        console.log(usuario);
+
         //Crea el usuario en la parte de autenticacion
 
         const formValue = this.createUsuarioForm.value
@@ -93,7 +99,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
             // @ts-ignore
             const idUsuario = res.user.uid;
 
-            const data = { idUsuario, ...usuario }
+            const data = {idUsuario, ...usuario}
 
             //Crea el documento
             this.loading = true;

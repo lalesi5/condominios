@@ -26,7 +26,6 @@ export class AjustesCondominioEditComponent implements OnInit {
   ciudadCondominio: string = '';
   descripcionCondominio: string = '';
   loading = false;
-  id: string | null;
 
   /*Formularios*/
   condominioForm: FormGroup;
@@ -52,8 +51,6 @@ export class AjustesCondominioEditComponent implements OnInit {
       descripcionCondominio: [''],
     });
 
-    this.id = aRoute.snapshot.paramMap.get('id');
-
     this.recoverData();
   }
 
@@ -62,18 +59,19 @@ export class AjustesCondominioEditComponent implements OnInit {
   }
 
   recoverData() {
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.condominio = navigations;
-    this.idCondominio = navigations.idCondominio;
     this.NavigationExtras.state = this.condominio
   }
 
   onListCondminios() {
-    if (this.id !== null) {
+    if (this.idCondominio !== null) {
       this.loading = true;
       this.subscription.add(
-        this._condominiosService.getCondominio(this.id).subscribe(data => {
-          this.loading = false;          
+        this._condominiosService.getCondominio(this.idCondominio).subscribe(data => {
+          this.loading = false;
           this.condominioForm.setValue({
             nombreCondominio: data.payload.data()['nombreCondominio'],
             ciudadCondominio: data.payload.data()['ciudadCondominio'],
@@ -88,8 +86,8 @@ export class AjustesCondominioEditComponent implements OnInit {
 
     const nombre = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
     const ciudad = String(this.condominioForm.value.ciudadCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.ciudadCondominio).slice(1);
-    const idCondo = this.aRoute.snapshot.paramMap.get('id');
-    
+    const idCondo = this.idCondominio;
+
     const condominio: any = {
       nombreCondominio: nombre,
       ciudadCondominio: ciudad,

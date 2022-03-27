@@ -10,7 +10,6 @@ import { NavigationExtras, Router } from "@angular/router";
 
 export class AjustesComponent implements OnInit{
 
-    idAministrador: string = '';
     condominio: any[] = [];
 
     NavigationExtras: NavigationExtras = {
@@ -29,7 +28,6 @@ export class AjustesComponent implements OnInit{
 
     recoverData(){
       const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-      this.idAministrador = navigations.idAdministrador;
       this.condominio = navigations;
       this.NavigationExtras.state = this.condominio;
     }

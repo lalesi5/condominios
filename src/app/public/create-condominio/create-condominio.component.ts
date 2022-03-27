@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { CondominioService } from '../../services/condominios.service';
 import { Subscription } from "rxjs";
 import { DialogService } from 'src/app/services/dialog.service';
@@ -51,9 +51,10 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
+    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.administrador = navigations;
-    this.idAministrador = navigations.idAdministrador;
     this.NavigationExtras.state = this.administrador;
   }
 
@@ -80,12 +81,9 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
         this.toastr.success('El condominio se ha creado exitosamente', 'Registro exitoso', {
           positionClass: 'toast-bottom-right', timeOut: 10000
         });
+        this.router.navigate(['/selectCondominio'], this.NavigationExtras);
       }
     });
-
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/createCondominio'], this.NavigationExtras);
   }
 
   get form(): { [key: string]: AbstractControl; } {

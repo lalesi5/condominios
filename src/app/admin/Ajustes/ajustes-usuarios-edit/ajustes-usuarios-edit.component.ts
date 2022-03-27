@@ -19,7 +19,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
   idUsuario: string = '';
   usuarios: any[] = [];
   condominio: any[] = [];
-  id: string | null;
+
   editUsuarioForm: FormGroup;
   loading = false;
   private isEmail = /\S+@\S+\.\S+/;
@@ -44,8 +44,6 @@ export class AjustesUsuariosEditComponent implements OnInit {
       address: [''],
     })
 
-    this.id = aRoute.snapshot.paramMap.get('id');
-
     this.recoverData();
   }
 
@@ -54,19 +52,20 @@ export class AjustesUsuariosEditComponent implements OnInit {
   }
 
   recoverData() {
+    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string> sessionStorage.getItem('idUsuario');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUsuario = navigations.idUsuario;
     this.condominio = navigations;
     this.NavigationExtras.state = this.condominio;
   }
 
   getDatosUsuario() {
-    if (this.id !== null) {
+    if (this.idUsuario !== null) {
       this.loading = true;
       this.subscription.add(
-        this._usuarioService.getUsuario(this.id).subscribe(data => {
+        this._usuarioService.getUsuario(this.idUsuario).subscribe(data => {
           this.loading = false;
           this.editUsuarioForm.setValue({
             name: data.payload.data()['name'],
@@ -86,7 +85,6 @@ export class AjustesUsuariosEditComponent implements OnInit {
     const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const direccion = String(this.editUsuarioForm.value.address).charAt(0).toLocaleUpperCase() + String(this.editUsuarioForm.value.address).slice(1);
 
-    const idUser = this.aRoute.snapshot.paramMap.get('id');
 
     const usuario: any = {
       name: nombre,
@@ -105,7 +103,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
     }).subscribe(res => {
       if (res) {
         this.loading = true;
-        this._usuarioService.actualizarUsuario(idUser!, usuario).then(() => {
+        this._usuarioService.actualizarUsuario(this.idUsuario!, usuario).then(() => {
           this.loading = false;
           this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
             positionClass: 'toast-bottom-right'

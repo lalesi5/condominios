@@ -32,7 +32,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   passwordAministrador: string = '';
   rolAministrador: string = '';
   loading = false;
-  id: string | null;
 
   /*Formularios*/
   administradorForm: FormGroup;
@@ -55,7 +54,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     private firestoreService: FirestoreService,
     private _dialogService: DialogService,
     private toastr: ToastrService,
-    private aRoute: ActivatedRoute
   ) {
 
     this.administradorForm = this.fb.group({
@@ -89,8 +87,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.id = aRoute.snapshot.paramMap.get('id');
-
     this.recoverData();
   }
 
@@ -103,18 +99,19 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
+    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.condominio = navigations;
-    this.idAministrador = navigations.idAdministrador;
     this.NavigationExtras.state = this.condominio;
   }
 
   getDatosAdministrador() {
-    if (this.id !== null) {
+    if (this.idAministrador !== null) {
       this.loading = true;
       this.subscription.add(
-        this._adminService.getAdministrador(this.id).subscribe(data => {
-          this.loading = false;          
+        this._adminService.getAdministrador(this.idAministrador).subscribe(data => {
+          this.loading = false;
           this.administradorForm.setValue({
             name: data.payload.data()['name'],
             last_name: data.payload.data()['last_name'],
@@ -147,8 +144,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
     //informaciona guardar en el documento
     const data = { name, last_name, address, phone }
 
-    const idAdmin = this.aRoute.snapshot.paramMap.get('id');
-
     this._dialogService.confirmDialog({
       title: 'Modificar información',
       message: '¿Está seguro de modificar la información?',
@@ -163,8 +158,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
               positionClass: 'toast-bottom-right'
             });
           })
-        this.loading = false;
-        this.NavigationExtras.state = this.condominio;
         this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
       }
     })
@@ -194,27 +187,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
         this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
       }
     })
-  }
-
-  onChangeEmail() {
-    const userAuth = getAuth();
-    const email = this.emailForm.get('email')?.value;
-
-    const data = { email };
-
-    console.log('email - ', email);
-
-    this.administrador.forEach((element: any) => {
-      this.emailAministrador = element.email;
-    })
-
-    let result = confirm("Esta seguro de modificar su correo electrónico")
-    if (result) {
-      this.firestoreService.updateDoc(data, 'Administrador', this.idAministrador);
-      this.auth.updateEmail(userAuth.currentUser, email);
-      alert('Correo electrónico actualizado correctamente');
-      this.router.navigate(['/admin'], this.NavigationExtras);
-    }
   }
 
   get form(): { [key: string]: AbstractControl; } {

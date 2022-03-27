@@ -44,9 +44,10 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
   }
 
   recoverData() {
+    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
   }
@@ -73,8 +74,8 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
         this.loading = true;
         this._AreaComunalService.saveAreasComunales(areaComunal,
           this.idAministrador,
-          this.idCondominio).then(() => {
-
+          this.idCondominio
+        ).then(() => {
             this.toastr.success('El área fue registrada con exito', 'Área registrada', {
               positionClass: 'toast-bottom-right'
             });

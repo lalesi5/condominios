@@ -42,8 +42,9 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
+    console.log(sessionStorage);
+    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
     this.administrador = navigations;
     this.NavigationExtras.state = this.administrador;
   }
@@ -54,6 +55,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
         this._condominiosService
           .getCondominios(this.idAministrador)
           .subscribe(data => {
+            this.condominios = [];
             data.forEach((element: any) => {
               this.condominios.push({
                 ...element.payload.doc.data()
@@ -67,6 +69,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   }
 
   onGoAdmin(item: any) {
+    sessionStorage.setItem('idCondominio', <string>item.idCondominio);
     this.NavigationExtras.state = item;
     this.router.navigate(['/admin'], this.NavigationExtras);
   }

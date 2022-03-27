@@ -36,8 +36,9 @@ export class AjustesCondominioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
     this.NavigationExtras.state = this.condominio;
   }
@@ -55,13 +56,13 @@ export class AjustesCondominioComponent implements OnInit, OnDestroy {
             id: element.payload.doc.id,
             ...element.payload.doc.data()
           })
-        })        
+        })
       })
     );
   }
 
   onGoEdit(item: any) {
     this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesCondominioEdit', item.idCondominio], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesCondominioEdit'], this.NavigationExtras);
   }
 }

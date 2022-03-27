@@ -41,8 +41,9 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
   }
@@ -100,8 +101,9 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   onGoEdit(item: any) {
+    sessionStorage.setItem('idUsuario', <string> item.idUsuario);
     this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit', item.id], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit'], this.navigationExtras);
   }
 
 }

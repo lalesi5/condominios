@@ -40,8 +40,9 @@ export class AjustesAdminComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
+    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
     this.condominio = navigations;
     this.navigationExtras.state = this.condominio;
   }
@@ -55,14 +56,14 @@ export class AjustesAdminComponent implements OnInit, OnDestroy {
             id: element.payload.doc.id,
             ...element.payload.doc.data()
           })
-        })        
+        })
       })
     );
   }
 
   onEdit(item: any){
     this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesAdminEdit', item.idAdministrador], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesAdminEdit'], this.navigationExtras);
   }
 
 }

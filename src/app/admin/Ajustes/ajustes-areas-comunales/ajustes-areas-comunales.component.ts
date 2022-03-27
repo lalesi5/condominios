@@ -35,8 +35,9 @@ export class AjustesAreasComunalesComponent implements OnInit {
   }
 
   recoverData() {
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    console.log(sessionStorage);
     const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
     this.condominio = navigations;
     this.NavigationExtras.state = this.condominio;
   }
@@ -81,7 +82,8 @@ export class AjustesAreasComunalesComponent implements OnInit {
   }
 
   onGoEdit(item: any) {
+    sessionStorage.setItem('idAreaComunal', <string> item.idAreaComunal);
     this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit', item.id], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit'], this.NavigationExtras);
   }
 }
