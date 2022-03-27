@@ -61,7 +61,13 @@ export class SelectUnidadesComponent implements OnInit {
   }
 
   onGoAdmin(item: any) {
+    sessionStorage.setItem('idAdministrador', <string>item.idAdministrador);
+    sessionStorage.setItem('idCondominio', <string>item.idCondominio);
+    sessionStorage.setItem('idUsuario', <string>item.idUsuario);
     sessionStorage.setItem('idUnidad', <string>item.idUnidad);
+    sessionStorage.setItem('nombreResidente', <string>item.nombreResidente);
+    sessionStorage.setItem('apellidoResidente', <string>item.apellidoResidente);
+    sessionStorage.setItem('numeroUnidad', <string>item.numeroUnidad);
     this.router.navigate(['/user']);
   }
 

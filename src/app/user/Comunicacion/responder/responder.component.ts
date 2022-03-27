@@ -16,17 +16,14 @@ export class ResponderComponent implements OnInit {
   idCondominio: string = '';
   idUsuario: string = '';
   idUnidad: string = '';
-  nombreUser: string = '';
+  nombreResidente: string = '';
+  apellidoResidente: string = '';
+  nombreUsuario: string = '';
   mensajes: any[] = [];
-  unidad: any[] = [];
 
   loading = false;
 
   mensajesForm: FormGroup;
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -46,18 +43,18 @@ export class ResponderComponent implements OnInit {
   ngOnInit() { }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAdministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUsuario = navigations.idUsuario;
-    this.idUnidad = navigations.idUnidad;
-    this.unidad = navigations;
-    this.nombreUser = navigations.nombreResidente + ' ' + navigations.apellidoResidente;
-    this.navigationExtras.state = this.unidad;
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
+    this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
+    this.nombreUsuario = this.nombreResidente + ' ' + this.apellidoResidente;
+
   }
 
   volver() {
-    this.router.navigate(['/user/comunicacion'], this.navigationExtras);
+    this.router.navigate(['/user/comunicacion']);
   }
 
   onCreateMensaje() {
@@ -80,7 +77,7 @@ export class ResponderComponent implements OnInit {
           tituloMensaje: titulo,
           idUsuario: this.idUsuario,
           estado: 'Activo',
-          escritoPor: this.nombreUser,
+          escritoPor: this.nombreUsuario,
           idUnidad: this.idUnidad
         }
         //Crea el documento
@@ -91,7 +88,7 @@ export class ResponderComponent implements OnInit {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          this.router.navigate(['/user/comunicacion'], this.navigationExtras);
+          this.router.navigate(['/user/comunicacion']);
 
         }).catch(error => {
           console.log(error);

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {ReservasService} from "../../../services/reservas.service";
 
 @Component({
@@ -14,11 +14,6 @@ export class ReservasComponent implements OnInit, OnDestroy {
   idAreaComunal: string = '';
   idUnidad: string = '';
   reservas: any[] = [];
-  areaComunal: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -37,11 +32,8 @@ export class ReservasComponent implements OnInit, OnDestroy {
   }
 
   recoverData(){
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAreaComunal = navigations.idAreaComunal;
-    this.idUnidad = navigations.idUnidad;
-    this.areaComunal = navigations;
-    this.NavigationExtras.state = this.areaComunal;
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
   }
 
   getReservas(){
@@ -58,11 +50,11 @@ export class ReservasComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/user/areasComunes'], this.NavigationExtras);
+    this.router.navigate(['/user/areasComunes']);
   }
 
   onGoCreate(): void {
-    this.router.navigate(['/user/reservasCreate'], this.NavigationExtras);
+    this.router.navigate(['/user/reservasCreate']);
   }
 
 
