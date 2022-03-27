@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AreasComunalesService } from 'src/app/services/areasComunales.service';
-import { DialogService } from 'src/app/services/dialog.service';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, Validators, FormBuilder, AbstractControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {AreasComunalesService} from 'src/app/services/areasComunales.service';
+import {DialogService} from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-ajustes-areas-comunales-create',
@@ -13,17 +13,11 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class AjustesAreasComunalesCreateComponent implements OnInit {
 
   idAministrador: string = '';
-  idCondominio: string = ';'
-  areasComunales: any[] = [];
-  condominio: any[] = [];
+  idCondominio: string = ''
   loading = false;
 
   /*Formularios*/
   areaComunalForm: FormGroup;
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -44,12 +38,8 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
   }
 
   recoverData() {
-    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
-    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   onCreateAreaComunal() {
@@ -76,23 +66,22 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
           this.idAministrador,
           this.idCondominio
         ).then(() => {
-            this.toastr.success('El área fue registrada con exito', 'Área registrada', {
-              positionClass: 'toast-bottom-right'
-            });
-            this.loading = false;
-            this.navigationExtras.state = this.condominio;
-            this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
-
-          }).catch(error => {
-            console.log(error);
-            this.loading = false;
+          this.toastr.success('El área fue registrada con exito', 'Área registrada', {
+            positionClass: 'toast-bottom-right'
           });
+          this.loading = false;
+          this.router.navigate(['/admin/ajustes/ajustesAreasComunales']);
+
+        }).catch(error => {
+          console.log(error);
+          this.loading = false;
+        });
       }
     });
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunales']);
   }
 
   get form(): { [key: string]: AbstractControl; } {

@@ -17,12 +17,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   idCondominio: string = ';'
   unidades: any[] = [];
   reservas: any[] = [];
-  condominio: any[] = [];
   anuncios: any[] = [];
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -45,10 +40,6 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   recoverData() {
     this.idCondominio = <string> sessionStorage.getItem('idCondominio');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.navigationExtras.state =  this.condominio;
   }
 
   getUnidades() {
@@ -92,14 +83,14 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   onGoUnidades() {
-    this.router.navigate(['/admin/administracion'], this.navigationExtras);
+    this.router.navigate(['/admin/administracion']);
   }
 
   onGoReservas() {
-    this.router.navigate(['/admin/administracion/areasComunes'], this.navigationExtras);
+    this.router.navigate(['/admin/administracion/areasComunes']);
   }
 
   onGoMensajes() {
-    this.router.navigate(['/admin/comunicacion/generales'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion/generales']);
   }
 }

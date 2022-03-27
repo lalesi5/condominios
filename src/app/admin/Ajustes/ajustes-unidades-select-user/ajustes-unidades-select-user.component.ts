@@ -15,11 +15,6 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
   idAministrador: string = '';
   idCondominio: string = '';
   usuarios: any[] = [];
-  condominio: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -39,9 +34,6 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
   recoverData() {
     this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
   }
 
   getUsuarios() {
@@ -60,8 +52,7 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
 
   onGoSelectUnidad(item: any) {
     sessionStorage.setItem('idUsuario', <string> item.idUsuario);
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesUnidades'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUnidades']);
   }
 
 }

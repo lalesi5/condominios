@@ -1,41 +1,28 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-comunicacion',
-    templateUrl: './comunicacion.component.html',
-    styleUrls: ['./comunicacion.component.css']
+  selector: 'app-comunicacion',
+  templateUrl: './comunicacion.component.html',
+  styleUrls: ['./comunicacion.component.css']
 })
 
-export class ComunicacionComponent implements OnInit{
+export class ComunicacionComponent implements OnInit {
 
-    idAministrador: string = '';
-    condominio: any[] = [];
+  constructor(
+    private router: Router,
+  ) {
+  }
 
-    NavigationExtras: NavigationExtras = {
-        state: {
+  ngOnInit() {
+  }
 
-        }
-    }
+  onGoAnunciosGenerales() {
+    this.router.navigate(['/admin/comunicacion/generales']);
+  }
 
-    constructor(
-        private router: Router,
-    ) {
-        const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-        this.idAministrador = navigations.uid;
-        this.condominio = navigations;
-    }
-
-    ngOnInit(){}
-
-    onGoAnunciosGenerales(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/comunicacion/generales'], this.NavigationExtras);
-    }
-
-    onGoComunicadosIndividuales(){
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/comunicacion/individuales'], this.NavigationExtras);
-    }
+  onGoComunicadosIndividuales() {
+    this.router.navigate(['/admin/comunicacion/individuales']);
+  }
 
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AreasComunalesService } from '../../../services/areasComunales.service';
-import { Subscription } from "rxjs";
-import { DialogService } from 'src/app/services/dialog.service';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AreasComunalesService} from '../../../services/areasComunales.service';
+import {Subscription} from "rxjs";
+import {DialogService} from 'src/app/services/dialog.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-ajustes-areas-comunales-edit',
@@ -17,16 +17,10 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   idAministrador: string = '';
   idCondominio: string = '';
   idAreaComunal: string = '';
-  areasComunales: any[] = [];
-  condominio: any[] = [];
   loading = false;
 
   /*Formularios*/
   areaComunalForm: FormGroup;
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -49,13 +43,9 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
   }
 
   recoverData() {
-    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
-    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
-    this.idAreaComunal = <string> sessionStorage.getItem('idAreaComunal');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
   }
 
   onListAreaComunal() {
@@ -100,14 +90,13 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
           });
         })
         this.loading = false;
-        this.navigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesAreasComunales']);
       }
     });
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunales']);
   }
 
 }

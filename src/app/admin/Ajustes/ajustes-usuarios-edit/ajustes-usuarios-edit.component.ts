@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { ToastrService } from 'ngx-toastr';
-import { DialogService } from 'src/app/services/dialog.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Subscription} from "rxjs";
+import {ToastrService} from 'ngx-toastr';
+import {DialogService} from 'src/app/services/dialog.service';
+import {UsuariosService} from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios-edit',
@@ -17,20 +17,13 @@ export class AjustesUsuariosEditComponent implements OnInit {
   idAministrador: string = '';
   idCondominio: string = '';
   idUsuario: string = '';
-  usuarios: any[] = [];
-  condominio: any[] = [];
 
   editUsuarioForm: FormGroup;
   loading = false;
   private isEmail = /\S+@\S+\.\S+/;
 
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
-    private aRoute: ActivatedRoute,
     private _dialogService: DialogService,
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -52,13 +45,9 @@ export class AjustesUsuariosEditComponent implements OnInit {
   }
 
   recoverData() {
-    this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
-    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
-    this.idUsuario = <string> sessionStorage.getItem('idUsuario');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio;
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   getDatosUsuario() {
@@ -110,14 +99,13 @@ export class AjustesUsuariosEditComponent implements OnInit {
           });
         })
         this.loading = false;
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
       }
     });
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
   }
 
   get form(): { [key: string]: AbstractControl; } {

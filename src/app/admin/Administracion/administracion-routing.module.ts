@@ -19,7 +19,7 @@ const routerAdministracion: Routes = [
         {path: 'unidades', component: UnidadesComponent},
         {path: 'usuarios', component: UsuariosComponent},
         {path: 'areasComunes', component: AreasComunesComponent},
-        {path: 'reservas/:id', component: ReservasComponent},
+        {path: 'reservas', component: ReservasComponent},
         {path: 'reservasCreate', component: ReservasCreateComponent},
         {path: 'listarUnidades', component: ListarUnidadesComponent}
       ]

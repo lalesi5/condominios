@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from "rxjs";
-import { NavigationExtras, Router } from "@angular/router";
-import { UnidadesService } from "../../../services/unidades.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DialogService } from "../../../services/dialog.service";
-import { ToastrService } from "ngx-toastr";
-import { ReservasService } from "../../../services/reservas.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
+import {UnidadesService} from "../../../services/unidades.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DialogService} from "../../../services/dialog.service";
+import {ToastrService} from "ngx-toastr";
+import {ReservasService} from "../../../services/reservas.service";
 
 @Component({
   selector: 'app-reservas-create',
@@ -26,12 +26,8 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   unidad: any[] = [];
 
   reservaForm: FormGroup;
-
   datosUnidadForm: FormGroup;
 
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -66,13 +62,10 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAdministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.nombreAreaComunal = navigations.nombre;
-    this.areaComunal = navigations;
-    this.idAreaComunal = navigations.idAreaComunal;
-    this.NavigationExtras.state = this.areaComunal;
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
+    this.nombreAreaComunal = <string>sessionStorage.getItem('nombreAreaComunal');
   }
 
   getDatosUnidades() {
@@ -136,7 +129,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
             positionClass: 'toast-bottom-rigth'
           });
           this.loading = false;
-          this.router.navigate(['/admin/administracion/reservas', this.idAreaComunal], this.NavigationExtras);
+          this.router.navigate(['/admin/administracion/reservas']);
         }).catch(error => {
           console.log(error);
         })
@@ -159,7 +152,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['admin/administracion/reservas', this.idAreaComunal], this.NavigationExtras);
+    this.router.navigate(['admin/administracion/reservas', this.idAreaComunal]);
   }
 
 }

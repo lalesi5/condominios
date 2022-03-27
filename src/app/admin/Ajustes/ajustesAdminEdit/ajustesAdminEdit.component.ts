@@ -40,12 +40,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
   cambioPasswordForm: FormGroup;
 
-  /*Variables de retorno*/
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
     private _adminService: AdminService,
@@ -100,10 +94,6 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
 
   recoverData() {
     this.idAministrador = <string> sessionStorage.getItem('idAdministrador');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio;
   }
 
   getDatosAdministrador() {
@@ -124,7 +114,7 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes']);
   }
 
   onCreateAdmin() {
@@ -158,7 +148,7 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
               positionClass: 'toast-bottom-right'
             });
           })
-        this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesAdmin']);
       }
     })
   }
@@ -184,7 +174,7 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
         this.toastr.success('Su contraseña fue modificada con exito', 'Contraseña cambiada', {
           positionClass: 'toast-bottom-right'
         });
-        this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesAdmin']);
       }
     })
   }

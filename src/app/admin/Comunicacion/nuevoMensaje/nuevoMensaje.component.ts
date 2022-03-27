@@ -24,10 +24,6 @@ export class NuevoMensajeComponent implements OnInit {
 
   mensajesForm: FormGroup;
 
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
     private _mensajesService: MensajesService,
@@ -46,17 +42,14 @@ export class NuevoMensajeComponent implements OnInit {
   ngOnInit() { }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAdministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUsuario = navigations.idUsuario;
-    this.idUnidad = navigations.idUnidad;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
   }
 
   onBacktoList() {
-    this.router.navigate(['/admin/comunicacion/individuales'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion/individuales']);
   }
 
   onCreateMensaje() {
@@ -90,7 +83,7 @@ export class NuevoMensajeComponent implements OnInit {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          this.router.navigate(['/admin/comunicacion/individuales'], this.navigationExtras);
+          this.router.navigate(['/admin/comunicacion/individuales']);
 
         }).catch(error => {
           console.log(error);

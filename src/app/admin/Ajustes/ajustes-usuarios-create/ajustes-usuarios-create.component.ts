@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NavigationExtras, Router} from '@angular/router';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from 'src/app/services/auth.service';
 import {DialogService} from 'src/app/services/dialog.service';
@@ -22,10 +22,6 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   loading = false;
   private isEmail = /\S+@\S+\.\S+/;
   hide: boolean = true;
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -55,10 +51,6 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   recoverData() {
     this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
   }
 
   agregarUsuario() {
@@ -89,8 +81,6 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           address: direccion
         }
 
-        console.log(usuario);
-
         //Crea el usuario en la parte de autenticacion
 
         const formValue = this.createUsuarioForm.value
@@ -109,8 +99,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
                 positionClass: 'toast-bottom-right'
               });
               this.loading = false;
-              this.navigationExtras.state = this.condominio;
-              this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
+              this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
 
             }).catch(error => {
               console.log(error);
@@ -123,7 +112,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
   }
 
   //Mostrar y ocular contraseña

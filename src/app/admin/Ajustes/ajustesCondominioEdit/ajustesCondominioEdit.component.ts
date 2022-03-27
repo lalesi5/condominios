@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CondominioService } from '../../../services/condominios.service';
-import { Subscription } from "rxjs";
-import { ToastrService } from "ngx-toastr";
-import { DialogService } from "src/app/services/dialog.service";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CondominioService} from '../../../services/condominios.service';
+import {Subscription} from "rxjs";
+import {ToastrService} from "ngx-toastr";
+import {DialogService} from "src/app/services/dialog.service";
 
 @Component({
   selector: 'app-ajustesCondominioEdit',
@@ -15,12 +15,7 @@ import { DialogService } from "src/app/services/dialog.service";
 export class AjustesCondominioEditComponent implements OnInit {
 
   /*Variables*/
-
   private subscription: Subscription = new Subscription;
-  condominio: any[] = [];
-  impCondominio: any[] = [];
-
-  idAdministrador: string = '';
   idCondominio: string = '';
   nombreCondominio: string = '';
   ciudadCondominio: string = '';
@@ -30,19 +25,12 @@ export class AjustesCondominioEditComponent implements OnInit {
   /*Formularios*/
   condominioForm: FormGroup;
 
-  /*Variables de retorno*/
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
     private _condominiosService: CondominioService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
     private toastr: ToastrService,
-    private aRoute: ActivatedRoute
   ) {
 
     this.condominioForm = this.fb.group({
@@ -59,11 +47,7 @@ export class AjustesCondominioEditComponent implements OnInit {
   }
 
   recoverData() {
-    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
-    console.log(sessionStorage);
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   onListCondminios() {
@@ -109,13 +93,12 @@ export class AjustesCondominioEditComponent implements OnInit {
           });
         })
         this.loading = false;
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes/ajustesCondominio'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesCondominio']);
       }
     })
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesCondominio'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesCondominio']);
   }
 }
