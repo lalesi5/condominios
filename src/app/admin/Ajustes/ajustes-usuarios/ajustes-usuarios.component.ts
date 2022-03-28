@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { NavigationExtras, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/services/dialog.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
+import {DialogService} from 'src/app/services/dialog.service';
+import {UsuariosService} from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios',
@@ -17,10 +17,6 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   idCondominio: string = ''
   usuarios: any[] = [];
   condominio: any[] = [];
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -41,10 +37,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   getUsuarios() {
@@ -96,12 +89,12 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   onGoCreate() {
-    this.router.navigate(['/admin/ajustes/ajustesUsuariosCreate'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUsuariosCreate']);
   }
 
   onGoEdit(item: any) {
-    this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit', item.id], this.navigationExtras);
+    sessionStorage.setItem('idUsuario', <string>item.idUsuario);
+    this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit']);
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {UnidadesService} from "../../services/unidades.service";
 import {DialogService} from "../../services/dialog.service";
 import {AuthService} from "../../services/auth.service";
@@ -15,14 +15,8 @@ import {ToastrService} from "ngx-toastr";
 export class SelectUnidadesComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
-  usuario: any[] = [];
   idUsuario: string = '';
   unidades: any[] = [];
-  idUnidad: string = '';
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -43,10 +37,7 @@ export class SelectUnidadesComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idUsuario = navigations.idUsuario;
-    this.usuario = navigations;
-    this.NavigationExtras.state = this.usuario;
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   onListUnidades() {
@@ -70,8 +61,14 @@ export class SelectUnidadesComponent implements OnInit {
   }
 
   onGoAdmin(item: any) {
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/user'], this.NavigationExtras);
+    sessionStorage.setItem('idAdministrador', <string>item.idAdministrador);
+    sessionStorage.setItem('idCondominio', <string>item.idCondominio);
+    sessionStorage.setItem('idUsuario', <string>item.idUsuario);
+    sessionStorage.setItem('idUnidad', <string>item.idUnidad);
+    sessionStorage.setItem('nombreResidente', <string>item.nombreResidente);
+    sessionStorage.setItem('apellidoResidente', <string>item.apellidoResidente);
+    sessionStorage.setItem('numeroUnidad', <string>item.numeroUnidad);
+    this.router.navigate(['/user']);
   }
 
   onLogout() {

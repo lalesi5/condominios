@@ -23,13 +23,9 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   apellidoResidente: string = '';
   numeroUnidad: string = '';
   loading = false;
-  areaComunal: any[] = [];
 
   reservaForm: FormGroup;
 
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -54,17 +50,16 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAdministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUnidad = navigations.idUnidad;
-    this.numeroUnidad = navigations.numeroUnidad;
-    this.nombreAreaComunal = navigations.nombre;
-    this.nombreResidente = navigations.nombreResidente;
-    this.apellidoResidente = navigations.apellidoResidente;
-    this.areaComunal = navigations;
-    this.idAreaComunal = navigations.idAreaComunal;
-    this.NavigationExtras.state = this.areaComunal;
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.numeroUnidad = <string>sessionStorage.getItem('numeroUnidad');
+    this.nombreAreaComunal = <string>sessionStorage.getItem('nombreAreaComunal');
+    this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
+    this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
+    this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
+
+    console.log(sessionStorage);
   }
 
   onCreateReserva(){
@@ -101,7 +96,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
             positionClass: 'toast-bottom-rigth'
           });
           this.loading = false;
-          this.router.navigate(['/user/reservas'], this.NavigationExtras);
+          this.router.navigate(['/user/reservas']);
         }).catch(error => {
           console.log(error);
         })
@@ -110,7 +105,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['user/reservas'], this.NavigationExtras);
+    this.router.navigate(['user/reservas']);
   }
 
 }

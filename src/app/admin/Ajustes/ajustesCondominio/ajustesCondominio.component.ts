@@ -16,13 +16,6 @@ export class AjustesCondominioComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   idCondominio: string = ''
   infoCondominio: any[] = [];
-  condominio: any[] = [];
-
-  /*Variables de retorno*/
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -36,10 +29,7 @@ export class AjustesCondominioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio;
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
   }
 
   ngOnDestroy(): void {
@@ -55,13 +45,12 @@ export class AjustesCondominioComponent implements OnInit, OnDestroy {
             id: element.payload.doc.id,
             ...element.payload.doc.data()
           })
-        })        
+        })
       })
     );
   }
 
   onGoEdit(item: any) {
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesCondominioEdit', item.idCondominio], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesCondominioEdit']);
   }
 }

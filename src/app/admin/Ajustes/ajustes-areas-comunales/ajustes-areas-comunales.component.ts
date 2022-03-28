@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { AreasComunalesService } from '../../../services/areasComunales.service';
-import { Subscription } from "rxjs";
-import { DialogService } from 'src/app/services/dialog.service';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AreasComunalesService} from '../../../services/areasComunales.service';
+import {Subscription} from "rxjs";
+import {DialogService} from 'src/app/services/dialog.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-ajustes-areas-comunales',
@@ -15,11 +15,6 @@ export class AjustesAreasComunalesComponent implements OnInit {
   private subscription: Subscription = new Subscription;
   idCondominio: string = ''
   areasComunales: any[] = [];
-  condominio: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -35,10 +30,7 @@ export class AjustesAreasComunalesComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   getAreasComunales() {
@@ -77,11 +69,11 @@ export class AjustesAreasComunalesComponent implements OnInit {
   }
 
   onGoCreate() {
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesCreate'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesCreate']);
   }
 
   onGoEdit(item: any) {
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit', item.id], this.NavigationExtras);
+    sessionStorage.setItem('idAreaComunal', <string>item.idAreaComunal);
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunalesEdit']);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
 import { AnunciosGeneralesService } from "src/app/services/anunciosGenerales.service";
@@ -13,17 +13,11 @@ import { DialogService } from "src/app/services/dialog.service";
 
 export class NuevoAnuncioComponent implements OnInit {
 
+  idCondominio: string = '';
   idAministrador: string = '';
-  idCondominio: string = ''
-  anuncios: any[] = [];
-  condominio: any[] = [];
   loading = false;
 
   mensajesForm: FormGroup;
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -45,11 +39,8 @@ export class NuevoAnuncioComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idAministrador = <string>sessionStorage.getItem('idAministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   onCreateAnuncios() {
@@ -78,8 +69,7 @@ export class NuevoAnuncioComponent implements OnInit {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          this.navigationExtras.state = this.condominio;
-          this.router.navigate(['/admin/comunicacion'], this.navigationExtras);
+          this.router.navigate(['/admin/comunicacion']);
 
         }).catch(error => {
           console.log(error);
@@ -90,6 +80,6 @@ export class NuevoAnuncioComponent implements OnInit {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/comunicacion'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion']);
   }
 }

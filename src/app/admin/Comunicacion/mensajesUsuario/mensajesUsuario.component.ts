@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { Subscription } from "rxjs";
-import { DialogService } from "src/app/services/dialog.service";
-import { MensajesService } from '../../../services/mensajes.service';
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {Subscription} from "rxjs";
+import {DialogService} from "src/app/services/dialog.service";
+import {MensajesService} from '../../../services/mensajes.service';
 
 @Component({
   selector: 'app-mensajesUsuario',
@@ -14,17 +14,13 @@ import { MensajesService } from '../../../services/mensajes.service';
 export class MensajeUsuarioComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
-  idAministrador: string = '';
   idCondominio: string = '';
   idUnidad: string = '';
   idUsuario: string = '';
+  nombreResidente: string = '';
+  apellidoResidente: string = '';
   nombreUsuario: string = '';
   mensajes: any[] = [];
-  condominio: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -40,14 +36,12 @@ export class MensajeUsuarioComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUnidad = navigations.idUnidad;
-    this.idUsuario = navigations.idUsuario;
-    this.nombreUsuario = navigations.nombreResidente + ' ' + navigations.apellidoResidente;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
+    this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
+    this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
+    this.nombreUsuario = this.nombreResidente + ' ' + this.apellidoResidente;
   }
 
   getMensajes() {
@@ -86,12 +80,12 @@ export class MensajeUsuarioComponent implements OnInit {
   }
 
   onGoEdit(item: any) {
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/comunicacion/editarMensaje', item.idMensaje], this.NavigationExtras);
+    sessionStorage.setItem('idMensaje', <string>item.idMensaje);
+    this.router.navigate(['/admin/comunicacion/editarMensaje']);
   }
 
   onBackToUnits() {
-    this.router.navigate(['/admin/comunicacion/individuales'], this.NavigationExtras);
+    this.router.navigate(['/admin/comunicacion/individuales']);
   }
 
 }

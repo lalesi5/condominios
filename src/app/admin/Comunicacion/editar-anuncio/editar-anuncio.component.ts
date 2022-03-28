@@ -17,16 +17,10 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
   idAministrador: string = '';
   idCondominio: string = '';
   idAnuncioGeneral: string = '';
-  anuncios: any[] = [];
-  condominio: any[] = [];
   loading = false;
   id: string | null;
 
   anunciosForm: FormGroup;
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -56,19 +50,16 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idAnuncioGeneral = navigations.idAnuncioGeneral;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idAministrador = <string>sessionStorage.getItem('idAministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idAnuncioGeneral = <string>sessionStorage.getItem('idAnuncioGeneral');
   }
 
   getAnuncioGeneral() {
-    if (this.id !== null) {
+    if (this.idAnuncioGeneral !== null) {
       this.loading = true;
       this.subscription.add(
-        this._anuncios.getAnuncioGeneral(this.id).subscribe(data => {
+        this._anuncios.getAnuncioGeneral(this.idAnuncioGeneral).subscribe(data => {
           this.loading = false;
           this.anunciosForm.setValue({
             tituloAnuncio: data.payload.data()['tituloAnuncio'],
@@ -105,8 +96,7 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
             });
           })
           this.loading = false;
-          this.navigationExtras.state = this.condominio;
-          this.router.navigate(['/admin/comunicacion'], this.navigationExtras);
+          this.router.navigate(['/admin/comunicacion']);
         }
       })
     )
@@ -114,6 +104,6 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/comunicacion'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion']);
   }
 }

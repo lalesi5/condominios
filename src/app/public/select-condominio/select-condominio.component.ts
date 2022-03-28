@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { CondominioService } from '../../services/condominios.service';
-import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/services/dialog.service';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {CondominioService} from '../../services/condominios.service';
+import {AuthService} from '../../services/auth.service';
+import {Subscription} from 'rxjs';
+import {DialogService} from 'src/app/services/dialog.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-select-condominio',
@@ -14,14 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 export class SelectCondominioComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
-  administrador: any[] = [];
   idAministrador: string = '';
   condominios: any[] = [];
-  idCondominio: string = '';
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -42,10 +36,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.administrador = navigations;
-    this.NavigationExtras.state = this.administrador;
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
   }
 
   onListCondominios() {
@@ -54,6 +45,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
         this._condominiosService
           .getCondominios(this.idAministrador)
           .subscribe(data => {
+            this.condominios = [];
             data.forEach((element: any) => {
               this.condominios.push({
                 ...element.payload.doc.data()
@@ -67,12 +59,12 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
   }
 
   onGoAdmin(item: any) {
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin'], this.NavigationExtras);
+    sessionStorage.setItem('idCondominio', <string>item.idCondominio);
+    this.router.navigate(['/admin']);
   }
 
   onGoCreate() {
-    this.router.navigate(['/createCondominio'], this.NavigationExtras);
+    this.router.navigate(['/createCondominio']);
   }
 
   onLogout() {
@@ -103,16 +95,12 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
         cancelText: 'No',
       }).subscribe(res => {
         if (res) {
-
           const idCondominioEliminar = item.idCondominio;
           this._condominiosService.deleteCondominios(idCondominioEliminar);
-
           /*recargar componente*/
-
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
           this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate([this.router.url], this.NavigationExtras);
-
+          this.router.navigate([this.router.url]);
           this.toastr.success('El condominio se ha eliminado exitosamente', 'Registro eliminado', {
             positionClass: 'toast-bottom-right'
           });

@@ -20,10 +20,6 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
   nombreResidente: string = '';
   apellidoResidente: string = '';
 
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
     private _areasComunalesService: AreasComunalesService,
@@ -40,14 +36,10 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.numeroUnidad = navigations.numeroUnidad;
-    this.idCondominio = navigations.idCondominio;
-    this.idUnidad = navigations.idUnidad;
-    this.nombreResidente =  navigations.nombreResidente;
-    this.apellidoResidente = navigations.apellidoResidente;
-    this.unidad = navigations;
-    this.NavigationExtras.state = this.unidad;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
+    this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
   }
 
   onListAreasComunales() {
@@ -64,18 +56,9 @@ export class AreasComunesUsuarioComponent implements OnInit, OnDestroy {
   }
 
   onGoReservas(item: any){
-    const unidad = {
-      numeroUnidad: this.numeroUnidad,
-      idUnidad: this.idUnidad,
-      nombreResidente: this.nombreResidente,
-      apellidoResidente: this.apellidoResidente
-    };
-    const data = {
-      ...unidad,
-      ...item
-    }
-    this.NavigationExtras.state = data;
-    this.router.navigate(['/user/reservas'], this.NavigationExtras);
+    sessionStorage.setItem('idAreaComunal', <string>item.idAreaComunal);
+    sessionStorage.setItem('nombreAreaComunal', <string>item.nombre);
+    this.router.navigate(['/user/reservas']);
   }
 
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { MensajesService } from "../../services/mensajes.service";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {MensajesService} from "../../services/mensajes.service";
 
 @Component({
   selector: 'app-comunicacionUsuario',
@@ -14,13 +14,10 @@ export class ComunicacionUsuarioComponent implements OnInit {
   private subscription: Subscription = new Subscription;
   idUsuario: string = '';
   idUnidad: string = '';
+  nombreResidente: string = '';
+  apellidoResidente: string = '';
   nombreUsuario: string = '';
   mensajes: any[] = [];
-  unidad: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -34,12 +31,12 @@ export class ComunicacionUsuarioComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idUsuario = navigations.idUsuario;
-    this.idUnidad = navigations.idUnidad;
-    this.unidad = navigations;
-    this.nombreUsuario = navigations.nombreResidente + ' ' + navigations.apellidoResidente;
-    this.NavigationExtras.state = this.unidad;
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
+    this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
+    this.nombreUsuario = this.nombreResidente + ' ' + this.apellidoResidente;
+
   }
 
   getMensajes() {
@@ -59,7 +56,7 @@ export class ComunicacionUsuarioComponent implements OnInit {
   }
 
   onAnswer() {
-    this.router.navigate(['/user/responder'], this.NavigationExtras);
+    this.router.navigate(['/user/responder']);
   }
 
 }

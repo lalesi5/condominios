@@ -14,10 +14,6 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
   unidades: any[] = [];
   idCondominio: string = '';
 
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
     private _unidadService: UnidadesService
@@ -34,8 +30,7 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
   }
 
   recoverData(){
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
   }
 
   onListUnidades() {
@@ -59,8 +54,8 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
   }
 
   onGoUnits(item: any){
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/administracion/unidades'], this.NavigationExtras);
+    sessionStorage.setItem('idUnidad', <string> item.idUnidad);
+    this.router.navigate(['/admin/administracion/unidades']);
   }
 
 }

@@ -20,11 +20,6 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   unidades: any[] = [];
   condominio: any[] = [];
 
-  navigationExtras: NavigationExtras = {
-    state: {
-
-    }
-  }
 
   constructor(
     private router: Router,
@@ -44,12 +39,9 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   }
 
   recoverData(){
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUsuario = navigations.idUsuario;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idAministrador = <string> sessionStorage.getItem('idAministrador');
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string> sessionStorage.getItem('idUsuario');
   }
 
   getDatosUnidades() {
@@ -67,7 +59,7 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   }
 
   onGoCreate() {
-    this.router.navigate(['/admin/ajustes/ajustesUnidadesCreate'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUnidadesCreate']);
   }
 
   onDelete(id: string) {
@@ -90,12 +82,12 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   }
 
   onGoEdit(item: any) {
-    this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit', item.idUnidad], this.navigationExtras);
+    sessionStorage.setItem('idUnidad', <string> item.idUnidad);
+    this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit']);
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser']);
   }
 
 }

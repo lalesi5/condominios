@@ -20,8 +20,8 @@ const routesComunicacion: Routes = [
             {path: 'nuevoMensaje', component: NuevoMensajeComponent},
             {path: 'nuevoAnuncio', component: NuevoAnuncioComponent},
             {path: 'mensajeUsuario', component: MensajeUsuarioComponent},
-            {path: 'editarAnuncio/:id', component: EditarAnuncioComponent},
-            {path: 'editarMensaje/:id', component: EditarMensajeComponent}
+            {path: 'editarAnuncio', component: EditarAnuncioComponent},
+            {path: 'editarMensaje', component: EditarMensajeComponent}
         ]
     }
 ]

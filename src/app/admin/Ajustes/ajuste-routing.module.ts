@@ -26,18 +26,18 @@ const routesAjustes: Routes = [
       [
         {path: '', redirectTo: 'ajustesAdmin', pathMatch: 'full'},
         {path: 'ajustesAdmin', component: AjustesAdminComponent},
-        {path: 'ajustesAdminEdit/:id', component: AjustesAdminEditComponent},
+        {path: 'ajustesAdminEdit', component: AjustesAdminEditComponent},
         {path: 'ajustesCondominio', component: AjustesCondominioComponent},
-        {path: 'ajustesCondominioEdit/:id', component: AjustesCondominioEditComponent},
+        {path: 'ajustesCondominioEdit', component: AjustesCondominioEditComponent},
         {path: 'ajustesAreasComunales', component: AjustesAreasComunalesComponent},
-        {path: 'ajustesAreasComunalesEdit/:id', component: AjustesAreasComunalesEditComponent},
+        {path: 'ajustesAreasComunalesEdit', component: AjustesAreasComunalesEditComponent},
         {path: 'ajustesAreasComunalesCreate', component: AjustesAreasComunalesCreateComponent},
         {path: 'ajustesUnidades', component: AjustesUnidadesComponent},
-        {path: 'ajustesUnidadesEdit/:id', component: AjustesUnidadesEditComponent},
+        {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},
         {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent},
         {path: 'ajustesUnidadesSelectUser', component: AjustesUnidadesSelectUserComponent},
         {path: 'ajustesUsuarios', component: AjustesUsuariosComponent},
-        {path: 'ajustesUsuariosEdit/:id', component: AjustesUsuariosEditComponent},
+        {path: 'ajustesUsuariosEdit', component: AjustesUsuariosEditComponent},
         {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent}
       ]
   },

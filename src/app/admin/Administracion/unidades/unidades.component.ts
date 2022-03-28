@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {UnidadesService} from "../../../services/unidades.service";
 
@@ -15,10 +15,6 @@ export class UnidadesComponent implements OnInit {
   idUnidad: string = '';
   unidad: any[] = [];
   unidades: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -36,14 +32,11 @@ export class UnidadesComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idUnidad = navigations.idUnidad;
-    this.unidad = navigations;
-    this.NavigationExtras.state = this.unidad;
+    this.idUnidad = <string> sessionStorage.getItem('idUnidad');
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/administracion/listarUnidades'], this.NavigationExtras);
+    this.router.navigate(['/admin/administracion/listarUnidades']);
   }
 
   listarUnidad() {

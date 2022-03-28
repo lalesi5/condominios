@@ -14,7 +14,6 @@ export class InicioUsuarioComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   idCondominio: string ='';
   anunciosGenerales: any[] = [];
-  unidad: any[] = [];
 
   constructor(
     private router: Router,
@@ -32,9 +31,7 @@ export class InicioUsuarioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
-    this.unidad = navigations;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   getAnunciosGenerales() {

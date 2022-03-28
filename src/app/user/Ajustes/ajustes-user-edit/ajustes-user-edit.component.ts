@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
 import Validation from 'src/app/public/confirm.validator';
-import { AdminService } from 'src/app/services/admin.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { DialogService } from 'src/app/services/dialog.service';
-import { FirestoreService } from 'src/app/services/firestore.service';
-import { getAuth } from "firebase/auth";
+import {AdminService} from 'src/app/services/admin.service';
+import {AuthService} from 'src/app/services/auth.service';
+import {DialogService} from 'src/app/services/dialog.service';
+import {FirestoreService} from 'src/app/services/firestore.service';
+import {getAuth} from "firebase/auth";
 
 @Component({
   selector: 'app-ajustes-user-edit',
@@ -30,7 +30,6 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
   passwordAministrador: string = '';
   rolAministrador: string = '';
   loading = false;
-  id: string | null;
 
   /*Formularios*/
   administradorForm: FormGroup;
@@ -38,12 +37,6 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
   emailForm: FormGroup;
 
   cambioPasswordForm: FormGroup;
-
-  /*Variables de retorno*/
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -53,7 +46,6 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
     private firestoreService: FirestoreService,
     private _dialogService: DialogService,
     private toastr: ToastrService,
-    private aRoute: ActivatedRoute
   ) {
     this.administradorForm = this.fb.group({
       name: ['', Validators.required],
@@ -86,8 +78,6 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.id = aRoute.snapshot.paramMap.get('id');
-
     this.recoverData();
   }
 
@@ -100,18 +90,15 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.unidad = navigations;
-    this.idAministrador = navigations.idAdministrador;
-    this.idUsuario = navigations.idUsuario;
-    this.NavigationExtras.state = this.unidad;
+    this.idAministrador = <string>sessionStorage.getItem('idAministrador');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   getDatosAdministrador() {
-    if (this.id !== null) {
+    if (this.idUsuario !== null) {
       this.loading = true;
       this.subscription.add(
-        this._adminService.getAdministrador(this.id).subscribe(data => {
+        this._adminService.getAdministrador(this.idUsuario).subscribe(data => {
           this.loading = false;
           this.administradorForm.setValue({
             name: data.payload.data()['name'],
@@ -154,8 +141,7 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
           });
         })
         this.loading = false;
-        this.NavigationExtras.state = this.unidad;
-        this.router.navigate(['/user/ajustes'], this.NavigationExtras);
+        this.router.navigate(['/user/ajustes']);
       }
     })
   }
@@ -192,8 +178,7 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
           })
 
           this.loading = false;
-          this.NavigationExtras.state = this.unidad;
-          this.router.navigate(['/user/ajustes'], this.NavigationExtras);
+          this.router.navigate(['/user/ajustes']);
         });
       }
     })
@@ -203,19 +188,19 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
     const userAuth = getAuth();
     const email = this.emailForm.value.email;
 
-    const data = { email };
+    const data = {email};
 
     let result = confirm("Esta seguro de modificar su correo electrónico")
     if (result) {
       this.firestoreService.updateDoc(data, 'Administrador', this.idAministrador);
       this.auth.updateEmail(userAuth.currentUser, email);
       alert('Correo electrónico actualizado correctamente');
-      this.router.navigate(['/user/ajustes'], this.NavigationExtras);
+      this.router.navigate(['/user/ajustes']);
     }
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/user/ajustes'], this.NavigationExtras);
+    this.router.navigate(['/user/ajustes']);
   }
 
   get form(): { [key: string]: AbstractControl; } {

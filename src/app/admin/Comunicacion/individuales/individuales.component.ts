@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {UnidadesService} from '../../../services/unidades.service';
 import {Subscription} from "rxjs";
 
@@ -15,11 +15,6 @@ export class IndividualesComponent implements OnInit {
   idAministrador: string = '';
   idCondominio: string = '';
   unidades: any[] = [];
-  condominio: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -33,10 +28,7 @@ export class IndividualesComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
 
@@ -56,12 +48,15 @@ export class IndividualesComponent implements OnInit {
   }
 
   onGoMensajesUsuarios(item: any) {
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/comunicacion/mensajeUsuario'], this.NavigationExtras);
+    sessionStorage.setItem('idUnidad', <string>item.idUnidad);
+    sessionStorage.setItem('idUsuario', <string>item.idUsuario);
+    sessionStorage.setItem('nombreResidente', <string>item.nombreResidente);
+    sessionStorage.setItem('apellidoResidente', <string>item.apellidoResidente);
+    this.router.navigate(['/admin/comunicacion/mensajeUsuario']);
   }
 
   onGoNuevoMensaje(item: any) {
-    this.NavigationExtras.state = item;
-    this.router.navigate(['/admin/comunicacion/nuevoMensaje'], this.NavigationExtras);
+    sessionStorage.setItem('idUnidad', <string>item.idUnidad);
+    this.router.navigate(['/admin/comunicacion/nuevoMensaje']);
   }
 }
