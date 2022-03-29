@@ -1,23 +1,31 @@
 <div class="bodyUnidades">
     <div class="tablaUsuarios">
         <mat-card>
-          <h2>Usuarios</h2>
-          <h3>Lista de Usuarios</h3>
+            <h2>Usuarios</h2>
+            <h3>Lista de Usuarios</h3>
+            <div>
+                <button class="btn btn-primary mb-2">Crear Nuevo</button>
+            </div>
             <div class="control-section">
                 <ejs-grid #grid id='Grid' [allowPaging]="true" [dataSource]='unidades' [allowSorting]="true"
-                    [allowFiltering]="true" [pageSettings]="pageSettings" [toolbar]='toolbarOptions' height='272px'
-                    [allowExcelExport]='true' (excelExportComplete)='excelExportComplete()'
-                    (toolbarClick)='toolbarClick($event)'>
-                    <!--[allowPdfExport]='true' (pdfExportComplete)='pdfExportComplete()'-->
+                    [pageSettings]="pageSettings" [toolbar]='toolbarOptions' gridLines='Both'
+                    (commandClick)='commandClick($event)' height='272px' [allowExcelExport]='true'
+                    (excelExportComplete)='excelExportComplete()' (toolbarClick)='toolbarClick($event)'
+                    [allowPdfExport]='true' (pdfExportComplete)='pdfExportComplete()'>
                     <e-columns>
-                        <e-column field='numeroUnidad' headerText='Unidad' textAlign='Left' width=120> </e-column>
-                        <e-column field='tipoUnidad' headerText='Tipo' width=120> </e-column>
-                        <e-column field='nombreResidente' headerText='Usuario' width=120> </e-column>
+                        <e-column field='numeroUnidad' headerText='Unidad' textAlign='Left' width=82> </e-column>
+                        <e-column field='tipoUnidad' headerText='Tipo' width=110> </e-column>
+                        <e-column field='nombreResidente' headerText='Nombre' width=100> </e-column>
+                        <e-column field='apellidoResidente' headerText='Apellido' width=100> </e-column>
                         <e-column field='emailResidente' headerText='Correo' width=120> </e-column>
-                        <e-column field='telefonoResidente' headerText='Teléfono' width=120> </e-column>
-                        <e-column field='areaUnidad' headerText='Area (m^2)' width=120> </e-column>
+                        <e-column field='telefonoResidente' headerText='Teléfono' width=88> </e-column>
+                        <e-column field='areaUnidad' headerText='Area (m^2)' width=98> </e-column>
+                        <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
                     </e-columns>
                 </ejs-grid>`
+            </div>
+            <div class="centrarBotones">
+                <button class="btn btn-success">Volver</button>
             </div>
         </mat-card>
     </div>
