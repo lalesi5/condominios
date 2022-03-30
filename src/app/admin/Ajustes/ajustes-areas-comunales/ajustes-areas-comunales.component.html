@@ -2,9 +2,9 @@
   <div class="containerInfo">
     <mat-card>
       <h2>Areas Comunales</h2>
-      <h3>Datos del Area Comunal</h3>
+      <h3>Datos de las Areas Comunales</h3>
       <div>
-        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Area Comunal</button>
       </div>
       <h5 style="margin-top: 30px;" *ngIf='areasComunales.length == 0'>No hay datos para mostrar</h5>
       <table *ngIf="areasComunales.length > 0" class="table table-striped">
