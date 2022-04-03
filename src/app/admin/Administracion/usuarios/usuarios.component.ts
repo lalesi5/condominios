@@ -4,7 +4,6 @@ import { Subscription } from "rxjs";
 import { UnidadesService } from "src/app/services/unidades.service";
 import { ClickEventArgs } from '@syncfusion/ej2-navigations'
 import {
-    CommandClickEventArgs,
     CommandModel,
     ExcelExportService,
     GridComponent,
@@ -123,13 +122,13 @@ export class UsuariosComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private _unidades: UnidadesService
+        private _unidades: UnidadesService,
     ) {
         this.pageSettings = { pageSize: 6 }
 
         this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-        this.commands = [{ title: 'editar', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
-        { title: 'eliminar', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
+        this.commands = [{ title: 'Usuarios', buttonOption: { iconCss: 'e-icons e-people', cssClass: 'e-flat' } },
+        { title: 'Unidad', buttonOption: { iconCss: 'e-icons e-home', cssClass: 'e-flat' } }];
         this.idCondominio = <string>sessionStorage.getItem('idCondominio');
     }
 
@@ -152,19 +151,27 @@ export class UsuariosComponent implements OnInit {
         );
     }
 
+    //Seleccionar editar o eliminar usuario
     commandClick(args: any): void {
-        if (args.target?.title === 'editar') {
-
-            //sessionStorage.setItem('idUsuario', <string>user);
+        if (args.target?.title === 'Usuarios') {
             sessionStorage.setItem('idUsuario', <string>args.rowData['idUsuario']);
             this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit']);
 
-        } else if (args.target?.title === 'eliminar') {
-            console.log(JSON.stringify(args.rowData));
+        } else if (args.target?.title === 'Unidad') {
+            sessionStorage.setItem('idUnidad', <string>args.rowData['idUnidad']);
+            this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit']);
         }
         //console.log(JSON.stringify(args.rowData));
     }
 
+    onGoUsuarios() {
+        this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
+    }
+    onGoUnidades() {
+        this.router.navigate(['admin/ajustes/ajustesUnidadesSelectUser']);
+    }
+
+    //Seleccionar exportar excel y pdf
     toolbarClick(args: ClickEventArgs): void {
         if (args.item.id === 'Grid_pdfexport') {
             const pdfExportProperties: PdfExportProperties = {

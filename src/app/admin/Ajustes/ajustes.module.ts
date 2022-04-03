@@ -23,6 +23,7 @@ import { AjustesUsuariosCreateComponent } from './ajustes-usuarios-create/ajuste
 import { MatCommonModule } from "@angular/material/core";
 import { MatInputModule } from "@angular/material/input";
 import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-usuarios-edit.component';
+import { GridModule } from "@syncfusion/ej2-angular-grids";
 
 @NgModule({
 
@@ -36,7 +37,8 @@ import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-us
         MatSelectModule,
         ReactiveFormsModule,
         MatCommonModule,
-        MatInputModule
+        MatInputModule,
+        GridModule
     ],
 
     declarations: [

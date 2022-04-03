@@ -2,9 +2,15 @@
     <div class="tablaUsuarios">
         <mat-card>
             <h2>Usuarios</h2>
-            <h3>Lista de Usuarios</h3>
+            <h3>Lista de usuarios asignados a una unidad</h3>
             <div>
-                <button class="btn btn-primary mb-2">Crear Nuevo</button>
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="bold" (click)="onGoUsuarios()">Gestionar Usuarios
+                        <mat-icon>account_box</mat-icon></mat-button-toggle>
+                    <mat-button-toggle value="bold" (click)="onGoUnidades()">Gestionar Unidades
+                        <mat-icon>home</mat-icon></mat-button-toggle>
+                </mat-button-toggle-group>
+
             </div>
             <div class="control-section">
                 <ejs-grid #grid id='Grid' [allowPaging]="true" [dataSource]='unidades' [allowSorting]="true"
@@ -20,12 +26,9 @@
                         <e-column field='emailResidente' headerText='Correo' width=120> </e-column>
                         <e-column field='telefonoResidente' headerText='Teléfono' width=88> </e-column>
                         <e-column field='areaUnidad' headerText='Area (m^2)' width=98> </e-column>
-                        <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
+                        <e-column headerText='Editar' width=95 [commands]='commands'></e-column>
                     </e-columns>
                 </ejs-grid>`
-            </div>
-            <div class="centrarBotones">
-                <button class="btn btn-success">Volver</button>
             </div>
         </mat-card>
     </div>

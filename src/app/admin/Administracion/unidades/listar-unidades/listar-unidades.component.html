@@ -13,6 +13,18 @@
             <img src="../../../../assets/logoCondominio.jpg" (click)="onGoUnits(unidad)" alt="userImage">
           </div>
         </div>
+
+      </div>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [allowPaging]="true" [dataSource]="unidades" [allowSorting]="true"
+          [pageSettings]="pageSettings" gridLines="Both" (rowDataBound)="rowDataBound($event)"
+          (commandClick)='commandClick($event)'>
+          <e-columns>
+            <e-column headerText="No" width='100'></e-column>
+            <e-column field='tipoUnidad' headerText='Unidad' width=110> </e-column>
+            <e-column headerText='Ver' width=95 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>`
       </div>
     </mat-card>
   </div>
