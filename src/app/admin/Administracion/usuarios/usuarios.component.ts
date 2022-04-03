@@ -195,5 +195,16 @@ export class UsuariosComponent implements OnInit {
   excelExportComplete(): void {
     this.grid.query = this.queryClone;
   }
-  
+
+  rowDataBound(args: any) {
+    // aquí estamos calculando el número de serie
+    var rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
+    var page = this.grid.pageSettings.currentPage! - 1;
+
+    var totalPages = this.grid.pageSettings.pageSize;
+    var startIndex = page * totalPages!;
+    var sno = startIndex + (rowIndex + 1);
+    //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
+    args.row.cells[0].innerText = sno;
+  }
 }

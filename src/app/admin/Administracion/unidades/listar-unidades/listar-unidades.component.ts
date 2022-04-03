@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from "rxjs";
 import { UnidadesService } from "../../../../services/unidades.service";
-import { CommandModel, GridComponent, PageSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { Router } from '@angular/router';
+import { Query } from '@syncfusion/ej2-data';
 
 @Component({
   selector: 'app-listar-unidades',
@@ -16,7 +17,9 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
   idCondominio: string = '';
 
   public pageSettings: PageSettingsModel;
+  public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
+  public queryClone: any;
   @ViewChild('grid', { static: true })
   public grid!: GridComponent;
 
@@ -25,6 +28,7 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
     private _unidadService: UnidadesService
   ) {
     this.pageSettings = { pageSize: 6 }
+    this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [{ title: 'seleccionar', buttonOption: { iconCss: 'e-icons e-eye', cssClass: 'e-flat' } }];
     this.recoverData();
   }
@@ -86,4 +90,28 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
     //console.log(JSON.stringify(args.rowData));
   }
 
+  //Seleccionar exportar excel y pdf
+  toolbarClick(args: any): void {
+    if (args.item.id === 'Grid_pdfexport') {
+      const pdfExportProperties: PdfExportProperties = {
+        fileName: 'usuarios.pdf'
+      };
+      this.queryClone = this.grid.query;
+      this.grid.query = new Query().addParams('recordcount', '12');
+      this.grid.pdfExport(pdfExportProperties);
+      //this.grid.pdfExport();
+    } else if (args.item.id === 'Grid_excelexport') {
+      this.queryClone = this.grid.query;
+      this.grid.query = new Query().addParams('recordcount', '12');
+      this.grid.excelExport();
+    }
+  }
+
+  pdfExportComplete(): void {
+    this.grid.query = this.queryClone;
+  }
+
+  excelExportComplete(): void {
+    this.grid.query = this.queryClone;
+  }
 }
