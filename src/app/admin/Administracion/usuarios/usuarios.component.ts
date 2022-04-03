@@ -1,21 +1,21 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {UnidadesService} from "src/app/services/unidades.service";
-import {ClickEventArgs} from '@syncfusion/ej2-navigations'
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { UnidadesService } from "src/app/services/unidades.service";
+import { ClickEventArgs } from '@syncfusion/ej2-navigations'
 import {
-    CommandModel,
-    ExcelExportService,
-    GridComponent,
-    PageSettingsModel,
-    PdfExportProperties,
-    PdfExportService,
-    ToolbarItems,
-    ToolbarService,
-    VirtualScrollService
+  CommandModel,
+  ExcelExportService,
+  GridComponent,
+  PageSettingsModel,
+  PdfExportProperties,
+  PdfExportService,
+  ToolbarItems,
+  ToolbarService,
+  VirtualScrollService
 } from "@syncfusion/ej2-angular-grids";
-import {Query} from '@syncfusion/ej2-data';
-import {L10n, setCulture} from '@syncfusion/ej2-base';
+import { Query } from '@syncfusion/ej2-data';
+import { L10n, setCulture } from '@syncfusion/ej2-base';
 
 L10n.load({
   'es': {
@@ -120,17 +120,17 @@ export class UsuariosComponent implements OnInit {
   @ViewChild('grid') public grid: GridComponent | any;
   public queryClone: any;
 
-    constructor(
-        private router: Router,
-        private _unidades: UnidadesService,
-    ) {
-        this.pageSettings = { pageSize: 6 }
+  constructor(
+    private router: Router,
+    private _unidades: UnidadesService,
+  ) {
+    this.pageSettings = { pageSize: 6 }
 
-        this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-        this.commands = [{ title: 'Usuarios', buttonOption: { iconCss: 'e-icons e-people', cssClass: 'e-flat' } },
-        { title: 'Unidad', buttonOption: { iconCss: 'e-icons e-home', cssClass: 'e-flat' } }];
-        this.idCondominio = <string>sessionStorage.getItem('idCondominio');
-    }
+    this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
+    this.commands = [{ title: 'Usuarios', buttonOption: { iconCss: 'e-icons e-people', cssClass: 'e-flat' } },
+    { title: 'Unidad', buttonOption: { iconCss: 'e-icons e-home', cssClass: 'e-flat' } }];
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+  }
 
   ngOnInit(): void {
     setCulture('es');
@@ -151,43 +151,40 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-    //Seleccionar editar o eliminar usuario
-    commandClick(args: any): void {
-        if (args.target?.title === 'Usuarios') {
-            sessionStorage.setItem('idUsuario', <string>args.rowData['idUsuario']);
-            this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit']);
+  //Seleccionar editar o eliminar usuario
+  commandClick(args: any): void {
+    if (args.target?.title === 'Usuarios') {
+      sessionStorage.setItem('idUsuario', <string>args.rowData['idUsuario']);
+      this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit']);
 
-        } else if (args.target?.title === 'Unidad') {
-            sessionStorage.setItem('idUnidad', <string>args.rowData['idUnidad']);
-            this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit']);
-        }
-        //console.log(JSON.stringify(args.rowData));
+    } else if (args.target?.title === 'Unidad') {
+      sessionStorage.setItem('idUnidad', <string>args.rowData['idUnidad']);
+      this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit']);
     }
     //console.log(JSON.stringify(args.rowData));
   }
 
-    onGoUsuarios() {
-        this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
-    }
-    onGoUnidades() {
-        this.router.navigate(['admin/ajustes/ajustesUnidadesSelectUser']);
-    }
+  onGoUsuarios() {
+    this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
+  }
+  onGoUnidades() {
+    this.router.navigate(['admin/ajustes/ajustesUnidadesSelectUser']);
+  }
 
-    //Seleccionar exportar excel y pdf
-    toolbarClick(args: ClickEventArgs): void {
-        if (args.item.id === 'Grid_pdfexport') {
-            const pdfExportProperties: PdfExportProperties = {
-                fileName: 'usuarios.pdf'
-            };
-            this.queryClone = this.grid.query;
-            this.grid.query = new Query().addParams('recordcount', '12');
-            this.grid.pdfExport(pdfExportProperties);
-            //this.grid.pdfExport();
-        } else if (args.item.id === 'Grid_excelexport') {
-            this.queryClone = this.grid.query;
-            this.grid.query = new Query().addParams('recordcount', '12');
-            this.grid.excelExport();
-        }
+  //Seleccionar exportar excel y pdf
+  toolbarClick(args: ClickEventArgs): void {
+    if (args.item.id === 'Grid_pdfexport') {
+      const pdfExportProperties: PdfExportProperties = {
+        fileName: 'usuarios.pdf'
+      };
+      this.queryClone = this.grid.query;
+      this.grid.query = new Query().addParams('recordcount', '12');
+      this.grid.pdfExport(pdfExportProperties);
+      //this.grid.pdfExport();
+    } else if (args.item.id === 'Grid_excelexport') {
+      this.queryClone = this.grid.query;
+      this.grid.query = new Query().addParams('recordcount', '12');
+      this.grid.excelExport();
     }
   }
 
@@ -198,4 +195,5 @@ export class UsuariosComponent implements OnInit {
   excelExportComplete(): void {
     this.grid.query = this.queryClone;
   }
+  
 }

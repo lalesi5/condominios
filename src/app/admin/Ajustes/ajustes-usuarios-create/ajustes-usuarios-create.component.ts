@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {AuthService} from 'src/app/services/auth.service';
-import {DialogService} from 'src/app/services/dialog.service';
-import {UsuariosService} from 'src/app/services/usuarios.service';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
+import { DialogService } from 'src/app/services/dialog.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios-create',
@@ -13,7 +13,7 @@ import {UsuariosService} from 'src/app/services/usuarios.service';
 })
 export class AjustesUsuariosCreateComponent implements OnInit {
 
-  idAministrador: string = '';
+  idAdministrador: string = '';
   idCondominio: string = ''
   usuarios: any[] = [];
   condominio: any[] = [];
@@ -37,8 +37,8 @@ export class AjustesUsuariosCreateComponent implements OnInit {
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       password: ['', [Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(15)]],
+      Validators.minLength(6),
+      Validators.maxLength(15)]],
       phone: ['', [Validators.pattern(/^\d+$/)]],
       address: [''],
     })
@@ -49,7 +49,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   }
 
   recoverData() {
-    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
@@ -76,7 +76,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           fechaCreacion: new Date(),
           fechaActualizacion: new Date(),
           rol: 'Usuario',
-          idAdministrador: this.idAministrador,
+          idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           address: direccion
         }
@@ -89,7 +89,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
             // @ts-ignore
             const idUsuario = res.user.uid;
 
-            const data = {idUsuario, ...usuario}
+            const data = { idUsuario, ...usuario }
 
             //Crea el documento
             this.loading = true;

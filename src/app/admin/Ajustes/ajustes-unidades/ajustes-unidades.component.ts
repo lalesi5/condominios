@@ -100,30 +100,6 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDelete(id: string) {
-    this._dialogService.confirmDialog({
-      title: 'Eliminar Unidad',
-      message: '¿Está seguro de eliminar la información?',
-      confirmText: 'Si',
-      cancelText: 'No',
-    }).subscribe(res => {
-      if (res) {
-        this._unidadesService.deleteUnidades(id).then(() => {
-          this.toastr.success('El registro fue eliminado con exito', 'Registro eliminado', {
-            positionClass: 'toast-bottom-right'
-          });
-        }).catch(error => {
-          console.log(error);
-        })
-      }
-    });
-  }
-
-  onGoEdit(item: any) {
-    sessionStorage.setItem('idUnidad', <string>item.idUnidad);
-    this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit']);
-  }
-
   onBacktoList(): void {
     this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser']);
   }
@@ -132,7 +108,7 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
+        fileName: 'unidades.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
