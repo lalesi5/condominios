@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
-import {Router} from '@angular/router';
-import {UnidadesService} from '../../../services/unidades.service';
-import {Subscription} from "rxjs";
-import {UsuariosService} from "../../../services/usuarios.service";
-import {ToastrService} from 'ngx-toastr';
-import {DialogService} from 'src/app/services/dialog.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UnidadesService } from '../../../services/unidades.service';
+import { Subscription } from "rxjs";
+import { UsuariosService } from "../../../services/usuarios.service";
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-ajustes-unidades-create',
@@ -15,7 +15,7 @@ import {DialogService} from 'src/app/services/dialog.service';
 export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
-  idAministrador: string = '';
+  idAdministrador: string = '';
   idCondominio: string = '';
   idUnidad: string = '';
   idUsuario: string = '';
@@ -35,9 +35,9 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   ) {
 
     this.unidadesForm = this.fb.group({
-      numeroUnidad: ['', Validators.required],
-      tipoUnidad: ['', Validators.required],
+      unidad: ['', Validators.required],
       areaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      cuotaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       nombreResidente: [''],
       apellidoResidente: [''],
       telefonoResidente: [''],
@@ -61,9 +61,9 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    this.idAministrador = <string> sessionStorage.getItem('idAministrador');
-    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
-    this.idUsuario = <string> sessionStorage.getItem('idUsuario');
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   getUsuarios() {
@@ -82,6 +82,7 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
 
   onCreateUnidades() {
 
+    const unidadInput = String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const nombre = String(this.unidadesForm.value.nombrePropietario).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const apellido = String(this.unidadesForm.value.apellidoPropietario).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
 
@@ -94,9 +95,9 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
       if (res) {
 
         const unidad: any = {
-          numeroUnidad: this.unidadesForm.value.numeroUnidad,
-          tipoUnidad: this.unidadesForm.value.tipoUnidad,
+          unidad: unidadInput,
           areaUnidad: this.unidadesForm.value.areaUnidad,
+          cuotaUnidad: this.unidadesForm.value.cuotaUnidad,
           nombreResidente: this.unidadesForm.value.nombreResidente,
           apellidoResidente: this.unidadesForm.value.apellidoResidente,
           telefonoResidente: this.unidadesForm.value.telefonoResidente,
@@ -105,7 +106,7 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
           apellidoPropietario: apellido,
           telefonoPropietario: this.unidadesForm.value.telefonoPropietario,
           emailPropietario: this.unidadesForm.value.emailPropietario,
-          idAdministrador: this.idAministrador,
+          idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idUsuario: this.idUsuario
         }
@@ -135,12 +136,12 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
     return this.unidadesForm.controls;
   }
 
-  get numeroUnidad() {
-    return this.unidadesForm.get('numeroUnidad');
-  }
-
   get areaUnidad() {
     return this.unidadesForm.get('areaUnidad');
+  }
+
+  get cuotaUnidad() {
+    return this.unidadesForm.get('cuotaUnidad');
   }
 
   get emailPropietario() {

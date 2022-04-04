@@ -4,17 +4,19 @@
     <mat-card>
       <h2>Unidades</h2>
       <h3>Seleccione la Unidad</h3>
-      <div class="headerCondominio">
-        <div class="card" *ngFor="let unidad of unidades">
-          <div>
-            <div class="cardName" (click)="onGoUnits(unidad)">Unidad: {{unidad.numeroUnidad}}</div>
-          </div>
-          <div class="iconBx">
-            <img src="../../../../assets/logoCondominio.jpg" (click)="onGoUnits(unidad)" alt="userImage">
-          </div>
-        </div>
+        <div class="control-section">
+          <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+            [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
+            [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+            (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+            (pdfExportComplete)="pdfExportComplete()">
+            <e-columns>
+              <e-column headerText="No" width='100'></e-column>
+              <e-column field='unidad' headerText='Unidad' width=110> </e-column>
+              <e-column headerText='Ver' width=95 [commands]='commands'></e-column>
+            </e-columns>
+          </ejs-grid>`
       </div>
     </mat-card>
   </div>
-
 </div>

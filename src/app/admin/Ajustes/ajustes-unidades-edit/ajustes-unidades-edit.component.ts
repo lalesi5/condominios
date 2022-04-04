@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup, Validators, FormBuilder, AbstractControl} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Subscription} from 'rxjs';
-import {DialogService} from 'src/app/services/dialog.service';
-import {UnidadesService} from 'src/app/services/unidades.service';
-import {UsuariosService} from 'src/app/services/usuarios.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/services/dialog.service';
+import { UnidadesService } from 'src/app/services/unidades.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-unidades-edit',
@@ -41,8 +41,8 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
   ) {
 
     this.unidadesForm = this.fb.group({
-      numeroUnidad: ['', Validators.required],
-      tipoUnidad: ['', Validators.required],
+      unidad: ['', Validators.required],
+      cuotaUnidad: ['', Validators.required],
       areaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       nombrePropietario: ['', Validators.required],
       apellidoPropietario: ['', Validators.required],
@@ -85,13 +85,9 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
         this._unidadesService.getUnidad(this.idUnidad).subscribe(data => {
           this.loading = false;
           this.unidadesForm.setValue({
-            numeroUnidad: data.payload.data()['numeroUnidad'],
-            tipoUnidad: data.payload.data()['tipoUnidad'],
+            unidad: data.payload.data()['unidad'],
+            cuotaUnidad: data.payload.data()['cuotaUnidad'],
             areaUnidad: data.payload.data()['areaUnidad'],
-            //nombreResidente: data.payload.data()['nombreResidente'],
-            //apellidoResidente: data.payload.data()['apellidoResidente'],
-            //telefonoResidente: data.payload.data()['telefonoResidente'],
-            //emailResidente: data.payload.data()['emailResidente'],
             nombrePropietario: data.payload.data()['nombrePropietario'],
             apellidoPropietario: data.payload.data()['apellidoPropietario'],
             telefonoPropietario: data.payload.data()['telefonoPropietario'],
@@ -132,8 +128,8 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
       if (res) {
 
         const unidad: any = {
-          numeroUnidad: this.unidadesForm.value.numeroUnidad,
-          tipoUnidad: this.unidadesForm.value.tipoUnidad,
+          unidad: this.unidadesForm.value.unidad,
+          cuotaUnidad: this.unidadesForm.value.cuotaUnidad,
           areaUnidad: this.unidadesForm.value.areaUnidad,
           nombrePropietario: nombre,
           apellidoPropietario: apellido,
@@ -168,6 +164,10 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
 
   get form(): { [key: string]: AbstractControl; } {
     return this.unidadesForm.controls;
+  }
+
+  get cuotaUnidad() {
+    return this.unidadesForm.get('cuotaUnidad');
   }
 
   get areaUnidad() {

@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { EditarAnuncioComponent } from './editar-anuncio/editar-anuncio.component';  
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditarMensajeComponent } from './editar-mensaje/editar-mensaje.component';
+import { GridModule } from "@syncfusion/ej2-angular-grids";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { EditarMensajeComponent } from './editar-mensaje/editar-mensaje.componen
         MatSelectModule,
         SharedModule,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        GridModule
     ],
     declarations:[
         GeneralesComponent,
