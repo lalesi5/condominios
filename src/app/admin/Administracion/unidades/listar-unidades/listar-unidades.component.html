@@ -4,6 +4,7 @@
     <mat-card>
       <h2>Unidades</h2>
       <h3>Seleccione la Unidad</h3>
+<<<<<<< Updated upstream
         <div class="control-section">
           <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
             [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
@@ -16,6 +17,17 @@
               <e-column headerText='Ver' width=95 [commands]='commands'></e-column>
             </e-columns>
           </ejs-grid>`
+=======
+      <div class="headerCondominio">
+        <div class="card" *ngFor="let unidad of unidades" (click)="onGoUnits(unidad)">
+          <div>
+            <div class="cardName">Unidad: {{unidad.numeroUnidad}}</div>
+          </div>
+          <div class="iconBx">
+            <img src="../../../../assets/logoCondominio.jpg" (click)="onGoUnits(unidad)" alt="userImage">
+          </div>
+        </div>
+>>>>>>> Stashed changes
       </div>
     </mat-card>
   </div>
