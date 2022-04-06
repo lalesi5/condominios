@@ -30,6 +30,7 @@
     "firebase": "^9.6.1",
     "ionicons": "^6.0.0",
     "jquery": "^3.6.0",
+    "mdb-ui-kit": "^3.11.0",
     "ngx-toastr": "^14.2.2",
     "rxfire": "^6.0.0",
     "rxjs": "~7.4.0",

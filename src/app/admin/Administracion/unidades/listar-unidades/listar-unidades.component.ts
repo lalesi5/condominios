@@ -1,9 +1,15 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from "rxjs";
-import { UnidadesService } from "../../../../services/unidades.service";
-import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
-import { Router } from '@angular/router';
-import { Query } from '@syncfusion/ej2-data';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Subscription} from "rxjs";
+import {UnidadesService} from "../../../../services/unidades.service";
+import {
+  CommandModel,
+  GridComponent,
+  PageSettingsModel,
+  PdfExportProperties,
+  ToolbarItems
+} from '@syncfusion/ej2-angular-grids';
+import {Router} from '@angular/router';
+import {Query} from '@syncfusion/ej2-data';
 
 @Component({
   selector: 'app-listar-unidades',
@@ -20,16 +26,16 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
   public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
   public queryClone: any;
-  @ViewChild('grid', { static: true })
+  @ViewChild('grid', {static: true})
   public grid!: GridComponent;
 
   constructor(
     private router: Router,
     private _unidadService: UnidadesService
   ) {
-    this.pageSettings = { pageSize: 6 }
+    this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{ title: 'seleccionar', buttonOption: { iconCss: 'e-icons e-eye', cssClass: 'e-flat' } }];
+    this.commands = [{title: 'seleccionar', buttonOption: {iconCss: 'e-icons e-eye', cssClass: 'e-flat'}}];
     this.recoverData();
   }
 
