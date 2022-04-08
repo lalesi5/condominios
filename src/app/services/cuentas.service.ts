@@ -13,17 +13,22 @@ export class CuentasService {
   ) {
   }
 
-  getPagos(){
-
+  getCuentas(idCondominio: string): Observable<any> {
+    return this.firestore.collection('Cuentas', ref => ref.where('idCondominio', '==', idCondominio)).snapshotChanges();
   }
 
   getCuenta(id: string): Observable<any> {
     return this.firestore.collection('Cuentas').doc(id).snapshotChanges();
   }
 
-  saveCuenta(datosCuenta: any) {
+  saveCuenta(datosCuenta: any,
+    idAdmin: string,
+    idCondo: string
+  ): Promise<any> {
+    const idAdministrador = idAdmin;
+    const idCondominio = idCondo;
     const idCuenta = this.firestore.createId();
-    const data = {idCuenta, ...datosCuenta}
+    const data = {idAdministrador,idCondominio,idCuenta, ...datosCuenta}
     return this.firestore.collection('Cuentas').doc(idCuenta).set(data);
   }
 

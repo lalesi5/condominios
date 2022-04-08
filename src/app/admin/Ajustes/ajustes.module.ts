@@ -25,6 +25,8 @@ import { MatInputModule } from "@angular/material/input";
 import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-usuarios-edit.component';
 import { GridModule } from "@syncfusion/ej2-angular-grids";
 import { CuentasComponent } from './cuentas/cuentas.component';
+import { CuentasCreateComponent } from './cuentas-create/cuentas-create.component';
+import { CuentasEditComponent } from './cuentas-edit/cuentas-edit.component';
 
 @NgModule({
 
@@ -58,6 +60,8 @@ import { CuentasComponent } from './cuentas/cuentas.component';
         AjustesUsuariosEditComponent,
         AjustesUnidadesSelectUserComponent,
         CuentasComponent,
+        CuentasCreateComponent,
+        CuentasEditComponent,
     ],
 
     exports: [

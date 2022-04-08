@@ -19,6 +19,8 @@ import {
   AjustesUnidadesSelectUserComponent
 } from "./ajustes-unidades-select-user/ajustes-unidades-select-user.component";
 import {CuentasComponent} from "./cuentas/cuentas.component";
+import {CuentasCreateComponent} from "./cuentas-create/cuentas-create.component";
+import {CuentasEditComponent} from "./cuentas-edit/cuentas-edit.component";
 
 
 const routesAjustes: Routes = [
@@ -40,7 +42,9 @@ const routesAjustes: Routes = [
         {path: 'ajustesUsuarios', component: AjustesUsuariosComponent},
         {path: 'ajustesUsuariosEdit', component: AjustesUsuariosEditComponent},
         {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent},
-        {path: 'cuentas', component: CuentasComponent}
+        {path: 'cuentas', component: CuentasComponent},
+        {path: 'cuentasCreate', component: CuentasCreateComponent},
+        {path: 'cuentasEdit', component: CuentasEditComponent}
       ]
   },
 ];
