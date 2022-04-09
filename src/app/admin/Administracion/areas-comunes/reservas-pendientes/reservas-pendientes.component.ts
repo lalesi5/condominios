@@ -56,7 +56,7 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
 
   getReservas() {
     this.subscription.add(
-      this._reservaService.getReservasEnCondominio(this.idCondominio).subscribe(data => {
+      this._reservaService.getReservasEnCondominioPendientes(this.idCondominio).subscribe(data => {
         this.reservas = [];
         data.forEach((element: any) => {
           this.reservas.push({

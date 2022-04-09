@@ -19,7 +19,6 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   idAdministrador: string = '';
   idCondominio: string = '';
   idAreaComunal: string = '';
-  nombreAreaComunal: string = '';
   numeroUnidad: string = '';
   loading = false;
   areaComunal: any[] = [];
