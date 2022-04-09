@@ -16,7 +16,7 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
   idAreaComunal: string = '';
-  nombreAreaComunal: string = '';
+  idCondominio: string = '';
   reservas: any[] = [];
 
   public pageSettings: PageSettingsModel;
@@ -51,12 +51,12 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
 
   recoverData() {
     this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
-    this.nombreAreaComunal = <string>sessionStorage.getItem('nombreAreaComunal');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   getReservas() {
     this.subscription.add(
-      this._reservaService.getReserva(this.idAreaComunal).subscribe(data => {
+      this._reservaService.getReservasEnCondominio(this.idCondominio).subscribe(data => {
         this.reservas = [];
         data.forEach((element: any) => {
           this.reservas.push({

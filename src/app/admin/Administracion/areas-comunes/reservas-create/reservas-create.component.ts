@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { AreasComunalesService } from 'src/app/services/areasComunales.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { UnidadesService } from 'src/app/services/unidades.service';
@@ -24,14 +25,18 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   areaComunal: any[] = [];
   unidades: any[] = [];
   unidad: any[] = [];
+  area: any[] = [];
+  areas: any[] = [];
 
   reservaForm: FormGroup;
   datosUnidadForm: FormGroup;
+  areaComunalForm: FormGroup;
 
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
     private _reservaService: ReservasService,
+    private _AreaComunalService: AreasComunalesService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
     private toastr: ToastrService
@@ -42,6 +47,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
       detalleReserva: ['', Validators.required],
       estadoReserva: ['', Validators.required],
       idUnidad: ['', Validators.required],
+      idAreaComunal: ['', Validators.required],
     });
 
     this.datosUnidadForm = this.fb.group({
@@ -49,11 +55,16 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
       apellidoResidente: [''],
       unidad: ['']
     })
+
+    this.areaComunalForm = this.fb.group({
+      nombre: ['', Validators.required]
+    })
     this.recoverData();
   }
 
   ngOnInit(): void {
     this.getDatosUnidades();
+    this.getDatosAreas();
   }
 
   ngOnDestroy(): void {
@@ -63,8 +74,8 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   recoverData() {
     this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
-    this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
-    this.nombreAreaComunal = <string>sessionStorage.getItem('nombreAreaComunal');
+    //this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
+    //this.nombreAreaComunal = <string>sessionStorage.getItem('nombreAreaComunal');
   }
 
   getDatosUnidades() {
@@ -73,6 +84,19 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
         this.unidades = [];
         data.forEach((element: any) => {
           this.unidades.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    );
+  }
+
+  getDatosAreas() {
+    this.subscription.add(
+      this._AreaComunalService.getAreasComunales(this.idCondominio).subscribe(data => {
+        this.areas = [];
+        data.forEach((element: any) => {
+          this.areas.push({
             ...element.payload.doc.data()
           })
         })
@@ -93,11 +117,23 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     )
   }
 
+  onAreaChanged(item: any) {
+    this.subscription.add(
+      this._AreaComunalService.getArea(item).subscribe(data => {
+        this.loading = false;
+        this.areaComunalForm.setValue({
+          nombre: data.payload.data()['nombre'],
+        })
+      })
+    )
+  }
+
   onCreateReserva() {
     const descripcionArea = String(this.reservaForm.value.detalleReserva).charAt(0).toLocaleUpperCase() + String(this.reservaForm.value.detalleReserva).slice(1);
     const date = this.reservaForm.value.fechaReservaInicio;
     const date2 = this.reservaForm.value.fechaReservaFin;
     const idUnidad = this.reservaForm.value.idUnidad;
+    const idArea = this.reservaForm.value.idAreaComunal;
 
     this._dialogService.confirmDialog({
       title: 'Agregar reserva',
@@ -117,8 +153,8 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
           apellidoResidente: this.datosUnidadForm.value.apellidoResidente,
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
-          idAreaComunal: this.idAreaComunal,
-          nombreAreaComunal: this.nombreAreaComunal,
+          idAreaComunal: idArea,
+          nombreAreaComunal: this.areaComunalForm.value.nombre,
           detalleReserva: descripcionArea
         }
 
@@ -142,6 +178,19 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
         this.unidad = [];
         data.forEach((element: any) => {
           this.unidad.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    );
+  }
+
+  getAreaID(id: string) {
+    this.subscription.add(
+      this._AreaComunalService.getArea(id).subscribe(data => {
+        this.area = [];
+        data.forEach((element: any) => {
+          this.area.push({
             ...element.payload.doc.data()
           })
         })

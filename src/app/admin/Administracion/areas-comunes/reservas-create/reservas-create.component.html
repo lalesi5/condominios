@@ -29,6 +29,28 @@
         </div>
     </div>
     <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label>Seleccione el Área</label>
+                <select class="form-control" formControlName="idAreaComunal" (ngModelChange)="onAreaChanged($event)"
+                    [ngClass]="{ 'is-invalid': !reservaForm.controls['idAreaComunal'].valid  && reservaForm.controls['idAreaComunal'].touched }">
+                    <option *ngFor="let area of areas" [ngValue]="area.idAreaComunal">Área: {{area.nombre}}
+                    </option>
+                </select>
+                <div *ngIf=" reservaForm.controls['idAreaComunal'].touched  && !reservaForm.controls['idAreaComunal'].valid"
+                    class="invalid-feedback">
+                    Campo requerido
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <form [formGroup]='areaComunalForm'>
+        <input type="hidden" class="form-control" formControlName="nombre" [readonly]="true">
+    </form>
+
+    <div class="form-group">
         <label>Estado Reserva</label>
         <select class="form-control" formControlName="estadoReserva"
             [ngClass]="{ 'is-invalid': !reservaForm.controls['estadoReserva'].valid  && reservaForm.controls['estadoReserva'].touched }">
@@ -64,12 +86,9 @@
                     <label>Apellido Residente: </label>
                     <input type="text" class="form-control" formControlName="apellidoResidente" [readonly]="true">
                 </div>
-                <div class="col">
-                    <label>Numero Unidad: </label>
-                    <input type="text" class="form-control" formControlName="unidad" [readonly]="true">
-                </div>
             </div>
         </div>
+        <input type="hidden" class="form-control" formControlName="unidad" [readonly]="true">
     </form>
     <div class="form-group">
         <label>Detalle de la Reserva</label>
