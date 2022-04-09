@@ -34,8 +34,8 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
     this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [
-      { title: 'Aceptar', buttonOption: { iconCss: 'e-icons e-circle-check', cssClass: 'e-flat' } },
-      { title: 'Rechazar', buttonOption: { iconCss: 'e-icons e-circle-close', cssClass: 'e-flat' } }
+      { title: 'Aceptar', buttonOption: { iconCss: 'e-icons e-circle-check', cssClass: 'e-success e-flat' } },
+      { title: 'Rechazar', buttonOption: { iconCss: 'e-icons e-circle-close', cssClass: 'e-danger e-flat' } }
     ];
 
     this.recoverData();
