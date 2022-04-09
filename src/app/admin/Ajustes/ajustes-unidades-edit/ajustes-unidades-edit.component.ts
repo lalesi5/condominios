@@ -112,7 +112,6 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
         })
       })
     )
-
   }
 
   onEditUnidades() {

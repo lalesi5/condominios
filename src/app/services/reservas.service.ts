@@ -17,6 +17,18 @@ export class ReservasService {
     return this.firestore.collection('Reservas').doc(idReserva).set(data);
   }
 
+  getReservaId(id: string): Observable<any> {
+    return this.firestore.collection('Reservas').doc(id).snapshotChanges();
+  }
+
+  getReservasEnCondominio(id: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio','==', id)).snapshotChanges();
+  }
+
+  getReservasEnCondominioPendientes(id: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio','==', id).where('estadoReserva', '==', 'Pendiente')).snapshotChanges();
+  }
+
   getReserva(idAreaComun: string): Observable<any> {
     return this.firestore.collection('Reservas', ref => ref.where('idAreaComunal','==', idAreaComun).orderBy('fechaReservaInicio', 'desc')).snapshotChanges();
   }

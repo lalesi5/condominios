@@ -22,6 +22,7 @@ import { AjustesUserEditComponent } from './Ajustes/ajustes-user-edit/ajustes-us
 import { ReservasComponent } from './AreasComunes/reservas/reservas.component';
 import { ReservasCreateComponent } from './AreasComunes/reservas-create/reservas-create.component';
 import {DateTimePickerModule} from "@syncfusion/ej2-angular-calendars";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 
@@ -35,7 +36,8 @@ import {DateTimePickerModule} from "@syncfusion/ej2-angular-calendars";
         MatSelectModule,
         CommonModule,
         ReactiveFormsModule,
-        DateTimePickerModule
+        DateTimePickerModule,
+        MatButtonToggleModule
     ],
     declarations: [
         UserComponent,

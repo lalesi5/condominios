@@ -5,16 +5,7 @@
   top: 150px;
 }
 
-.containerInfo mat-card {
-  display: grid;
-  width: 50%;
-  left: 25%;
-  top: 9vh;
-  border-radius: 20px;
-  padding-bottom: 25px;
-}
-
-.containerInfo mat-card h2 {
+h2 {
   background-color: #287bff;
   color: #fff;
   border-radius: 10px;
@@ -22,7 +13,7 @@
   text-align: center;
 }
 
-.containerInfo mat-card h3 {
+h3 {
   background-color: #2ba846;
   color: #fff;
   border-radius: 10px;

@@ -1,4 +1,4 @@
-.ajustesReservas {
+.ajustesAreasComunales {
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
@@ -7,14 +7,14 @@
 
 .containerInfo mat-card {
   display: grid;
-  width: 70%;
-  left: 15%;
-  top: 5vh;
+  width: 50%;
+  left: 25%;
+  top: 17vh;
   border-radius: 20px;
   padding-bottom: 25px;
 }
 
-.containerInfo mat-card h2 {
+h2 {
   background-color: #287bff;
   color: #fff;
   border-radius: 10px;
@@ -22,7 +22,7 @@
   text-align: center;
 }
 
-.containerInfo mat-card h3 {
+h3 {
   background-color: #2ba846;
   color: #fff;
   border-radius: 10px;
