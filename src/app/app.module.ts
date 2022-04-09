@@ -22,6 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 //syncfusion library
 import { ExcelExportService, FilterService, GridAllModule, GridModule, GroupService, PageService, PdfExportService, SortService, ToolbarService } from '@syncfusion/ej2-angular-grids';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { AreasComunesRoutingModule } from './admin/Administracion/areas-comunes/areas-comunes-routing.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
 
@@ -43,7 +45,9 @@ import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
     MatButtonModule,
     GridModule,
     GridAllModule,
-    DateTimePickerModule
+    DateTimePickerModule,
+    AreasComunesRoutingModule,
+    MatButtonToggleModule
   ],
   declarations: [
     AppComponent

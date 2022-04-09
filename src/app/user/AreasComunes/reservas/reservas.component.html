@@ -4,11 +4,21 @@
     <div class="containerInfo">
       <mat-card>
         <h2>Areas Comunes</h2>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle value="bold" >Reservas
+          </mat-button-toggle>
+          <mat-button-toggle value="bold" >Listas de reservas
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <br>
         <h3>Reservas</h3>
+
         <div>
           <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
         </div>
-        <h5 style="margin-top: 30px;" *ngIf='reservas.length == 0'>No hay datos para mostrar</h5>
+
+
+        <!--<h5 style="margin-top: 30px;" *ngIf='reservas.length == 0'>No hay datos para mostrar</h5>
         <table *ngIf="reservas.length > 0" class="table table-striped">
           <thead>
           <tr>
@@ -28,7 +38,7 @@
             <td>{{reserva.detalleReserva}}</td>
           </tr>
           </tbody>
-        </table>
+        </table>-->
         <div class="centrarBotones">
           <button class="btn btn-primary" (click)="onBacktoList()">Volver</button>
         </div>
