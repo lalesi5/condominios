@@ -18,7 +18,6 @@ const routerAdministracion: Routes = [
         { path: 'unidades', component: UnidadesComponent },
         { path: 'usuarios', component: UsuariosComponent },
         { path: 'listarUnidades', component: ListarUnidadesComponent },
-        //{path: 'areasComunes', component: AreasComunesComponent},
         {
           path: 'areasComunes',
           loadChildren: () => import('./areas-comunes/areas-comunes.module').then(m => m.AreasComunesModule),

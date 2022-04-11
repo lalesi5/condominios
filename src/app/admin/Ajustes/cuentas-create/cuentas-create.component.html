@@ -1,0 +1,37 @@
+<div class="ajustesCuentaCreate">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Cuentas</h2>
+      <h3>Crear Cuenta
+        <div *ngIf="loading" class="spinner-border float-right" role="status">
+          <span class="sr-only">Procesando...</span>
+        </div>
+      </h3>
+      <form [formGroup]='cuentasForm' (ngSubmit)="onCreateCuenta()">
+        <div class="form-group">
+          <label>Nombre del la Cuenta</label>
+          <input type="text" class="form-control" formControlName="nombreCuenta"
+                 [ngClass]="{ 'is-invalid': !cuentasForm.controls['nombreCuenta'].valid  && cuentasForm.controls['nombreCuenta'].touched }">
+          <div *ngIf=" cuentasForm.controls['nombreCuenta'].touched  && !cuentasForm.controls['nombreCuenta'].valid"
+               class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Tipo de Cuenta</label>
+          <input type="text" class="form-control" formControlName="tipoCuenta"
+                 [ngClass]="{ 'is-invalid': !cuentasForm.controls['tipoCuenta'].valid  && cuentasForm.controls['tipoCuenta'].touched }">
+          <div
+            *ngIf=" cuentasForm.controls['tipoCuenta'].touched  && !cuentasForm.controls['tipoCuenta'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-success mr-2" [disabled]="cuentasForm.invalid">Guardar</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

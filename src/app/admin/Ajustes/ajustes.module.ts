@@ -24,6 +24,12 @@ import { MatCommonModule } from "@angular/material/core";
 import { MatInputModule } from "@angular/material/input";
 import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-usuarios-edit.component';
 import { GridModule } from "@syncfusion/ej2-angular-grids";
+import { CuentasComponent } from './cuentas/cuentas.component';
+import { CuentasCreateComponent } from './cuentas-create/cuentas-create.component';
+import { CuentasEditComponent } from './cuentas-edit/cuentas-edit.component';
+import { PagosComponent } from './pagos/pagos.component';
+import { PagosCreateComponent } from './pagos-create/pagos-create.component';
+import { PagosEditComponent } from './pagos-edit/pagos-edit.component';
 
 @NgModule({
 
@@ -38,7 +44,7 @@ import { GridModule } from "@syncfusion/ej2-angular-grids";
         ReactiveFormsModule,
         MatCommonModule,
         MatInputModule,
-        GridModule
+        GridModule,
     ],
 
     declarations: [
@@ -56,6 +62,12 @@ import { GridModule } from "@syncfusion/ej2-angular-grids";
         AjustesUsuariosCreateComponent,
         AjustesUsuariosEditComponent,
         AjustesUnidadesSelectUserComponent,
+        CuentasComponent,
+        CuentasCreateComponent,
+        CuentasEditComponent,
+        PagosComponent,
+        PagosCreateComponent,
+        PagosEditComponent,
     ],
 
     exports: [

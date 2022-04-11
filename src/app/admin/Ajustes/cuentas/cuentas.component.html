@@ -1,0 +1,25 @@
+<div class="ajustesCuentas">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Cuentas</h2>
+      <h3>Información de las Cuentas</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Cuenta</button>
+      </div>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="cuentas" [allowSorting]="true" [allowPaging]="true"
+                  gridLines="Both" [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)"
+                  (commandClick)="commandClick($event)" [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)"
+                  [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+                  (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column headerText=" No" width='50'> </e-column>
+            <e-column field='nombreCuenta' headerText='Nombre de la Cuenta' width=100> </e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100> </e-column>
+            <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>`
+      </div>
+    </mat-card>
+  </div>
+</div>

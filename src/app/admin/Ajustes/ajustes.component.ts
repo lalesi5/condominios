@@ -23,12 +23,16 @@ export class AjustesComponent implements OnInit {
     this.router.navigate(['/admin/ajustes/ajustesAdmin']);
   }
 
-  onGoAjustesCondominio() {
-    this.router.navigate(['/admin/ajustes/ajustesCondominio']);
+  onGoCuentas() {
+    this.router.navigate(['/admin/ajustes/cuentas']);
   }
 
-  onGoAjustesAreasComunales() {
-    this.router.navigate(['/admin/ajustes/ajustesAreasComunales']);
+  onGoPagos() {
+    this.router.navigate(['/admin/ajustes/pagos']);
+  }
+
+  onGoAjustesCondominio() {
+    this.router.navigate(['/admin/ajustes/ajustesCondominio']);
   }
 
   onGoAjustesajustesUnidades() {
@@ -38,4 +42,6 @@ export class AjustesComponent implements OnInit {
   onGoAjustesUsuarios() {
     this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
   }
+
+
 }

@@ -1,0 +1,67 @@
+.selectorMensualidades {
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 165px;
+  min-height: 82vh;
+}
+
+.cardsBalance{
+  display: grid;
+  grid-template-columns: repeat(3,1fr) ;
+  grid-gap: 1px;
+  width: 100%;
+  left: 20%;
+  top: 5vh;
+}
+
+.cardsBalance .card{
+  position: relative;
+  align-items: center;
+  padding: 5px;
+  border-radius: 7px;
+  display: flex;
+  box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+}
+
+.cardsBalance .card .numbers{
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  position: relative;
+  font-weight: 580;
+  font-size: 1.5em;
+  color: #287bff;
+}
+
+.cardsBalance .card .cardName{
+  color: #999;
+  font-size: 1.7em;
+  text-align: center;
+}
+
+
+.containerInfo mat-card {
+  display: grid;
+  width: 60%;
+  left: 20%;
+  top: 5vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
+}
+
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}

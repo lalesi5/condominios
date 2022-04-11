@@ -18,6 +18,13 @@ import {AjustesUsuariosEditComponent} from "./ajustes-usuarios-edit/ajustes-usua
 import {
   AjustesUnidadesSelectUserComponent
 } from "./ajustes-unidades-select-user/ajustes-unidades-select-user.component";
+import {CuentasComponent} from "./cuentas/cuentas.component";
+import {CuentasCreateComponent} from "./cuentas-create/cuentas-create.component";
+import {CuentasEditComponent} from "./cuentas-edit/cuentas-edit.component";
+import {PagosComponent} from "./pagos/pagos.component";
+import {PagerComponent} from "@syncfusion/ej2-angular-grids";
+import {PagosCreateComponent} from "./pagos-create/pagos-create.component";
+import {PagosEditComponent} from "./pagos-edit/pagos-edit.component";
 
 
 const routesAjustes: Routes = [
@@ -38,7 +45,13 @@ const routesAjustes: Routes = [
         {path: 'ajustesUnidadesSelectUser', component: AjustesUnidadesSelectUserComponent},
         {path: 'ajustesUsuarios', component: AjustesUsuariosComponent},
         {path: 'ajustesUsuariosEdit', component: AjustesUsuariosEditComponent},
-        {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent}
+        {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent},
+        {path: 'cuentas', component: CuentasComponent},
+        {path: 'cuentasCreate', component: CuentasCreateComponent},
+        {path: 'cuentasEdit', component: CuentasEditComponent},
+        {path: 'pagos', component: PagosComponent},
+        {path: 'pagosCreate', component: PagosCreateComponent},
+        {path: 'pagosEdit', component: PagosEditComponent}
       ]
   },
 ];
