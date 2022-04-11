@@ -54,7 +54,7 @@ export class ReservasComponent implements OnInit, OnDestroy {
   }
 
   onGoCreate(): void {
-    this.router.navigate(['/user/reservasCreate']);
+    this.router.navigate(['/user/areasComunes/reservasCreate']);
   }
 
 

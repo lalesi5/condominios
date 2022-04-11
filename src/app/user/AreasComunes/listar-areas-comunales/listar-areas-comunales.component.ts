@@ -57,7 +57,7 @@ export class ListarAreasComunalesUserComponent implements OnInit {
   onGoReservas(item: any){
     sessionStorage.setItem('idAreaComunal', <string>item.idAreaComunal);
     sessionStorage.setItem('nombreAreaComunal', <string>item.nombre);
-    this.router.navigate(['/user/reservas']);
+    this.router.navigate(['/user/areasComunes/reservas']);
   }
 
 }

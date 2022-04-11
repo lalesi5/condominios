@@ -1,21 +1,18 @@
-<div class="listarAreas">
-  <app-topbar></app-topbar>
-  <div class="areas">
-    <div class="containerInfo">
-      <mat-card>
-        <h2>Areas Comunales</h2>
-        <h3>Seleccione el area Común</h3>
-        <div class="headerAreaComunal">
-          <div class="card" *ngFor="let area of areasComunes">
-            <div>
-              <div class="cardName" (click)="onGoReservas(area)">{{area.nombre}}</div>
-            </div>
-            <div class="iconBx">
-              <img src="../../../../assets/logoAreasComunales.png" alt="areaComunalImage" (click)="onGoReservas(area)">
-            </div>
+<div class="areas">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Areas Comunales</h2>
+      <h3>Seleccione el area Común</h3>
+      <div class="headerAreaComunal">
+        <div class="card" *ngFor="let area of areasComunes">
+          <div>
+            <div class="cardName" (click)="onGoReservas(area)">{{area.nombre}}</div>
+          </div>
+          <div class="iconBx">
+            <img src="../../../../assets/logoAreasComunales.png" alt="areaComunalImage" (click)="onGoReservas(area)">
           </div>
         </div>
-      </mat-card>
-    </div>
+      </div>
+    </mat-card>
   </div>
 </div>

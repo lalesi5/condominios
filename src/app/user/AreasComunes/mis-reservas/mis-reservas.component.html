@@ -1,1 +1,25 @@
-<p>mis-reservas works!</p>
+<div class="reservas">
+    <div class="containerInfo">
+        <mat-card>
+            <h3>Reservas Totales</h3>
+            <div>
+                <button class="btn btn-primary mb-2">Crear Reserva</button>
+            </div>
+            <div class="control-section">
+                <ejs-grid #grid id='Grid'>
+                    <e-columns>
+                        <e-column field='fechaReservaInicio' headerText='Fecha Inicio' width=100> </e-column>
+                        <e-column field='fechaReservaFin' headerText='Fecha Fin' width=100> </e-column>
+                        <e-column field='unidad' headerText='Unidad' width=100> </e-column>
+                        <e-column field='nombreResidente' headerText='Nombre' width=100> </e-column>
+                        <e-column field='apellidoResidente' headerText='Apellido' width=100> </e-column>
+                        <e-column field='nombreAreaComunal' headerText='Área' width=100> </e-column>
+                        <e-column field='estadoReserva' headerText='Estado' width=80> </e-column>
+                        <e-column headerText='Opciones' width=95></e-column>
+                    </e-columns>
+                </ejs-grid>`
+            </div>
+
+        </mat-card>
+    </div>
+</div>

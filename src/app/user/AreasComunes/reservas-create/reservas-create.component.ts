@@ -96,7 +96,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
             positionClass: 'toast-bottom-rigth'
           });
           this.loading = false;
-          this.router.navigate(['/user/reservas']);
+          this.router.navigate(['/user/areasComunes/reservas']);
         }).catch(error => {
           console.log(error);
         })
@@ -105,7 +105,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['user/reservas']);
+    this.router.navigate(['user/areasComunes/reservas']);
   }
 
 }
