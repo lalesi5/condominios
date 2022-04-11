@@ -27,6 +27,9 @@ import { GridModule } from "@syncfusion/ej2-angular-grids";
 import { CuentasComponent } from './cuentas/cuentas.component';
 import { CuentasCreateComponent } from './cuentas-create/cuentas-create.component';
 import { CuentasEditComponent } from './cuentas-edit/cuentas-edit.component';
+import { PagosComponent } from './pagos/pagos.component';
+import { PagosCreateComponent } from './pagos-create/pagos-create.component';
+import { PagosEditComponent } from './pagos-edit/pagos-edit.component';
 
 @NgModule({
 
@@ -62,6 +65,9 @@ import { CuentasEditComponent } from './cuentas-edit/cuentas-edit.component';
         CuentasComponent,
         CuentasCreateComponent,
         CuentasEditComponent,
+        PagosComponent,
+        PagosCreateComponent,
+        PagosEditComponent,
     ],
 
     exports: [

@@ -1,23 +1,20 @@
 <div class="areasComunales">
   <app-topbarUser></app-topbarUser>
 
-  <div class="areas">
-    <div class="containerInfo">
-      <mat-card>
-        <h2>Areas Comunales</h2>
-        <h3>Seleccione el area Común</h3>
-        <div class="headerAreaComunal">
-          <div class="card" *ngFor="let area of areasComunes">
-            <div>
-              <div class="cardName" (click)="onGoReservas(area)">{{area.nombre}}</div>
-            </div>
-            <div class="iconBx">
-              <img src="../../../../assets/logoAreasComunales.png" alt="areaComunalImage" (click)="onGoReservas(area)">
-            </div>
-          </div>
-        </div>
-      </mat-card>
-    </div>
+  <div class="headerAreasComunales">
+    <mat-card>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a [routerLinkActive]="['active']">Areas Comunales</a>
+          </li>
+          <li>
+            <a [routerLinkActive]="['active']">Mis Reservas</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-card>
   </div>
-
 </div>
+
+<router-outlet></router-outlet>

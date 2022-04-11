@@ -39,10 +39,11 @@ import { GridModule } from '@syncfusion/ej2-angular-grids';
         FinanzasComponent,
         AjustesComponent
     ],
-    exports: [
-        MatCardModule,
-        CommonModule
-    ],
+  exports: [
+    MatCardModule,
+    CommonModule,
+    TopBarComponent
+  ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
     ]

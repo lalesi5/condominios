@@ -10,19 +10,19 @@ import {
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {DialogService} from "../../../services/dialog.service";
-import {CuentasService} from "../../../services/cuentas.service";
 import {Query} from "@syncfusion/ej2-data";
+import {TiposPagoService} from "../../../services/tiposPago.service";
 
 @Component({
-  selector: 'app-cuentas',
-  templateUrl: './cuentas.component.html',
-  styleUrls: ['./cuentas.component.css']
+  selector: 'app-pagos',
+  templateUrl: './pagos.component.html',
+  styleUrls: ['./pagos.component.css']
 })
-export class CuentasComponent implements OnInit {
+export class PagosComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idCondominio: string = ''
-  cuentas: any[] = [];
+  pagos: any[] = [];
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -32,7 +32,7 @@ export class CuentasComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _cuentas: CuentasService,
+    private _pagosService: TiposPagoService,
     private toastr: ToastrService,
     private _dialogService: DialogService
   ) {
@@ -44,19 +44,19 @@ export class CuentasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCuentas();
+    this.getTiposPagos();
   }
 
   recoverData() {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getCuentas() {
+  getTiposPagos() {
     this.subscription.add(
-      this._cuentas.getCuentas(this.idCondominio).subscribe(data => {
-        this.cuentas = [];
+      this._pagosService.getTiposPago(this.idCondominio).subscribe(data => {
+        this.pagos = [];
         data.forEach((element: any) => {
-          this.cuentas.push({
+          this.pagos.push({
             id: element.payload.doc.id,
             ...element.payload.doc.data()
           })
@@ -67,20 +67,20 @@ export class CuentasComponent implements OnInit {
 
   commandClick(item: any): void {
     if (item.target?.title === 'Editar') {
-      sessionStorage.setItem('idCuenta', <string>item.rowData['idCuenta']);
-      this.router.navigate(['/admin/ajustes/cuentasEdit']);
+      sessionStorage.setItem('idTipoPago', <string>item.rowData['idTipoPago']);
+      this.router.navigate(['/admin/ajustes/pagosEdit']);
 
     } else if (item.target?.title === 'Eliminar') {
-      const id = <string>item.rowData['idCuenta'];
+      const id = <string>item.rowData['idTipoPago'];
       this._dialogService.confirmDialog({
-        title: 'Eliminar Cuenta',
-        message: '¿Está seguro de eliminar la cuenta?',
+        title: 'Eliminar Tipo Pago',
+        message: '¿Está seguro de eliminar el tipo de pago?',
         confirmText: 'Si',
         cancelText: 'No',
       }).subscribe(res => {
         if (res) {
-          this._cuentas.deleteCuenta(id).then(() => {
-            this.toastr.success('El registro fue eliminado con exito', 'Registro eliminado', {
+          this._pagosService.deleteTipoPago(id).then(() => {
+            this.toastr.success('El tipo de pago fue eliminado con exito', 'Tipo de Pago eliminado', {
               positionClass: 'toast-bottom-right'
             });
           }).catch(error => {
@@ -92,7 +92,7 @@ export class CuentasComponent implements OnInit {
   }
 
   onGoCreate() {
-    this.router.navigate(['/admin/ajustes/cuentasCreate']);
+    this.router.navigate(['/admin/ajustes/pagosCreate']);
   }
 
   //Seleccionar exportar excel y pdf
@@ -131,7 +131,6 @@ export class CuentasComponent implements OnInit {
     //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
     args.row.cells[0].innerText = sno;
   }
-
 
 
 }

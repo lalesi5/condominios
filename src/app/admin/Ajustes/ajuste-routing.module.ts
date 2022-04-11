@@ -21,6 +21,10 @@ import {
 import {CuentasComponent} from "./cuentas/cuentas.component";
 import {CuentasCreateComponent} from "./cuentas-create/cuentas-create.component";
 import {CuentasEditComponent} from "./cuentas-edit/cuentas-edit.component";
+import {PagosComponent} from "./pagos/pagos.component";
+import {PagerComponent} from "@syncfusion/ej2-angular-grids";
+import {PagosCreateComponent} from "./pagos-create/pagos-create.component";
+import {PagosEditComponent} from "./pagos-edit/pagos-edit.component";
 
 
 const routesAjustes: Routes = [
@@ -44,7 +48,10 @@ const routesAjustes: Routes = [
         {path: 'ajustesUsuariosCreate', component: AjustesUsuariosCreateComponent},
         {path: 'cuentas', component: CuentasComponent},
         {path: 'cuentasCreate', component: CuentasCreateComponent},
-        {path: 'cuentasEdit', component: CuentasEditComponent}
+        {path: 'cuentasEdit', component: CuentasEditComponent},
+        {path: 'pagos', component: PagosComponent},
+        {path: 'pagosCreate', component: PagosCreateComponent},
+        {path: 'pagosEdit', component: PagosEditComponent}
       ]
   },
 ];
