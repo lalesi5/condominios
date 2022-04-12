@@ -67,7 +67,7 @@ export class SelectUnidadesComponent implements OnInit {
     sessionStorage.setItem('idUnidad', <string>item.idUnidad);
     sessionStorage.setItem('nombreResidente', <string>item.nombreResidente);
     sessionStorage.setItem('apellidoResidente', <string>item.apellidoResidente);
-    sessionStorage.setItem('numeroUnidad', <string>item.numeroUnidad);
+    sessionStorage.setItem('unidad', <string>item.unidad);
     this.router.navigate(['/user']);
   }
 

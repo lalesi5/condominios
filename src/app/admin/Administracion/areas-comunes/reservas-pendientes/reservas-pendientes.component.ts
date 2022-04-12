@@ -127,7 +127,7 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
+        fileName: 'reservas.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');

@@ -1,6 +1,5 @@
 <div class="reservas">
   <div class="containerInfo">
-
     <mat-card>
       <h2>Reservas</h2>
       <h3>Información de la Reserva
@@ -8,9 +7,6 @@
           <span class="sr-only">Procesando...</span>
         </div>
       </h3>
-      <div class="centrarBotones">
-        <button class="btn btn-primary mb-4" (click)="onBacktoList()">Volver</button>
-      </div>
       <form [formGroup]="reservaForm" (ngSubmit)="onCreateReserva()">
         <div class="form-group">
           <label>Fecha de Reserva Inicio</label>
@@ -38,16 +34,18 @@
         </div>
         <div class="form-group">
           <label>Detalle de la Reserva</label>
-          <input type="text" class="form-control" formControlName="detalleReserva">
-          <div class="invalid-feedback">
+          <input type="text" class="form-control" formControlName="detalleReserva"
+            [ngClass]="{ 'is-invalid': !reservaForm.controls['detalleReserva'].valid && reservaForm.controls['detalleReserva'].touched }">
+          <div *ngIf=" reservaForm.controls['detalleReserva'].touched && !reservaForm.controls['detalleReserva'].valid"
+            class="invalid-feedback">
             Campo requerido
           </div>
         </div>
         <div class="centrarBotones">
-          <button type="submit" class="btn btn-success mr-2">Crear</button>
+          <button type="submit" class="btn btn-success mr-2" [disabled]="reservaForm.invalid">Crear Reserva</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
         </div>
       </form>
     </mat-card>
-
   </div>
 </div>

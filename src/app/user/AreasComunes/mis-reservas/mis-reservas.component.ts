@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, rowCell, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { Query } from '@syncfusion/ej2-data';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -20,6 +20,7 @@ export class MisReservasComponent implements OnInit, OnDestroy {
   reservas: any[] = [];
 
   public pageSettings: PageSettingsModel;
+  public editSettings: Object;
   public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
   public queryClone: any;
@@ -33,11 +34,27 @@ export class MisReservasComponent implements OnInit, OnDestroy {
   ) {
     this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
+
+    this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false };
+
     this.commands = [
-      { title: 'Cancelar esta solicitud de reservación', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }
+      {
+        type: 'Delete', title: 'Eliminar reservación', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }
+      }
     ];
 
     this.recoverData();
+  }
+
+  rowDataBound(args: any) {
+    if (args.column.headerText == 'Commands' && args.rowData['estadoReserva'] == 'Aceptado') {
+      console.log('hola');
+      
+      //remove the button based on index
+    }
+
+    var btn = args.rowData.Deleted ? "Delete" : "";
+    args.row.find("Acetado" + btn + "Delete").addClass("e-hide");
   }
 
   ngOnInit(): void {
@@ -62,8 +79,6 @@ export class MisReservasComponent implements OnInit, OnDestroy {
             ...element.payload.doc.data()
           })
         })
-        console.log(this.reservas);
-        
       })
     );
   }
@@ -76,17 +91,16 @@ export class MisReservasComponent implements OnInit, OnDestroy {
   commandClick(item: any): void {
     const id = <string>item.rowData['idReserva'];
 
-    if (item.target?.title === 'Cancelar esta solicitud de reservación') {
-
+    if (item.target?.title === 'Eliminar reservación') {
       this._dialogService.confirmDialog({
         title: 'Eliminar área',
-        message: '¿Está seguro de cancelar la reservación?',
+        message: '¿Está seguro de eliminar la reservación?',
         confirmText: 'Si',
         cancelText: 'No',
       }).subscribe(res => {
         if (res) {
           this._reservaService.eliminarReserva(id).then(() => {
-            this.toastr.success('La reservación fue cancelada con exito', 'Reservación cancelada', {
+            this.toastr.success('La reservación fue eliminada con exito', 'Registro eliminado', {
               positionClass: 'toast-bottom-right'
             });
           }).catch(error => {
@@ -101,7 +115,7 @@ export class MisReservasComponent implements OnInit, OnDestroy {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
+        fileName: 'reservas.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');

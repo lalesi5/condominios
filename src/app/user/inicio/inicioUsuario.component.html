@@ -20,10 +20,10 @@
         <mat-icon>attach_money</mat-icon>
       </div>
     </div>
-    <div class="card" [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']">
+    <div class="card" [routerLink]="['/user/areasComunes/misReservas']" [routerLinkActive]="['active']">
       <div>
         <div class="cardName">Reservas Pendientes</div>
-        <div class="numbers"> 2</div>
+        <div class="numbers"> {{reservas.length}} </div>
       </div>
       <div class="iconBx">
         <mat-icon>people</mat-icon>

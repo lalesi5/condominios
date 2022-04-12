@@ -120,7 +120,7 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
           })
         }
       })
-    } else if(item.target?.title === 'Editar') {
+    } else if (item.target?.title === 'Editar') {
 
       sessionStorage.setItem('idReserva', <string>item.rowData['idReserva']);
       sessionStorage.setItem('idAreaComunal', <string>item.rowData['idAreaComunal']);
@@ -152,7 +152,7 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
+        fileName: 'reservas.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');

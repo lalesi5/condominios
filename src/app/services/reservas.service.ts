@@ -35,6 +35,12 @@ export class ReservasService {
     .where('estadoReserva', '!=', 'Rechazado')).snapshotChanges();
   }
 
+  getReservasUsuarioPendientes(id: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id)
+    .where('idUnidad', '==', idUnidad)
+    .where('estadoReserva', '==', 'Pendiente')).snapshotChanges();
+  }
+
   eliminarReserva(idReser: string): Promise<any> {
     return this.firestore.collection('Reservas').doc(idReser).delete();
   }
