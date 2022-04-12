@@ -24,7 +24,7 @@ export class ReservasComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getReservas();
+    //this.getReservas();
   }
 
   ngOnDestroy():void {
@@ -36,7 +36,7 @@ export class ReservasComponent implements OnInit, OnDestroy {
     this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
   }
 
-  getReservas(){
+  /*getReservas(){
     this.subscription.add(
       this._reservaService.getReservaIdUnit(this.idAreaComunal, this.idUnidad).subscribe(data =>{
         this.reservas = [];
@@ -47,7 +47,7 @@ export class ReservasComponent implements OnInit, OnDestroy {
         })
       })
     );
-  }
+  }*/
 
   onBacktoList(): void {
     this.router.navigate(['/user/areasComunes']);
