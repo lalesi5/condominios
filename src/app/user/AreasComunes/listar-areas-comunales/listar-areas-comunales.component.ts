@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from "rxjs";
-import {Router} from "@angular/router";
-import {AreasComunalesService} from "../../../services/areasComunales.service";
+import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
+import { AreasComunalesService } from "../../../services/areasComunales.service";
 
 @Component({
   selector: 'app-listar-areas-comunales',
@@ -13,9 +13,12 @@ export class ListarAreasComunalesUserComponent implements OnInit {
   private suscription: Subscription = new Subscription;
   areasComunes: any[] = [];
   unidad: any[] = [];
-  numeroUnidad: string = '';
+
   idCondominio: string = '';
+  idReserva: string = '';
   idUnidad: string = '';
+  
+  numeroUnidad: string = '';
   nombreResidente: string = '';
   apellidoResidente: string = '';
 
@@ -54,10 +57,10 @@ export class ListarAreasComunalesUserComponent implements OnInit {
     )
   }
 
-  onGoReservas(item: any){
+  onGoReservas(item: any) {
     sessionStorage.setItem('idAreaComunal', <string>item.idAreaComunal);
     sessionStorage.setItem('nombreAreaComunal', <string>item.nombre);
-    this.router.navigate(['/user/reservas']);
+    this.router.navigate(['/user/areasComunes/reservasCreate']);
   }
 
 }

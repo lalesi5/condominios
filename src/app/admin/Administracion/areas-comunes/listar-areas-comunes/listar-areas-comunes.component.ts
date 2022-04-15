@@ -96,7 +96,7 @@ export class ListarAreasComunesComponent implements OnInit {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
+        fileName: 'areasComunes.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
