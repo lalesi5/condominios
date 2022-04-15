@@ -30,6 +30,9 @@ import { CuentasEditComponent } from './cuentas-edit/cuentas-edit.component';
 import { PagosComponent } from './pagos/pagos.component';
 import { PagosCreateComponent } from './pagos-create/pagos-create.component';
 import { PagosEditComponent } from './pagos-edit/pagos-edit.component';
+import { DescuentosComponent } from './descuentos/descuentos.component';
+import { DescuentosCreateComponent } from './descuentos-create/descuentos-create.component';
+import { DescuentosEditComponent } from './descuentos-edit/descuentos-edit.component';
 
 @NgModule({
 
@@ -68,6 +71,9 @@ import { PagosEditComponent } from './pagos-edit/pagos-edit.component';
         PagosComponent,
         PagosCreateComponent,
         PagosEditComponent,
+        DescuentosComponent,
+        DescuentosCreateComponent,
+        DescuentosEditComponent,
     ],
 
     exports: [

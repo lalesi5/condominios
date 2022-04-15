@@ -31,6 +31,10 @@ export class AjustesComponent implements OnInit {
     this.router.navigate(['/admin/ajustes/pagos']);
   }
 
+  onGoDescuentos() {
+    this.router.navigate(['/admin/ajustes/descuentos']);
+  }
+
   onGoAjustesCondominio() {
     this.router.navigate(['/admin/ajustes/ajustesCondominio']);
   }

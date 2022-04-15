@@ -25,6 +25,9 @@ import {PagosComponent} from "./pagos/pagos.component";
 import {PagerComponent} from "@syncfusion/ej2-angular-grids";
 import {PagosCreateComponent} from "./pagos-create/pagos-create.component";
 import {PagosEditComponent} from "./pagos-edit/pagos-edit.component";
+import {DescuentosComponent} from "./descuentos/descuentos.component";
+import {DescuentosCreateComponent} from "./descuentos-create/descuentos-create.component";
+import {DescuentosEditComponent} from "./descuentos-edit/descuentos-edit.component";
 
 
 const routesAjustes: Routes = [
@@ -51,7 +54,10 @@ const routesAjustes: Routes = [
         {path: 'cuentasEdit', component: CuentasEditComponent},
         {path: 'pagos', component: PagosComponent},
         {path: 'pagosCreate', component: PagosCreateComponent},
-        {path: 'pagosEdit', component: PagosEditComponent}
+        {path: 'pagosEdit', component: PagosEditComponent},
+        {path: 'descuentos', component: DescuentosComponent},
+        {path: 'descuentosCreate', component: DescuentosCreateComponent},
+        {path: 'descuentosEdit', component: DescuentosEditComponent}
       ]
   },
 ];

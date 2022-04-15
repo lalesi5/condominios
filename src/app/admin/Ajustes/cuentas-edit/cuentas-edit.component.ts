@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AreasComunalesService} from "../../../services/areasComunales.service";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
 import {CuentasService} from "../../../services/cuentas.service";
