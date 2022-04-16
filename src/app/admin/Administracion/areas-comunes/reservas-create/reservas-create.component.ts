@@ -7,6 +7,7 @@ import { AreasComunalesService } from 'src/app/services/areasComunales.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { UnidadesService } from 'src/app/services/unidades.service';
+import {stringify} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-reservas-create',
@@ -21,7 +22,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   idAreaComunal: string = '';
   numeroUnidad: string = '';
   loading = false;
-  areaComunal: any[] = [];
+  pagoReserva: string = '';
   unidades: any[] = [];
   unidad: any[] = [];
   area: any[] = [];
@@ -56,7 +57,8 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     })
 
     this.areaComunalForm = this.fb.group({
-      nombre: ['', Validators.required]
+      nombre: ['', Validators.required],
+      valorReserva: ['', Validators.required]
     })
     this.recoverData();
   }
@@ -73,6 +75,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   recoverData() {
     this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.pagoReserva = 'Por Pagar';
     //this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
     //this.nombreAreaComunal = <string>sessionStorage.getItem('nombreAreaComunal');
   }
@@ -122,6 +125,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.areaComunalForm.setValue({
           nombre: data.payload.data()['nombre'],
+          valorReserva: data.payload.data()['valorReserva']
         })
       })
     )
@@ -154,7 +158,9 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
           idCondominio: this.idCondominio,
           idAreaComunal: idArea,
           nombreAreaComunal: this.areaComunalForm.value.nombre,
-          detalleReserva: descripcionArea
+          detalleReserva: descripcionArea,
+          pagoReserva: this.pagoReserva,
+          valorReserva: <number>this.areaComunalForm.value.valorReserva
         }
 
         this.loading = true;

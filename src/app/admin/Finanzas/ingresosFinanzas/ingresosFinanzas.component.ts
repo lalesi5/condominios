@@ -86,6 +86,7 @@ export class IngresosFinanzasComponent implements OnInit {
   commandClick(args: any) {
     if (args.target?.title === 'seleccionar') {
       sessionStorage.setItem('idUnidad', <string>args.rowData['idUnidad']);
+      sessionStorage.setItem('cuotaUnidad', args.rowData['cuotaUnidad'])
       this.router.navigate(['/admin/finanzas/registrarMensualidad']);
     }
     //console.log(JSON.stringify(args.rowData));

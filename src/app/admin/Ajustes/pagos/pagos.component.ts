@@ -21,7 +21,7 @@ import {TiposPagoService} from "../../../services/tiposPago.service";
 export class PagosComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
-  idCondominio: string = ''
+  idCondominio: string = '';
   pagos: any[] = [];
 
   public pageSettings: PageSettingsModel;

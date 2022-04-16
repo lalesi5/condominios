@@ -29,6 +29,7 @@ export class AreasComunesCreateComponent implements OnInit {
     this.areaComunalForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
+      valorReserva: ['', Validators.required]
     });
 
     this.recoverData();
@@ -46,6 +47,7 @@ export class AreasComunesCreateComponent implements OnInit {
 
     const nombreArea = String(this.areaComunalForm.value.nombre).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.nombre).slice(1);
     const descripcionArea = String(this.areaComunalForm.value.descripcion).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.descripcion).slice(1);
+    const valorReservaData = this.areaComunalForm.value.valorReserva;
 
     this._dialogService.confirmDialog({
       title: 'Agregar área',
@@ -58,6 +60,7 @@ export class AreasComunesCreateComponent implements OnInit {
         const areaComunal: any = {
           nombre: nombreArea,
           descripcion: descripcionArea,
+          valorReserva: valorReservaData
         }
 
         //Crea el documento
