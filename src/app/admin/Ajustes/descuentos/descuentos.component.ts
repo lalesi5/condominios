@@ -8,21 +8,22 @@ import {
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
+import {CuentasService} from "../../../services/cuentas.service";
 import {ToastrService} from "ngx-toastr";
 import {DialogService} from "../../../services/dialog.service";
 import {Query} from "@syncfusion/ej2-data";
-import {TiposPagoService} from "../../../services/tiposPago.service";
+import {DescuentosService} from "../../../services/descuentos.service";
 
 @Component({
-  selector: 'app-pagos',
-  templateUrl: './pagos.component.html',
-  styleUrls: ['./pagos.component.css']
+  selector: 'app-descuentos',
+  templateUrl: './descuentos.component.html',
+  styleUrls: ['./descuentos.component.css']
 })
-export class PagosComponent implements OnInit {
+export class DescuentosComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
-  idCondominio: string = '';
-  pagos: any[] = [];
+  idCondominio: string = ''
+  descuentos: any[] = [];
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -32,7 +33,7 @@ export class PagosComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _pagosService: TiposPagoService,
+    private _descuentos: DescuentosService,
     private toastr: ToastrService,
     private _dialogService: DialogService
   ) {
@@ -44,19 +45,19 @@ export class PagosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTiposPagos();
+    this.getDescuentos();
   }
 
   recoverData() {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getTiposPagos() {
+  getDescuentos() {
     this.subscription.add(
-      this._pagosService.getTiposPago(this.idCondominio).subscribe(data => {
-        this.pagos = [];
+      this._descuentos.getDescuentos(this.idCondominio).subscribe(data => {
+        this.descuentos = [];
         data.forEach((element: any) => {
-          this.pagos.push({
+          this.descuentos.push({
             id: element.payload.doc.id,
             ...element.payload.doc.data()
           })
@@ -67,20 +68,20 @@ export class PagosComponent implements OnInit {
 
   commandClick(item: any): void {
     if (item.target?.title === 'Editar') {
-      sessionStorage.setItem('idTipoPago', <string>item.rowData['idTipoPago']);
-      this.router.navigate(['/admin/ajustes/pagosEdit']);
+      sessionStorage.setItem('idDescuento', <string>item.rowData['idDescuento']);
+      this.router.navigate(['/admin/ajustes/descuentosEdit']);
 
     } else if (item.target?.title === 'Eliminar') {
-      const id = <string>item.rowData['idTipoPago'];
+      const id = <string>item.rowData['idDescuento'];
       this._dialogService.confirmDialog({
-        title: 'Eliminar Tipo Pago',
-        message: '¿Está seguro de eliminar el tipo de pago?',
+        title: 'Eliminar Descuento',
+        message: '¿Está seguro de eliminar el descuento?',
         confirmText: 'Si',
         cancelText: 'No',
       }).subscribe(res => {
         if (res) {
-          this._pagosService.deleteTipoPago(id).then(() => {
-            this.toastr.success('El tipo de pago fue eliminado con exito', 'Tipo de Pago eliminado', {
+          this._descuentos.deleteDescuento(id).then(() => {
+            this.toastr.success('El descuento fue eliminado con exito', 'Descuento eliminado', {
               positionClass: 'toast-bottom-right'
             });
           }).catch(error => {
@@ -92,14 +93,14 @@ export class PagosComponent implements OnInit {
   }
 
   onGoCreate() {
-    this.router.navigate(['/admin/ajustes/pagosCreate']);
+    this.router.navigate(['/admin/ajustes/descuentosCreate']);
   }
 
   //Seleccionar exportar excel y pdf
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
+        fileName: 'descuentos.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
@@ -131,6 +132,5 @@ export class PagosComponent implements OnInit {
     //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
     args.row.cells[0].innerText = sno;
   }
-
 
 }

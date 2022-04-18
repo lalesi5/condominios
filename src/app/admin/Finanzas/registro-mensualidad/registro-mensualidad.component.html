@@ -2,27 +2,46 @@
   <div class="containerInfo">
     <mat-card>
       <h2>Registrar Mensualidades</h2>
-      <h3>Datos Pagos Unidades</h3>
+      <h3>Historico Pagos Unidades</h3>
 
       <div class="cardsBalance">
         <div class="card">
           <div>
-            <div class="cardName">Valor Cuota</div>
-            <div class="numbers">$600.00</div>
+            <div class="cardName">Valor Mensualidad</div>
+            <div class="numbers">${{cuotaUnidad}}.00</div>
           </div>
         </div>
         <div class="card">
           <div>
             <div class="cardName">Areas Comunales</div>
-            <div class="numbers">$1500.00</div>
+            <div class="numbers">${{sumaValorReservas}}.00</div>
           </div>
         </div>
         <div class="card">
           <div>
             <div class="cardName">Deudas Totales</div>
-            <div class="numbers">$900.00</div>
+            <div class="numbers">${{cuotaUnidad + sumaValorReservas}}.00</div>
           </div>
         </div>
+      </div>
+      <br>
+      <div>
+        <button class="btn btn-primary mb-2">Crear Pago</button>
+      </div>
+      <br>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="" [allowSorting]="true" [allowPaging]="true" gridLines="Both">
+          <e-columns>
+            <e-column field='unidad' headerText='Unidad' width=100> </e-column>
+            <e-column field='mesPago' headerText='Mes de Pago' width=100> </e-column>
+            <e-column field='numeroReciboPago' headerText='Número Recibo de Pago' width=100> </e-column>
+            <e-column field='cuentaPago' headerText='Cuenta de Pago' width=100> </e-column>
+            <e-column field='tipoPago' headerText='Tipo de Pago' width=100> </e-column>
+            <e-column field='descuento' headerText='Descuento' width=80> </e-column>
+            <e-column field='estadoPago' headerText='Estado de Pago' width=80> </e-column>
+            <e-column field='detallePago' headerText='Detalle Pago' width=80> </e-column>
+          </e-columns>
+        </ejs-grid>`
       </div>
 
     </mat-card>
