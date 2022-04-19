@@ -7,6 +7,7 @@ import {
   IngresosExtraordinariosFinanzasComponent
 } from './ingresosExtraordinariosFinanzas/ingresosExtraordinariosFinanzas.component';
 import {RegistroMensualidadComponent} from "./registro-mensualidad/registro-mensualidad.component";
+import {CrearPagoMensualidadComponent} from "./crear-pago-mensualidad/crear-pago-mensualidad.component";
 
 
 const routesFinanzas: Routes = [
@@ -17,7 +18,8 @@ const routesFinanzas: Routes = [
         {path: 'ingresosFinanzas', component: IngresosFinanzasComponent},
         {path: 'egresosFinanzas', component: EgresosFinanzasComponent},
         {path: 'ingresosExtraordinarios', component: IngresosExtraordinariosFinanzasComponent},
-        {path: 'registrarMensualidad', component: RegistroMensualidadComponent}
+        {path: 'registrarMensualidad', component: RegistroMensualidadComponent},
+        {path: 'crearPagoMensualidad', component: CrearPagoMensualidadComponent}
       ]
   },
 ];

@@ -1,8 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ReservasService} from "../../../services/reservas.service";
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import {UnidadesService} from "../../../services/unidades.service";
+import {Router} from "@angular/router";
+import {
+  CommandModel,
+  GridComponent,
+  PageSettingsModel,
+  PdfExportProperties,
+  ToolbarItems
+} from "@syncfusion/ej2-angular-grids";
+import {Query} from "@syncfusion/ej2-data";
 
 @Component({
   selector: 'app-registro-mensualidad',
@@ -18,11 +27,19 @@ export class RegistroMensualidadComponent implements OnInit {
   sumaValorReservas: number = 0;
   cuotaUnidad: number = 0;
 
+  public pageSettings: PageSettingsModel;
+  public toolbarOptions: ToolbarItems[];
+  public queryClone: any;
+  @ViewChild('grid') public grid: GridComponent | any;
+
   constructor(
+    private router: Router,
     private _reservasService: ReservasService,
     private _unidadesService: UnidadesService
   ) {
     this.recoverData();
+    this.pageSettings = { pageSize: 6 }
+    this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
   }
 
   ngOnInit(): void {
@@ -65,6 +82,36 @@ export class RegistroMensualidadComponent implements OnInit {
         })
       })
     )
+  }
+
+  onGoCreate() {
+    this.router.navigate(['/admin/finanzas/crearPagoMensualidad']);
+    sessionStorage.setItem('idUnidad', <string>this.idUnidad);
+  }
+
+  //Seleccionar exportar excel y pdf
+  toolbarClick(args: any): void {
+    if (args.item.id === 'Grid_pdfexport') {
+      const pdfExportProperties: PdfExportProperties = {
+        fileName: 'reservas.pdf'
+      };
+      this.queryClone = this.grid.query;
+      this.grid.query = new Query().addParams('recordcount', '12');
+      this.grid.pdfExport(pdfExportProperties);
+      //this.grid.pdfExport();
+    } else if (args.item.id === 'Grid_excelexport') {
+      this.queryClone = this.grid.query;
+      this.grid.query = new Query().addParams('recordcount', '12');
+      this.grid.excelExport();
+    }
+  }
+
+  pdfExportComplete(): void {
+    this.grid.query = this.queryClone;
+  }
+
+  excelExportComplete(): void {
+    this.grid.query = this.queryClone;
   }
 
 }

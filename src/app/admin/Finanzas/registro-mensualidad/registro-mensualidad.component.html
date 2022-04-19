@@ -19,18 +19,21 @@
         </div>
         <div class="card">
           <div>
-            <div class="cardName">Deudas Totales</div>
+            <div class="cardName">Deuda Total</div>
             <div class="numbers">${{cuotaUnidad + sumaValorReservas}}.00</div>
           </div>
         </div>
       </div>
       <br>
       <div>
-        <button class="btn btn-primary mb-2">Crear Pago</button>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Pago</button>
       </div>
       <br>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="" [allowSorting]="true" [allowPaging]="true" gridLines="Both">
+        <ejs-grid #grid id='Grid' [dataSource]="" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
             <e-column field='unidad' headerText='Unidad' width=100> </e-column>
             <e-column field='mesPago' headerText='Mes de Pago' width=100> </e-column>

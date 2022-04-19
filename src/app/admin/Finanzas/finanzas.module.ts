@@ -12,6 +12,7 @@ import { IngresosFinanzasComponent } from './ingresosFinanzas/ingresosFinanzas.c
 import {GridModule} from "@syncfusion/ej2-angular-grids";
 import { RegistroMensualidadComponent } from './registro-mensualidad/registro-mensualidad.component';
 import {CommonModule} from "@angular/common";
+import { CrearPagoMensualidadComponent } from './crear-pago-mensualidad/crear-pago-mensualidad.component';
 
 @NgModule({
 
@@ -28,7 +29,8 @@ import {CommonModule} from "@angular/common";
         EgresosFinanzasComponent,
         IngresosExtraordinariosFinanzasComponent,
         IngresosFinanzasComponent,
-        RegistroMensualidadComponent
+        RegistroMensualidadComponent,
+        CrearPagoMensualidadComponent
     ],
     exports: [
         MatCardModule,
