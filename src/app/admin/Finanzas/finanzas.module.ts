@@ -13,18 +13,21 @@ import {GridModule} from "@syncfusion/ej2-angular-grids";
 import { RegistroMensualidadComponent } from './registro-mensualidad/registro-mensualidad.component';
 import {CommonModule} from "@angular/common";
 import { CrearPagoMensualidadComponent } from './crear-pago-mensualidad/crear-pago-mensualidad.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
 
-    imports: [
-        FinanzasRoutingModule,
-        MatCardModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        GridModule,
-        CommonModule
-    ],
+  imports: [
+    FinanzasRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    GridModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
     declarations: [
         EgresosFinanzasComponent,
         IngresosExtraordinariosFinanzasComponent,

@@ -8,10 +8,67 @@
         </div>
       </h3>
 
-      <form>
+      <form [formGroup]='pagoMensualidadForm'>
         <div class="form-group">
-          <label>Unidad</label>
+          <label>Seleccione la Unidad</label>
+          <select class="form-control" formControlName="idUnidad" (ngModelChange)="onUnitChanged($event)"
+                  [ngClass]="{ 'is-invalid': !pagoMensualidadForm.controls['idUnidad'].valid  && pagoMensualidadForm.controls['idUnidad'].touched }">
+            <option *ngFor="let unidad of unidades" [ngValue]="unidad.idUnidad" selected>{{unidad.unidad}}
+            </option>
+          </select>
+          <div *ngIf=" pagoMensualidadForm.controls['idUnidad'].touched  && !pagoMensualidadForm.controls['idUnidad'].valid"
+               class="invalid-feedback">
+            Campo requerido
+          </div>
         </div>
+        <form [formGroup]='datosUnidadForm'>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label>Nombre Residente: </label>
+                <input type="text" class="form-control" formControlName="nombreResidente" [readonly]="true">
+              </div>
+              <div class="col">
+                <label>Apellido Residente: </label>
+                <input type="text" class="form-control" formControlName="apellidoResidente" [readonly]="true">
+              </div>
+              <div class="col">
+                <label>Cuota Unidad: </label>
+                <input type="text" class="form-control" formControlName="cuotaUnidad" [readonly]="true">
+              </div>
+            </div>
+          </div>
+          <input type="hidden" class="form-control" formControlName="unidad" [readonly]="true">
+        </form>
+
+        <form [formGroup]='pagoMensualidadForm' >
+          <div class="form-group">
+            <label>Seleccione el nombre de la Cuenta</label>
+            <select class="form-control" formControlName="idCuenta" (ngModelChange)="onCuentaPagoChanged($event)"
+                    [ngClass]="{ 'is-invalid': !pagoMensualidadForm.controls['idCuenta'].valid  && pagoMensualidadForm.controls['idCuenta'].touched }">
+              <option *ngFor="let cuentaPago of cuentasPago" [ngValue]="cuentaPago.idCuenta" selected>{{cuentaPago.nombreCuenta}}
+              </option>
+            </select>
+            <div *ngIf=" pagoMensualidadForm.controls['idCuenta'].touched  && !pagoMensualidadForm.controls['idCuenta'].valid"
+                 class="invalid-feedback">
+              Campo requerido
+            </div>
+          </div>
+        </form>
+
+        <form [formGroup]='cuentasPagoForm'>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label>Tipo de Cuenta: </label>
+                <input type="text" class="form-control" formControlName="tipoCuenta" [readonly]="true">
+              </div>
+            </div>
+          </div>
+          <input type="hidden" class="form-control" formControlName="unidad" [readonly]="true">
+        </form>
+
+
 
         <div class="centrarBotones">
           <button type="submit" class="btn btn-success mr-2">Registrar Mensualidad</button>
