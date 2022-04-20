@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormBuilder, Validators, AbstractControl} from '@angular/forms';
-import {CondominioService} from '../../services/condominios.service';
-import {Subscription} from "rxjs";
-import {DialogService} from 'src/app/services/dialog.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { CondominioService } from '../../services/condominios.service';
+import { finalize, Observable, Subscription } from "rxjs";
+import { DialogService } from 'src/app/services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
+import { StorageService } from 'src/app/services/storage.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-create-condominio',
@@ -16,6 +18,15 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   /*Variables*/
   idAministrador: string = '';
+
+  public pruebaImg = '';
+  public imgFile: any;
+  nombreImg: string = '';
+  imagen: any[] = [];
+
+  uploadPercent!: Observable<number>;
+  urlImage!: Observable<string>;
+  @ViewChild('imageUser') inputImageUser!: ElementRef
 
   /*Formularios*/
 
@@ -30,7 +41,9 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
     private _condominioService: CondominioService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private storage: AngularFireStorage,
+    private _storageService: StorageService
   ) {
 
     this.recoverData();
@@ -51,6 +64,38 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
     this.router.navigate(['/selectCondominio']);
   }
 
+  cargarImagen(event: any) {
+    //const id = Math.random().toString(36).substring(2);
+    //const file = event.target.files[0];
+    //this.pruebaImg = event.target.files[0];
+    //const filePath = `uploads/profile_${id}`;
+    //const ref = this.storage.ref(filePath);
+    //const task = this.storage.upload(filePath, file);
+    //const task = this.storage.upload(filePath, this.pruebaImg);
+    //console.log('task', task);
+
+    //this.uploadPercent = task.percentageChanges();
+    //task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
+    console.log(event.target.files[0].name);
+    this.imagen = [];
+    //const nombreCondominio = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleLowerCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
+
+    this.imgFile = event;
+    console.log('p1', this.imgFile);
+
+    let archivo = event.target.files;
+    let reader = new FileReader();
+
+    reader.readAsDataURL(archivo[0]);
+    reader.onloadend = () => {
+      this.imagen.push(reader.result);
+      //this._storageService.subirImagen(  "_", reader.result).then(urlImagen => {
+
+      //});
+    }
+    //return archivo;
+  }
+
   onCreate() {
 
     this._dialogService.confirmDialog({
@@ -63,9 +108,23 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
         const nombreCondominio = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
         const ciudadCondominio = String(this.condominioForm.value.ciudadCondominio).charAt(0).toLocaleUpperCase() + String(this.condominioForm.value.ciudadCondominio).slice(1);
         const descripcionCondominio = this.condominioForm.value.descripcionCondominio;
-        const data = {nombreCondominio, ciudadCondominio, descripcionCondominio}
 
-        this._condominioService.saveCondominios(data, this.idAministrador);
+        this.imagen = [];
+        const nombreImg = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleLowerCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
+
+        let archivo = this.imgFile.target.files;
+        let reader = new FileReader();
+        reader.readAsDataURL(archivo[0]);
+        reader.onloadend = () => {
+          this.imagen.push(reader.result);
+          this._storageService.subirImagen(nombreImg + "_" + Date.now(), reader.result).then(urlImagen => {
+            const imgCondominio = urlImagen;
+            const data = { nombreCondominio, ciudadCondominio, descripcionCondominio, imgCondominio }
+            this._condominioService.saveCondominios(data, this.idAministrador);
+          });
+        }
+
+        //const data = { nombreCondominio, ciudadCondominio, descripcionCondominio }
 
         this.toastr.success('El condominio se ha creado exitosamente', 'Registro exitoso', {
           positionClass: 'toast-bottom-right', timeOut: 10000
