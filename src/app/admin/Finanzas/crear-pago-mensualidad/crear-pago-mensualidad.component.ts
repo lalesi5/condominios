@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import {UnidadesService} from "../../../services/unidades.service";
 import { DialogService } from 'src/app/services/dialog.service';
 import {CuentasService} from "../../../services/cuentas.service";
+import {ReservasService} from "../../../services/reservas.service";
+import {TiposPagoService} from "../../../services/tiposPago.service";
 
 
 @Component({
@@ -20,24 +22,31 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   idCondominio: string = '';
   idUnidad: string = '';
   loading = false;
+  sumaValorReservas: number = 0;
 
   unidades: any[] = [];
   cuentasPago: any[] = [];
+  reservas: any[] = [];
+  tiposPago: any[] = [];
 
   pagoMensualidadForm: FormGroup;
   datosUnidadForm: FormGroup;
   cuentasPagoForm: FormGroup;
+  tiposPagoForm: FormGroup;
 
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
+    private _reservasService: ReservasService,
     private _cuentaPagoService: CuentasService,
+    private _tipoPagoService: TiposPagoService,
     private fb: FormBuilder,
   ) {
     this.pagoMensualidadForm = this.fb.group({
       fechaMensualidad: ['', Validators.required],
       idUnidad: ['', Validators.required],
       idCuenta: ['', Validators.required],
+      idTiposPago: ['', Validators.required],
       idAreaComunal: ['', Validators.required],
     });
 
@@ -45,12 +54,18 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       cuotaUnidad: [''],
       unidad: [''],
       nombreResidente: [''],
-      apellidoResidente: ['']
+      apellidoResidente: [''],
+      sumaValorReservas: ['']
     });
 
     this.cuentasPagoForm = this.fb.group({
       nombreCuenta: [''],
       tipoCuenta: ['']
+    });
+
+    this.tiposPagoForm = this.fb.group({
+      tiposPago: [''],
+      detalleTiposPago: ['']
     })
 
     this.recoverData()
@@ -59,6 +74,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getDatoUnidad();
     this.getCuentaPago();
+    this.getValoresReservas();
+    this.getTiposPago();
   }
 
   ngOnDestroy(): void {
@@ -69,7 +86,6 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
     this.idUnidad = <string>sessionStorage.getItem('idUnidad');
-    console.log(sessionStorage);
   }
 
   getDatoUnidad() {
@@ -98,6 +114,36 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     )
   }
 
+  getTiposPago(){
+    this.subscription.add(
+      this._tipoPagoService.getTiposPago(this.idCondominio).subscribe(data => {
+        this.tiposPago = [];
+        data.forEach((element: any) => {
+          this.tiposPago.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    )
+  }
+
+  getValoresReservas() {
+    this.subscription.add(
+      this._reservasService.getReservasValorPago(this.idUnidad).subscribe(data => {
+        this.reservas = [];
+        data.forEach((element: any) => {
+          this.reservas.push({
+            ...element.payload.doc.data()
+          })
+        })
+        //suma todos los valores de reservas que pertenecen a esa unidad y que tienen pagoReserva = Por Pagar
+        this.reservas.map(data => {
+          this.sumaValorReservas += data.valorReserva;
+        })
+      })
+    )
+  }
+
   onUnitChanged(item: any) {
     this.subscription.add(
       this._unidadesService.getUnidad(item).subscribe(data => {
@@ -107,6 +153,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           unidad: data.payload.data()['unidad'],
           nombreResidente: data.payload.data()['nombreResidente'],
           apellidoResidente: data.payload.data()['apellidoResidente'],
+          sumaValorReservas: this.sumaValorReservas
         })
       })
     )
@@ -119,6 +166,18 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
         this.cuentasPagoForm.setValue({
           nombreCuenta: data.payload.data()['nombreCuenta'],
           tipoCuenta: data.payload.data()['tipoCuenta']
+        })
+      })
+    )
+  }
+
+  onTipoPagoChanged(item: any){
+    this.subscription.add(
+      this._tipoPagoService.getTipoPago(item).subscribe(data => {
+        this.loading = false;
+        this.tiposPagoForm.setValue({
+          tiposPago: data.payload.data()['tiposPago'],
+          detalleTiposPago: data.payload.data()['detalleTiposPago']
         })
       })
     )
