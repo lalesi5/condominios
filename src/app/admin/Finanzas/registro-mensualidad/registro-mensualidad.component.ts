@@ -114,4 +114,8 @@ export class RegistroMensualidadComponent implements OnInit {
     this.grid.query = this.queryClone;
   }
 
+  onBacktoList(): void {
+    this.router.navigate(['/admin/finanzas/ingresosFinanzas']);
+  }
+
 }
