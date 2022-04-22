@@ -9,7 +9,9 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from "@angular/fire/compat";
+
 import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { environment } from '../environments/environment';
 
@@ -47,7 +49,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     GridAllModule,
     DateTimePickerModule,
     AreasComunesRoutingModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    AngularFireStorageModule
   ],
   declarations: [
     AppComponent
