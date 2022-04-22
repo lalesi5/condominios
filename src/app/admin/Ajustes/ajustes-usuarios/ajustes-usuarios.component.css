@@ -7,9 +7,9 @@
 
 .containerInfo mat-card {
   display: grid;
-  width: 50%;
-  left: 25%;
-  top: 17vh;
+  width: 80%;
+  left: 10%;
+  top: 5vh;
   border-radius: 20px;
   padding-bottom: 25px;
 }
