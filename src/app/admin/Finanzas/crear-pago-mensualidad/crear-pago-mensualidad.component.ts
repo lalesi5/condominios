@@ -1,13 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import {UnidadesService} from "../../../services/unidades.service";
-import { DialogService } from 'src/app/services/dialog.service';
 import {CuentasService} from "../../../services/cuentas.service";
 import {ReservasService} from "../../../services/reservas.service";
 import {TiposPagoService} from "../../../services/tiposPago.service";
+import {DescuentosService} from "../../../services/descuentos.service";
 
 
 @Component({
@@ -28,11 +27,13 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   cuentasPago: any[] = [];
   reservas: any[] = [];
   tiposPago: any[] = [];
+  descuentos: any[] = [];
 
   pagoMensualidadForm: FormGroup;
   datosUnidadForm: FormGroup;
   cuentasPagoForm: FormGroup;
   tiposPagoForm: FormGroup;
+  descuentosForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -40,14 +41,16 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     private _reservasService: ReservasService,
     private _cuentaPagoService: CuentasService,
     private _tipoPagoService: TiposPagoService,
+    private _descuentoService: DescuentosService,
     private fb: FormBuilder,
   ) {
     this.pagoMensualidadForm = this.fb.group({
       fechaMensualidad: ['', Validators.required],
       idUnidad: ['', Validators.required],
       idCuenta: ['', Validators.required],
-      idTiposPago: ['', Validators.required],
       idAreaComunal: ['', Validators.required],
+      idTiposPago: ['', Validators.required],
+      idDescuento: ['', Validators.required],
     });
 
     this.datosUnidadForm = this.fb.group({
@@ -66,7 +69,12 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.tiposPagoForm = this.fb.group({
       tiposPago: [''],
       detalleTiposPago: ['']
-    })
+    });
+
+    this.descuentosForm = this.fb.group({
+      nombreDescuento: [''],
+      valorDescuento: ['']
+    });
 
     this.recoverData()
   }
@@ -76,6 +84,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.getCuentaPago();
     this.getValoresReservas();
     this.getTiposPago();
+    this.getDescuentos();
   }
 
   ngOnDestroy(): void {
@@ -120,6 +129,19 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
         this.tiposPago = [];
         data.forEach((element: any) => {
           this.tiposPago.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    )
+  }
+
+  getDescuentos(){
+    this.subscription.add(
+      this._descuentoService.getDescuentos(this.idCondominio).subscribe( data => {
+        this.descuentos = [];
+        data.forEach((element: any) => {
+          this.descuentos.push({
             ...element.payload.doc.data()
           })
         })
@@ -178,6 +200,18 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
         this.tiposPagoForm.setValue({
           tiposPago: data.payload.data()['tiposPago'],
           detalleTiposPago: data.payload.data()['detalleTiposPago']
+        })
+      })
+    )
+  }
+
+  onDescuentoChanged(item: any){
+    this.subscription.add(
+      this._descuentoService.getDescuento(item).subscribe(data=> {
+        this.loading = false;
+        this.descuentosForm.setValue({
+          nombreDescuento: data.payload.data()['nombreDescuento'],
+          valorDescuento: data.payload.data()['valorDescuento']
         })
       })
     )
