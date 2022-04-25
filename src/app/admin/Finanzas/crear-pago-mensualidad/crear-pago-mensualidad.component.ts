@@ -7,6 +7,9 @@ import {CuentasService} from "../../../services/cuentas.service";
 import {ReservasService} from "../../../services/reservas.service";
 import {TiposPagoService} from "../../../services/tiposPago.service";
 import {DescuentosService} from "../../../services/descuentos.service";
+import {DialogService} from "../../../services/dialog.service";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -22,6 +25,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   idUnidad: string = '';
   loading = false;
   sumaValorReservas: number = 0;
+  date = new Date();
 
   unidades: any[] = [];
   cuentasPago: any[] = [];
@@ -34,23 +38,30 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   cuentasPagoForm: FormGroup;
   tiposPagoForm: FormGroup;
   descuentosForm: FormGroup;
+  sumaTotalForm: FormGroup;
 
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
+    private _ingresoUnidades: IngresoUnidadesService,
     private _reservasService: ReservasService,
     private _cuentaPagoService: CuentasService,
     private _tipoPagoService: TiposPagoService,
     private _descuentoService: DescuentosService,
+    private _dialogService: DialogService,
+    private toastr: ToastrService,
     private fb: FormBuilder,
   ) {
     this.pagoMensualidadForm = this.fb.group({
-      fechaMensualidad: ['', Validators.required],
       idUnidad: ['', Validators.required],
       idCuenta: ['', Validators.required],
-      idAreaComunal: ['', Validators.required],
       idTiposPago: ['', Validators.required],
       idDescuento: ['', Validators.required],
+      numeroReciboPago: ['', Validators.required],
+      fechaReciboPago: [this.date.toLocaleString, Validators.required],
+      observacionesMensualidadPago: ['', Validators.required],
+      estadoIngreso: ['Activo'],
+      estadoReciboPago: ['Pagado'],
     });
 
     this.datosUnidadForm = this.fb.group({
@@ -72,9 +83,14 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     });
 
     this.descuentosForm = this.fb.group({
+      idDescuento: [''],
       nombreDescuento: [''],
       valorDescuento: ['']
     });
+
+    this.sumaTotalForm = this.fb.group({
+      sumaTotal: ['']
+    })
 
     this.recoverData()
   }
@@ -210,11 +226,61 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       this._descuentoService.getDescuento(item).subscribe(data=> {
         this.loading = false;
         this.descuentosForm.setValue({
+          idDescuento: data.payload.data()['idDescuento'],
           nombreDescuento: data.payload.data()['nombreDescuento'],
           valorDescuento: data.payload.data()['valorDescuento']
         })
+        this.sumaTotalForm.setValue({
+          sumaTotal: this.datosUnidadForm.value.cuotaUnidad + this.sumaValorReservas - this.descuentosForm.value.valorDescuento
+        })
       })
     )
+  }
+
+  onCreatePagoMensualidad(){
+
+    this._dialogService.confirmDialog({
+      title: 'Registrar Pago',
+      message: '¿Está seguro que desea registrar el pago?',
+      confirmText: 'Sí',
+      cancelText: 'No',
+    }).subscribe( res => {
+      if (res) {
+        const pagoMensualidad: any = {
+          idAdministrador: this.idAdministrador,
+          idCondominio: this.idCondominio,
+          idUnidad: this.idUnidad,
+          unidad: this.datosUnidadForm.value.unidad,
+          fechaReciboPago: this.date.toLocaleString(),
+          numeroReciboPago: this.pagoMensualidadForm.value.numeroReciboPago,
+          nombreResidente: this.datosUnidadForm.value.nombreResidente,
+          apellidoResidente: this.datosUnidadForm.value.apellidoResidente,
+          cuotaUnidad: this.datosUnidadForm.value.cuotaUnidad,
+          sumaValorReservas: this.datosUnidadForm.value.sumaValorReservas,
+          nombreCuenta: this.cuentasPagoForm.value.nombreCuenta,
+          tipoCuenta: this.cuentasPagoForm.value.tipoCuenta,
+          tiposPago: this.tiposPagoForm.value.tiposPago,
+          detalleTiposPago: this.tiposPagoForm.value.detalleTiposPago,
+          idDescuento: this.descuentosForm.value.idDescuento,
+          valorDescuento: this.descuentosForm.value.valorDescuento,
+          valorTotal: this.sumaTotalForm.value.sumaTotal,
+          observaciones: this.pagoMensualidadForm.value.observacionesMensualidadPago,
+          estadoReciboPago: this.pagoMensualidadForm.value.estadoReciboPago,
+          estadoIngreso: this.pagoMensualidadForm.value.estadoIngreso
+        }
+        console.log(pagoMensualidad);
+        this.loading = true;
+        this._ingresoUnidades.savePago(pagoMensualidad).then(()=> {
+          this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
+            positionClass: 'toast-bottom-right'
+          });
+          this.loading = false;
+          this.router.navigate(['/admin/finanzas/registrarMensualidad']);
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    });
   }
 
   onBacktoList(): void {

@@ -8,18 +8,26 @@
         </div>
       </h3>
 
-      <form [formGroup]='pagoMensualidadForm'>
+      <form [formGroup]='pagoMensualidadForm' (ngSubmit)="onCreatePagoMensualidad()">
         <div class="form-group">
-          <label>Seleccione la Unidad</label>
-          <select class="form-control" formControlName="idUnidad" (ngModelChange)="onUnitChanged($event)"
-                  [ngClass]="{ 'is-invalid': !pagoMensualidadForm.controls['idUnidad'].valid  && pagoMensualidadForm.controls['idUnidad'].touched }">
-            <option *ngFor="let unidad of unidades" [ngValue]="unidad.idUnidad" selected>{{unidad.unidad}}
-            </option>
-          </select>
-          <div
-            *ngIf=" pagoMensualidadForm.controls['idUnidad'].touched  && !pagoMensualidadForm.controls['idUnidad'].valid"
-            class="invalid-feedback">
-            Campo requerido
+          <div class="row">
+            <div class="col">
+              <label>Seleccione la Unidad</label>
+              <select class="form-control" formControlName="idUnidad" (ngModelChange)="onUnitChanged($event)"
+                      [ngClass]="{ 'is-invalid': !pagoMensualidadForm.controls['idUnidad'].valid  && pagoMensualidadForm.controls['idUnidad'].touched }">
+                <option *ngFor="let unidad of unidades" [ngValue]="unidad.idUnidad" selected>{{unidad.unidad}}
+                </option>
+              </select>
+              <div
+                *ngIf=" pagoMensualidadForm.controls['idUnidad'].touched  && !pagoMensualidadForm.controls['idUnidad'].valid"
+                class="invalid-feedback">
+                Campo requerido
+              </div>
+            </div>
+            <div class="col">
+              <label>Número de Recibo: </label>
+              <input type="text" class="form-control" formControlName="numeroReciboPago">
+            </div>
           </div>
         </div>
         <form [formGroup]='datosUnidadForm'>
@@ -143,6 +151,30 @@
               </div>
             </form>
           </div>
+          <div class="col">
+            <form [formGroup]='sumaTotalForm'>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    <label>Valor Total: </label>
+                    <input type="number" class="form-control" formControlName="sumaTotal" [readonly]="true">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <form [formGroup]='pagoMensualidadForm'>
+              <div class="form-group">
+                <label>Observaciones: </label>
+                <textarea type="text" class="form-control" formControlName="observacionesMensualidadPago">
+                </textarea>
+              </div>
+            </form>
+          </div>
         </div>
 
         <div class="centrarBotones">
@@ -150,6 +182,7 @@
           <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
         </div>
       </form>
+
 
     </mat-card>
   </div>
