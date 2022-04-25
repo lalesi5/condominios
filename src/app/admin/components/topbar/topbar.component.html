@@ -1,8 +1,8 @@
-<div class="topbar">
+<div class="topbar" *ngFor="let condominio of condominios">
 
     <!--userImg-->
     <div class="user">
-        <img src="../../../../assets/condominios.png" alt="userImage">
+        <img src="{{condominio.imgCondominio}}" alt="userImage">
     </div>
 
     <!--manualUsuario-->

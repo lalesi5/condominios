@@ -7,7 +7,6 @@ import { AreasComunalesService } from 'src/app/services/areasComunales.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { UnidadesService } from 'src/app/services/unidades.service';
-import {stringify} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-reservas-create',

@@ -1,8 +1,9 @@
-.ajustesUsuarios {
+.selectorCrearPagoMensualidad {
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
-  top: 150px;
+  top: 165px;
+  min-height: 82vh;
 }
 
 .containerInfo mat-card {
@@ -12,6 +13,8 @@
   top: 5vh;
   border-radius: 20px;
   padding-bottom: 25px;
+  overflow: auto;
+  max-height: 800px;
 }
 
 .containerInfo mat-card h2 {

@@ -19,29 +19,37 @@
         </div>
         <div class="card">
           <div>
-            <div class="cardName">Deudas Totales</div>
+            <div class="cardName">Deuda Total</div>
             <div class="numbers">${{cuotaUnidad + sumaValorReservas}}.00</div>
           </div>
         </div>
       </div>
       <br>
       <div>
-        <button class="btn btn-primary mb-2">Crear Pago</button>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Pago</button>
       </div>
       <br>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="" [allowSorting]="true" [allowPaging]="true" gridLines="Both">
+        <ejs-grid #grid id='Grid' [dataSource]="ingresoUnidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
             <e-column field='unidad' headerText='Unidad' width=100> </e-column>
-            <e-column field='mesPago' headerText='Mes de Pago' width=100> </e-column>
+            <e-column field='fechaReciboPago' headerText='Mes de Pago' width=100> </e-column>
             <e-column field='numeroReciboPago' headerText='Número Recibo de Pago' width=100> </e-column>
-            <e-column field='cuentaPago' headerText='Cuenta de Pago' width=100> </e-column>
-            <e-column field='tipoPago' headerText='Tipo de Pago' width=100> </e-column>
-            <e-column field='descuento' headerText='Descuento' width=80> </e-column>
-            <e-column field='estadoPago' headerText='Estado de Pago' width=80> </e-column>
-            <e-column field='detallePago' headerText='Detalle Pago' width=80> </e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100> </e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100> </e-column>
+            <e-column field='cuotaUnidad' headerText='Cuota Unidad' width=80> </e-column>
+            <e-column field='sumaValorReservas' headerText='Valor de Reservas' width=80> </e-column>
+            <e-column field='valorDescuento' headerText='Descuento' width=80> </e-column>
+            <e-column field='valorTotal' headerText='Valor Total' width=80> </e-column>
           </e-columns>
         </ejs-grid>`
+      </div>
+
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onBacktoList()">Volver</button>
       </div>
 
     </mat-card>

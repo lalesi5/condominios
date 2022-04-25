@@ -33,10 +33,17 @@ export class DescuentosCreateComponent implements OnInit {
     this.recoverData();
   }
 
+  ngOnInit(): void {
+  }
+
+  recoverData() {
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+  }
+
   onCreateDescuento() {
 
     const nombreDescuentoData = String(this.descuentosForm.value.nombreDescuento).charAt(0).toLocaleUpperCase() + String(this.descuentosForm.value.nombreDescuento).slice(1);
-    const valorDescuentoData = String(this.descuentosForm.value.valorDescuento).charAt(0).toLocaleUpperCase() + String(this.descuentosForm.value.valorDescuento).slice(1);
 
     this._dialogService.confirmDialog({
       title: 'Agregar descuento',
@@ -48,7 +55,7 @@ export class DescuentosCreateComponent implements OnInit {
 
         const Descuento: any = {
           nombreDescuento: nombreDescuentoData,
-          valorDescuento: valorDescuentoData,
+          valorDescuento: <number>this.descuentosForm.value.valorDescuento,
         }
 
         //Crea el documento
@@ -71,13 +78,7 @@ export class DescuentosCreateComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
 
-  recoverData() {
-    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
-    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
-  }
 
   onBacktoList(): void {
     this.router.navigate(['/admin/ajustes/descuentos']);

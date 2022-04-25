@@ -6,33 +6,33 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 
-export class MensajesService {
+export class IngresoUnidadesService {
 
   constructor(
     public firestore: AngularFirestore,
   ) {
   }
 
-  getPagos(){
-
+  getPagos(idUnidad: string): Observable<any>{
+    return this.firestore.collection('IngresoUnidades', ref => ref.where('idUnidad', '==',idUnidad)).snapshotChanges();
   }
 
   getPago(id: string): Observable<any> {
-    return this.firestore.collection('Pagos').doc(id).snapshotChanges();
+    return this.firestore.collection('IngresoUnidades').doc(id).snapshotChanges();
   }
 
   savePago(datosPago: any) {
     const idPago = this.firestore.createId();
     const data = {idPago, ...datosPago}
-    return this.firestore.collection('Pagos').doc(idPago).set(data);
+    return this.firestore.collection('IngresoUnidades').doc(idPago).set(data);
   }
 
   updatePago(id: string, data: any): Promise <any>{
-    return this.firestore.collection('Pagos').doc(id).update(data);
+    return this.firestore.collection('IngresoUnidades').doc(id).update(data);
   }
 
   deletePago(id: string): Promise<any> {
-    return this.firestore.collection('Pagos').doc(id).delete();
+    return this.firestore.collection('IngresoUnidades').doc(id).delete();
   }
 
 }

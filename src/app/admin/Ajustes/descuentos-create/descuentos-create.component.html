@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
           <label>Valor del Descuento</label>
-          <input type="text" class="form-control" formControlName="valorDescuento"
+          <input type="number" class="form-control" formControlName="valorDescuento"
                  [ngClass]="{ 'is-invalid': !descuentosForm.controls['valorDescuento'].valid  && descuentosForm.controls['valorDescuento'].touched }">
           <div
             *ngIf=" descuentosForm.controls['valorDescuento'].touched  && !descuentosForm.controls['valorDescuento'].valid"

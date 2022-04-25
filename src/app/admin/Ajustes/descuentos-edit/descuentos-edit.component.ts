@@ -67,13 +67,12 @@ export class DescuentosEditComponent implements OnInit {
   onEditCuenta() {
 
     const nombreDescuentoData = String(this.descuentosForm.value.nombreDescuento).charAt(0).toLocaleUpperCase() + String(this.descuentosForm.value.nombreDescuento).slice(1);
-    const valorDescuentoData = String(this.descuentosForm.value.valorDescuento).charAt(0).toLocaleUpperCase() + String(this.descuentosForm.value.valorDescuento).slice(1);
 
     const idDescuento = this.idDescuento;
 
     const Descuento: any = {
       nombreDescuento: nombreDescuentoData,
-      valorDescuento: valorDescuentoData,
+      valorDescuento: <number>this.descuentosForm.value.valorDescuento,
     }
 
     this._dialogService.confirmDialog({
