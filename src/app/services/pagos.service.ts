@@ -13,8 +13,8 @@ export class IngresoUnidadesService {
   ) {
   }
 
-  getPagos(){
-
+  getPagos(idUnidad: string): Observable<any>{
+    return this.firestore.collection('IngresoUnidades', ref => ref.where('idUnidad', '==',idUnidad)).snapshotChanges();
   }
 
   getPago(id: string): Observable<any> {

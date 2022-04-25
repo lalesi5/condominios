@@ -12,6 +12,7 @@ import {
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
 import {Query} from "@syncfusion/ej2-data";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
 
 @Component({
   selector: 'app-registro-mensualidad',
@@ -24,6 +25,7 @@ export class RegistroMensualidadComponent implements OnInit {
   idUnidad: string = '';
   reservas: any[] = [];
   unidad: any[] = [];
+  ingresoUnidades: any [] = [];
   sumaValorReservas: number = 0;
   cuotaUnidad: number = 0;
 
@@ -35,16 +37,18 @@ export class RegistroMensualidadComponent implements OnInit {
   constructor(
     private router: Router,
     private _reservasService: ReservasService,
-    private _unidadesService: UnidadesService
+    private _unidadesService: UnidadesService,
+    private _ingresoUnidadesService: IngresoUnidadesService
   ) {
     this.recoverData();
-    this.pageSettings = { pageSize: 6 }
+    this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
   }
 
   ngOnInit(): void {
     this.getValoresReservas();
     this.getUnidadCuotaReserva();
+    this.getIngresoUnidades();
   }
 
   recoverData() {
@@ -79,6 +83,19 @@ export class RegistroMensualidadComponent implements OnInit {
         })
         this.unidad.map(data => {
           this.cuotaUnidad = data.cuotaUnidad;
+        })
+      })
+    )
+  }
+
+  getIngresoUnidades() {
+    this.subscription.add(
+      this._ingresoUnidadesService.getPagos(this.idUnidad).subscribe(data => {
+        this.ingresoUnidades = [];
+        data.forEach((element: any) => {
+          this.ingresoUnidades.push({
+            ...element.payload.doc.data()
+          })
         })
       })
     )
