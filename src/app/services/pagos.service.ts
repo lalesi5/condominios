@@ -14,7 +14,7 @@ export class IngresoUnidadesService {
   }
 
   getPagos(idUnidad: string): Observable<any>{
-    return this.firestore.collection('IngresoUnidades', ref => ref.where('idUnidad', '==',idUnidad)).snapshotChanges();
+    return this.firestore.collection('IngresoUnidades', ref => ref.where('idUnidad', '==',idUnidad).where('estadoIngreso', '==', 'Activo' )).snapshotChanges();
   }
 
   getPago(id: string): Observable<any> {
