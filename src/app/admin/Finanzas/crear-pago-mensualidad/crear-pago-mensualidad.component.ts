@@ -32,6 +32,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   reservas: any[] = [];
   tiposPago: any[] = [];
   descuentos: any[] = [];
+  pagosACambiarEstado: any[] = [];
 
   pagoMensualidadForm: FormGroup;
   datosUnidadForm: FormGroup;
@@ -268,7 +269,6 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           estadoReciboPago: this.pagoMensualidadForm.value.estadoReciboPago,
           estadoIngreso: this.pagoMensualidadForm.value.estadoIngreso
         }
-        console.log(pagoMensualidad);
         this.loading = true;
         this._ingresoUnidades.savePago(pagoMensualidad).then(()=> {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
@@ -281,6 +281,16 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
         })
       }
     });
+    this.onUpdateEstadoReservasPagadas();
+  }
+
+  onUpdateEstadoReservasPagadas(){
+    this.reservas.forEach((element: any) => {
+      const pagoReservaData: any = {
+        pagoReserva: 'Pagado'
+      }
+      this._reservasService.actualizarReserva(element.idReserva, pagoReservaData);
+    })
   }
 
   onBacktoList(): void {

@@ -13,6 +13,8 @@ import {
 } from "@syncfusion/ej2-angular-grids";
 import {Query} from "@syncfusion/ej2-data";
 import {IngresoUnidadesService} from "../../../services/pagos.service";
+import {DialogService} from "../../../services/dialog.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-registro-mensualidad',
@@ -32,17 +34,21 @@ export class RegistroMensualidadComponent implements OnInit {
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
   public queryClone: any;
+  public commands: CommandModel[];
   @ViewChild('grid') public grid: GridComponent | any;
 
   constructor(
     private router: Router,
     private _reservasService: ReservasService,
     private _unidadesService: UnidadesService,
-    private _ingresoUnidadesService: IngresoUnidadesService
+    private _ingresoUnidadesService: IngresoUnidadesService,
+    private _dialogService: DialogService,
+    private toastr: ToastrService
   ) {
     this.recoverData();
     this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
+    this.commands = [{ title: 'Anular Pago', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
   }
 
   ngOnInit(): void {
@@ -121,6 +127,31 @@ export class RegistroMensualidadComponent implements OnInit {
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.excelExport();
     }
+  }
+
+  commandClick(item: any): void{
+  if(item.target?.title == 'Anular Pago'){
+    const id = <string>item.rowData['idPago'];
+    this._dialogService.confirmDialog({
+      title: 'Anular Pago',
+      message: '¿Está seguro de anular el pago?',
+      confirmText: 'Sí',
+      cancelText: 'No'
+    }).subscribe( res => {
+      if (res) {
+        const pagoMensualidad: any = {
+          estadoIngreso: 'Inactivo'
+        }
+        this._ingresoUnidadesService.updatePago(id, pagoMensualidad).then(() => {
+          this.toastr.success('El pago ha sido anulado con exito', 'Pago Anulado', {
+            positionClass: 'toast-bottom-right'
+          });
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    })
+  }
   }
 
   pdfExportComplete(): void {
