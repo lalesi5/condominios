@@ -76,12 +76,10 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
 
     //this.uploadPercent = task.percentageChanges();
     //task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
-    console.log(event.target.files[0].name);
+    //console.log(event.target.files[0].name);
     this.imagen = [];
-    //const nombreCondominio = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleLowerCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
-
     this.imgFile = event;
-    console.log('p1', this.imgFile);
+    //console.log('p1', this.imgFile);
 
     let archivo = event.target.files;
     let reader = new FileReader();
@@ -89,11 +87,7 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(archivo[0]);
     reader.onloadend = () => {
       this.imagen.push(reader.result);
-      //this._storageService.subirImagen(  "_", reader.result).then(urlImagen => {
-
-      //});
     }
-    //return archivo;
   }
 
   onCreate() {
