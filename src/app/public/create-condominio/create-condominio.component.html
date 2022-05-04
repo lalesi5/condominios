@@ -34,7 +34,7 @@
         <input type="file" class="file-upload" accept=".png, .jpg, .jpeg" (change)="cargarImagen($event)">
         <br>
         <div class="form-group">
-          <img src="{{imagen[0]}}">
+          <img src="{{currentImage}}">
         </div>
         <div class="centrarBotones">
           <button type="submit" class="btn btn-success btn-lg mr-4" [disabled]="condominioForm.invalid">Guardar</button>
