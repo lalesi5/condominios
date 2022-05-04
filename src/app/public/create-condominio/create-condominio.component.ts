@@ -23,6 +23,7 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
   public imgFile: any;
   nombreImg: string = '';
   imagen: any[] = [];
+  public currentImage: any;
 
   uploadPercent!: Observable<number>;
   urlImage!: Observable<string>;
@@ -76,12 +77,10 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
 
     //this.uploadPercent = task.percentageChanges();
     //task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
-    console.log(event.target.files[0].name);
+    //console.log(event.target.files[0].name);
     this.imagen = [];
-    //const nombreCondominio = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleLowerCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
-
     this.imgFile = event;
-    console.log('p1', this.imgFile);
+    //console.log('p1', this.imgFile);
 
     let archivo = event.target.files;
     let reader = new FileReader();
@@ -89,11 +88,8 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(archivo[0]);
     reader.onloadend = () => {
       this.imagen.push(reader.result);
-      //this._storageService.subirImagen(  "_", reader.result).then(urlImagen => {
-
-      //});
+      this.currentImage = this.imagen[0];
     }
-    //return archivo;
   }
 
   onCreate() {
@@ -112,16 +108,22 @@ export class CreateCondominioComponent implements OnInit, OnDestroy {
         this.imagen = [];
         const nombreImg = String(this.condominioForm.value.nombreCondominio).charAt(0).toLocaleLowerCase() + String(this.condominioForm.value.nombreCondominio).slice(1);
 
-        let archivo = this.imgFile.target.files;
-        let reader = new FileReader();
-        reader.readAsDataURL(archivo[0]);
-        reader.onloadend = () => {
-          this.imagen.push(reader.result);
-          this._storageService.subirImagen(nombreImg + "_" + Date.now(), reader.result).then(urlImagen => {
-            const imgCondominio = urlImagen;
-            const data = { nombreCondominio, ciudadCondominio, descripcionCondominio, imgCondominio }
-            this._condominioService.saveCondominios(data, this.idAministrador);
-          });
+        if (this.imgFile != null) {
+          let archivo = this.imgFile.target.files;
+          let reader = new FileReader();
+          reader.readAsDataURL(archivo[0]);
+          reader.onloadend = () => {
+            this.imagen.push(reader.result);
+            this._storageService.subirImagen(nombreImg + "_" + Date.now(), reader.result).then(urlImagen => {
+              const imgCondominio = urlImagen;
+              const data = { nombreCondominio, ciudadCondominio, descripcionCondominio, imgCondominio }
+              this._condominioService.saveCondominios(data, this.idAministrador);
+            });
+          }
+        } else {
+          const imgCondominio = "https://firebasestorage.googleapis.com/v0/b/condominiosepn-68a1d.appspot.com/o/condominios%2Fzimba_1651702407689?alt=media&token=3cb6d8b9-05ce-4b72-b0a9-bef9a8678a6e";
+          const data = { nombreCondominio, ciudadCondominio, descripcionCondominio, imgCondominio }
+          this._condominioService.saveCondominios(data, this.idAministrador);
         }
 
         //const data = { nombreCondominio, ciudadCondominio, descripcionCondominio }
