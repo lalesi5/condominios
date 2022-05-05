@@ -61,7 +61,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     SortService,
     FilterService,
     GroupService,
-    PdfExportService, 
+    PdfExportService,
     ToolbarService,
     ExcelExportService
   ],

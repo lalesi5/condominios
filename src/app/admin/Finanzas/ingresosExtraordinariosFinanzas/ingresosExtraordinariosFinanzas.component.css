@@ -1,35 +1,32 @@
 .ingresosExtraordinarios {
-    position: absolute;
-    width: calc(100% - 231px);
-    left: 231px;
-    top: 165px;
-    min-height: 82vh;
-  }
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 165px;
+  min-height: 82vh;
+}
 
-  .containerFormulario mat-card {
-    top: 15px;
-    margin-top: 15px;
-    width: 99%;
-    left: 8px;
-    border-radius: 20px;
-    padding: 20px 20px;
-  }
-  
-  .formularioAnuncio{
-      width: 100%;
-      padding: 1px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 1vw;
-  }
+.containerInfo mat-card {
+  display: grid;
+  width: 80%;
+  left: 10%;
+  top: 5vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
+}
 
-  .btn {
-    position: relative;
-    margin-top: 8px;
-    margin-right: 8px;
-    padding: 5px 4px;
-    background: #287bff;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 6px;
-  }
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}

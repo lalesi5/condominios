@@ -30,7 +30,7 @@ export class ReservasService {
   }
 
   getReservasValorPago(idUnidad: string): Observable<any>{
-    return this.firestore.collection('Reservas', ref => ref.where('idUnidad', '==', idUnidad).where('pagoReserva', '==', 'Por Pagar')).snapshotChanges();
+    return this.firestore.collection('Reservas', ref => ref.where('idUnidad', '==', idUnidad).where('pagoReserva', '==', 'Por Pagar').where('estadoReserva', '==', 'Aceptado')).snapshotChanges();
   }
 
   getReservasUsuario(id: string, idUnidad: string): Observable<any> {
