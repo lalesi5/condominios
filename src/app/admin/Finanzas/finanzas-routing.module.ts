@@ -23,7 +23,7 @@ const routesFinanzas: Routes = [
         {path: 'ingresosExtraordinarios', component: IngresosExtraordinariosFinanzasComponent},
         {path: 'registrarMensualidad', component: RegistroMensualidadComponent},
         {path: 'crearPagoMensualidad', component: CrearPagoMensualidadComponent},
-        {path: 'registrarExtraordinarios', component: RegistrarExtraordinariosFinanzasComponent}
+        {path: 'registroExtraordinarios', component: RegistrarExtraordinariosFinanzasComponent}
       ]
   },
 ];

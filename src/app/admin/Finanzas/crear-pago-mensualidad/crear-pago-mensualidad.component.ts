@@ -32,7 +32,6 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   reservas: any[] = [];
   tiposPago: any[] = [];
   descuentos: any[] = [];
-  pagosACambiarEstado: any[] = [];
 
   pagoMensualidadForm: FormGroup;
   datosUnidadForm: FormGroup;
