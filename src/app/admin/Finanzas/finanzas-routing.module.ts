@@ -11,6 +11,7 @@ import {CrearPagoMensualidadComponent} from "./crear-pago-mensualidad/crear-pago
 import {
   RegistrarExtraordinariosFinanzasComponent
 } from "./registrar-extraordinarios-finanzas/registrar-extraordinarios-finanzas.component";
+import {RegistrarEgresoComponent} from "./registrar-egreso/registrar-egreso.component";
 
 
 const routesFinanzas: Routes = [
@@ -23,7 +24,8 @@ const routesFinanzas: Routes = [
         {path: 'ingresosExtraordinarios', component: IngresosExtraordinariosFinanzasComponent},
         {path: 'registrarMensualidad', component: RegistroMensualidadComponent},
         {path: 'crearPagoMensualidad', component: CrearPagoMensualidadComponent},
-        {path: 'registrarExtraordinarios', component: RegistrarExtraordinariosFinanzasComponent}
+        {path: 'registroExtraordinarios', component: RegistrarExtraordinariosFinanzasComponent},
+        {path: 'registroEgresos', component: RegistrarEgresoComponent}
       ]
   },
 ];

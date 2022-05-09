@@ -6,14 +6,14 @@ import {CuentasService} from "../../../services/cuentas.service";
 import {TiposPagoService} from "../../../services/tiposPago.service";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
-import {extraordinariosService} from "../../../services/extraordinarios.service";
+import {egresosService} from "../../../services/egresos.service";
 
 @Component({
-  selector: 'app-registrar-extraordinarios-finanzas',
-  templateUrl: './registrar-extraordinarios-finanzas.component.html',
-  styleUrls: ['./registrar-extraordinarios-finanzas.component.css']
+  selector: 'app-registrar-egreso',
+  templateUrl: './registrar-egreso.component.html',
+  styleUrls: ['./registrar-egreso.component.css']
 })
-export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDestroy {
+export class RegistrarEgresoComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
   idAdministrador: string = '';
@@ -24,7 +24,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
   tiposPago: any[] = [];
   cuentasPago: any[] = [];
 
-  extraordinariosForm: FormGroup;
+  egresosForm: FormGroup;
   tiposPagoForm: FormGroup;
   cuentasPagoForm: FormGroup;
 
@@ -33,18 +33,17 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     private _cuentaPagoService: CuentasService,
     private _tipoPagoService: TiposPagoService,
     private _dialogService: DialogService,
-    private _extraordinariosService: extraordinariosService,
+    private _egresoService: egresosService,
     private toastr: ToastrService,
     private fb: FormBuilder,
   ) {
-
-    this.extraordinariosForm = this.fb.group({
+    this.egresosForm = this.fb.group({
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
-      numeroReciboPagoExtraordinario: ['', Validators.required],
-      fechaReciboPagoExtraordinario: [this.date.toLocaleString, Validators.required],
-      observacionesPagoExtraordinario: ['', Validators.required],
-      valorPagoExtraordinario: ['', Validators.required],
+      numeroReciboEgreso: ['', Validators.required],
+      fechaEgreso: [this.date.toLocaleString, Validators.required],
+      observacionesEgreso: ['', Validators.required],
+      valorEgreso: ['', Validators.required],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
     });
@@ -60,7 +59,6 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     });
 
     this.recoverData();
-
   }
 
   ngOnInit(): void {
@@ -127,35 +125,35 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     )
   }
 
-  onCreatePagoExtraordinario(){
+  onCreateEgreso(){
     this._dialogService.confirmDialog({
-      title: 'Registrar Pago',
-      message: '¿Está seguro que desea registrar el pago?',
+      title: 'Registrar Egreso',
+      message: '¿Está seguro que desea registrar el egreso?',
       confirmText: 'Sí',
       cancelText: 'No',
     }).subscribe( res => {
       if (res) {
-        const pagoExtraordinarias: any = {
+        const pagoEgreso: any = {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
-          fechaReciboPagoExtraordinario: this.date.toLocaleString(),
-          numeroReciboPagoExtraordinario: this.extraordinariosForm.value.numeroReciboPagoExtraordinario,
-          valorPagoExtraordinario: this.extraordinariosForm.value.valorPagoExtraordinario,
+          fechaEgreso: this.date.toLocaleString(),
+          numeroReciboEgreso: this.egresosForm.value.numeroReciboEgreso,
+          valorEgreso: this.egresosForm.value.valorEgreso,
           nombreCuenta: this.cuentasPagoForm.value.nombreCuenta,
           tipoCuenta: this.cuentasPagoForm.value.tipoCuenta,
           tiposPago: this.tiposPagoForm.value.tiposPago,
           detalleTiposPago: this.tiposPagoForm.value.detalleTiposPago,
-          observacionesPagoExtraordinario: this.extraordinariosForm.value.observacionesPagoExtraordinario,
-          estadoReciboPago: this.extraordinariosForm.value.estadoReciboPago,
-          estadoIngreso: this.extraordinariosForm.value.estadoIngreso
+          observacionesEgreso: this.egresosForm.value.observacionesEgreso,
+          estadoReciboPago: this.egresosForm.value.estadoReciboPago,
+          estadoIngreso: this.egresosForm.value.estadoIngreso
         }
         this.loading = true;
-        this._extraordinariosService.saveExtraordinario(pagoExtraordinarias).then(() => {
+        this._egresoService.saveEgreso(pagoEgreso).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          this.router.navigate(['/admin/finanzas/ingresosExtraordinarios']);
+          this.router.navigate(['/admin/finanzas/egresosFinanzas']);
         }).catch(error => {
           console.log(error);
         })
@@ -164,7 +162,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
   }
 
   onBacktoList(): void {
-    this.router.navigate(['admin/finanzas//ingresosExtraordinarios']);
+    this.router.navigate(['admin/finanzas//egresosFinanzas']);
   }
 
 }

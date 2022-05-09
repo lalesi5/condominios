@@ -3,7 +3,27 @@
   <div class="containerInfo">
     <mat-card>
       <h2>Registrar Ingresos Extraordinarios</h2>
-      <h3>Seleccione la unidad para asignar el pago</h3>
+      <h3>Listado Ingresos Extraordinarios</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Pago</button>
+      </div>
+      <br>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions" (commandClick)="commandClick($event)"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=100> </e-column>
+            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=100> </e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100> </e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100> </e-column>
+            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=100> </e-column>
+            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=80> </e-column>
+            <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>`
+      </div>
     </mat-card>
   </div>
 </div>
