@@ -1,66 +1,29 @@
 <div class="egresos">
-    <!--Formulario Ingresos Pagos-->
-  
-    <div class="containerFormulario">
-      <mat-card>
-        <form class="formularioAnuncio">
-          <mat-form-field appearance="fill">
-            <mat-label>Fecha</mat-label>
-            <mat-select multiple>
-              <mat-option>Unidad 1</mat-option>
-              <mat-option>Unidad 2</mat-option>
-              <mat-option>Unidad 3</mat-option>
-              <mat-option>Unidad 4</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Cantidad</mat-label>
-            <mat-select multiple>
-              <mat-option>Unidad 1</mat-option>
-              <mat-option>Unidad 2</mat-option>
-              <mat-option>Unidad 3</mat-option>
-              <mat-option>Unidad 4</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Cuenta</mat-label>
-            <input matInput>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Metodo de Pago</mat-label>
-            <mat-select multiple>
-              <mat-option>Unidad 1</mat-option>
-              <mat-option>Unidad 2</mat-option>
-              <mat-option>Unidad 3</mat-option>
-              <mat-option>Unidad 4</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Categoria</mat-label>
-            <mat-select multiple>
-              <mat-option>Unidad 1</mat-option>
-              <mat-option>Unidad 2</mat-option>
-              <mat-option>Unidad 3</mat-option>
-              <mat-option>Unidad 4</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Concepto</mat-label>
-            <input matInput>
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Proveedor</mat-label>
-            <input matInput>
-          </mat-form-field>
-          <mat-form-field class="textAreaAnuncio" appearance="fill">
-            <mat-label>Anuncio</mat-label>
-            <textarea matInput placeholder="Ingrese su anuncio"></textarea>
-          </mat-form-field>
-        </form>
-        <div id="botonPago">
-          <a class="btn" type="submit">Pagar</a>
-        </div>
-      </mat-card>
-    </div>
+
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Registrar Egresos</h2>
+      <h3>Listado de Egresos</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Egreso</button>
+      </div>
+      <br>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="egresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions" (commandClick)="commandClick($event)"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaEgreso' headerText='Fecha de Pago' width=100> </e-column>
+            <e-column field='numeroReciboEgreso' headerText='Número Recibo de Egreso' width=100> </e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100> </e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100> </e-column>
+            <e-column field='observacionesEgreso' headerText='Detalle de Pago' width=100> </e-column>
+            <e-column field='valorEgreso' headerText='Valor Total' width=80> </e-column>
+            <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>`
+      </div>
+    </mat-card>
   </div>
-  
+</div>

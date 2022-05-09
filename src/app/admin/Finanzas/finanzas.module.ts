@@ -15,6 +15,7 @@ import {CommonModule} from "@angular/common";
 import { CrearPagoMensualidadComponent } from './crear-pago-mensualidad/crear-pago-mensualidad.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegistrarExtraordinariosFinanzasComponent } from './registrar-extraordinarios-finanzas/registrar-extraordinarios-finanzas.component';
+import { RegistrarEgresoComponent } from './registrar-egreso/registrar-egreso.component';
 
 @NgModule({
 
@@ -35,7 +36,8 @@ import { RegistrarExtraordinariosFinanzasComponent } from './registrar-extraordi
         IngresosFinanzasComponent,
         RegistroMensualidadComponent,
         CrearPagoMensualidadComponent,
-        RegistrarExtraordinariosFinanzasComponent
+        RegistrarExtraordinariosFinanzasComponent,
+        RegistrarEgresoComponent
     ],
     exports: [
         MatCardModule,
