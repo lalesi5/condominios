@@ -28,6 +28,7 @@ export class egresosService {
   }
 
   updateEgreso(id: string, data:any): Promise<any>{
+    console.log(data);
     return this.firestore.collection('Egreso').doc(id).update(data);
   }
 

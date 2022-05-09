@@ -8,7 +8,6 @@ import {
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
-import {extraordinariosService} from "../../../services/extraordinarios.service";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
 import {egresosService} from "../../../services/egresos.service";
@@ -41,7 +40,7 @@ export class EgresosFinanzasComponent implements OnInit {
     this.recoverData();
     this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Anular Pago', buttonOption: {iconCss: 'e-icons e-delete', cssClass: 'e-flat'}}];
+    this.commands = [{title: 'Anular Egreso', buttonOption: {iconCss: 'e-icons e-delete', cssClass: 'e-flat'}}];
   }
 
   ngOnInit(): void {
