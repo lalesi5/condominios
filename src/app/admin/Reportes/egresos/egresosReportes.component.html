@@ -2,7 +2,7 @@
 
   <div class="containerInfo">
     <mat-card>
-      <h2>Registrar Egresos</h2>
+      <h2>Egresos</h2>
       <h3>Listado de Egresos</h3>
       <div class="cardsDatosEgresos">
         <div class="card">
@@ -16,17 +16,27 @@
       <div class="control-section">
         <ejs-grid #grid id='Grid' [dataSource]="egresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
                   [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
-                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()"
                   [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
-            <e-column field='fechaEgreso' headerText='Fecha de Pago' width=100> </e-column>
-            <e-column field='numeroReciboEgreso' headerText='Número Recibo de Egreso' width=100> </e-column>
-            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100> </e-column>
-            <e-column field='tiposPago' headerText='Tipo de Pago' width=100> </e-column>
-            <e-column field='observacionesEgreso' headerText='Detalle de Pago' width=100> </e-column>
-            <e-column field='valorEgreso' headerText='Valor Total' width=80> </e-column>
+            <e-column field='fechaEgreso' headerText='Fecha de Pago' width=100></e-column>
+            <e-column field='numeroReciboEgreso' headerText='Número Recibo de Egreso' width=100></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100></e-column>
+            <e-column field='observacionesEgreso' headerText='Detalle de Pago' width=100></e-column>
+            <e-column field='valorEgreso' headerText='Valor Total' width=80 format="C2"></e-column>
           </e-columns>
-        </ejs-grid>`
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorEgreso" format="C2">
+                  <ng-template let-egresos>{{egresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
       </div>
     </mat-card>
   </div>

@@ -32,11 +32,15 @@
 }
 
 .cardsDatosEgresos {
-  width: auto;
-  padding: 5px;
+  width: 100%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr) ;
+  grid-gap: 100px;
 }
 
 .cardsDatosEgresos .card {
+  left: 125%;
   position: relative;
   align-items: center;
   padding: 20px;
