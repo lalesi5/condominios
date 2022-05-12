@@ -1,82 +1,76 @@
 .balance {
-    position: absolute;
-    width: calc(100% - 231px);
-    left: 231px;
-    top: 150px;
-    min-height: 82vh;
-  }
-
-  .containerCardsBalance mat-card {
-    display: flex;
-    top: 15px;
-    width: 99%;
-    left: 8px;
-    border-radius: 20px;
-    padding-bottom: 25px;
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 165px;
+  min-height: 82vh;
 }
 
-.cardsBalance{
-    width: 100%;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr) ;
-    grid-gap: 100px;
-  }
-
-  .cardsBalance .card{
-    position: relative;
-    align-items: center;
-    padding: 10px;
-    border-radius: 20px;
-    display: flex;
-    cursor: pointer;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
-  }
-
-  .cardsBalance .card:hover{
-    background: #287bff;
-  }
-
-  .cardsBalance .card .numbers{
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position: relative;
-    font-weight: 600;
-    font-size: 2em;
-    color: #287bff;
-  }
-
-  .cardsBalance .card .cardName{
-    color: #999;
-    font-size: 1.5em;
-    text-align: center;
-  }
-
-
-  .cardsBalance .card:hover .numbers,
-  .cardsBalance .card:hover .cardName{
-    color: #fff;
-  }
-
-.tablaBalance mat-card {
-    top: 15px;
-    margin-top: 15px;
-    width: 99%;
-    left: 8px;
-    border-radius: 20px;
-    padding: 20px 20px;
+.containerInfo mat-card {
+  display: grid;
+  width: 80%;
+  left: 10%;
+  top: 5vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
 }
 
-.tablaBalance table tfoot{
-    font-weight: 590;
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
 }
 
-.tablaBalance table tr th:last-child{
-    text-align: end;
-    width: 30%;
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
 }
 
-.tablaBalance table tr td:last-child{
-    text-align: end;
+.cardsDatosEgresos {
+  width: 100%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr) ;
+  grid-gap: 100px;
+}
+
+.cardsDatosEgresos .card {
+  position: relative;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardsDatosEgresos .card:hover {
+  background: #287bff;
+}
+
+.cardsDatosEgresos .card .numbers {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 600;
+  font-size: 2em;
+  color: #287bff;
+}
+
+.cardsDatosEgresos .card .cardName {
+  color: #999;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+
+.cardsDatosEgresos .card:hover .numbers,
+.cardsDatosEgresos .card:hover .cardName {
+  color: #fff;
 }
