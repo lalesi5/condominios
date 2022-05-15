@@ -2,10 +2,10 @@
     <app-topbar></app-topbar>
 
     <div class="headerReseMenUni">
-        <div class="card" [routerLink]="['/admin/administracion/areasComunes']" [routerLinkActive]="['active']" (click)="onGoReservas()">
+        <div class="card" [routerLink]="['/admin/administracion/areasComunes/reservasPendientes']" [routerLinkActive]="['active']" (click)="onGoReservas()">
             <div>
-                <div class="numbers"> {{reservas.length}} </div>
-                <div class="cardName">Reservas</div>
+                <div class="numbers"> {{reservasPendientes.length}} </div>
+                <div class="cardName">Reservas Pendientes</div>
             </div>
             <div class="iconBx">
                 <mat-icon>visibility</mat-icon>
@@ -14,13 +14,13 @@
         <div class="card" [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']" (click)="onGoMensajes()">
             <div>
                 <div class="numbers"> {{anuncios.length}}</div>
-                <div class="cardName">Anuncios</div>
+                <div class="cardName">Anuncios Generales</div>
             </div>
             <div class="iconBx">
                 <mat-icon> comment</mat-icon>
             </div>
         </div>
-        <div class="card" [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']" (click)="onGoUnidades()">
+        <div class="card" [routerLink]="['/admin/administracion/listarUnidades']" [routerLinkActive]="['active']" (click)="onGoUnidades()">
             <div>
                 <div class="numbers"> {{unidades.length}} </div>
                 <div class="cardName">Unidades</div>

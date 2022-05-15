@@ -17,6 +17,10 @@ export class IngresoUnidadesService {
     return this.firestore.collection('IngresoUnidades', ref => ref.where('idUnidad', '==',idUnidad).where('estadoIngreso', '==', 'Activo' )).snapshotChanges();
   }
 
+  getPagosCondominio(idCondominio: string): Observable<any>{
+    return this.firestore.collection('IngresoUnidades', ref => ref.where('idCondominio', '==',idCondominio).where('estadoIngreso', '==', 'Activo' )).snapshotChanges();
+  }
+
   getPago(id: string): Observable<any> {
     return this.firestore.collection('IngresoUnidades').doc(id).snapshotChanges();
   }

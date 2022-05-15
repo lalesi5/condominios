@@ -1,112 +1,83 @@
-<div class="ingresoReportes">
+<div class="ingresos">
 
-  <div class="containerTitulo">
+  <div class="containerInfo">
     <mat-card>
-      <div class="cardsDatosIngresos">
-        <div class="card">
-          <div>
-            <div class="cardName">Total Ingresos</div>
-            <div class="numbers">$3200.00</div>
+      <h2>Ingresos</h2>
+      <h3>Listado de Ingresos</h3>
+      <div class="centrar">
+        <div class="cardsDatosEgresos">
+          <div class="card">
+            <div>
+              <div class="cardName">Total Ingresos Unidades</div>
+              <div class="numbers">$ {{sumaIngresos}}</div>
+            </div>
+          </div>
+          <div class="card">
+            <div>
+              <div class="cardName">Total Ingresos Extraordinarios</div>
+              <div class="numbers">$ {{sumaExtraordinarios}}</div>
+            </div>
+          </div>
+          <div class="card">
+            <div>
+              <div class="cardName">Total Ingresos</div>
+              <div class="numbers">$ {{total}}</div>
+            </div>
           </div>
         </div>
       </div>
-    </mat-card>
-  </div>
-
-  <div class="tablaIngresoReportes">
-    <mat-card>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Unidad</th>
-            <th>Recibo</th>
-            <th>Fecha</th>
-            <th>Concepto</th>
-            <th>Categoria</th>
-            <th>Cuenta</th>
-            <th>Descuento</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Casa</td>
-            <td>222KDASK</td>
-            <td>2021-09-06</td>
-            <td>
-              <p>Mantimiento Agosto 2021</p>
-              <p>Mantimiento Septiembre 2021</p>
-            </td>
-            <td>
-              <p>Mantimiento</p>
-              <p>Mantimiento Areas Comunales</p>
-            </td>
-            <td>$200</td>
-            <td>$800</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Casa</td>
-            <td>222KDASK</td>
-            <td>2021-09-06</td>
-            <td>
-              <p>Mantimiento Agosto 2021</p>
-              <p>Mantimiento Septiembre 2021</p>
-            </td>
-            <td>
-              <p>Mantimiento</p>
-              <p>Mantimiento Areas Comunales</p>
-            </td>
-            <td>$200</td>
-            <td>$800</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Casa</td>
-            <td>222KDASK</td>
-            <td>2021-09-06</td>
-            <td>
-              <p>Mantimiento Agosto 2021</p>
-              <p>Mantimiento Septiembre 2021</p>
-            </td>
-            <td>
-              <p>Mantimiento</p>
-              <p>Mantimiento Areas Comunales</p>
-            </td>
-            <td>$200</td>
-            <td>$800</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Casa</td>
-            <td>222KDASK</td>
-            <td>2021-09-06</td>
-            <td>
-              <p>Mantimiento Agosto 2021</p>
-              <p>Mantimiento Septiembre 2021</p>
-            </td>
-            <td>
-              <p>Mantimiento</p>
-              <p>Mantimiento Areas Comunales</p>
-            </td>
-            <td>$200</td>
-            <td>$800</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total</td>
-            <td>$3200</td>
-          </tr>
-        </tfoot>
-      </table>
+      <br>
+      <h3>Ingresos Unidades</h3>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=100></e-column>
+            <e-column field='numeroReciboPago' headerText='Número Recibo de Egreso' width=100></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100></e-column>
+            <e-column field='observaciones' headerText='Detalle de Pago' width=100></e-column>
+            <e-column field='valorTotal' headerText='Valor Total' width=80 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorTotal" format="C2">
+                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+        <h3>Ingresos Extraordinarios</h3>
+        <ejs-grid #grid id='Grid2' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true"
+                  gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=100></e-column>
+            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=100></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100></e-column>
+            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=100></e-column>
+            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=80 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorPagoExtraordinario" format="C2">
+                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+      </div>
     </mat-card>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {Subscription} from "rxjs";
+import { AggregateService } from '@syncfusion/ej2-angular-grids';
 import {
   CommandModel,
   GridComponent,
@@ -10,13 +11,13 @@ import {
 import {Router} from "@angular/router";
 import {egresosService} from "../../../services/egresos.service";
 import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
 import {Query} from "@syncfusion/ej2-data";
 
 @Component({
   selector: 'app-egresoReportes',
   templateUrl: 'egresosReportes.component.html',
-  styleUrls: ['./egresosReportes.component.css']
+  styleUrls: ['./egresosReportes.component.css'],
+  providers: [AggregateService]
 })
 
 export class EgresosReportesComponent implements OnInit {
@@ -35,8 +36,7 @@ export class EgresosReportesComponent implements OnInit {
   constructor(
     private router: Router,
     private _egresoService: egresosService,
-    private _dialogService: DialogService,
-    private toastr: ToastrService
+    private _dialogService: DialogService
   ) {
     this.recoverData();
     this.pageSettings = {pageSize: 6}
@@ -61,6 +61,7 @@ export class EgresosReportesComponent implements OnInit {
             ...element.payload.doc.data()
           })
         })
+        this.sumaEgresos = 0;
         this.egresos.map(data => {
           this.sumaEgresos += data.valorEgreso;
         })
