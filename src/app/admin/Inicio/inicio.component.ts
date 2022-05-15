@@ -17,6 +17,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   idCondominio: string = ';'
   unidades: any[] = [];
   reservas: any[] = [];
+  reservasPendientes: any[] = [];
   anuncios: any[] = [];
 
   constructor(
@@ -32,6 +33,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.getUnidades();
     this.getReservas();
     this.getAnuncios();
+    this.getReservasPendientes();
   }
 
   ngOnDestroy(): void {
@@ -69,6 +71,20 @@ export class InicioComponent implements OnInit, OnDestroy {
     )
   }
 
+  getReservasPendientes() {
+    this.subscription.add(
+      this._reservas.getReservasPendientes(this.idCondominio).subscribe(data => {
+        this.reservasPendientes = [];
+        data.forEach((element: any) => {
+          this.reservasPendientes.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    )
+  }
+
+
   getAnuncios() {
     this.subscription.add(
       this._anuncios.getAnunciosGenerales(this.idCondominio).subscribe(data => {
@@ -83,11 +99,11 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   onGoUnidades() {
-    this.router.navigate(['/admin/administracion']);
+    this.router.navigate(['/admin/administracion/listarUnidades']);
   }
 
   onGoReservas() {
-    this.router.navigate(['/admin/administracion/areasComunes']);
+    this.router.navigate(['/admin/administracion/areasComunes/reservasPendientes']);
   }
 
   onGoMensajes() {

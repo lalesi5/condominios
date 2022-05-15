@@ -87,6 +87,7 @@ export class BalanceComponent implements OnInit {
             ...element.payload.doc.data()
           })
         })
+        this.sumaIngresos = 0;
         this.ingresos.map(data => {
           this.sumaIngresos += data.valorTotal;
         })
@@ -103,12 +104,19 @@ export class BalanceComponent implements OnInit {
             ...element.payload.doc.data()
           })
         })
+        this.sumaExtraordinarios = 0;
+        this.total = 0;
         this.pagosExtraordinarios.map(data => {
           this.sumaExtraordinarios += data.valorPagoExtraordinario;
         })
         this.total = this.sumaExtraordinarios + this.sumaIngresos;
       })
     )
+  }
+
+  unirPagos() {
+    this.pagosExtraordinarios = this.pagosExtraordinarios.concat(this.ingresos, this.egresos);
+    console.log(this.pagosExtraordinarios);
   }
 
   toolbarClick(args: any): void {

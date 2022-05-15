@@ -27,12 +27,9 @@
         </div>
       </div>
       <br>
+      <h3>Ingresos</h3>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
-                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
-                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-                  (excelExportComplete)="excelExportComplete()"
-                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+        <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both">
           <e-columns>
             <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=100></e-column>
             <e-column field='numeroReciboPago' headerText='Número Recibo de Egreso' width=100></e-column>
@@ -51,12 +48,7 @@
             </e-aggregate>
           </e-aggregates>
         </ejs-grid>
-        <ejs-grid #grid id='Grid2' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true"
-                  gridLines="Both"
-                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
-                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-                  (excelExportComplete)="excelExportComplete()"
-                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+        <ejs-grid #grid id='Grid2' [dataSource]="pagosExtraordinarios" [allowPaging]="true" gridLines="Both">
           <e-columns>
             <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=100></e-column>
             <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=100></e-column>
@@ -75,11 +67,8 @@
             </e-aggregate>
           </e-aggregates>
         </ejs-grid>
-        <ejs-grid #grid id='Grid3' [dataSource]="egresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
-                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
-                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-                  (excelExportComplete)="excelExportComplete()"
-                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+        <h3>Egresos</h3>
+        <ejs-grid #grid id='Grid3' [dataSource]="egresos" [allowPaging]="true" gridLines="Both">
           <e-columns>
             <e-column field='fechaEgreso' headerText='Fecha de Pago' width=100></e-column>
             <e-column field='numeroReciboEgreso' headerText='Número Recibo de Egreso' width=100></e-column>

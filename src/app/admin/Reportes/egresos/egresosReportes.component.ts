@@ -61,6 +61,7 @@ export class EgresosReportesComponent implements OnInit {
             ...element.payload.doc.data()
           })
         })
+        this.sumaEgresos = 0;
         this.egresos.map(data => {
           this.sumaEgresos += data.valorEgreso;
         })

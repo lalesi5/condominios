@@ -27,6 +27,7 @@
         </div>
       </div>
       <br>
+      <h3>Ingresos Unidades</h3>
       <div class="control-section">
         <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
                   [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
@@ -51,6 +52,7 @@
             </e-aggregate>
           </e-aggregates>
         </ejs-grid>
+        <h3>Ingresos Extraordinarios</h3>
         <ejs-grid #grid id='Grid2' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true"
                   gridLines="Both"
                   [pageSettings]="pageSettings" [toolbar]="toolbarOptions"

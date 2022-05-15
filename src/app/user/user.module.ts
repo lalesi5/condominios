@@ -21,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AjustesUserEditComponent} from './Ajustes/ajustes-user-edit/ajustes-user-edit.component';
 import {DateTimePickerModule} from "@syncfusion/ej2-angular-calendars";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {GridModule} from "@syncfusion/ej2-angular-grids";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     CommonModule,
     ReactiveFormsModule,
     DateTimePickerModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    GridModule
   ],
   declarations: [
     UserComponent,
