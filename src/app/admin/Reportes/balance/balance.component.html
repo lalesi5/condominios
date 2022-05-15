@@ -4,29 +4,78 @@
     <mat-card>
       <h2>Balance</h2>
       <h3>Datos Balance</h3>
-      <div class="cardsBalance">
-        <div class="card">
-          <div>
-            <div class="cardName">Total Egresos</div>
-            <div class="numbers">$600.00</div>
+      <div class="centrar">
+        <div class="cardsDatosEgresos">
+          <div class="card">
+            <div>
+              <div class="cardName">Total Ingresos</div>
+              <div class="numbers">$ {{total}}</div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div>
-            <div class="cardName">Total Ingresos</div>
-            <div class="numbers">$1500.00</div>
+          <div class="card">
+            <div>
+              <div class="cardName">Total Egresos</div>
+              <div class="numbers">$ {{sumaEgresos}}</div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div>
-            <div class="cardName">Saldo Neto Disponible</div>
-            <div class="numbers">$900.00</div>
+          <div class="card">
+            <div>
+              <div class="cardName">Total</div>
+              <div class="numbers">$ {{total-sumaEgresos}}</div>
+            </div>
           </div>
         </div>
       </div>
       <br>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="egresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+        <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=100></e-column>
+            <e-column field='numeroReciboPago' headerText='Número Recibo de Egreso' width=100></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100></e-column>
+            <e-column field='observaciones' headerText='Detalle de Pago' width=100></e-column>
+            <e-column field='valorTotal' headerText='Valor Total' width=80 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorTotal" format="C2">
+                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+        <ejs-grid #grid id='Grid2' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true"
+                  gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=100></e-column>
+            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=100></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=100></e-column>
+            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=100></e-column>
+            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=80 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorPagoExtraordinario" format="C2">
+                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+        <ejs-grid #grid id='Grid3' [dataSource]="egresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
                   [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
                   (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
                   (excelExportComplete)="excelExportComplete()"
