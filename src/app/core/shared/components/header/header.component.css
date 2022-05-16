@@ -1,86 +1,83 @@
 #header {
-    position: relative;
-    border-top: 4px solid rgb(44, 89, 160);
-    background-color: white;
-    width: 100%;
-    height: 60px;
+  position: relative;
+  border-top: 4px solid rgb(44, 89, 160);
+  background-color: white;
+  width: 100%;
+  height: 60px;
 }
 
-.center{
-    display: inline;
-    background-color: white;
+.center {
+  display: inline;
+  background-color: white;
 }
 
 #logo {
-    font-size: 30px;
-    float: left;
-    margin-top: 15px;
+  float: left;
+  margin-top: 15px;
 }
 
 #logo a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+  margin-left: 20px;
 }
 
 #logo a strong {
-    text-decoration: none;
-    color: rgb(44, 89, 160);
+  text-decoration: none;
+  color: rgb(44, 89, 160);
 }
 
 #logo a:hover {
-    text-decoration: none;
-    color: rgb(44, 89, 160);
+  text-decoration: none;
+  color: rgb(44, 89, 160);
 }
 
-#menu {
-    font-size: 18px;
-    color: black;
-    float: left;
-    margin-top: 15px;
+#contacto {
+  font-size: 18px;
+  float: right;
+  left: 30px;
+  margin-top: 15px;
 }
 
-#menu ul li {
-    display: inline;
-    list-style: none;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-}
-
-#menu a {
-    text-decoration: none;
-    transition: 300ms all;
-    color: #000;
-}
-
-#menu a:hover,
-.active{
-    color: rgb(44, 89, 160);
-}
-
-#contacto{
-    font-size: 18px;
-    float: right;
-    margin-left: 30px;
-    margin-top: 15px;
-}
-
-#contacto mat-icon{
-    font-size: 17px;
-    color: rgb(44, 89, 160);
+#contacto mat-icon {
+  font-size: 20px;
+  color: rgb(44, 89, 160);
+  margin-left: 15px;
 }
 
 #contacto a {
-    text-decoration: none;
-    transition: 300ms all;
-    color: #000;
+  font-size: 18px;
+  text-decoration: none;
+  transition: 300ms all;
+  color: #000;
+  margin-right: 20px;
 }
 
 #contacto a:hover,
-.active{
-    color: rgb(44, 89, 160);
+.active {
+  color: rgb(44, 89, 160);
 }
 
+@media only screen and (max-width: 900px){
+
+  #logo a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin-left: 20px;
+  }
+
+  #contacto a {
+    font-size: 20px;
+    text-decoration: none;
+    transition: 300ms all;
+    color: #000;
+    margin-right: 20px;
+  }
+
+
+}
 
 
 

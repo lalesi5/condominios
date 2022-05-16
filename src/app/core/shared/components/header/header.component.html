@@ -3,31 +3,17 @@
 
     <!--logo-->
     <div id="logo">
-      <a [routerLink] = "['/home']" [routerLinkActive]="['active']">
+      <a [routerLink]="['/home']" [routerLinkActive]="['active']">
         Condominio<strong>EPN</strong>
       </a>
     </div>
 
-
-    <!--menu-->
-    <nav id="menu">
-      <ul>
-        <li>
-          <a [routerLink] = "['/loginAdmin']" [routerLinkActive]="['active']">Admin</a>
-        </li>
-      </ul>
-    </nav>
-
     <!--contacto-->
 
     <div id="contacto">
-      <mat-icon> email</mat-icon>
-      <a> contacto@condominios.com</a>
-    </div>
 
-    <div id="contacto">
-      <mat-icon>call</mat-icon>
-      <a> +1234567890</a>
+      <a [routerLink]="['/loginAdmin']" [routerLinkActive]="['active']">Iniciar Sesión</a>
+
     </div>
 
 
