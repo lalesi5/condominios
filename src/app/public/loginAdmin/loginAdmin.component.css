@@ -1,8 +1,7 @@
 #login {
-  padding-top: 100px;
+  padding-top: 10vh;
   text-align: center;
   height: calc(100vh - 230px);
-  
 }
 
 #login span {
@@ -11,12 +10,17 @@
   padding-bottom: 5px;
 }
 
-#login .col-md-12{
-    padding-right: 150px;
-    padding-left: 150px;
+#login .col-md-12 {
+  padding-right: 150px;
+  padding-left: 150px;
 }
 
-#login .form.floating{
-    margin-top: 20px;
+#login .form.floating {
+  margin-top: 20px;
 }
 
+@media only screen and (max-width: 900px) {
+  #login {
+    height: calc(100vh - 220px);
+  }
+}
