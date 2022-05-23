@@ -4,6 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import {Subscription} from "rxjs";
 import {DialogService} from "src/app/services/dialog.service";
 import {MensajesService} from '../../../services/mensajes.service';
+import {UnidadesService} from "../../../services/unidades.service";
 
 @Component({
   selector: 'app-mensajesUsuario',
@@ -21,10 +22,12 @@ export class MensajeUsuarioComponent implements OnInit {
   apellidoResidente: string = '';
   nombreUsuario: string = '';
   mensajes: any[] = [];
+  unidad: any[] = [];
 
   constructor(
     private router: Router,
     private _mensajesService: MensajesService,
+    private _unidadesService: UnidadesService,
     private _dialogService: DialogService,
     private toastr: ToastrService
   ) {
@@ -33,6 +36,7 @@ export class MensajeUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.getMensajes();
+    this.getUnidad();
   }
 
   recoverData() {
@@ -42,6 +46,21 @@ export class MensajeUsuarioComponent implements OnInit {
     this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
     this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
     this.nombreUsuario = this.nombreResidente + ' ' + this.apellidoResidente;
+  }
+
+  getUnidad() {
+    this.subscription.add(
+      this._unidadesService
+        .getUnidadesById(this.idUnidad)
+        .subscribe(data => {
+          this.unidad = [];
+          data.forEach((element: any) => {
+            this.unidad.push({
+              ...element.payload.doc.data()
+            })
+          })
+        })
+    )
   }
 
   getMensajes() {

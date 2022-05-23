@@ -42,3 +42,17 @@
   background-color: #eeebeb;
 }
 
+@media only screen and (max-width: 900px) {
+
+  .anuncioGeneral {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerGeneral mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

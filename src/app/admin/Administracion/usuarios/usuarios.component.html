@@ -1,38 +1,39 @@
 <div class="bodyUnidades">
-    <div class="tablaUsuarios">
-        <mat-card>
-            <h2>Usuarios</h2>
-            <h3>Lista de usuarios asignados a una unidad</h3>
-            <div>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                    <mat-button-toggle value="bold" (click)="onGoUsuarios()">Gestionar Usuarios
-                        <mat-icon>account_box</mat-icon>
-                    </mat-button-toggle>
-                    <mat-button-toggle value="bold" (click)="onGoUnidades()">Gestionar Unidades
-                        <mat-icon>home</mat-icon>
-                    </mat-button-toggle>
-                </mat-button-toggle-group>
+  <div class="tablaUsuarios">
+    <mat-card>
+      <h2>Usuarios</h2>
+      <h3>Lista de usuarios asignados a una unidad</h3>
+      <div>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle value="bold" (click)="onGoUsuarios()">Gestionar Usuarios
+            <mat-icon>account_box</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="bold" (click)="onGoUnidades()">Gestionar Unidades
+            <mat-icon>home</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
 
-            </div>
-            <div class="control-section">
-                <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowPaging]="true" height="272px"
-                    [allowSorting]="true" [allowPaging]="true" gridLines="Both" [pageSettings]="pageSettings"
-                    (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
-                    [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-                    (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
-                    (pdfExportComplete)="pdfExportComplete()">
-                    <e-columns>
-                        <e-column headerText="No" width=50></e-column>
-                        <e-column field='unidad' headerText='Unidad' textAlign='Left' width=82> </e-column>
-                        <e-column field='nombreResidente' headerText='Nombre' width=100> </e-column>
-                        <e-column field='apellidoResidente' headerText='Apellido' width=100> </e-column>
-                        <e-column field='emailResidente' headerText='Correo' width=120> </e-column>
-                        <e-column field='telefonoResidente' headerText='Teléfono' width=88> </e-column>
-                        <e-column field='areaUnidad' headerText='Area (m^2)' width=98> </e-column>
-                        <e-column headerText='Editar' width=95 [commands]='commands'></e-column>
-                    </e-columns>
-                </ejs-grid>`
-            </div>
-        </mat-card>
-    </div>
+      </div>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowPaging]="true" height="200px"
+                  [allowSorting]="true" [allowPaging]="true" gridLines="Both" [pageSettings]="pageSettings"
+                  (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
+                  [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+                  (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column headerText="No" width=50></e-column>
+            <e-column field='unidad' headerText='Unidad' textAlign='Left' width=120></e-column>
+            <e-column field='nombreResidente' headerText='Nombre' width=120></e-column>
+            <e-column field='apellidoResidente' headerText='Apellido' width=120></e-column>
+            <e-column field='emailResidente' headerText='Correo' width=200></e-column>
+            <e-column field='telefonoResidente' headerText='Teléfono' width=120></e-column>
+            <e-column field='areaUnidad' headerText='Area (m^2)' width=120></e-column>
+            <e-column headerText='Editar' width=110 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>
+        `
+      </div>
+    </mat-card>
+  </div>
 </div>

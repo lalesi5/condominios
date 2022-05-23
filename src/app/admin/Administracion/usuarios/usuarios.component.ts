@@ -124,7 +124,7 @@ export class UsuariosComponent implements OnInit {
     private router: Router,
     private _unidades: UnidadesService,
   ) {
-    this.pageSettings = { pageSize: 6 }
+    this.pageSettings = { pageSize: 5 }
 
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [{ title: 'Usuarios', buttonOption: { iconCss: 'e-icons e-people', cssClass: 'e-flat' } },

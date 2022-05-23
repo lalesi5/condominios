@@ -23,14 +23,7 @@
   font-size: 20px;
 }
 
-#menu ul {
-  line-height: 20px;
-  width: 100%;
-  float: initial;
-  margin-bottom: 0rem;
-}
-
-#menu ul li {
+#menu li {
   display: inline-block;
   list-style: none;
   margin-left: 20px;
@@ -46,4 +39,25 @@
 
 #menu a:hover {
   color: black;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .reportes {
+    width: calc(100% - 50px);
+    left: 50px;
+    overflow: auto;
+    max-height: 750px;
+    right: 10px;
+  }
+
+  .headerReportes mat-card {
+    width: 95%;
+  }
+
+  #menu li {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
 }

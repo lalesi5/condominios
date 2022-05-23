@@ -23,16 +23,32 @@
   text-align: center;
 }
 
+.containerInfo mat-card img{
+  max-width: 150px;
+}
+
 .centrarBotones {
   margin-top: 10px;
   margin-left: 28%;
 }
 
 @media only screen and (max-width: 900px) {
+
+  .Condominios {
+    min-height: calc(100vh - 130px);
+  }
+
   .containerInfo mat-card {
-    width: 100%;
-    top: 20vh;
+    width: 95%;
+    top: 5vh;
     border-radius: 20px;
     padding-bottom: 25px;
+    left: 2.5%;
   }
+
+  .centrarBotones {
+    margin-top: 10px;
+    margin-left: 20%;
+  }
+
 }

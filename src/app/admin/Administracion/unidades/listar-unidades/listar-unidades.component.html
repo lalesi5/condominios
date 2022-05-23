@@ -11,9 +11,9 @@
             (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
             (pdfExportComplete)="pdfExportComplete()">
             <e-columns>
-              <e-column headerText="No" width='100'></e-column>
+              <e-column headerText="No" width='25'></e-column>
               <e-column field='unidad' headerText='Unidad' width=110> </e-column>
-              <e-column headerText='Ver' width=95 [commands]='commands'></e-column>
+              <e-column headerText='Ver' width='25' [commands]='commands'></e-column>
             </e-columns>
           </ejs-grid>
         </div>
