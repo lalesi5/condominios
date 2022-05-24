@@ -32,3 +32,18 @@
   padding: 5px;
   text-align: center;
 }
+
+@media only screen and (max-width: 900px) {
+
+  .selectorExtraordinarias {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

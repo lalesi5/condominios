@@ -8,19 +8,19 @@
         <div class="card">
           <div>
             <div class="cardName">Valor Mensualidad</div>
-            <div class="numbers">${{cuotaUnidad}}.00</div>
+            <div class="numbers">${{cuotaUnidad}}</div>
           </div>
         </div>
         <div class="card">
           <div>
             <div class="cardName">Areas Comunales</div>
-            <div class="numbers">${{sumaValorReservas}}.00</div>
+            <div class="numbers">${{sumaValorReservas}}</div>
           </div>
         </div>
         <div class="card">
           <div>
             <div class="cardName">Deuda Total</div>
-            <div class="numbers">${{cuotaUnidad + sumaValorReservas}}.00</div>
+            <div class="numbers">${{cuotaUnidad + sumaValorReservas}}</div>
           </div>
         </div>
       </div>
@@ -36,15 +36,15 @@
                   [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
             <e-column field='unidad' headerText='Unidad' width=100> </e-column>
-            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=100> </e-column>
-            <e-column field='numeroReciboPago' headerText='Número Recibo de Pago' width=100> </e-column>
-            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100> </e-column>
-            <e-column field='tiposPago' headerText='Tipo de Pago' width=100> </e-column>
-            <e-column field='cuotaUnidad' headerText='Cuota Unidad' width=80> </e-column>
-            <e-column field='sumaValorReservas' headerText='Valor de Reservas' width=80> </e-column>
-            <e-column field='valorDescuento' headerText='Descuento' width=80> </e-column>
-            <e-column field='valorTotal' headerText='Valor Total' width=80> </e-column>
-            <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
+            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160> </e-column>
+            <e-column field='numeroReciboPago' headerText='Número Recibo de Pago' width=190> </e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140> </e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140> </e-column>
+            <e-column field='cuotaUnidad' headerText='Cuota Unidad' width=140 format="C2"> </e-column>
+            <e-column field='sumaValorReservas' headerText='Valor de Reservas' width=140 format="C2"> </e-column>
+            <e-column field='valorDescuento' headerText='Descuento' width=140 format="C2"> </e-column>
+            <e-column field='valorTotal' headerText='Valor Total' width=140 format="C2"> </e-column>
+            <e-column headerText='Opciones' width=110 [commands]='commands'></e-column>
           </e-columns>
         </ejs-grid>`
       </div>
