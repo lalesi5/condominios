@@ -1,20 +1,20 @@
 <div class="comunicacion">
-    <app-topbar></app-topbar>
+  <app-topbar></app-topbar>
 
-    <!--Header Comunicacion-->
-    <div class="headerComunicacion">
-        <mat-card>
-            <nav id="menu">
-                <ul>
-                    <li>
-                        <a [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']" (click)="onGoAnunciosGenerales()">Anuncios Generales</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']" (click)="onGoComunicadosIndividuales()">Comunicados Individuales</a>
-                    </li>
-                </ul>
-            </nav>
-        </mat-card>
-    </div>
+  <!--Header Comunicacion-->
+  <div class="headerComunicacion">
+    <mat-card>
+      <nav id="menu">
+        <li>
+          <a [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']"
+             (click)="onGoAnunciosGenerales()">Anuncios Generales</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']"
+             (click)="onGoComunicadosIndividuales()">Comunicados Individuales</a>
+        </li>
+      </nav>
+    </mat-card>
+  </div>
 </div>
 <router-outlet></router-outlet>

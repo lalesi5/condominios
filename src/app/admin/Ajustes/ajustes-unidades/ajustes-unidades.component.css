@@ -12,6 +12,8 @@
   top: 17vh;
   border-radius: 20px;
   padding-bottom: 25px;
+  overflow: auto;
+  max-height: 800px;
 }
 
 .containerInfo mat-card h2 {
@@ -33,4 +35,19 @@
 .botonFinalizar {
   margin-top: 10px;
   margin-left: 44.8%;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .ajustesUnidades {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
 }

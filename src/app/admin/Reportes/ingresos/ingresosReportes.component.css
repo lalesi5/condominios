@@ -2,7 +2,7 @@
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
-  top: 165px;
+  top: 155px;
   min-height: 82vh;
 }
 
@@ -13,6 +13,8 @@
   top: 5vh;
   border-radius: 20px;
   padding-bottom: 25px;
+  overflow: auto;
+  max-height: 800px;
 }
 
 .containerInfo mat-card h2 {
@@ -73,4 +75,23 @@
 .cardsDatosEgresos .card:hover .numbers,
 .cardsDatosEgresos .card:hover .cardName {
   color: #fff;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .ingresos {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+  .cardsDatosEgresos {
+    grid-gap: 10px;
+  }
+
 }

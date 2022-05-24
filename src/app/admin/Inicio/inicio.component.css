@@ -254,3 +254,32 @@
 .recentCustomers table tr:hover td h4 span {
   color: #fff;
 }
+
+@media only screen and (max-width: 900px) {
+
+  .inicio {
+    width: calc(100% - 50px);
+    left: 50px;
+    overflow: auto;
+    max-height: 750px;
+    right: 10px;
+  }
+
+  .headerReseMenUni {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+
+  .headerReseMenUni .card {
+    width: 100%;
+    margin-bottom: 5px;
+    overflow: auto;
+    max-width: 350px;
+  }
+
+  .details {
+    grid-template-columns: repeat(1, 1fr);
+    overflow: auto;
+  }
+
+}

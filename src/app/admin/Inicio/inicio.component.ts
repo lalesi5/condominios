@@ -60,7 +60,7 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   getReservas() {
     this.subscription.add(
-      this._reservas.getReservas(this.idCondominio).subscribe(data => {
+      this._reservas.getReservasEnCondominio(this.idCondominio).subscribe(data => {
         this.reservas = [];
         data.forEach((element: any) => {
           this.reservas.push({
@@ -104,6 +104,10 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   onGoReservas() {
     this.router.navigate(['/admin/administracion/areasComunes/reservasPendientes']);
+  }
+
+  onGoReservasTotales() {
+    this.router.navigate(['/admin/administracion/areasComunes/reservasTotales']);
   }
 
   onGoMensajes() {

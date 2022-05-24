@@ -2,18 +2,20 @@
     position: absolute;
     width: calc(100% - 231px);
     left: 231px;
-    top: 150px;
+    top: 140px;
   }
-  
+
   .containerInfo mat-card {
     display: grid;
     width: 80%;
     left: 10%;
-    top: 7vh;
+    top: 5vh;
     border-radius: 20px;
     padding-bottom: 25px;
+    overflow: auto;
+    max-height: 800px;
   }
-  
+
   .containerInfo mat-card h2 {
     background-color: #287bff;
     color: #fff;
@@ -21,7 +23,7 @@
     padding: 5px;
     text-align: center;
   }
-  
+
   .containerInfo mat-card h3 {
     background-color: #2ba846;
     color: #fff;
@@ -29,15 +31,15 @@
     padding: 5px;
     text-align: center;
   }
-  
-  
+
+
   .headerAreaComunal {
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
   }
-  
+
   .headerAreaComunal .card {
     position: relative;
     align-items: center;
@@ -50,18 +52,18 @@
     background-color: rgba(0, 0, 0, 0.05);
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   }
-  
+
   .headerAreaComunal .card:hover {
     background: #287bff;
   }
-  
+
   .headerAreaComunal .card .cardName {
     font-size: 1.4em;
     margin-top: 10px;
     text-align: center;
     color: #287bff
   }
-  
+
   .headerAreaComunal .card .iconBx {
     color: #545151;
     background-color: white;
@@ -73,12 +75,12 @@
     overflow: hidden;
     cursor: pointer;
   }
-  
+
   .headerAreaComunal .card .iconBx mat-icon {
     font-size: 85px;
     margin-left: 3px;
   }
-  
+
   .headerAreaComunal .card .iconBx img {
     position: absolute;
     top: 0;
@@ -87,7 +89,7 @@
     height: 100%;
     object-fit: cover;
   }
-  
+
   .headerAreaComunal .card:hover .numbers,
   .headerAreaComunal .card:hover .cardName{
     color: #fff;
@@ -95,4 +97,18 @@
   .headerAreaComunal .card:hover .iconBx {
     color: #287bff
   }
-  
+
+@media only screen and (max-width: 900px) {
+
+  .ajustesAreasComunales {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

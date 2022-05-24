@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {CommonModule, HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {GridModule} from '@syncfusion/ej2-angular-grids';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {GridModule} from '@syncfusion/ej2-angular-grids';
     MatCardModule,
     CommonModule,
     ReactiveFormsModule,
-    GridModule
+    GridModule,
+    MatToolbarModule
   ],
   declarations: [
     AdminComponent,

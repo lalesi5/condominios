@@ -28,7 +28,7 @@ export class IndividualesComponent implements OnInit {
     private router: Router,
     private _unidadesService: UnidadesService
   ) {
-    this.pageSettings = { pageSize: 6 }
+    this.pageSettings = { pageSize: 4 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [{ title: 'Ver Mensaje', buttonOption: { iconCss: 'e-icons e-comments', cssClass: 'e-flat' } },
     { title: 'Nuevo', buttonOption: { iconCss: 'e-icons e-save-as', cssClass: 'e-flat' } }];

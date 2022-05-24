@@ -42,3 +42,18 @@
   padding-bottom: 25px;
   background-color: #eeebeb;
 }
+
+@media only screen and (max-width: 900px) {
+
+  .mensajesUsuario {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .headerMensajesUsuario mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

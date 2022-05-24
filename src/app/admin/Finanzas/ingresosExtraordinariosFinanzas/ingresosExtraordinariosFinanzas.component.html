@@ -14,13 +14,13 @@
                   (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
                   [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
-            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=100> </e-column>
-            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=100> </e-column>
-            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100> </e-column>
-            <e-column field='tiposPago' headerText='Tipo de Pago' width=100> </e-column>
-            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=100> </e-column>
-            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=80 format="C2"> </e-column>
-            <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
+            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=160> </e-column>
+            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=200> </e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140> </e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140> </e-column>
+            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=180> </e-column>
+            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=120 format="C2"> </e-column>
+            <e-column headerText='Opciones' width=110 [commands]='commands'></e-column>
           </e-columns>
         </ejs-grid>
       </div>
