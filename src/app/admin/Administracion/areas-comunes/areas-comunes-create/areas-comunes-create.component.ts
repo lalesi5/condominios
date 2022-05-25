@@ -29,7 +29,7 @@ export class AreasComunesCreateComponent implements OnInit {
     this.areaComunalForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      valorReserva: ['', Validators.required]
+      valorReserva: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]]
     });
 
     this.recoverData();
@@ -97,6 +97,10 @@ export class AreasComunesCreateComponent implements OnInit {
 
   get descripcion() {
     return this.areaComunalForm.get('descripcion');
+  }
+
+  get valorReserva() {
+    return this.areaComunalForm.get('valorReserva');
   }
 
 }
