@@ -13,19 +13,44 @@ export class ReservasService {
 
   agregarReserva(reserva: any): Promise<any> {
     const idReserva = this.firestore.createId();
-    const data = { idReserva, ...reserva}
+    const data = {idReserva, ...reserva}
     return this.firestore.collection('Reservas').doc(idReserva).set(data);
   }
 
-  getReserva(idAreaComun: string): Observable<any> {
-    return this.firestore.collection('Reservas', ref => ref.where('idAreaComunal','==', idAreaComun).orderBy('fechaReservaInicio', 'desc')).snapshotChanges();
+  getReservaId(id: string): Observable<any> {
+    return this.firestore.collection('Reservas').doc(id).snapshotChanges();
   }
 
-  getReservaIdUnit(idAreaComun: string, idUnit: string): Observable<any> {
-    return this.firestore.collection('Reservas', ref => ref.where('idAreaComunal','==', idAreaComun).where('idUnidad', '==', idUnit).orderBy('fechaReservaInicio', 'desc')).snapshotChanges();
+  getReservasEnCondominio(id: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id)).snapshotChanges();
   }
 
-  eliminarReserva(idReser: string): Promise<any>{
+  getReservasEnCondominioPendientes(id: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id).where('estadoReserva', '==', 'Pendiente')).snapshotChanges();
+  }
+
+  getReservasValorPago(idUnidad: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idUnidad', '==', idUnidad).where('pagoReserva', '==', 'Por Pagar').where('estadoReserva', '==', 'Aceptado')).snapshotChanges();
+  }
+
+  getReservasUsuario(id: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id)
+      .where('idUnidad', '==', idUnidad)
+      .where('estadoReserva', '!=', 'Rechazado')).snapshotChanges();
+  }
+
+  getReservasUsuarioPendientes(id: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id)
+      .where('idUnidad', '==', idUnidad)
+      .where('estadoReserva', '==', 'Pendiente')).snapshotChanges();
+  }
+
+  getReservasPendientes(id: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id)
+      .where('estadoReserva', '==', 'Pendiente')).snapshotChanges();
+  }
+
+  eliminarReserva(idReser: string): Promise<any> {
     return this.firestore.collection('Reservas').doc(idReser).delete();
   }
 
@@ -33,7 +58,7 @@ export class ReservasService {
     return this.firestore.collection('Reservas').doc(idReser).update(data);
   }
 
-  getReservas(idCondo:string): Observable<any> {
+  getReservas(idCondo: string): Observable<any> {
     return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', idCondo).where('estadoReserva', '==', 'Pendiente').orderBy('numeroUnidad', 'desc')).snapshotChanges();
   }
 

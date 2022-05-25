@@ -9,7 +9,9 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from "@angular/fire/compat";
+
 import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { environment } from '../environments/environment';
 
@@ -22,6 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
 //syncfusion library
 import { ExcelExportService, FilterService, GridAllModule, GridModule, GroupService, PageService, PdfExportService, SortService, ToolbarService } from '@syncfusion/ej2-angular-grids';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { AreasComunesRoutingModule } from './admin/Administracion/areas-comunes/areas-comunes-routing.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
 
@@ -43,7 +47,10 @@ import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
     MatButtonModule,
     GridModule,
     GridAllModule,
-    DateTimePickerModule
+    DateTimePickerModule,
+    AreasComunesRoutingModule,
+    MatButtonToggleModule,
+    AngularFireStorageModule
   ],
   declarations: [
     AppComponent
@@ -54,7 +61,7 @@ import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
     SortService,
     FilterService,
     GroupService,
-    PdfExportService, 
+    PdfExportService,
     ToolbarService,
     ExcelExportService
   ],

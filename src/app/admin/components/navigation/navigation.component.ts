@@ -9,52 +9,39 @@ import {NavigationExtras, Router} from '@angular/router';
 
 export class NavigationComponent implements OnInit {
 
-  condominio: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
   ) {
-    this.recoverData();
   }
 
   ngOnInit() {
   }
 
-  recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio;
-  }
-
   onGoInicio() {
-    this.router.navigate(['/admin/inicio'], this.NavigationExtras);
+    this.router.navigate(['/admin/inicio']);
   }
 
   onGoAdministracion() {
-    this.router.navigate(['/admin/administracion'], this.NavigationExtras);
+    this.router.navigate(['/admin/administracion']);
   }
 
   onGoComunicacion() {
-    this.router.navigate(['/admin/comunicacion'], this.NavigationExtras);
+    this.router.navigate(['/admin/comunicacion']);
   }
 
   onGoReportes() {
-    this.router.navigate(['/admin/reportes'], this.NavigationExtras);
+    this.router.navigate(['/admin/reportes']);
   }
 
   onGoFinanzas() {
-    this.router.navigate(['/admin/finanzas'], this.NavigationExtras);
+    this.router.navigate(['/admin/finanzas']);
   }
 
   onGoAjustes() {
-    this.router.navigate(['/admin/ajustes'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes']);
   }
 
   onLogout(): void {
-    this.router.navigate(['/selectCondominio'], this.NavigationExtras)
+    this.router.navigate(['/selectCondominio'])
   }
 }

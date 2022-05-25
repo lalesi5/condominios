@@ -9,36 +9,37 @@
       </h3>
       <form [formGroup]='unidadesForm' (ngSubmit)="onCreateUnidades()">
         <div class="form-group">
-          <label>Numero de la Unidad:</label>
-          <input type="number" class="form-control" formControlName="numeroUnidad"
-            [ngClass]="{ 'is-invalid': !unidadesForm.controls['numeroUnidad'].valid  && unidadesForm.controls['numeroUnidad'].touched }">
-          <div *ngIf=" unidadesForm.controls['numeroUnidad'].touched  && !unidadesForm.controls['numeroUnidad'].valid"
+          <label>Unidad:</label>
+          <input type="text" class="form-control" formControlName="unidad"
+            [ngClass]="{ 'is-invalid': !unidadesForm.controls['unidad'].valid  && unidadesForm.controls['unidad'].touched }">
+          <div *ngIf=" unidadesForm.controls['unidad'].touched  && !unidadesForm.controls['unidad'].valid"
             class="invalid-feedback">
             Campo requerido
           </div>
         </div>
         <div class="form-group">
-          <label>Tipo de Unidad: </label>
-          <select class="form-control" formControlName="tipoUnidad"
-            [ngClass]="{ 'is-invalid': !unidadesForm.controls['tipoUnidad'].valid  && unidadesForm.controls['tipoUnidad'].touched }">
-            <option value="Departamento" selected>Departamento</option>
-            <option value="Casa">Casa</option>
-          </select>
-          <div *ngIf=" unidadesForm.controls['tipoUnidad'].touched  && !unidadesForm.controls['tipoUnidad'].valid"
-            class="invalid-feedback">
-            Campo requerido
+          <label>Cuota: </label>
+          <input type="number" class="form-control" formControlName="cuotaUnidad"
+            [ngClass]="{ 'is-invalid': !unidadesForm.controls['cuotaUnidad'].valid && unidadesForm.controls['cuotaUnidad'].touched }">
+          <div *ngIf="form['cuotaUnidad'].errors && form['cuotaUnidad'].touched" class="invalid-feedback">
+            <div *ngIf="form['cuotaUnidad'].errors['required']">
+              Campo requerido
+            </div>
+            <div *ngIf="form['cuotaUnidad'].errors['pattern']">
+              El campo solo debe contener números, números positivos con dos decimales.
+            </div>
           </div>
         </div>
         <div class="form-group">
           <label>Area Unidad (m2): </label>
           <input type="number" class="form-control" formControlName="areaUnidad"
-            [ngClass]="{ 'is-invalid': !unidadesForm.controls['areaUnidad'].valid && unidadesForm.controls['areaUnidad'].touched}">
-          <div *ngIf="form['areaUnidad'].errors" class="invalid-feedback">
+            [ngClass]="{ 'is-invalid': !unidadesForm.controls['areaUnidad'].valid && unidadesForm.controls['areaUnidad'].touched }">
+          <div *ngIf="form['areaUnidad'].errors && form['areaUnidad'].touched" class="invalid-feedback">
             <div *ngIf="form['areaUnidad'].errors['required']">
               Campo requerido
             </div>
             <div *ngIf="form['areaUnidad'].errors['pattern']">
-              El campo solo debe contener números!
+              El campo solo debe contener números, números positivos con dos decimales.
             </div>
           </div>
         </div>
@@ -58,7 +59,7 @@
             [readonly]="true">
         </div>
         <div class="form-group">
-          <label>Celular del Residente: </label>
+          <label>Teléfono del Residente: </label>
           <input type="text" class="form-control" formControlName="telefonoResidente" [(ngModel)]="usuario.phone"
             [readonly]="true">
         </div>
@@ -87,7 +88,7 @@
           <label>Email Propietario: </label>
           <input type="text" class="form-control" formControlName="emailPropietario"
             [ngClass]="{ 'is-invalid': !unidadesForm.controls['emailPropietario'].valid && unidadesForm.controls['emailPropietario'].touched }">
-          <div *ngIf="form['emailPropietario'].errors" class="invalid-feedback">
+          <div *ngIf="form['emailPropietario'].errors && form['emailPropietario'].touched" class="invalid-feedback">
             <div *ngIf="form['emailPropietario'].errors['required']">
               Campo requerido
             </div>
@@ -97,18 +98,19 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Celular del Propietario: </label>
+          <label>Teléfono del Propietario: </label>
           <input type="number" class="form-control" formControlName="telefonoPropietario"
             [ngClass]="{ 'is-invalid': !unidadesForm.controls['telefonoPropietario'].valid  && unidadesForm.controls['telefonoPropietario'].touched }">
           <div *ngIf="form['telefonoPropietario'].errors" class="invalid-feedback">
             <div *ngIf="form['telefonoPropietario'].errors['pattern']">
-              El campo solo debe contener números!
+              La longitud del número no es válida
             </div>
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="centrarBotones">
-          <button type="submit" class="btn btn-success mr-2 btn-responsive" [disabled]="unidadesForm.invalid">Guardar</button>
+          <button type="submit" class="btn btn-success mr-2 btn-responsive"
+            [disabled]="unidadesForm.invalid">Guardar</button>
           <button class="btn btn-primary ml-2 btn-responsive" (click)="onBacktoList()">Volver</button>
         </div>
       </form>

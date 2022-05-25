@@ -1,56 +1,51 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
 
 
 @Component({
-    selector: 'app-ajustes',
-    templateUrl: './ajustes.component.html',
-    styleUrls: ['./ajustes.component.css']
+  selector: 'app-ajustes',
+  templateUrl: './ajustes.component.html',
+  styleUrls: ['./ajustes.component.css']
 })
 
-export class AjustesComponent implements OnInit{
+export class AjustesComponent implements OnInit {
 
-    idAministrador: string = '';
-    condominio: any[] = [];
+  constructor(
+    private router: Router,
+  ) {
+  }
 
-    NavigationExtras: NavigationExtras = {
-        state: {}
-    }
+  ngOnInit() {
 
-    constructor(
-        private router: Router,
-    ) {
-      this.recoverData();
-    }
+  }
 
-    ngOnInit(){
+  onGoAjustesAdmin() {
+    this.router.navigate(['/admin/ajustes/ajustesAdmin']);
+  }
 
-    }
+  onGoCuentas() {
+    this.router.navigate(['/admin/ajustes/cuentas']);
+  }
 
-    recoverData(){
-      const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-      this.idAministrador = navigations.idAdministrador;
-      this.condominio = navigations;
-      this.NavigationExtras.state = this.condominio;
-    }
+  onGoPagos() {
+    this.router.navigate(['/admin/ajustes/pagos']);
+  }
 
-    onGoAjustesAdmin(){
-        this.router.navigate(['/admin/ajustes/ajustesAdmin'], this.NavigationExtras);
-    }
+  onGoDescuentos() {
+    this.router.navigate(['/admin/ajustes/descuentos']);
+  }
 
-    onGoAjustesCondominio(){
-        this.router.navigate(['/admin/ajustes/ajustesCondominio'], this.NavigationExtras);
-    }
+  onGoAjustesCondominio() {
+    this.router.navigate(['/admin/ajustes/ajustesCondominio']);
+  }
 
-    onGoAjustesAreasComunales(){
-        this.router.navigate(['/admin/ajustes/ajustesAreasComunales'], this.NavigationExtras);
-    }
+  onGoAjustesajustesUnidades() {
+    this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser']);
+  }
 
-    onGoAjustesajustesUnidades(){
-        this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser'], this.NavigationExtras);
-    }
+  onGoAjustesUsuarios() {
+    this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
+  }
 
-    onGoAjustesUsuarios(){
-        this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
-    }
+
 }

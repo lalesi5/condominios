@@ -1,0 +1,22 @@
+<br>
+<h3>Reservas Totales</h3>
+<div>
+    <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Reserva</button>
+</div>
+<div class="control-section">
+    <ejs-grid #grid id='Grid' [dataSource]="reservas" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+        [pageSettings]="pageSettings" (commandClick)="commandClick($event)" [toolbar]="toolbarOptions"
+        (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+        [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+        <e-columns>
+            <e-column field='fechaReservaInicio' headerText='Fecha Inicio' width=160> </e-column>
+            <e-column field='fechaReservaFin' headerText='Fecha Fin' width=160> </e-column>
+            <e-column field='unidad' headerText='Unidad' width=100> </e-column>
+            <e-column field='nombreResidente' headerText='Nombre' width=100> </e-column>
+            <e-column field='apellidoResidente' headerText='Apellido' width=100> </e-column>
+            <e-column field='nombreAreaComunal' headerText='Área' width=200> </e-column>
+            <e-column field='estadoReserva' headerText='Estado' width=110> </e-column>
+            <e-column headerText='Opciones' width=130 [commands]='commands'></e-column>
+        </e-columns>
+    </ejs-grid>`
+</div>

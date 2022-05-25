@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {UnidadesService} from "../../../services/unidades.service";
+import {ReservasService} from "../../../services/reservas.service";
 
 @Component({
   selector: 'app-unidades',
@@ -15,20 +16,22 @@ export class UnidadesComponent implements OnInit {
   idUnidad: string = '';
   unidad: any[] = [];
   unidades: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
+  reservas: any[] = [];
+  cuotaUnidad: number = 0;
+  sumaValorReservas: number = 0;
 
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
+    private _reservasService: ReservasService,
   ) {
     this.recoverData();
   }
 
   ngOnInit() {
     this.listarUnidad();
+    this.getValoresReservas();
+    this.getUnidadCuotaReserva();
   }
 
   ngOnDestroy():void {
@@ -36,14 +39,11 @@ export class UnidadesComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idUnidad = navigations.idUnidad;
-    this.unidad = navigations;
-    this.NavigationExtras.state = this.unidad;
+    this.idUnidad = <string> sessionStorage.getItem('idUnidad');
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/administracion/listarUnidades'], this.NavigationExtras);
+    this.router.navigate(['/admin/administracion/listarUnidades']);
   }
 
   listarUnidad() {
@@ -57,6 +57,39 @@ export class UnidadesComponent implements OnInit {
         })
       })
     );
+  }
+
+  getValoresReservas() {
+    this.subscription.add(
+      this._reservasService.getReservasValorPago(this.idUnidad).subscribe(data => {
+        this.reservas = [];
+        data.forEach((element: any) => {
+          this.reservas.push({
+            ...element.payload.doc.data()
+          })
+        })
+        //suma todos los valores de reservas que pertenecen a esa unidad y que tienen pagoReserva = Por Pagar
+        this.reservas.map(data => {
+          this.sumaValorReservas += data.valorReserva;
+        })
+      })
+    )
+  }
+
+  getUnidadCuotaReserva() {
+    this.subscription.add(
+      this._unidadesService.getUnidadesById(this.idUnidad).subscribe(data => {
+        this.unidad = [];
+        data.forEach((element: any) => {
+          this.unidad.push({
+            ...element.payload.doc.data()
+          })
+        })
+        this.unidad.map(data => {
+          this.cuotaUnidad = data.cuotaUnidad;
+        })
+      })
+    )
   }
 
 }

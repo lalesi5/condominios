@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -13,7 +13,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class AjustesUsuariosCreateComponent implements OnInit {
 
-  idAministrador: string = '';
+  idAdministrador: string = '';
   idCondominio: string = ''
   usuarios: any[] = [];
   condominio: any[] = [];
@@ -22,10 +22,6 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   loading = false;
   private isEmail = /\S+@\S+\.\S+/;
   hide: boolean = true;
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -43,18 +39,18 @@ export class AjustesUsuariosCreateComponent implements OnInit {
       password: ['', [Validators.required,
       Validators.minLength(6),
       Validators.maxLength(15)]],
-      phone: ['', [Validators.pattern(/^\d+$/)]],
+      phone: ['', [Validators.pattern(/^.{9,13}$/)]],
       address: [''],
     })
-
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.recoverData();
   }
 
   ngOnInit(): void {
+  }
+
+  recoverData() {
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   agregarUsuario() {
@@ -80,7 +76,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           fechaCreacion: new Date(),
           fechaActualizacion: new Date(),
           rol: 'Usuario',
-          idAdministrador: this.idAministrador,
+          idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           address: direccion
         }
@@ -103,8 +99,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
                 positionClass: 'toast-bottom-right'
               });
               this.loading = false;
-              this.navigationExtras.state = this.condominio;
-              this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
+              this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
 
             }).catch(error => {
               console.log(error);
@@ -117,7 +112,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.navigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
   }
 
   //Mostrar y ocular contraseña

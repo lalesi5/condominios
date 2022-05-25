@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/services/dialog.service';
-import { MensajesService } from 'src/app/services/mensajes.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
+import {DialogService} from 'src/app/services/dialog.service';
+import {MensajesService} from 'src/app/services/mensajes.service';
 
 @Component({
   selector: 'app-editar-mensaje',
@@ -15,25 +15,17 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
 
-  idAdministrador: string = '';
   idCondominio: string = '';
   idUsuario: string = '';
+  idMensaje: string = '';
   mensajes: any[] = [];
-  condominio: any[] = [];
-
-  id: string | null;
 
   loading = false;
 
   mensajesForm: FormGroup;
 
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
-    private aRoute: ActivatedRoute,
     private _mensajesService: MensajesService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
@@ -44,7 +36,6 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
       descripcionMensaje: [''],
     })
 
-    this.id = aRoute.snapshot.paramMap.get('id');
 
     this.recoverData();
   }
@@ -58,19 +49,16 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAdministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUsuario = navigations.idUsuario;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idMensaje = <string>sessionStorage.getItem('idMensaje');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   getDatosMensaje() {
-    if (this.id !== null) {
+    if (this.idMensaje !== null) {
       this.loading = true;
       this.subscription.add(
-        this._mensajesService.getMensaje(this.id).subscribe(data => {
+        this._mensajesService.getMensaje(this.idMensaje).subscribe(data => {
           this.loading = false;
           this.mensajesForm.setValue({
             tituloMensaje: data.payload.data()['tituloMensaje'],
@@ -84,7 +72,7 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
   onEditMensaje() {
     const titulo = String(this.mensajesForm.value.tituloMensaje).charAt(0).toLocaleUpperCase() + String(this.mensajesForm.value.tituloMensaje).slice(1);
     var date = new Date();
-    const idUMensaje = this.aRoute.snapshot.paramMap.get('id');
+    const idUMensaje = this.idMensaje;
 
     this._dialogService.confirmDialog({
       title: 'Modificar mensaje',
@@ -101,14 +89,13 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
         }
         //Crea el documento
         this.loading = true;
-        this._mensajesService.updateMensajes(idUMensaje!,mensaje).then(() => {
+        this._mensajesService.updateMensajes(idUMensaje!, mensaje).then(() => {
 
           this.toastr.success('El la información fue modificada con exito', 'Informción modificada', {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          this.navigationExtras.state = this.condominio;
-          this.router.navigate(['/admin/comunicacion/mensajeUsuario'], this.navigationExtras);
+          this.router.navigate(['/admin/comunicacion/mensajeUsuario']);
 
         }).catch(error => {
           console.log(error);
@@ -119,7 +106,7 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList() {
-    this.router.navigate(['/admin/comunicacion/mensajeUsuario'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion/mensajeUsuario']);
   }
 
 }

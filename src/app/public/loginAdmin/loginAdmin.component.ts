@@ -26,10 +26,6 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
     password: ['', Validators.required],
   });
 
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(private authSvc: AuthService,
     private fstore: FirestoreService,
     private fb: FormBuilder,
@@ -79,11 +75,13 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.fstore.getDoc<AdminI>(path, idAdministrador).subscribe(res => {
         this.rolUser = res?.rol;
-        this.NavigationExtras.state = res;
         if (this.rolUser === 'Administrador') {
-          this.router.navigate(['/selectCondominio'], this.NavigationExtras);
+          sessionStorage.setItem('idAdministrador', <string>res?.idAdministrador);
+          this.router.navigate(['/selectCondominio']);
         } else if (this.rolUser === 'Usuario') {
-          this.router.navigate(['/selectUnidad'], this.NavigationExtras);
+          // @ts-ignore
+          sessionStorage.setItem('idUsuario', <string>res?.idUsuario);
+          this.router.navigate(['/selectUnidad']);
         } else if (this.rolUser === 'admin-user') {
 
         }

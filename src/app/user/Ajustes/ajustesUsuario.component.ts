@@ -14,11 +14,6 @@ export class AjustesUsuarioComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   administrador: any[] = [];
   idUsuario: string = '';
-  unidad: any[] = [];
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -36,10 +31,7 @@ export class AjustesUsuarioComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idUsuario = navigations.idUsuario;
-    this.unidad = navigations;
-    this.navigationExtras.state = this.unidad;
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   getAdministrador() {
@@ -56,9 +48,8 @@ export class AjustesUsuarioComponent implements OnInit, OnDestroy {
     );
   }
 
-  onEdit(item: any) {
-    this.navigationExtras.state = item;
-    this.router.navigate(['/user/editarUsuario', item.idUsuario], this.navigationExtras);
+  onEdit() {
+    this.router.navigate(['/user/editarUsuario']);
   }
 
 }

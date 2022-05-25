@@ -1,60 +1,28 @@
 <div class="ingresosExtraordinarios">
-  <!--Formulario Ingresos Pagos-->
 
-  <div class="containerFormulario">
+  <div class="containerInfo">
     <mat-card>
-      <form class="formularioAnuncio">
-        <mat-form-field appearance="fill">
-          <mat-label>Fecha</mat-label>
-          <mat-select multiple>
-            <mat-option>Unidad 1</mat-option>
-            <mat-option>Unidad 2</mat-option>
-            <mat-option>Unidad 3</mat-option>
-            <mat-option>Unidad 4</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Cantidad</mat-label>
-          <mat-select multiple>
-            <mat-option>Unidad 1</mat-option>
-            <mat-option>Unidad 2</mat-option>
-            <mat-option>Unidad 3</mat-option>
-            <mat-option>Unidad 4</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Cuenta</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Metodo de Pago</mat-label>
-          <mat-select multiple>
-            <mat-option>Unidad 1</mat-option>
-            <mat-option>Unidad 2</mat-option>
-            <mat-option>Unidad 3</mat-option>
-            <mat-option>Unidad 4</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Categoria</mat-label>
-          <mat-select multiple>
-            <mat-option>Unidad 1</mat-option>
-            <mat-option>Unidad 2</mat-option>
-            <mat-option>Unidad 3</mat-option>
-            <mat-option>Unidad 4</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Concepto</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <mat-form-field class="textAreaAnuncio" appearance="fill">
-          <mat-label>Anuncio</mat-label>
-          <textarea matInput placeholder="Ingrese su anuncio"></textarea>
-        </mat-form-field>
-      </form>
-      <div id="botonPago">
-        <a class="btn" type="submit">Pagar</a>
+      <h2>Registrar Ingresos Extraordinarios</h2>
+      <h3>Listado Ingresos Extraordinarios</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Pago</button>
+      </div>
+      <br>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions" (commandClick)="commandClick($event)"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=160> </e-column>
+            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=200> </e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140> </e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140> </e-column>
+            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=180> </e-column>
+            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=120 format="C2"> </e-column>
+            <e-column headerText='Opciones' width=110 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>
       </div>
     </mat-card>
   </div>

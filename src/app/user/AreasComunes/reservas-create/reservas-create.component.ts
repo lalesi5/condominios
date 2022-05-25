@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {NavigationExtras, Router} from "@angular/router";
-import {ReservasService} from "../../../services/reservas.service";
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ReservasService } from "../../../services/reservas.service";
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-reservas-create',
@@ -18,18 +18,15 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   idCondominio: string = '';
   idAreaComunal: string = '';
   idUnidad: string = '';
+
   nombreAreaComunal: string = '';
+  unidad: string = '';
   nombreResidente: string = '';
   apellidoResidente: string = '';
-  numeroUnidad: string = '';
+
   loading = false;
-  areaComunal: any[] = [];
 
   reservaForm: FormGroup;
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -43,6 +40,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
       fechaReservaFin: ['', Validators.required],
       detalleReserva: ['', Validators.required],
     });
+
     this.recoverData();
   }
 
@@ -54,20 +52,17 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAdministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUnidad = navigations.idUnidad;
-    this.numeroUnidad = navigations.numeroUnidad;
-    this.nombreAreaComunal = navigations.nombre;
-    this.nombreResidente = navigations.nombreResidente;
-    this.apellidoResidente = navigations.apellidoResidente;
-    this.areaComunal = navigations;
-    this.idAreaComunal = navigations.idAreaComunal;
-    this.NavigationExtras.state = this.areaComunal;
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idAreaComunal = <string>sessionStorage.getItem('idAreaComunal');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.nombreAreaComunal = <string>sessionStorage.getItem('nombreAreaComunal');
+    this.unidad = <string>sessionStorage.getItem('unidad');
+    this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
+    this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
   }
 
-  onCreateReserva(){
+  onCreateReserva() {
     const descripcionArea = String(this.reservaForm.value.detalleReserva).charAt(0).toLocaleUpperCase() + String(this.reservaForm.value.detalleReserva).slice(1);
     const date = this.reservaForm.value.fechaReservaInicio;
     const date2 = this.reservaForm.value.fechaReservaFin;
@@ -77,7 +72,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
       message: '¿Está seguro de agregar la reserva?',
       confirmText: 'Si',
       cancelText: 'No',
-    }).subscribe( res => {
+    }).subscribe(res => {
       if (res) {
 
         const reserva: any = {
@@ -85,7 +80,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
           fechaReservaFin: date2.toLocaleString(),
           estadoReserva: 'Pendiente',
           idUnidad: this.idUnidad,
-          numeroUnidad: this.numeroUnidad,
+          unidad: this.unidad,
           nombreResidente: this.nombreResidente,
           apellidoResidente: this.apellidoResidente,
           idAdministrador: this.idAdministrador,
@@ -98,10 +93,10 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
         this.loading = true;
         this._reservaService.agregarReserva(reserva).then(() => {
           this.toastr.success('La reserva fue creada con exito', 'Reserva registrada', {
-            positionClass: 'toast-bottom-rigth'
+            positionClass: 'toast-top-rigth'
           });
           this.loading = false;
-          this.router.navigate(['/user/reservas'], this.NavigationExtras);
+          this.router.navigate(['/user/areasComunes/listarAreas']);
         }).catch(error => {
           console.log(error);
         })
@@ -110,7 +105,6 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList(): void {
-    this.router.navigate(['user/reservas'], this.NavigationExtras);
+    this.router.navigate(['/user/areasComunes/listarAreas']);
   }
-
 }

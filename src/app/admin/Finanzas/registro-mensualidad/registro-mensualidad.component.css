@@ -1,0 +1,84 @@
+.selectorMensualidades {
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 165px;
+  min-height: 82vh;
+}
+
+.cardsBalance{
+  display: grid;
+  grid-template-columns: repeat(3,1fr) ;
+  grid-gap: 5px;
+  width: 100%;
+  left: 20%;
+  top: 5vh;
+}
+
+.cardsBalance .card{
+  position: relative;
+  align-items: center;
+  padding: 5px;
+  border-radius: 7px;
+  display: flex;
+  box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+}
+
+.cardsBalance .card .numbers{
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  position: relative;
+  font-weight: 580;
+  font-size: 1.5em;
+  color: #287bff;
+}
+
+.cardsBalance .card .cardName{
+  color: #999;
+  font-size: 1.7em;
+  text-align: center;
+}
+
+
+.containerInfo mat-card {
+  display: grid;
+  width: 80%;
+  left: 10%;
+  top: 5vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
+  overflow: auto;
+  max-height: 800px;
+}
+
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .selectorMensualidades {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

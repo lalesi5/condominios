@@ -1,18 +1,20 @@
 .ajustesCondominioEdit {
-    position: absolute;
-    width: calc(100% - 231px);
-    left: 231px;
-    top: 150px;
-  }
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 110px;
+}
 
 .containerInfo mat-card {
-    display: grid;
-    width: 50%;
-    left: 25%;
-    top: 17vh;
-    border-radius: 20px;
-    padding-bottom: 25px;
-  }
+  display: grid;
+  width: 50%;
+  left: 25%;
+  top: 17vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
+  overflow: auto;
+  max-height: 800px;
+}
 
 .containerInfo mat-card h2 {
   background-color: #287bff;
@@ -38,4 +40,21 @@
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
+.containerInfo mat-card img{
+  max-width: 150px;
+}
 
+@media only screen and (max-width: 900px) {
+
+  .ajustesCondominioEdit {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

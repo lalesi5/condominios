@@ -2,30 +2,24 @@
   <div class="containerInfo">
     <mat-card>
       <h2>Areas Comunales</h2>
-      <h3>Datos del Area Comunal</h3>
+      <h3>Datos de las Areas Comunales</h3>
       <div>
-        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Area Comunal</button>
       </div>
-      <h5 style="margin-top: 30px;" *ngIf='areasComunales.length == 0'>No hay datos para mostrar</h5>
-      <table *ngIf="areasComunales.length > 0" class="table table-striped">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Opciones</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let area of areasComunales">
-          <tr>
-            <td>{{area.nombre}}</td>
-            <td>{{area.descripcion}}</td>
-            <td>
-              <mat-icon (click)="onGoEdit(area)" class="btn-info">edit</mat-icon>
-              <mat-icon (click)="onDelete(area.id)" class="btn-danger">delete</mat-icon>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="areasComunales" [allowSorting]="true" [allowPaging]="true"
+          gridLines="Both" [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)"
+          (commandClick)="commandClick($event)" [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)"
+          [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+          (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column headerText=" No" width='50'> </e-column>
+            <e-column field='nombre' headerText='Nombre' width=100> </e-column>
+            <e-column field='descripcion' headerText='Descripcion' width=100> </e-column>
+            <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>`
+      </div>
     </mat-card>
   </div>
 </div>

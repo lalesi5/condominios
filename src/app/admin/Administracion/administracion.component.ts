@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-administracion',
@@ -9,38 +10,24 @@ import {NavigationExtras, Router} from "@angular/router";
 
 export class AdministracionComponent implements OnInit {
 
-  condominio: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router
   ) {
-    this.recoverData();
   }
 
-  ngOnInit(){}
-
-  recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.condominio = navigations;
+  ngOnInit() {
   }
 
   onGoAjustesUnidades() {
-    this.NavigationExtras.state = this.condominio;
-    this.router.navigate(['/admin/administracion/listarUnidades'], this.NavigationExtras);
+    this.router.navigate(['/admin/administracion/listarUnidades']);
   }
 
   onGoAjustesUsuarios() {
-    this.NavigationExtras.state = this.condominio;
-    this.router.navigate(['/admin/administracion/usuarios'], this.NavigationExtras);
+    this.router.navigate(['/admin/administracion/usuarios']);
   }
 
   onGoAjustesAreasComunales() {
-    this.NavigationExtras.state = this.condominio;
-    this.router.navigate(['/admin/administracion/areasComunes'], this.NavigationExtras);
+    this.router.navigate(['/admin/administracion/areasComunes']);
   }
 
 

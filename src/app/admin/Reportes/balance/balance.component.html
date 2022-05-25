@@ -1,118 +1,93 @@
 <div class="balance">
 
-  <div class="containerCardsBalance">
+  <div class="containerInfo">
     <mat-card>
-      <div class="cardsBalance">
-        <div class="card">
-          <div>
-            <div class="cardName">Saldo Neto Disponible</div>
-            <div class="numbers">$600.00</div>
+      <h2>Balance</h2>
+      <h3>Datos Balance</h3>
+      <div class="centrar">
+        <div class="cardsDatosEgresos">
+          <div class="card">
+            <div>
+              <div class="cardName">Total Ingresos</div>
+              <div class="numbers">$ {{total}}</div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div>
-            <div class="cardName">Total Ingresos</div>
-            <div class="numbers">$1500.00</div>
+          <div class="card">
+            <div>
+              <div class="cardName">Total Egresos</div>
+              <div class="numbers">$ {{sumaEgresos}}</div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div>
-            <div class="cardName">Total Egresos</div>
-            <div class="numbers">$900.00</div>
+          <div class="card">
+            <div>
+              <div class="cardName">Total</div>
+              <div class="numbers">$ {{total-sumaEgresos}}</div>
+            </div>
           </div>
         </div>
       </div>
+      <br>
+      <h3>Ingresos</h3>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both">
+          <e-columns>
+            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160></e-column>
+            <e-column field='numeroReciboPago' headerText='Número Recibo de Egreso' width=200></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140></e-column>
+            <e-column field='observaciones' headerText='Detalle de Pago' width=160></e-column>
+            <e-column field='valorTotal' headerText='Valor Total' width=110 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorTotal" format="C2">
+                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+        <ejs-grid #grid id='Grid2' [dataSource]="pagosExtraordinarios" [allowPaging]="true" gridLines="Both">
+          <e-columns>
+            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=160></e-column>
+            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=200></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140></e-column>
+            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=160></e-column>
+            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=110 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorPagoExtraordinario" format="C2">
+                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+        <h3>Egresos</h3>
+        <ejs-grid #grid id='Grid3' [dataSource]="egresos" [allowPaging]="true" gridLines="Both">
+          <e-columns>
+            <e-column field='fechaEgreso' headerText='Fecha de Pago' width=160></e-column>
+            <e-column field='numeroReciboEgreso' headerText='Número Recibo de Egreso' width=200></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140></e-column>
+            <e-column field='observacionesEgreso' headerText='Detalle de Pago' width=160></e-column>
+            <e-column field='valorEgreso' headerText='Valor Total' width=110 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorEgreso" format="C2">
+                  <ng-template let-egresos>{{egresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+      </div>
     </mat-card>
-  </div>
-
-  <div class="tablaBalance">
-    <mat-card>
-      <!--tabla Ingresos-->
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Ingresos</th>
-            <th>Cantidad</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Mantenimientos</td>
-            <td>9000</td>
-          </tr>
-          <tr>
-            <td>Areas Comunes</td>
-            <td>9000</td>
-          </tr>
-          <tr>
-            <td>Otros ingresos</td>
-            <td>5000</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr class="bg-success">
-            <td>Total</td>
-            <td>$1500</td>
-          </tr>
-        </tfoot>
-      </table>
-    </mat-card>
-
-    <mat-card>
-      <!--Tabla Egresos-->
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Egresos</th>
-            <th>Cantidad</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Agua Potable</td>
-            <td>900</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr class="bg-danger">
-            <td>Total</td>
-            <td>$900</td>
-          </tr>
-        </tfoot>
-      </table>
-    </mat-card>
-
-    
-    <mat-card>
-        <!--Tabla Saldo Neto-->
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Resumen</th>
-              <th>Cantidad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-                <td>Saldo</td>
-                <td>0</td>
-              </tr>
-            <tr>
-              <td>Total Ingresos</td>
-              <td>1500</td>
-            </tr>
-            <tr>
-                <td>Total Egresos</td>
-                <td>1500</td>
-              </tr>
-          </tbody>
-          <tfoot>
-            <tr class="bg-info">
-              <td>Saldo Neto Dispobible</td>
-              <td>$600</td>
-            </tr>
-          </tfoot>
-        </table>
-      </mat-card>
   </div>
 </div>

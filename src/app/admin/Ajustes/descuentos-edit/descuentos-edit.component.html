@@ -1,0 +1,41 @@
+<div class="descuentosEdit">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Descuentos</h2>
+      <h3>Editar Descuento
+        <div *ngIf="loading" class="spinner-border float-right" role="status">
+          <span class="sr-only">Procesando...</span>
+        </div>
+      </h3>
+      <form [formGroup]='descuentosForm' (ngSubmit)="onEditCuenta()">
+        <div class="form-group">
+          <label>Nombre del Descuento</label>
+          <input type="text" class="form-control" formControlName="nombreDescuento"
+            [ngClass]="{ 'is-invalid': !descuentosForm.controls['nombreDescuento'].valid  && descuentosForm.controls['nombreDescuento'].touched }">
+          <div
+            *ngIf=" descuentosForm.controls['nombreDescuento'].touched  && !descuentosForm.controls['nombreDescuento'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Valor del Descuento</label>
+          <input type="number" class="form-control" formControlName="valorDescuento"
+            [ngClass]="{ 'is-invalid': !descuentosForm.controls['valorDescuento'].valid  && descuentosForm.controls['valorDescuento'].touched }">
+          <div *ngIf="form['valorDescuento'].errors" class="invalid-feedback">
+            <div *ngIf="form['valorDescuento'].errors['required']">
+              Campo requerido
+            </div>
+            <div *ngIf="form['valorDescuento'].errors['pattern']">
+              Solo números positivos
+            </div>
+          </div>
+        </div>
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-success mr-2" [disabled]="descuentosForm.invalid">Guardar</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

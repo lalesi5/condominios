@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-headerInside></app-headerInside>
 
 <div class="Condominios">
   <div class="containerInfo">
@@ -10,7 +10,7 @@
             <div class="cardName" (click)="onGoAdmin(condominio)">{{condominio.nombreCondominio}}</div>
           </div>
           <div class="iconBx">
-            <img src="../../../../assets/logoCondominio.jpg" (click)="onGoAdmin(condominio)" alt="userImage">
+            <img src="{{condominio.imgCondominio}}" (click)="onGoAdmin(condominio)" alt="userImage">
           </div>
           <button type="button" class="btn btn-danger" (click)="onDelete(condominio)">Eliminar Condominio</button>
         </div>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="botonFinalizar">
-        <button type="button" class="btn btn-info" (click)="onLogout()">Finalizar Sesion</button>
+        <button  type="button" class="btn btn-info" (click)="onLogout()">Finalizar Sesion</button>
       </div>
     </mat-card>
   </div>

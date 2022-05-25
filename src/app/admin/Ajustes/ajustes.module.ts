@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { SharedModule } from '../../core/shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { AjustesAdminComponent } from "./ajustesAdmin/ajustesAdmin.component";
 import { AjustesCondominioComponent } from './ajustesCondominio/ajustesCondominio.component';
 
@@ -23,7 +23,16 @@ import { AjustesUsuariosCreateComponent } from './ajustes-usuarios-create/ajuste
 import { MatCommonModule } from "@angular/material/core";
 import { MatInputModule } from "@angular/material/input";
 import { AjustesUsuariosEditComponent } from './ajustes-usuarios-edit/ajustes-usuarios-edit.component';
-import { AjustesUnidadesSelectUnidadComponent } from './ajustes-unidades-select-unidad/ajustes-unidades-select-unidad.component';
+import { GridModule } from "@syncfusion/ej2-angular-grids";
+import { CuentasComponent } from './cuentas/cuentas.component';
+import { CuentasCreateComponent } from './cuentas-create/cuentas-create.component';
+import { CuentasEditComponent } from './cuentas-edit/cuentas-edit.component';
+import { PagosComponent } from './pagos/pagos.component';
+import { PagosCreateComponent } from './pagos-create/pagos-create.component';
+import { PagosEditComponent } from './pagos-edit/pagos-edit.component';
+import { DescuentosComponent } from './descuentos/descuentos.component';
+import { DescuentosCreateComponent } from './descuentos-create/descuentos-create.component';
+import { DescuentosEditComponent } from './descuentos-edit/descuentos-edit.component';
 
 @NgModule({
 
@@ -37,7 +46,8 @@ import { AjustesUnidadesSelectUnidadComponent } from './ajustes-unidades-select-
         MatSelectModule,
         ReactiveFormsModule,
         MatCommonModule,
-        MatInputModule
+        MatInputModule,
+        GridModule,
     ],
 
     declarations: [
@@ -55,7 +65,15 @@ import { AjustesUnidadesSelectUnidadComponent } from './ajustes-unidades-select-
         AjustesUsuariosCreateComponent,
         AjustesUsuariosEditComponent,
         AjustesUnidadesSelectUserComponent,
-        AjustesUnidadesSelectUnidadComponent,
+        CuentasComponent,
+        CuentasCreateComponent,
+        CuentasEditComponent,
+        PagosComponent,
+        PagosCreateComponent,
+        PagosEditComponent,
+        DescuentosComponent,
+        DescuentosCreateComponent,
+        DescuentosEditComponent,
     ],
 
     exports: [
@@ -64,7 +82,7 @@ import { AjustesUnidadesSelectUnidadComponent } from './ajustes-unidades-select-
         MatSelectModule,
         ReactiveFormsModule
     ],
-    providers: []
+    providers: [CurrencyPipe]
 
 })
 

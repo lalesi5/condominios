@@ -1,0 +1,21 @@
+<br>
+<h3>Lista de Áreas Comunales</h3>
+<div>
+  <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Área Común</button>
+</div>
+<div class="control-section">
+  <ejs-grid #grid id='Grid' [dataSource]="areasComunales" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+            [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
+            [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+            (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+            (pdfExportComplete)="pdfExportComplete()">
+    <e-columns>
+      <e-column headerText=" No" width='70'></e-column>
+      <e-column field='nombre' headerText='Nombre' width=140></e-column>
+      <e-column field='descripcion' headerText='Descripcion' width=140></e-column>
+      <e-column field='valorReserva' headerText='Valor por Reserva' width=120></e-column>
+      <e-column headerText='Opciones' width=110 [commands]='commands'></e-column>
+    </e-columns>
+  </ejs-grid>
+  `
+</div>

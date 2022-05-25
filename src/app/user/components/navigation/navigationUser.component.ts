@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigationUser',
@@ -9,48 +9,34 @@ import {NavigationExtras, Router} from "@angular/router";
 
 export class NavigationUserComponent implements OnInit {
 
-  unidad: any[] = [];
-
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router
-  ) {
-    this.recoverData();
-  }
+  ) {}
 
   ngOnInit() {
   }
 
-  recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.unidad = navigations;
-    this.NavigationExtras.state = this.unidad;
-  }
-
   onGoInicio() {
-    this.router.navigate(['/user/home'], this.NavigationExtras);
+    this.router.navigate(['/user/home']);
   }
 
   onGoComunicacion() {
-    this.router.navigate(['/user/comunicacion'], this.NavigationExtras);
+    this.router.navigate(['/user/comunicacion']);
   }
 
   onGoAreasComunales() {
-    this.router.navigate(['/user/areasComunes'], this.NavigationExtras);
+    this.router.navigate(['/user/areasComunes']);
   }
 
   onGoFinanzas() {
-    this.router.navigate(['/user/finanzas'], this.NavigationExtras);
+    this.router.navigate(['/user/finanzas']);
   }
 
   onGoAjustes() {
-    this.router.navigate(['/user/ajustes'], this.NavigationExtras);
+    this.router.navigate(['/user/ajustes']);
   }
 
   onLogout(): void {
-    this.router.navigate(['/selectUnidad'], this.NavigationExtras)
+    this.router.navigate(['/selectUnidad'])
   }
 }

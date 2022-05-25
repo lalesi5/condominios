@@ -1,77 +1,45 @@
-<div class="ingresoReportes">
+<div class="egresos">
 
-  <div class="containerTitulo">
+  <div class="containerInfo">
     <mat-card>
+      <h2>Egresos</h2>
+      <h3>Listado de Egresos</h3>
       <div class="cardsDatosEgresos">
         <div class="card">
           <div>
             <div class="cardName">Total Egresos</div>
-            <div class="numbers">$2800.00</div>
+            <div class="numbers">$ {{sumaEgresos}}</div>
           </div>
         </div>
       </div>
+      <br>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="egresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaEgreso' headerText='Fecha de Pago' width=160></e-column>
+            <e-column field='numeroReciboEgreso' headerText='Número Recibo de Egreso' width=120></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140></e-column>
+            <e-column field='observacionesEgreso' headerText='Detalle de Pago' width=160></e-column>
+            <e-column field='valorEgreso' headerText='Valor Total' width=110 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorEgreso" format="C2">
+                  <ng-template let-egresos>{{egresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+      </div>
     </mat-card>
   </div>
-
-  <div class="tablaEgresosReportes">
-    <mat-card>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Descripcion</th>
-            <th>Cuenta</th>
-            <th>Categoria</th>
-            <th>Proveedor</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2021-09-06</td>
-            <td>Pago Mensual Agua Potable</td>
-            <td>Banco</td>
-            <td>Agua Potable</td>
-            <td>Empresa Electrica Quito</td>
-            <td>$1700</td>
-          </tr>
-          <tr>
-            <td>2021-09-06</td>
-            <td>Pago Mensual Agua Potable</td>
-            <td>Banco</td>
-            <td>Agua Potable</td>
-            <td>Empresa Electrica Quito</td>
-            <td>$1700</td>
-          </tr>
-          <tr>
-            <td>2021-09-06</td>
-            <td>Pago Mensual Agua Potable</td>
-            <td>Banco</td>
-            <td>Agua Potable</td>
-            <td>Empresa Electrica Quito</td>
-            <td>$1700</td>
-          </tr>
-          <tr>
-            <td>2021-09-06</td>
-            <td>Pago Mensual Agua Potable</td>
-            <td>Banco</td>
-            <td>Agua Potable</td>
-            <td>Empresa Electrica Quito</td>
-            <td>$1700</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total</td>
-            <td>$2800</td>
-          </tr>
-        </tfoot>
-      </table>
-    </mat-card>
-  </div>
-
 </div>
+
+

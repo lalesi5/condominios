@@ -1,12 +1,10 @@
 .topbar{
 
-    height: 60px;
+    height: 62px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5px;
     width: 100%;
-    padding-right: 30px;
     padding-left: 10px;
 }
 
@@ -31,7 +29,6 @@
 
 .btn{
     position: relative;
-    margin-top: 8px;
     margin-right: 8px;
     padding: 5px 5px;
     background: #287bff;

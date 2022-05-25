@@ -6,10 +6,11 @@ import { EgresosReportesComponent } from './egresos/egresosReportes.component';
 import { IngresosReportesComponent } from './ingresos/ingresosReportes.component';
 
 
-import {MatCardModule} from '@angular/material/card'; 
-import {MatIconModule} from '@angular/material/icon'; 
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';  
+import {MatSelectModule} from '@angular/material/select';
+import {GridModule} from "@syncfusion/ej2-angular-grids";
 
 @NgModule({
 
@@ -18,7 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
         MatCardModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        GridModule
     ],
     declarations: [
         BalanceComponent,

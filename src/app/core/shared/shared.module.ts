@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { MatCommonModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import {HeaderInsideComponent} from "./components/headerInside/headerInside.component";
 
 @NgModule({
 
@@ -24,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     NotFoundComponent,
     HeaderComponent,
+    HeaderInsideComponent,
     FooterComponent,
     MatConfirmDialogComponent
   ],
@@ -33,7 +35,8 @@ import { MatButtonModule } from '@angular/material/button';
     NotFoundComponent,
     HeaderComponent,
     MatIconModule,
-    FooterComponent
+    FooterComponent,
+    HeaderInsideComponent
   ],
   providers: []
 })

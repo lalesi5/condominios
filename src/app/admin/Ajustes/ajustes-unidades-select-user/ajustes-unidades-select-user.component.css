@@ -12,6 +12,8 @@
   top: 5vh;
   border-radius: 20px;
   padding-bottom: 25px;
+  overflow: auto;
+  max-height: 800px;
 }
 
 .containerInfo mat-card h2 {
@@ -95,5 +97,28 @@
   color: #287bff
 }
 
+@media only screen and (max-width: 900px) {
+
+  .Usuarios {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+  .headerUser .card .iconBx {
+    min-width: 60px;
+    height: 60px;
+  }
+
+  .headerUser .card {
+    width: 80%;
+  }
+
+}
 
 

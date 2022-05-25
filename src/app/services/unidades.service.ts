@@ -35,7 +35,7 @@ export class UnidadesService {
   }
 
   getAllUnidadesOrdenadas(idCondo: string) {
-    return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo).orderBy("numeroUnidad"))
+    return this.firestore.collection('Unidades', ref => ref.where('idCondominio', '==', idCondo))
       .snapshotChanges();
   }
 

@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { AdminService } from '../../../services/admin.service';
-import { Router, NavigationExtras } from '@angular/router';
-import { Subscription } from "rxjs";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {AdminService} from '../../../services/admin.service';
+import {Router} from '@angular/router';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-ajustesAdmin',
@@ -16,13 +16,6 @@ export class AjustesAdminComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   administrador: any[] = [];
   idAministrador: string = '';
-  condominio: any[] = [];
-
-  /*Variables de retorno*/
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -40,10 +33,7 @@ export class AjustesAdminComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
   }
 
   getAdministrador() {
@@ -55,14 +45,13 @@ export class AjustesAdminComponent implements OnInit, OnDestroy {
             id: element.payload.doc.id,
             ...element.payload.doc.data()
           })
-        })        
+        })
       })
     );
   }
 
-  onEdit(item: any){
-    this.navigationExtras.state = item;
-    this.router.navigate(['/admin/ajustes/ajustesAdminEdit', item.idAdministrador], this.navigationExtras);
+  onEdit() {
+    this.router.navigate(['/admin/ajustes/ajustesAdminEdit']);
   }
 
 }

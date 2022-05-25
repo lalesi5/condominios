@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
-import { Observable } from "rxjs";
+import {Injectable} from "@angular/core";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class MensajesService {
 
   guardarMensaje(mensaje: any) {
     const idMensaje = this.firestore.createId();
-    const data = { idMensaje, ...mensaje }
+    const data = {idMensaje, ...mensaje}
     return this.firestore.collection('Mensajes').doc(idMensaje).set(data);
   }
 

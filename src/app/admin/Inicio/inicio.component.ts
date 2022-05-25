@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { UnidadesService } from '../../services/unidades.service';
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {NavigationExtras, Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {UnidadesService} from '../../services/unidades.service';
 import {ReservasService} from "../../services/reservas.service";
 import {AnunciosGeneralesService} from "../../services/anunciosGenerales.service";
 
@@ -14,18 +14,11 @@ import {AnunciosGeneralesService} from "../../services/anunciosGenerales.service
 export class InicioComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
-  idAministrador: string = '';
   idCondominio: string = ';'
   unidades: any[] = [];
   reservas: any[] = [];
-  condominio: any[] = [];
+  reservasPendientes: any[] = [];
   anuncios: any[] = [];
-
-  navigationExtras: NavigationExtras = {
-    state: {
-
-    }
-  }
 
   constructor(
     private router: Router,
@@ -33,23 +26,22 @@ export class InicioComponent implements OnInit, OnDestroy {
     private _reservas: ReservasService,
     private _anuncios: AnunciosGeneralesService
   ) {
-
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state =  this.condominio;
-
+    this.recoverData();
   }
 
   ngOnInit(): void {
     this.getUnidades();
     this.getReservas();
     this.getAnuncios();
+    this.getReservasPendientes();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  recoverData() {
+    this.idCondominio = <string> sessionStorage.getItem('idCondominio');
   }
 
   getUnidades() {
@@ -66,11 +58,11 @@ export class InicioComponent implements OnInit, OnDestroy {
     );
   }
 
-  getReservas(){
+  getReservas() {
     this.subscription.add(
-      this._reservas.getReservas(this.idCondominio).subscribe(data => {
+      this._reservas.getReservasEnCondominio(this.idCondominio).subscribe(data => {
         this.reservas = [];
-        data.forEach((element:any) => {
+        data.forEach((element: any) => {
           this.reservas.push({
             ...element.payload.doc.data()
           })
@@ -79,11 +71,25 @@ export class InicioComponent implements OnInit, OnDestroy {
     )
   }
 
-  getAnuncios(){
+  getReservasPendientes() {
+    this.subscription.add(
+      this._reservas.getReservasPendientes(this.idCondominio).subscribe(data => {
+        this.reservasPendientes = [];
+        data.forEach((element: any) => {
+          this.reservasPendientes.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    )
+  }
+
+
+  getAnuncios() {
     this.subscription.add(
       this._anuncios.getAnunciosGenerales(this.idCondominio).subscribe(data => {
         this.anuncios = [];
-        data.forEach((element:any) => {
+        data.forEach((element: any) => {
           this.anuncios.push({
             ...element.payload.doc.data()
           })
@@ -92,15 +98,19 @@ export class InicioComponent implements OnInit, OnDestroy {
     )
   }
 
-  onGoUnidades(){
-    this.router.navigate(['/admin/administracion'], this.navigationExtras);
+  onGoUnidades() {
+    this.router.navigate(['/admin/administracion/listarUnidades']);
   }
 
-  onGoReservas(){
-    this.router.navigate(['/admin/administracion/areasComunes'], this.navigationExtras);
+  onGoReservas() {
+    this.router.navigate(['/admin/administracion/areasComunes/reservasPendientes']);
   }
 
-  onGoMensajes(){
-    this.router.navigate(['/admin/comunicacion/generales'], this.navigationExtras);
+  onGoReservasTotales() {
+    this.router.navigate(['/admin/administracion/areasComunes/reservasTotales']);
+  }
+
+  onGoMensajes() {
+    this.router.navigate(['/admin/comunicacion/generales']);
   }
 }

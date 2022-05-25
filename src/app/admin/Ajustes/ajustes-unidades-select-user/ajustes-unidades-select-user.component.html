@@ -3,16 +3,18 @@
     <mat-card>
       <h2>Unidades</h2>
       <h3>Seleccione el usuario que desee agregar a una unidad</h3>
-      <h5 style="margin-top: 30px;" *ngIf='usuarios.length == 0'>No hay datos para mostrar</h5>
+      <h5 style="margin-top: 30px;" *ngIf='usuarios.length == 0'>Debe crear primero un usuario</h5>
       <div class="headerUser">
-        <div class="card" *ngFor="let usuario of usuarios">
+        <div class="card" *ngFor="let usuario of usuarios" (click)="onGoSelectUnidad(usuario)">
           <div>
           </div>
           <div class="iconBx">
             <img src="../../../../assets/user.png"  alt="userImage" (click)="onGoSelectUnidad(usuario)">
           </div>
           <div>
-            <div class="cardName" (click)="onGoSelectUnidad(usuario)">{{usuario.name}}</div>
+
+            <div class="cardName" (click)="onGoSelectUnidad(usuario)">{{usuario.name}} {{usuario.last_name}}</div>
+
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
-import { AnunciosGeneralesService } from '../../../services/anunciosGenerales.service';
-import { DialogService } from "../../../services/dialog.service";
-import { ToastrService } from "ngx-toastr";
-import { Subscription } from "rxjs";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {AnunciosGeneralesService} from '../../../services/anunciosGenerales.service';
+import {DialogService} from "../../../services/dialog.service";
+import {ToastrService} from "ngx-toastr";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-generales',
@@ -16,11 +16,6 @@ export class GeneralesComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   idCondominio: string = ''
   anunciosGenerales: any[] = [];
-  condominio: any[] = [];
-
-  navigationExtras: NavigationExtras = {
-    state: {}
-  }
 
   constructor(
     private router: Router,
@@ -40,10 +35,7 @@ export class GeneralesComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idCondominio = navigations.idCondominio;
-    this.condominio = navigations;
-    this.navigationExtras.state = this.condominio;
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
   getAnunciosGenerales() {
@@ -61,7 +53,7 @@ export class GeneralesComponent implements OnInit, OnDestroy {
   }
 
   onGoCreate() {
-    this.router.navigate(['/admin/comunicacion/nuevoAnuncio'], this.navigationExtras);
+    this.router.navigate(['/admin/comunicacion/nuevoAnuncio']);
   }
 
   onDelete(id: string) {
@@ -85,7 +77,7 @@ export class GeneralesComponent implements OnInit, OnDestroy {
   }
 
   onGoEdit(item: any) {
-    this.navigationExtras.state = item;
-    this.router.navigate(['/admin/comunicacion/editarAnuncio', item.idAnuncioGeneral], this.navigationExtras);
+    sessionStorage.setItem('idAnuncioGeneral', <string>item.idAnuncioGeneral);
+    this.router.navigate(['/admin/comunicacion/editarAnuncio']);
   }
 }

@@ -2,24 +2,24 @@
   <div class="containerInfo">
     <mat-card *ngFor="let data of unidades">
       <h2>Unidades</h2>
-      <h3>Unidad Numero: {{data.numeroUnidad}}</h3>
+      <h3>{{data.unidad}}</h3>
       <div class="cardsDatosUnidades">
         <div class="card">
           <div>
-            <div class="cardName">Mantenimiento</div>
-            <div class="numbers">$450.00</div>
+            <div class="cardName">Valor Mensualidad</div>
+            <div class="numbers">${{cuotaUnidad}}</div>
           </div>
         </div>
         <div class="card">
           <div>
             <div class="cardName">Areas Comunes</div>
-            <div class="numbers">$0.00</div>
+            <div class="numbers">${{sumaValorReservas}}</div>
           </div>
         </div>
         <div class="card">
           <div>
-            <div class="cardName">Adeudo Total</div>
-            <div class="numbers">$450.00</div>
+            <div class="cardName">Deuda Total</div>
+            <div class="numbers">${{cuotaUnidad + sumaValorReservas}}</div>
           </div>
         </div>
       </div>

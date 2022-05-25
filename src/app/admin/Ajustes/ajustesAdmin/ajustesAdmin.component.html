@@ -1,13 +1,13 @@
 <div class="ajustesAdmin">
   <div class="containerInfo">
     <mat-card>
-      <h2>Cuenta</h2>
+      <h2>Perfil Usuario</h2>
       <h3>Datos del administrador</h3>
       <div class="card" *ngFor="let admin of administrador">
         <div><b>Nombre: </b>{{admin.name}}</div>
         <div><b>Apellido: </b>{{admin.last_name}}</div>
         <div><b>Email: </b>{{admin.email}}</div>
-        <div><b>Celular: </b>{{admin.phone}}</div>
+        <div><b>Teléfono: </b>{{admin.phone}}</div>
         <div><b>Dirección: </b>{{admin.address}}</div>
       </div>
       <div class="notes " *ngFor="let admin of administrador">
@@ -17,7 +17,7 @@
         de cualquier tipo de acuerdo de confidencialidad para con sus clientes o miembros de su comunidad.
       </div>
       <div>
-        <button class="btn btn-primary mt-2" (click)="onEdit(condominio)">Editar</button>
+        <button class="btn btn-primary mt-2" (click)="onEdit()">Editar</button>
       </div>
     </mat-card>
   </div>

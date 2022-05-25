@@ -1,0 +1,120 @@
+<div class="egresos">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Registrar Pago Egresos</h2>
+      <h3>Ingreso de Datos Egresos
+        <div *ngIf="loading" class="spinner-border float-right" role="status">
+          <span class="sr-only">Procesando...</span>
+        </div>
+      </h3>
+
+      <form [formGroup]='egresosForm' (ngSubmit)="onCreateEgreso()">
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <label>Número de Recibo: </label>
+              <input type="text" class="form-control" formControlName="numeroReciboEgreso"
+                [ngClass]="{ 'is-invalid': !egresosForm.controls['numeroReciboEgreso'].valid && egresosForm.controls['numeroReciboEgreso'].touched }">
+              <div *ngIf="form['numeroReciboEgreso'].errors" class="invalid-feedback">
+                <div *ngIf="form['numeroReciboEgreso'].errors['pattern']">
+                  La longitud del número no es válida
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <label>Valor: </label>
+              <input type="number" class="form-control" formControlName="valorEgreso"
+                [ngClass]="{ 'is-invalid': !egresosForm.controls['valorEgreso'].valid && egresosForm.controls['valorEgreso'].touched }">
+              <div *ngIf="form['valorEgreso'].errors" class="invalid-feedback">
+                <div *ngIf="form['valorEgreso'].errors['required']">
+                  Campo requerido
+                </div>
+                <div *ngIf="form['valorEgreso'].errors['pattern']">
+                  El campo solo debe contener números, números positivos con dos decimales.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <form [formGroup]='egresosForm'>
+              <div class="form-group">
+                <label>Seleccione el tipo de Pago</label>
+                <select class="form-control" formControlName="idTiposPago" (ngModelChange)="onTipoPagoChanged($event)"
+                  [ngClass]="{ 'is-invalid': !egresosForm.controls['idTiposPago'].valid  && egresosForm.controls['idTiposPago'].touched }">
+                  <option *ngFor="let tipoPago of tiposPago" [ngValue]="tipoPago.idTipoPago" selected>
+                    {{tipoPago.tiposPago}}
+                  </option>
+                </select>
+                <div *ngIf=" egresosForm.controls['idTiposPago'].touched  && !egresosForm.controls['idTiposPago'].valid"
+                  class="invalid-feedback">
+                  Campo requerido
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col">
+            <form [formGroup]='tiposPagoForm'>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    <label>Detalle Tipo Pago: </label>
+                    <input type="text" class="form-control" formControlName="detalleTiposPago" [readonly]="true">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <form [formGroup]='egresosForm'>
+              <div class="form-group">
+                <label>Seleccione el nombre de la Cuenta</label>
+                <select class="form-control" formControlName="idCuenta" (ngModelChange)="onCuentaPagoChanged($event)"
+                  [ngClass]="{ 'is-invalid': !egresosForm.controls['idCuenta'].valid  && egresosForm.controls['idCuenta'].touched }">
+                  <option *ngFor="let cuentaPago of cuentasPago" [ngValue]="cuentaPago.idCuenta" selected>
+                    {{cuentaPago.nombreCuenta}}
+                  </option>
+                </select>
+                <div *ngIf=" egresosForm.controls['idCuenta'].touched  && !egresosForm.controls['idCuenta'].valid"
+                  class="invalid-feedback">
+                  Campo requerido
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col">
+            <form [formGroup]='cuentasPagoForm'>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    <label>Tipo de Cuenta: </label>
+                    <input type="text" class="form-control" formControlName="tipoCuenta" [readonly]="true">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <form [formGroup]='egresosForm'>
+              <div class="form-group">
+                <label>Concepto de Pago: </label>
+                <textarea type="text" class="form-control" formControlName="observacionesEgreso">
+                </textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="centrarBotones">
+          <button type="submit" class="btn btn-success mr-2" [disabled]="egresosForm.invalid">Registrar Egreso</button>
+          <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { ToastrService } from 'ngx-toastr';
-import { DialogService } from 'src/app/services/dialog.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Subscription} from "rxjs";
+import {ToastrService} from 'ngx-toastr';
+import {DialogService} from 'src/app/services/dialog.service';
+import {UsuariosService} from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-ajustes-usuarios-edit',
@@ -17,20 +17,13 @@ export class AjustesUsuariosEditComponent implements OnInit {
   idAministrador: string = '';
   idCondominio: string = '';
   idUsuario: string = '';
-  usuarios: any[] = [];
-  condominio: any[] = [];
-  id: string | null;
+
   editUsuarioForm: FormGroup;
   loading = false;
   private isEmail = /\S+@\S+\.\S+/;
 
-  NavigationExtras: NavigationExtras = {
-    state: {}
-  }
-
   constructor(
     private router: Router,
-    private aRoute: ActivatedRoute,
     private _dialogService: DialogService,
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -40,11 +33,9 @@ export class AjustesUsuariosEditComponent implements OnInit {
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
-      phone: ['', [Validators.pattern(/^\d+$/)]],
+      phone: ['', [Validators.pattern(/^.{9,13}$/)]],
       address: [''],
     })
-
-    this.id = aRoute.snapshot.paramMap.get('id');
 
     this.recoverData();
   }
@@ -54,19 +45,16 @@ export class AjustesUsuariosEditComponent implements OnInit {
   }
 
   recoverData() {
-    const navigations: any = this.router.getCurrentNavigation()?.extras.state;
-    this.idAministrador = navigations.idAdministrador;
-    this.idCondominio = navigations.idCondominio;
-    this.idUsuario = navigations.idUsuario;
-    this.condominio = navigations;
-    this.NavigationExtras.state = this.condominio;
+    this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   getDatosUsuario() {
-    if (this.id !== null) {
+    if (this.idUsuario !== null) {
       this.loading = true;
       this.subscription.add(
-        this._usuarioService.getUsuario(this.id).subscribe(data => {
+        this._usuarioService.getUsuario(this.idUsuario).subscribe(data => {
           this.loading = false;
           this.editUsuarioForm.setValue({
             name: data.payload.data()['name'],
@@ -86,7 +74,6 @@ export class AjustesUsuariosEditComponent implements OnInit {
     const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const direccion = String(this.editUsuarioForm.value.address).charAt(0).toLocaleUpperCase() + String(this.editUsuarioForm.value.address).slice(1);
 
-    const idUser = this.aRoute.snapshot.paramMap.get('id');
 
     const usuario: any = {
       name: nombre,
@@ -105,21 +92,20 @@ export class AjustesUsuariosEditComponent implements OnInit {
     }).subscribe(res => {
       if (res) {
         this.loading = true;
-        this._usuarioService.actualizarUsuario(idUser!, usuario).then(() => {
+        this._usuarioService.actualizarUsuario(this.idUsuario!, usuario).then(() => {
           this.loading = false;
           this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
             positionClass: 'toast-bottom-right'
           });
         })
         this.loading = false;
-        this.NavigationExtras.state = this.condominio;
-        this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+        this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
       }
     });
   }
 
   onBacktoList(): void {
-    this.router.navigate(['/admin/ajustes/ajustesUsuarios'], this.NavigationExtras);
+    this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
   }
 
   get form(): { [key: string]: AbstractControl; } {

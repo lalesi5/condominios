@@ -1,14 +1,31 @@
-<div class="areasComunales">
-  <app-topbarUser></app-topbarUser>
-  <div class="areas">
-    <div class="containerInfo">
-      <mat-card>
-        <h2>Areas Comunes</h2>
-        <h3>Reservas</h3>
-        <div>
-          <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
-        </div>
-        <h5 style="margin-top: 30px;" *ngIf='reservas.length == 0'>No hay datos para mostrar</h5>
+<div class="reservas">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Areas Comunes</h2>
+
+      <h3>Reservas</h3>
+
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Reserva</button>
+      </div>
+
+      <div class="control-section">
+        <ejs-grid #grid id='Grid'>
+            <e-columns>
+                <e-column field='fechaReservaInicio' headerText='Fecha Inicio' width=100> </e-column>
+                <e-column field='fechaReservaFin' headerText='Fecha Fin' width=100> </e-column>
+                <e-column field='unidad' headerText='Unidad' width=100> </e-column>
+                <e-column field='nombreResidente' headerText='Nombre' width=100> </e-column>
+                <e-column field='apellidoResidente' headerText='Apellido' width=100> </e-column>
+                <e-column field='nombreAreaComunal' headerText='Área' width=100> </e-column>
+                <e-column field='estadoReserva' headerText='Estado' width=80> </e-column>
+                <e-column headerText='Opciones' width=95></e-column>
+            </e-columns>
+        </ejs-grid>`
+    </div>
+
+
+      <!--<h5 style="margin-top: 30px;" *ngIf='reservas.length == 0'>No hay datos para mostrar</h5>
         <table *ngIf="reservas.length > 0" class="table table-striped">
           <thead>
           <tr>
@@ -28,12 +45,10 @@
             <td>{{reserva.detalleReserva}}</td>
           </tr>
           </tbody>
-        </table>
-        <div class="centrarBotones">
-          <button class="btn btn-primary" (click)="onBacktoList()">Volver</button>
-        </div>
-      </mat-card>
-    </div>
+        </table>-->
+      <div class="centrarBotones">
+        <button class="btn btn-primary" (click)="onBacktoList()">Volver</button>
+      </div>
+    </mat-card>
   </div>
-
 </div>
