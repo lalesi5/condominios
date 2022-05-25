@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from "rxjs";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { ReservasService } from "../../../services/reservas.service";
-import { DialogService } from "../../../services/dialog.service";
-import { ToastrService } from "ngx-toastr";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from "rxjs";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {ReservasService} from "../../../services/reservas.service";
+import {DialogService} from "../../../services/dialog.service";
+import {ToastrService} from "ngx-toastr";
+import {AreasComunalesService} from "../../../services/areasComunales.service";
 
 @Component({
   selector: 'app-reservas-create',
@@ -18,6 +19,9 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   idCondominio: string = '';
   idAreaComunal: string = '';
   idUnidad: string = '';
+  pagoReserva: string = '';
+  valorReserva: string = '';
+  area: any[] = [];
 
   nombreAreaComunal: string = '';
   unidad: string = '';
@@ -33,7 +37,8 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     private _reservaService: ReservasService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _areaComunalService: AreasComunalesService
   ) {
     this.reservaForm = this.fb.group({
       fechaReservaInicio: ['', Validators.required],
@@ -45,6 +50,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.ongetArea();
   }
 
   ngOnDestroy(): void {
@@ -60,6 +66,18 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     this.unidad = <string>sessionStorage.getItem('unidad');
     this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
     this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');
+    this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.pagoReserva = 'Por Pagar';
+    console.log(sessionStorage);
+  }
+
+  ongetArea() {
+    this.subscription.add(
+      this._areaComunalService.getArea(this.idAreaComunal).subscribe(data => {
+        this.valorReserva = data.payload.data()['valorReserva'];
+      })
+    )
   }
 
   onCreateReserva() {
@@ -87,7 +105,10 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
           idCondominio: this.idCondominio,
           idAreaComunal: this.idAreaComunal,
           nombreAreaComunal: this.nombreAreaComunal,
-          detalleReserva: descripcionArea
+          detalleReserva: descripcionArea,
+          pagoReserva: this.pagoReserva,
+          valorReserva: this.valorReserva,
+
         }
 
         this.loading = true;
