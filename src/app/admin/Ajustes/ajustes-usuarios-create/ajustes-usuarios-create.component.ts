@@ -39,7 +39,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
       password: ['', [Validators.required,
       Validators.minLength(6),
       Validators.maxLength(15)]],
-      phone: ['', [Validators.pattern(/^\d+$/)]],
+      phone: ['', [Validators.pattern(/^.{9,13}$/)]],
       address: [''],
     })
     this.recoverData();

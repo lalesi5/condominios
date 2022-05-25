@@ -26,7 +26,7 @@
               Campo requerido
             </div>
             <div *ngIf="form['cuotaUnidad'].errors['pattern']">
-              El campo solo debe contener números!
+              El campo solo debe contener números, números positivos con dos decimales.
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
               Campo requerido
             </div>
             <div *ngIf="form['areaUnidad'].errors['pattern']">
-              El campo solo debe contener números!
+              El campo solo debe contener números, números positivos con dos decimales.
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@
             [ngClass]="{ 'is-invalid': !unidadesForm.controls['telefonoPropietario'].valid  && unidadesForm.controls['telefonoPropietario'].touched }">
           <div *ngIf="form['telefonoPropietario'].errors" class="invalid-feedback">
             <div *ngIf="form['telefonoPropietario'].errors['pattern']">
-              El campo solo debe contener números!
+              La longitud del número no es válida
             </div>
           </div>
         </div>

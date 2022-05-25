@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -32,7 +32,7 @@ export class AreasComunesEditComponent implements OnInit {
     this.areaComunalForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      valorReserva: ['', Validators.required]
+      valorReserva: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]]
     })
 
     this.recoverData();
@@ -102,4 +102,11 @@ export class AreasComunesEditComponent implements OnInit {
     this.router.navigate(['/admin/administracion/areasComunes/listarAreasComunes']);
   }
 
+  get form(): { [key: string]: AbstractControl; } {
+    return this.areaComunalForm.controls;
+  }
+
+  get valorReserva() {
+    return this.areaComunalForm.get('valorReserva');
+  }
 }

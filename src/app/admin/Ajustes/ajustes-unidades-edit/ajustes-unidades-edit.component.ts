@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,16 +38,18 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
     private _dialogService: DialogService,
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private _usuarioService: UsuariosService
+    private _usuarioService: UsuariosService,
+    private curencyPipe: CurrencyPipe
   ) {
 
     this.unidadesForm = this.fb.group({
       unidad: ['', Validators.required],
-      cuotaUnidad: ['', Validators.required],
-      areaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      //cuotaUnidad: ['', [Validators.required, Validators.pattern(/^[0-9]\d{0,2}(\.\d{3})*(,\d+)?$/)]],
+      cuotaUnidad: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
+      areaUnidad: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       nombrePropietario: ['', Validators.required],
       apellidoPropietario: ['', Validators.required],
-      telefonoPropietario: ['', [Validators.pattern(/^\d+$/)]],
+      telefonoPropietario: ['', [Validators.pattern(/^.{9,13}$/)]],
       emailPropietario: ['', [Validators.required, Validators.pattern(this.isEmail)]],
     });
 
@@ -64,7 +67,6 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getDatosUnidade();
-
   }
 
   ngOnDestroy(): void {

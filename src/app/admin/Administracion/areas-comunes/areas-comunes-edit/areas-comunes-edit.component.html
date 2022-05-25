@@ -23,15 +23,19 @@
             Campo requerido
         </div>
     </div>
-  <div class="form-group">
-    <label>Valor de Reserva</label>
-    <input type="number" class="form-control" formControlName="valorReserva"
-           [ngClass]="{ 'is-invalid': !areaComunalForm.controls['valorReserva'].valid  && areaComunalForm.controls['valorReserva'].touched }">
-    <div *ngIf=" areaComunalForm.controls['valorReserva'].touched  && !areaComunalForm.controls['valorReserva'].valid"
-         class="invalid-feedback">
-      Campo requerido
+    <div class="form-group">
+        <label>Valor de Reserva</label>
+        <input type="number" class="form-control" formControlName="valorReserva"
+            [ngClass]="{ 'is-invalid': !areaComunalForm.controls['valorReserva'].valid  && areaComunalForm.controls['valorReserva'].touched }">
+        <div *ngIf="form['valorReserva'].errors" class="invalid-feedback">
+            <div *ngIf="form['valorReserva'].errors['required']">
+                Campo requerido
+            </div>
+            <div *ngIf="form['valorReserva'].errors['pattern']">
+                El campo solo debe contener números, números positivos con dos decimales.
+            </div>
+        </div>
     </div>
-  </div>
     <div class="btn-group">
         <button type="submit" class="btn btn-primary mr-2" [disabled]="areaComunalForm.invalid">Guardar</button>
         <button class="btn btn-success" (click)="onBacktoList()">Volver</button>

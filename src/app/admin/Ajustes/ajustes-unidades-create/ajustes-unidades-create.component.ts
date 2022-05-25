@@ -36,15 +36,15 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
 
     this.unidadesForm = this.fb.group({
       unidad: ['', Validators.required],
-      areaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      cuotaUnidad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      cuotaUnidad: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
+      areaUnidad: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       nombreResidente: [''],
       apellidoResidente: [''],
       telefonoResidente: [''],
       emailResidente: [''],
       nombrePropietario: ['', Validators.required],
       apellidoPropietario: ['', Validators.required],
-      telefonoPropietario: ['', [Validators.pattern(/^\d+$/)]],
+      telefonoPropietario: ['', [Validators.pattern(/^.{9,13}$/)]],
       emailPropietario: ['', [Validators.required, Validators.pattern(this.isEmail)]],
     });
 
