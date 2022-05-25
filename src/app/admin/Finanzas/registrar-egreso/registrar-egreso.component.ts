@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CuentasService} from "../../../services/cuentas.service";
 import {TiposPagoService} from "../../../services/tiposPago.service";
@@ -40,10 +40,10 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
     this.egresosForm = this.fb.group({
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
-      numeroReciboEgreso: ['', Validators.required],
-      fechaEgreso: [this.date.toLocaleString, Validators.required],
+      numeroReciboEgreso: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      fechaEgreso: [this.date.toLocaleString],
       observacionesEgreso: ['', Validators.required],
-      valorEgreso: ['', Validators.required],
+      valorEgreso: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
     });
@@ -165,4 +165,15 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/finanzas//egresosFinanzas']);
   }
 
+  get form(): { [key: string]: AbstractControl; } {
+    return this.egresosForm.controls;
+  }
+
+  get numeroReciboEgreso() {
+    return this.egresosForm.get('numeroReciboEgreso');
+  }
+
+  get valorEgreso() {
+    return this.egresosForm.get('valorEgreso');
+  }
 }

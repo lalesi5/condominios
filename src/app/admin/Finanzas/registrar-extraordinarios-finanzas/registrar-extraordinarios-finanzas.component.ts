@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {CuentasService} from "../../../services/cuentas.service";
-import {TiposPagoService} from "../../../services/tiposPago.service";
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
-import {extraordinariosService} from "../../../services/extraordinarios.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { CuentasService } from "../../../services/cuentas.service";
+import { TiposPagoService } from "../../../services/tiposPago.service";
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
+import { extraordinariosService } from "../../../services/extraordinarios.service";
 
 @Component({
   selector: 'app-registrar-extraordinarios-finanzas',
@@ -41,10 +41,10 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     this.extraordinariosForm = this.fb.group({
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
-      numeroReciboPagoExtraordinario: ['', Validators.required],
-      fechaReciboPagoExtraordinario: [this.date.toLocaleString, Validators.required],
+      numeroReciboPagoExtraordinario: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      fechaReciboPagoExtraordinario: [this.date.toLocaleString],
       observacionesPagoExtraordinario: ['', Validators.required],
-      valorPagoExtraordinario: ['', Validators.required],
+      valorPagoExtraordinario: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
     });
@@ -77,7 +77,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getCuentaPago(){
+  getCuentaPago() {
     this.subscription.add(
       this._cuentaPagoService.getCuentas(this.idCondominio).subscribe(data => {
         this.cuentasPago = [];
@@ -90,7 +90,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     )
   }
 
-  getTiposPago(){
+  getTiposPago() {
     this.subscription.add(
       this._tipoPagoService.getTiposPago(this.idCondominio).subscribe(data => {
         this.tiposPago = [];
@@ -127,13 +127,13 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     )
   }
 
-  onCreatePagoExtraordinario(){
+  onCreatePagoExtraordinario() {
     this._dialogService.confirmDialog({
       title: 'Registrar Pago',
       message: '¿Está seguro que desea registrar el pago?',
       confirmText: 'Sí',
       cancelText: 'No',
-    }).subscribe( res => {
+    }).subscribe(res => {
       if (res) {
         const pagoExtraordinarias: any = {
           idAdministrador: this.idAdministrador,
@@ -167,4 +167,15 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     this.router.navigate(['admin/finanzas//ingresosExtraordinarios']);
   }
 
+  get form(): { [key: string]: AbstractControl; } {
+    return this.extraordinariosForm.controls;
+  }
+
+  get numeroReciboPagoExtraordinario() {
+    return this.extraordinariosForm.get('numeroReciboPagoExtraordinario');
+  }
+
+  get valorPagoExtraordinario() {
+    return this.extraordinariosForm.get('valorPagoExtraordinario');
+  }
 }

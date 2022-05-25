@@ -13,11 +13,26 @@
           <div class="row">
             <div class="col">
               <label>Número de Recibo: </label>
-              <input type="text" class="form-control" formControlName="numeroReciboPagoExtraordinario">
+              <input type="text" class="form-control" formControlName="numeroReciboPagoExtraordinario"
+                [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['numeroReciboPagoExtraordinario'].valid && extraordinariosForm.controls['numeroReciboPagoExtraordinario'].touched }">
+              <div *ngIf="form['numeroReciboPagoExtraordinario'].errors" class="invalid-feedback">
+                <div *ngIf="form['numeroReciboPagoExtraordinario'].errors['pattern']">
+                  La longitud del número no es válida
+                </div>
+              </div>
             </div>
             <div class="col">
               <label>Valor: </label>
-              <input type="number" class="form-control" formControlName="valorPagoExtraordinario">
+              <input type="number" class="form-control" formControlName="valorPagoExtraordinario"
+                [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['valorPagoExtraordinario'].valid && extraordinariosForm.controls['valorPagoExtraordinario'].touched }">
+              <div *ngIf="form['valorPagoExtraordinario'].errors" class="invalid-feedback">
+                <div *ngIf="form['valorPagoExtraordinario'].errors['required']">
+                  Campo requerido
+                </div>
+                <div *ngIf="form['valorPagoExtraordinario'].errors['pattern']">
+                  El campo solo debe contener números, números positivos con dos decimales.
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -27,13 +42,13 @@
               <div class="form-group">
                 <label>Seleccione el tipo de Pago</label>
                 <select class="form-control" formControlName="idTiposPago" (ngModelChange)="onTipoPagoChanged($event)"
-                        [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['idTiposPago'].valid  && extraordinariosForm.controls['idTiposPago'].touched }">
-                  <option *ngFor="let tipoPago of tiposPago" [ngValue]="tipoPago.idTipoPago"
-                          selected>{{tipoPago.tiposPago}}
+                  [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['idTiposPago'].valid  && extraordinariosForm.controls['idTiposPago'].touched }">
+                  <option *ngFor="let tipoPago of tiposPago" [ngValue]="tipoPago.idTipoPago" selected>
+                    {{tipoPago.tiposPago}}
                   </option>
                 </select>
                 <div
-                  *ngIf=" extraordinariosForm.controls['idTiposPago'].touched  && !extraordinariosForm.controls['idTiposPago'].valid"
+                  *ngIf=" extraordinariosForm.controls['idTiposPago'].touched && !extraordinariosForm.controls['idTiposPago'].valid"
                   class="invalid-feedback">
                   Campo requerido
                 </div>
@@ -59,9 +74,9 @@
               <div class="form-group">
                 <label>Seleccione el nombre de la Cuenta</label>
                 <select class="form-control" formControlName="idCuenta" (ngModelChange)="onCuentaPagoChanged($event)"
-                        [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['idCuenta'].valid  && extraordinariosForm.controls['idCuenta'].touched }">
-                  <option *ngFor="let cuentaPago of cuentasPago" [ngValue]="cuentaPago.idCuenta"
-                          selected>{{cuentaPago.nombreCuenta}}
+                  [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['idCuenta'].valid  && extraordinariosForm.controls['idCuenta'].touched }">
+                  <option *ngFor="let cuentaPago of cuentasPago" [ngValue]="cuentaPago.idCuenta" selected>
+                    {{cuentaPago.nombreCuenta}}
                   </option>
                 </select>
                 <div
@@ -99,7 +114,8 @@
 
 
         <div class="centrarBotones">
-          <button type="submit" class="btn btn-success mr-2">Registrar Ingreso</button>
+          <button type="submit" class="btn btn-success mr-2" [disabled]="extraordinariosForm.invalid">Registrar
+            Ingreso</button>
           <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
         </div>
       </form>

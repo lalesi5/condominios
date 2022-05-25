@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Subscription } from 'rxjs';
-import {UnidadesService} from "../../../services/unidades.service";
-import {CuentasService} from "../../../services/cuentas.service";
-import {ReservasService} from "../../../services/reservas.service";
-import {TiposPagoService} from "../../../services/tiposPago.service";
-import {DescuentosService} from "../../../services/descuentos.service";
-import {DialogService} from "../../../services/dialog.service";
-import {IngresoUnidadesService} from "../../../services/pagos.service";
-import {ToastrService} from "ngx-toastr";
+import { UnidadesService } from "../../../services/unidades.service";
+import { CuentasService } from "../../../services/cuentas.service";
+import { ReservasService } from "../../../services/reservas.service";
+import { TiposPagoService } from "../../../services/tiposPago.service";
+import { DescuentosService } from "../../../services/descuentos.service";
+import { DialogService } from "../../../services/dialog.service";
+import { IngresoUnidadesService } from "../../../services/pagos.service";
+import { ToastrService } from "ngx-toastr";
 
 
 @Component({
@@ -57,9 +57,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
       idDescuento: ['', Validators.required],
-      numeroReciboPago: ['', Validators.required],
-      fechaReciboPago: [this.date.toLocaleString, Validators.required],
-      observacionesMensualidadPago: ['', Validators.required],
+      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      fechaReciboPago: [this.date.toLocaleString],
+      observacionesMensualidadPago: [''],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
     });
@@ -126,7 +126,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     );
   }
 
-  getCuentaPago(){
+  getCuentaPago() {
     this.subscription.add(
       this._cuentaPagoService.getCuentas(this.idCondominio).subscribe(data => {
         this.cuentasPago = [];
@@ -139,7 +139,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     )
   }
 
-  getTiposPago(){
+  getTiposPago() {
     this.subscription.add(
       this._tipoPagoService.getTiposPago(this.idCondominio).subscribe(data => {
         this.tiposPago = [];
@@ -152,9 +152,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     )
   }
 
-  getDescuentos(){
+  getDescuentos() {
     this.subscription.add(
-      this._descuentoService.getDescuentos(this.idCondominio).subscribe( data => {
+      this._descuentoService.getDescuentos(this.idCondominio).subscribe(data => {
         this.descuentos = [];
         data.forEach((element: any) => {
           this.descuentos.push({
@@ -197,7 +197,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     )
   }
 
-  onCuentaPagoChanged(item: any){
+  onCuentaPagoChanged(item: any) {
     this.subscription.add(
       this._cuentaPagoService.getCuenta(item).subscribe(data => {
         this.loading = false;
@@ -209,7 +209,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     )
   }
 
-  onTipoPagoChanged(item: any){
+  onTipoPagoChanged(item: any) {
     this.subscription.add(
       this._tipoPagoService.getTipoPago(item).subscribe(data => {
         this.loading = false;
@@ -221,9 +221,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     )
   }
 
-  onDescuentoChanged(item: any){
+  onDescuentoChanged(item: any) {
     this.subscription.add(
-      this._descuentoService.getDescuento(item).subscribe(data=> {
+      this._descuentoService.getDescuento(item).subscribe(data => {
         this.loading = false;
         this.descuentosForm.setValue({
           idDescuento: data.payload.data()['idDescuento'],
@@ -237,14 +237,14 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     )
   }
 
-  onCreatePagoMensualidad(){
+  onCreatePagoMensualidad() {
 
     this._dialogService.confirmDialog({
       title: 'Registrar Pago',
       message: '¿Está seguro que desea registrar el pago?',
       confirmText: 'Sí',
       cancelText: 'No',
-    }).subscribe( res => {
+    }).subscribe(res => {
       if (res) {
         const pagoMensualidad: any = {
           idAdministrador: this.idAdministrador,
@@ -269,7 +269,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           estadoIngreso: this.pagoMensualidadForm.value.estadoIngreso
         }
         this.loading = true;
-        this._ingresoUnidades.savePago(pagoMensualidad).then(()=> {
+        this._ingresoUnidades.savePago(pagoMensualidad).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
             positionClass: 'toast-bottom-right'
           });
@@ -283,7 +283,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.onUpdateEstadoReservasPagadas();
   }
 
-  onUpdateEstadoReservasPagadas(){
+  onUpdateEstadoReservasPagadas() {
     this.reservas.forEach((element: any) => {
       const pagoReservaData: any = {
         pagoReserva: 'Pagado'
@@ -296,4 +296,11 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/finanzas//registrarMensualidad']);
   }
 
+  get form(): { [key: string]: AbstractControl; } {
+    return this.pagoMensualidadForm.controls;
+  }
+
+  get numeroReciboPago() {
+    return this.pagoMensualidadForm.get('numeroReciboPago');
+  }
 }

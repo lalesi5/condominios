@@ -27,7 +27,7 @@ export class DescuentosCreateComponent implements OnInit {
   ) {
     this.descuentosForm = this.fb.group({
       nombreDescuento: ['', Validators.required],
-      valorDescuento: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
+      valorDescuento: ['', [Validators.required, Validators.pattern(/^(0|[1-9]\d*)$/)]],
     });
 
     this.recoverData();

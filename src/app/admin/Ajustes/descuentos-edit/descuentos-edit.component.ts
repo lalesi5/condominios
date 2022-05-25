@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from "rxjs";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CuentasService} from "../../../services/cuentas.service";
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
-import {DescuentosService} from "../../../services/descuentos.service";
+import { Subscription } from "rxjs";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CuentasService } from "../../../services/cuentas.service";
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
+import { DescuentosService } from "../../../services/descuentos.service";
 
 @Component({
   selector: 'app-descuentos-edit',
@@ -33,7 +33,7 @@ export class DescuentosEditComponent implements OnInit {
   ) {
     this.descuentosForm = this.fb.group({
       nombreDescuento: ['', Validators.required],
-      valorDescuento: ['',[Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
+      valorDescuento: ['', [Validators.required, Validators.pattern(/^(0|[1-9]\d*)$/)]],
     });
 
     this.recoverData();
