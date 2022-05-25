@@ -3,7 +3,6 @@
   width: calc(100% - 231px);
   left: 231px;
   top: 165px;
-  min-height: 82vh;
 }
 
 .containerInfo mat-card {

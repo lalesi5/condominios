@@ -231,8 +231,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           valorDescuento: data.payload.data()['valorDescuento']
         })
         this.sumaTotalForm.setValue({
-          sumaTotal: this.datosUnidadForm.value.cuotaUnidad + this.sumaValorReservas - this.descuentosForm.value.valorDescuento
+          sumaTotal: Math.round(((this.datosUnidadForm.value.cuotaUnidad + this.sumaValorReservas - this.descuentosForm.value.valorDescuento) + Number.EPSILON) * 100) / 100
         })
+
       })
     )
   }
