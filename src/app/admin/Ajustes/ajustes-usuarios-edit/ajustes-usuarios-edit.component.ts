@@ -33,7 +33,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
-      phone: ['', [Validators.pattern(/^\d+$/)]],
+      phone: ['', [Validators.pattern(/^.{9,13}$/)]],
       address: [''],
     })
 

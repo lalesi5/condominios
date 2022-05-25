@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
@@ -27,7 +27,7 @@ export class DescuentosCreateComponent implements OnInit {
   ) {
     this.descuentosForm = this.fb.group({
       nombreDescuento: ['', Validators.required],
-      valorDescuento: ['', Validators.required],
+      valorDescuento: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
     });
 
     this.recoverData();
@@ -78,10 +78,16 @@ export class DescuentosCreateComponent implements OnInit {
     });
   }
 
-
-
   onBacktoList(): void {
     this.router.navigate(['/admin/ajustes/descuentos']);
+  }
+
+  get form(): { [key: string]: AbstractControl; } {
+    return this.descuentosForm.controls;
+  }
+
+  get cuotaUnidad() {
+    return this.descuentosForm.get('valorDescuento');
   }
 
 }

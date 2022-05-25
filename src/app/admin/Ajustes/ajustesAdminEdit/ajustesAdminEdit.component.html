@@ -41,11 +41,8 @@
           <input type="text" class="form-control" formControlName="phone"
             [ngClass]="{ 'is-invalid': !administradorForm.controls['phone'].valid  && administradorForm.controls['phone'].touched }">
           <div *ngIf="form['phone'].errors" class="invalid-feedback">
-            <!--<div *ngIf="form['phone'].errors['required']">
-              Campo requerido
-            </div>-->
             <div *ngIf="form['phone'].errors['pattern']">
-              El campo solo debe contener números!
+              La longitud del número no es válida
             </div>
           </div>
         </div>

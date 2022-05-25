@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { SharedModule } from '../../core/shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { AjustesAdminComponent } from "./ajustesAdmin/ajustesAdmin.component";
 import { AjustesCondominioComponent } from './ajustesCondominio/ajustesCondominio.component';
 
@@ -82,7 +82,7 @@ import { DescuentosEditComponent } from './descuentos-edit/descuentos-edit.compo
         MatSelectModule,
         ReactiveFormsModule
     ],
-    providers: []
+    providers: [CurrencyPipe]
 
 })
 

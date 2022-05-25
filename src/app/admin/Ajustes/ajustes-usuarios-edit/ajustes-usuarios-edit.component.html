@@ -68,7 +68,7 @@
             [ngClass]="{ 'is-invalid': !editUsuarioForm.controls['phone'].valid  && editUsuarioForm.controls['phone'].touched }">
           <div *ngIf="form['phone'].errors" class="invalid-feedback">
             <div *ngIf="form['phone'].errors['pattern']">
-              El campo solo debe contener números!
+              La longitud del número no es válida
             </div>
           </div>
         </div>
