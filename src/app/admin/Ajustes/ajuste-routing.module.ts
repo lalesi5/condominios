@@ -28,6 +28,7 @@ import {PagosEditComponent} from "./pagos-edit/pagos-edit.component";
 import {DescuentosComponent} from "./descuentos/descuentos.component";
 import {DescuentosCreateComponent} from "./descuentos-create/descuentos-create.component";
 import {DescuentosEditComponent} from "./descuentos-edit/descuentos-edit.component";
+import {AjustesListarUnidadesComponent} from "./ajustes-listar-unidades/ajustes-listar-unidades.component";
 
 
 const routesAjustes: Routes = [
@@ -43,6 +44,7 @@ const routesAjustes: Routes = [
         {path: 'ajustesAreasComunalesEdit', component: AjustesAreasComunalesEditComponent},
         {path: 'ajustesAreasComunalesCreate', component: AjustesAreasComunalesCreateComponent},
         {path: 'ajustesUnidades', component: AjustesUnidadesComponent},
+        {path: 'ajustesListarUnidades', component: AjustesListarUnidadesComponent},
         {path: 'ajustesUnidadesEdit', component: AjustesUnidadesEditComponent},
         {path: 'ajustesUnidadesCreate', component: AjustesUnidadesCreateComponent},
         {path: 'ajustesUnidadesSelectUser', component: AjustesUnidadesSelectUserComponent},
@@ -57,7 +59,7 @@ const routesAjustes: Routes = [
         {path: 'pagosEdit', component: PagosEditComponent},
         {path: 'descuentos', component: DescuentosComponent},
         {path: 'descuentosCreate', component: DescuentosCreateComponent},
-        {path: 'descuentosEdit', component: DescuentosEditComponent}
+        {path: 'descuentosEdit', component: DescuentosEditComponent},
       ]
   },
 ];

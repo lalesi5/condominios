@@ -40,7 +40,7 @@ export class AjustesComponent implements OnInit {
   }
 
   onGoAjustesajustesUnidades() {
-    this.router.navigate(['/admin/ajustes/ajustesUnidadesSelectUser']);
+    this.router.navigate(['/admin/ajustes/ajustesListarUnidades']);
   }
 
   onGoAjustesUsuarios() {

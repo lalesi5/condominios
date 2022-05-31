@@ -55,4 +55,8 @@ export class AjustesUnidadesSelectUserComponent implements OnInit {
     this.router.navigate(['/admin/ajustes/ajustesUnidades']);
   }
 
+  onBacktoList(): void {
+    this.router.navigate(['/admin/ajustes/ajustesListarUnidades']);
+  }
+
 }
