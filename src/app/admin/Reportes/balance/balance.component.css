@@ -3,18 +3,17 @@
   width: calc(100% - 231px);
   left: 231px;
   top: 155px;
-  min-height: 82vh;
 }
 
 .containerInfo mat-card {
   display: grid;
-  width: 80%;
-  left: 10%;
-  top: 5vh;
+  width: 90%;
+  left: 5%;
+  top: 1vh;
   border-radius: 20px;
   padding-bottom: 25px;
   overflow: auto;
-  max-height: 800px;
+  max-height: 750px;
 }
 
 .containerInfo mat-card h2 {

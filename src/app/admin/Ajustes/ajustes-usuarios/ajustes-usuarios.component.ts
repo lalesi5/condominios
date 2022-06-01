@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { ToastrService } from 'ngx-toastr';
@@ -31,7 +30,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     private _usuarioService: UsuariosService,
     private toastr: ToastrService,
     private _dialogService: DialogService,
-    public firestore: AngularFirestore
+
   ) {
     this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];

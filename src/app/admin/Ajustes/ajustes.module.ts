@@ -33,6 +33,7 @@ import { PagosEditComponent } from './pagos-edit/pagos-edit.component';
 import { DescuentosComponent } from './descuentos/descuentos.component';
 import { DescuentosCreateComponent } from './descuentos-create/descuentos-create.component';
 import { DescuentosEditComponent } from './descuentos-edit/descuentos-edit.component';
+import { AjustesListarUnidadesComponent } from './ajustes-listar-unidades/ajustes-listar-unidades.component';
 
 @NgModule({
 
@@ -74,6 +75,7 @@ import { DescuentosEditComponent } from './descuentos-edit/descuentos-edit.compo
         DescuentosComponent,
         DescuentosCreateComponent,
         DescuentosEditComponent,
+        AjustesListarUnidadesComponent,
     ],
 
     exports: [

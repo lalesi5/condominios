@@ -1,8 +1,8 @@
-.selectorCrearPagoMensualidad {
+.ajustesUnidades {
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
-  top: 165px;
+  top: 150px;
 }
 
 .containerInfo mat-card {
@@ -34,7 +34,7 @@
 
 @media only screen and (max-width: 900px) {
 
-  .selectorCrearPagoMensualidad {
+  .ajustesUnidades {
     width: calc(100% - 15px);
     left: 15px;
     max-height: 750px;
