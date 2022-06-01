@@ -24,7 +24,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
   public queryClone: any;
-  @ViewChild('grid') public grid: GridComponent | any;
+  @ViewChild('grid') public grid!: GridComponent;
 
   constructor(
     private router: Router,
@@ -41,6 +41,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.toolbarOptions = ['Search'];
     this.getUsuarios();
   }
 
@@ -66,12 +67,18 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     );
   }
 
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+            this.grid.search((event!.target as HTMLInputElement).value)
+    });
+}
+
   //Seleccionar editar o eliminar usuario
   commandClick(item: any): void {
     if (item.target?.title === 'Editar') {
       sessionStorage.setItem('idUsuario', <string>item.rowData['idUsuario']);
       this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit']);
-      
+
     } else if (item.target?.title === 'Eliminar') {
       const id = <string>item.rowData['idUsuario'];
       this._dialogService.confirmDialog({
