@@ -9,9 +9,9 @@
       <div class="control-section">
         <ejs-grid #grid id='Grid' [dataSource]="usuarios" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
           [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
-          [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+          [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" 
           (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
-          (pdfExportComplete)="pdfExportComplete()">
+          (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
             <e-column headerText=" No" width='50'> </e-column>
             <e-column field='name' headerText='Nombre' width=110> </e-column>
