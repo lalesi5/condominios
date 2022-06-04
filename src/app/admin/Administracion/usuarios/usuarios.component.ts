@@ -21,40 +21,18 @@ L10n.load({
   'es': {
     grid: {
       "EmptyRecord": "No hay registros que mostrar",
-      "True": "cierto",
-      "False": "falso",
       "InvalidFilterMessage": "Datos de filtro no válidos",
-      "FilterbarTitle": "celda de barra de filtro",
-      "EmptyDataSourceError": "DataSource no debe estar vacío en la carga inicial ya que las columnas se generan a partir de dataSource en AutoGenerate Column Grid",
       "Print": "Impresión",
       "Pdfexport": "Exportar PDF",
       "Excelexport": "Exportar Excel",
       "Wordexport": "Exportación de palabras",
       "Search": "Buscar",
       "Columnchooser": "Columnas",
-      "Save": "Salvar",
       "Item": "registro",
       "Items": "registros",
-      "ChooseColumns": "Elegir columna",
-      "SearchColumns": "columnas de búsqueda",
       "Matchs": "No se encontraron coincidencias",
-      "FilterButton": "Filtrar",
-      "ClearButton": "Claro",
-      "StartsWith": "Comienza con",
-      "EndsWith": "Termina con",
-      "Contains": "Contiene",
-      "Equal": "Igual",
-      "NotEqual": "No es igual",
-      "LessThan": "Menos que",
-      "LessThanOrEqual": "Menor o igual",
-      "GreaterThan": "Mas grande que",
-      "GreaterThanOrEqual": "Mayor que o igual",
       "ChooseDate": "Elige una fecha",
       "EnterValue": "Ingrese el valor",
-      "Group": "Agrupar por esta columna",
-      "Ungroup": "Desagrupar por esta columna",
-      "autoFitAll": "Ajuste automático de todas las columnas",
-      "autoFit": "Ajustar automáticamente esta columna",
       "Export": "Exportar",
       "FirstPage": "Primera página",
       "LastPage": "Última página",
@@ -64,23 +42,15 @@ L10n.load({
       "SortDescending": "Orden descendiente",
       "FilterMenu": "Filtrar",
       "SelectAll": "Seleccionar todo",
-      "Blanks": "Espacios en blanco",
-      "FilterTrue": "Cierto",
-      "FilterFalse": "Falso",
       "NoResult": "No se encontraron coincidencias",
-      "ClearFilter": "Filtro claro",
-      "NumberFilter": "Filtros de número",
-      "TextFilter": "Filtros de texto",
       "DateFilter": "Filtros de fecha",
       "DateTimeFilter": "Filtros de fecha y hora",
       "MatchCase": "Match Case",
       "Between": "Entre",
-      "CustomFilter": "Filtro personalizado",
       "CustomFilterPlaceHolder": "Ingrese el valor",
       "CustomFilterDatePlaceHolder": "Elige una fecha",
       "AND": "Y",
       "OR": "O",
-      "ShowRowsWhere": "Mostrar filas donde:"
     },
     pager: {
       "currentPageInfo": "{0} de {1} páginas",
@@ -206,5 +176,12 @@ export class UsuariosComponent implements OnInit {
     var sno = startIndex + (rowIndex + 1);
     //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
     args.row.cells[0].innerText = sno;
+  }
+
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
   }
 }

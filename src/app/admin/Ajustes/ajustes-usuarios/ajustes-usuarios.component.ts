@@ -68,9 +68,9 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   created(): void {
     document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
-            this.grid.search((event!.target as HTMLInputElement).value)
+      this.grid.search((event!.target as HTMLInputElement).value)
     });
-}
+  }
 
   //Seleccionar editar o eliminar usuario
   commandClick(item: any): void {
