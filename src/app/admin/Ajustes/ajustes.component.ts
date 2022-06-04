@@ -47,5 +47,9 @@ export class AjustesComponent implements OnInit {
     this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
   }
 
+  onGoAjustesAreasComunales() {
+    this.router.navigate(['/admin/ajustes/ajustesAreasComunales']);
+  }
+
 
 }

@@ -2,36 +2,48 @@
     <div class="containerInfo">
         <mat-card>
             <h2>Areas Comunales</h2>
-            <h3>Editar Datos del Area Comunal
-                <div *ngIf="loading" class="spinner-border float-right" role="status">
-                    <span class="sr-only">Procesando...</span>
+          <h3>Editar Datos del Area Comunal
+            <div *ngIf="loading" class="spinner-border float-right" role="status">
+              <span class="sr-only">Procesando...</span>
+            </div>
+          </h3>
+          <form [formGroup]='areaComunalForm' (ngSubmit)="onEditAreaComunal()">
+            <div class="form-group">
+              <label>Nombre del Area Comunal</label>
+              <input type="text" class="form-control" formControlName="nombre"
+                     [ngClass]="{ 'is-invalid': !areaComunalForm.controls['nombre'].valid  && areaComunalForm.controls['nombre'].touched }">
+              <div *ngIf=" areaComunalForm.controls['nombre'].touched  && !areaComunalForm.controls['nombre'].valid"
+                   class="invalid-feedback">
+                Campo requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Descripción</label>
+              <input type="text" class="form-control" formControlName="descripcion"
+                     [ngClass]="{ 'is-invalid': !areaComunalForm.controls['descripcion'].valid  && areaComunalForm.controls['descripcion'].touched }">
+              <div *ngIf=" areaComunalForm.controls['descripcion'].touched  && !areaComunalForm.controls['descripcion'].valid"
+                   class="invalid-feedback">
+                Campo requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Valor de Reserva</label>
+              <input type="number" class="form-control" formControlName="valorReserva"
+                     [ngClass]="{ 'is-invalid': !areaComunalForm.controls['valorReserva'].valid  && areaComunalForm.controls['valorReserva'].touched }">
+              <div *ngIf="form['valorReserva'].errors" class="invalid-feedback">
+                <div *ngIf="form['valorReserva'].errors['required']">
+                  Campo requerido
                 </div>
-            </h3>
-            <form [formGroup]='areaComunalForm' (ngSubmit)="onEditAreaComunal()">
-                <div class="form-group">
-                    <label>Nombre del Area Comunal</label>
-                    <input type="text" class="form-control" formControlName="nombre"
-                        [ngClass]="{ 'is-invalid': !areaComunalForm.controls['nombre'].valid  && areaComunalForm.controls['nombre'].touched }">
-                    <div *ngIf=" areaComunalForm.controls['nombre'].touched  && !areaComunalForm.controls['nombre'].valid"
-                        class="invalid-feedback">
-                        Campo requerido
-                    </div>
+                <div *ngIf="form['valorReserva'].errors['pattern']">
+                  El campo solo debe contener números, números positivos con dos decimales.
                 </div>
-                <div class="form-group">
-                    <label>Descripción</label>
-                    <input type="text" class="form-control" formControlName="descripcion"
-                        [ngClass]="{ 'is-invalid': !areaComunalForm.controls['descripcion'].valid  && areaComunalForm.controls['descripcion'].touched }">
-                    <div *ngIf=" areaComunalForm.controls['descripcion'].touched  && !areaComunalForm.controls['descripcion'].valid"
-                        class="invalid-feedback">
-                        Campo requerido
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary mr-2"
-                        [disabled]="areaComunalForm.invalid">Guardar</button>
-                    <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
-                </div>
-            </form>
+              </div>
+            </div>
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary mr-2" [disabled]="areaComunalForm.invalid">Guardar</button>
+              <button class="btn btn-success" (click)="onBacktoList()">Volver</button>
+            </div>
+          </form>
         </mat-card>
     </div>
 </div>
