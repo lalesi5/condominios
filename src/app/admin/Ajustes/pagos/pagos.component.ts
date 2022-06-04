@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from "rxjs";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from "rxjs";
 import {
   CommandModel,
   GridComponent,
@@ -7,11 +7,11 @@ import {
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import {DialogService} from "../../../services/dialog.service";
-import {Query} from "@syncfusion/ej2-data";
-import {TiposPagoService} from "../../../services/tiposPago.service";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { DialogService } from "../../../services/dialog.service";
+import { Query } from "@syncfusion/ej2-data";
+import { TiposPagoService } from "../../../services/tiposPago.service";
 
 @Component({
   selector: 'app-pagos',
@@ -36,10 +36,10 @@ export class PagosComponent implements OnInit {
     private toastr: ToastrService,
     private _dialogService: DialogService
   ) {
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Editar', buttonOption: {iconCss: 'e-icons e-edit', cssClass: 'e-flat'}},
-      {title: 'Eliminar', buttonOption: {iconCss: 'e-icons e-delete', cssClass: 'e-flat'}}];
+    this.commands = [{ title: 'Editar', buttonOption: { iconCss: 'e-icons e-edit', cssClass: 'e-flat' } },
+    { title: 'Eliminar', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
     this.recoverData();
   }
 
@@ -132,5 +132,10 @@ export class PagosComponent implements OnInit {
     args.row.cells[0].innerText = sno;
   }
 
-
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
 }

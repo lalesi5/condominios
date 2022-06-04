@@ -7,13 +7,11 @@
         <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Descuento</button>
       </div>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="descuentos" [allowSorting]="true" [allowPaging]="true"
-                  gridLines="Both" [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)"
-                  (commandClick)="commandClick($event)" [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)"
-                  [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
-                  (pdfExportComplete)="pdfExportComplete()">
+        <ejs-grid #grid id='Grid' [dataSource]="descuentos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+          [pageSettings]="pageSettings" (commandClick)="commandClick($event)" [toolbar]="toolbarOptions"
+          (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+          [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
-            <e-column headerText=" No" width='50'> </e-column>
             <e-column field='nombreDescuento' headerText='Nombre del Descuento' width=100> </e-column>
             <e-column field='valorDescuento' headerText='Valor del descuento' width=100> </e-column>
             <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
