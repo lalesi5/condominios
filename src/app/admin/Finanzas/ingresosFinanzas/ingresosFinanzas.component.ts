@@ -116,4 +116,11 @@ export class IngresosFinanzasComponent implements OnInit {
   excelExportComplete(): void {
     this.grid.query = this.queryClone;
   }
+
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
 }

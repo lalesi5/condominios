@@ -129,4 +129,11 @@ export class ListarAreasComunesComponent implements OnInit {
     args.row.cells[0].innerText = sno;
   }
 
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
+
 }

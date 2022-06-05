@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from "rxjs";
 import {
   CommandModel,
   GridComponent,
@@ -7,12 +7,12 @@ import {
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {Router} from "@angular/router";
-import {UsuariosService} from "../../../services/usuarios.service";
-import {ToastrService} from "ngx-toastr";
-import {DialogService} from "../../../services/dialog.service";
-import {UnidadesService} from "../../../services/unidades.service";
-import {Query} from "@syncfusion/ej2-data";
+import { Router } from "@angular/router";
+import { UsuariosService } from "../../../services/usuarios.service";
+import { ToastrService } from "ngx-toastr";
+import { DialogService } from "../../../services/dialog.service";
+import { UnidadesService } from "../../../services/unidades.service";
+import { Query } from "@syncfusion/ej2-data";
 
 @Component({
   selector: 'app-ajustes-listar-unidades',
@@ -37,10 +37,10 @@ export class AjustesListarUnidadesComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private _dialogService: DialogService,
   ) {
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Editar', buttonOption: {iconCss: 'e-icons e-edit', cssClass: 'e-flat'}},
-      {title: 'Eliminar', buttonOption: {iconCss: 'e-icons e-delete', cssClass: 'e-flat'}}];
+    this.commands = [{ title: 'Editar', buttonOption: { iconCss: 'e-icons e-edit', cssClass: 'e-flat' } },
+    { title: 'Eliminar', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
     this.recoverData();
   }
 
@@ -110,8 +110,8 @@ export class AjustesListarUnidadesComponent implements OnInit, OnDestroy {
 
   //Seleccionar exportar excel y pdf
   toolbarClick(args
-                 :
-                 any
+    :
+    any
   ):
     void {
     if (args.item.id === 'Grid_pdfexport'
@@ -143,8 +143,8 @@ export class AjustesListarUnidadesComponent implements OnInit, OnDestroy {
   }
 
   rowDataBound(args
-                 :
-                 any
+    :
+    any
   ) {
     // aquí estamos calculando el número de serie
     var rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
@@ -157,4 +157,10 @@ export class AjustesListarUnidadesComponent implements OnInit, OnDestroy {
     args.row.cells[0].innerText = sno;
   }
 
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
 }

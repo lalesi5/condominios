@@ -18,6 +18,7 @@ import { ListarAreasComunalesUserComponent } from "./listar-areas-comunales/list
 import { MisReservasComponent } from "./mis-reservas/mis-reservas.component";
 import { ReservasComponent } from "./reservas/reservas.component";
 import { ReservasCreateComponent } from "./reservas-create/reservas-create.component";
+import { ListaReservasComponent } from './lista-reservas/lista-reservas.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ReservasCreateComponent } from "./reservas-create/reservas-create.compo
     ListarAreasComunalesUserComponent,
     MisReservasComponent,
     ReservasComponent,
-    ReservasCreateComponent
+    ReservasCreateComponent,
+    ListaReservasComponent
   ],
   exports: [
     MatCardModule,

@@ -121,4 +121,11 @@ export class IndividualesComponent implements OnInit {
     //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
     args.row.cells[0].innerText = sno;
   }
+
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
 }

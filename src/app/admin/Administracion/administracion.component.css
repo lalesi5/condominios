@@ -8,6 +8,9 @@
   background: linear-gradient(90deg, rgba(40,133,255,0.8477766106442577) 0%, rgba(40,82,255,0.8477766106442577) 50%, rgba(22,6,128,1) 100%);
 }
 
+.active{
+  background: gray;
+}
 
 .headerAdministracion mat-card {
   display: flex;
