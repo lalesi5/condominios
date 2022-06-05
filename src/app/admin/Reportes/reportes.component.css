@@ -41,6 +41,10 @@
   color: black;
 }
 
+a.active{
+  color: black !important;
+}
+
 @media only screen and (max-width: 900px) {
 
   .reportes {

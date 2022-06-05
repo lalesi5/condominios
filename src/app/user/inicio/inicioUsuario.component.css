@@ -108,5 +108,9 @@
   background-color: #eeebeb;
 }
 
+a.active{
+  color: black !important;
+}
+
 
 
