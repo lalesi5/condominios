@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ReservasService {
 
   agregarReserva(reserva: any): Promise<any> {
     const idReserva = this.firestore.createId();
-    const data = {idReserva, ...reserva}
+    const data = { idReserva, ...reserva }
     return this.firestore.collection('Reservas').doc(idReserva).set(data);
   }
 
@@ -36,7 +36,12 @@ export class ReservasService {
   getReservasUsuario(id: string, idUnidad: string): Observable<any> {
     return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id)
       .where('idUnidad', '==', idUnidad)
-      .where('estadoReserva', '!=', 'Rechazado')).snapshotChanges();
+      .where('estadoReserva', '==', 'Pendiente')).snapshotChanges();
+  }
+
+  getTodasReservasUsuario(id: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Reservas', ref => ref.where('idCondominio', '==', id)
+      .where('idUnidad', '==', idUnidad)).snapshotChanges();
   }
 
   getReservasUsuarioPendientes(id: string, idUnidad: string): Observable<any> {

@@ -29,7 +29,7 @@
         <ejs-grid #grid id='Grid' [dataSource]="ingresoUnidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
                   [pageSettings]="pageSettings" [toolbar]="toolbarOptions" (commandClick)="commandClick($event)"
                   (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
-                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
             <e-column field='unidad' headerText='Unidad' width=100> </e-column>
             <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=100> </e-column>

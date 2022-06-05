@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, rowCell, ToolbarItems } from '@syncfusion/ej2-angular-grids';
-import { Query } from '@syncfusion/ej2-data';
+import { GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ReservasService } from 'src/app/services/reservas.service';
+import { Query } from '@syncfusion/ej2-data';
 
 @Component({
-  selector: 'app-mis-reservas',
-  templateUrl: './mis-reservas.component.html',
-  styleUrls: ['./mis-reservas.component.css']
+  selector: 'app-lista-reservas',
+  templateUrl: './lista-reservas.component.html',
+  styleUrls: ['./lista-reservas.component.css']
 })
-export class MisReservasComponent implements OnInit, OnDestroy {
+export class ListaReservasComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
   idUnidad: string = '';
@@ -22,7 +22,6 @@ export class MisReservasComponent implements OnInit, OnDestroy {
   public pageSettings: PageSettingsModel;
   public editSettings: Object;
   public toolbarOptions: ToolbarItems[];
-  public commands: CommandModel[];
   public queryClone: any;
   @ViewChild('grid') public grid: GridComponent | any;
 
@@ -36,12 +35,6 @@ export class MisReservasComponent implements OnInit, OnDestroy {
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
 
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false };
-
-    this.commands = [
-      {
-        type: 'Delete', title: 'Cancelar reservación', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }
-      }
-    ];
 
     this.recoverData();
   }
@@ -61,7 +54,7 @@ export class MisReservasComponent implements OnInit, OnDestroy {
 
   getReservas() {
     this.subscription.add(
-      this._reservaService.getReservasUsuario(this.idCondominio, this.idUnidad).subscribe(data => {
+      this._reservaService.getTodasReservasUsuario(this.idCondominio, this.idUnidad).subscribe(data => {
         this.reservas = [];
         data.forEach((element: any) => {
           this.reservas.push({
@@ -74,29 +67,6 @@ export class MisReservasComponent implements OnInit, OnDestroy {
 
   onGoCreate() {
     this.router.navigate(['/admin/administracion/areasComunes/reservasCreate']);
-  }
-
-  commandClick(item: any): void {
-    const id = <string>item.rowData['idReserva'];
-
-    if (item.target?.title === 'Eliminar reservación') {
-      this._dialogService.confirmDialog({
-        title: 'Eliminar área',
-        message: '¿Está seguro de eliminar la reservación?',
-        confirmText: 'Si',
-        cancelText: 'No',
-      }).subscribe(res => {
-        if (res) {
-          this._reservaService.eliminarReserva(id).then(() => {
-            this.toastr.success('La reservación fue eliminada con exito', 'Registro eliminado', {
-              positionClass: 'toast-bottom-right'
-            });
-          }).catch(error => {
-            console.log(error);
-          })
-        }
-      });
-    }
   }
 
   //Seleccionar exportar excel y pdf
