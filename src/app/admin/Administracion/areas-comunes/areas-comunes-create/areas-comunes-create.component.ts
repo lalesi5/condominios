@@ -13,7 +13,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class AreasComunesCreateComponent implements OnInit {
 
   idAministrador: string = '';
-  idCondominio: string = ''
+  idCondominio: string = '';
   loading = false;
 
   /*Formularios*/

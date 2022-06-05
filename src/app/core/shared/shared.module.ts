@@ -11,6 +11,7 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
 import { MatCommonModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import {HeaderInsideComponent} from "./components/headerInside/headerInside.component";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
 
@@ -20,7 +21,8 @@ import {HeaderInsideComponent} from "./components/headerInside/headerInside.comp
     MatCommonModule,
     MatIconModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    CommonModule
   ],
   declarations: [
     NotFoundComponent,

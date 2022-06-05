@@ -1,5 +1,6 @@
 #header {
   position: relative;
+  justify-content: center;
   border-top: 4px solid rgb(44, 89, 160);
   background-color: white;
   width: 100%;
@@ -7,8 +8,27 @@
 }
 
 .center {
-  display: inline;
-  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "a b c";
+}
+
+.item1{
+  grid-area: a;
+  align-self: start !important;
+  justify-self: start !important;
+}
+
+.item2{
+  grid-area: b;
+  align-self: center !important;
+  justify-self: center !important;
+}
+
+.item3{
+  grid-area: c;
+  align-self: end !important;
+  justify-self: end !important;
 }
 
 #logo {
@@ -19,7 +39,7 @@
 #logo a {
   text-decoration: none;
   color: black;
-  font-size: 30px;
+  font-size: 28px;
   margin-left: 20px;
 }
 
@@ -33,25 +53,34 @@
   color: rgb(44, 89, 160);
 }
 
-#contacto {
+#bienvenido{
+  float: left;
+  margin-top: 12px;
+  left: 100px;
+}
+
+#bienvenido a {
+  text-decoration: none;
   font-size: 18px;
-  float: right;
-  left: 30px;
+  color: #287bff;
+}
+
+#contacto {
+  font-size: 16px;
   margin-top: 15px;
 }
 
 #contacto mat-icon {
   font-size: 20px;
   color: rgb(44, 89, 160);
-  margin-left: 15px;
 }
 
 #contacto a {
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
   transition: 300ms all;
-  color: #000;
-  margin-right: 20px;
+  color: #287bff;
+  margin-right: 18px;
 }
 
 #contacto a:hover,
@@ -62,20 +91,17 @@
 @media only screen and (max-width: 900px){
 
   #logo a {
-    text-decoration: none;
-    color: black;
-    font-size: 20px;
-    margin-left: 20px;
+    font-size: 18px;
   }
 
   #contacto a {
-    font-size: 20px;
-    text-decoration: none;
-    transition: 300ms all;
-    color: #000;
-    margin-right: 20px;
+    font-size: 12px;
+    margin-top: 5px;
   }
 
+  #bienvenido a {
+    font-size: 12px;
+  }
 
 }
 
