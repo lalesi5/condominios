@@ -34,11 +34,11 @@
 }
 
 .navigation ul li:nth-child(2){
-    margin-top: calc(50vh - 270px);
+    margin-top: calc(47vh - 270px);
 }
 
-.navigation ul li:nth-child(8){
-    margin-bottom: calc(50vh - 270px);
+.navigation ul li:nth-child(9){
+    margin-bottom: calc(47vh - 270px);
 }
 
 .navigation ul li:last-child{
@@ -47,7 +47,7 @@
 
 .navigation ul li a{
     position: relative;
-    display: block;
+
     width: 100%;
     display: flex;
     text-decoration: none;

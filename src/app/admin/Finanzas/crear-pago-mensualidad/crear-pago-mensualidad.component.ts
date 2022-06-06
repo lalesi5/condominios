@@ -10,6 +10,9 @@ import { DescuentosService } from "../../../services/descuentos.service";
 import { DialogService } from "../../../services/dialog.service";
 import { IngresoUnidadesService } from "../../../services/pagos.service";
 import { ToastrService } from "ngx-toastr";
+import {BigInteger} from "@angular/compiler/src/i18n/big_integer";
+import {toInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
+import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 
 @Component({
@@ -25,6 +28,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   idUnidad: string = '';
   loading = false;
   sumaValorReservas: number = 0;
+  saldo: number = 0;
   date = new Date();
 
   unidades: any[] = [];
@@ -62,6 +66,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       observacionesMensualidadPago: [''],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
+      valorPago: ['', Validators.required],
+      saldo: ['']
     });
 
     this.datosUnidadForm = this.fb.group({
@@ -246,6 +252,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       confirmText: 'Sí',
       cancelText: 'No',
     }).subscribe(res => {
+      this.saldo = this.pagoMensualidadForm.value.valorTotal - this.pagoMensualidadForm.value.valorPago
+      console.log(this.saldo);
       if (res) {
         const pagoMensualidad: any = {
           idAdministrador: this.idAdministrador,
@@ -267,7 +275,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           valorTotal: this.sumaTotalForm.value.sumaTotal,
           observaciones: this.pagoMensualidadForm.value.observacionesMensualidadPago,
           estadoReciboPago: this.pagoMensualidadForm.value.estadoReciboPago,
-          estadoIngreso: this.pagoMensualidadForm.value.estadoIngreso
+          estadoIngreso: this.pagoMensualidadForm.value.estadoIngreso,
+          valorPago: this.pagoMensualidadForm.value.valorPago,
+          saldo: this.saldo
         }
         this.loading = true;
         this._ingresoUnidades.savePago(pagoMensualidad).then(() => {

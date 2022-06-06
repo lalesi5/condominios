@@ -1,0 +1,48 @@
+.areasComunales {
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 10vh;
+  min-height: 82vh;
+}
+
+.containerInfo mat-card {
+  display: grid;
+  width: 50%;
+  left: 25%;
+  top: 5vh;
+  border-radius: 20px;
+  padding-bottom: 25px;
+  overflow: auto;
+}
+
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .areasComunales {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

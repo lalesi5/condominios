@@ -41,10 +41,10 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     this.extraordinariosForm = this.fb.group({
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
-      numeroReciboPagoExtraordinario: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
-      fechaReciboPagoExtraordinario: [this.date.toLocaleString],
-      observacionesPagoExtraordinario: ['', Validators.required],
-      valorPagoExtraordinario: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
+      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      fechaReciboPago: [this.date.toLocaleString],
+      observaciones: ['', Validators.required],
+      valorPago: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
     });
