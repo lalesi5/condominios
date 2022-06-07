@@ -239,10 +239,13 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
         this.sumaTotalForm.setValue({
           sumaTotal: Math.round(((this.datosUnidadForm.value.cuotaUnidad + this.sumaValorReservas - this.descuentosForm.value.valorDescuento) + Number.EPSILON) * 100) / 100
         })
+        //console.log (typeof (this.sumaTotalForm.value.sumaTotal));
 
       })
     )
   }
+
+  //seleccionar la unidad y eliminar campo unidad en la tabla ya que es redundante
 
   onCreatePagoMensualidad() {
 
@@ -252,7 +255,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       confirmText: 'Sí',
       cancelText: 'No',
     }).subscribe(res => {
-      this.saldo = this.pagoMensualidadForm.value.valorTotal - this.pagoMensualidadForm.value.valorPago
+      this.saldo = (this.sumaTotalForm.value.sumaTotal - this.pagoMensualidadForm.value.valorPago);
+      console.log(typeof (this.sumaTotalForm.value.sumaTotal));
+      console.log(typeof (this.pagoMensualidadForm.value.valorPago));
       console.log(this.saldo);
       if (res) {
         const pagoMensualidad: any = {
