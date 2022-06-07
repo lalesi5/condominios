@@ -26,8 +26,12 @@ export class AdministracionComponent implements OnInit {
     this.router.navigate(['/admin/administracion/usuarios']);
   }
 
-  onGoAjustesAreasComunales() {
+  onGoReservas() {
     this.router.navigate(['/admin/administracion/areasComunes']);
+  }
+
+  onGoAjustesAreasComunales() {
+    this.router.navigate(['/admin/administracion/areasComunales']);
   }
 
 

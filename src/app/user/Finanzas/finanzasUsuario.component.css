@@ -68,3 +68,7 @@
   text-align: center;
 }
 
+a.active{
+  color: black !important;
+}
+

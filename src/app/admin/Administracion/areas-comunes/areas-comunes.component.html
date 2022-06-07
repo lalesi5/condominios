@@ -1,11 +1,8 @@
 <div class="ajustesAreasComunales">
   <div class="containerInfo">
     <mat-card>
-      <h2>Áreas Comunes</h2>
+      <h2>Reservas</h2>
       <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle value="bold" [routerLink]="['/admin/administracion/areasComunes/listarAreasComunes']"
-          [routerLinkActive]="['active']" (click)="onGoAjustesAreasComunales()">Administrar Áreas
-        </mat-button-toggle>
         <mat-button-toggle value="bold" [routerLink]="['/admin/administracion/areasComunes/reservasPendientes']"
           [routerLinkActive]="['active']">Reservaciones Pendientes
         </mat-button-toggle>

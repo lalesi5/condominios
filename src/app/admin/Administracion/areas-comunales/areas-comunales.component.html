@@ -1,0 +1,21 @@
+<div class="areasComunales">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Áreas Comunales</h2>
+      <h3>Lista de Áreas Comunales</h3>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="areasComunales" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" (commandClick)="commandClick($event)"
+                  [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+                  (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
+          <e-columns>
+            <e-column field='nombre' headerText='Nombre' width=140></e-column>
+            <e-column field='descripcion' headerText='Descripcion' width=140></e-column>
+            <e-column field='valorReserva' headerText='Valor por Reserva' width=120></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </mat-card>
+  </div>
+</div>
