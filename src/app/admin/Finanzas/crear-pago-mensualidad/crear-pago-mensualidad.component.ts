@@ -67,7 +67,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
       valorPago: ['', Validators.required],
-      saldo: ['']
+      saldo: [''],
+      modoPago: ['Mensualidad']
     });
 
     this.datosUnidadForm = this.fb.group({
@@ -239,10 +240,13 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
         this.sumaTotalForm.setValue({
           sumaTotal: Math.round(((this.datosUnidadForm.value.cuotaUnidad + this.sumaValorReservas - this.descuentosForm.value.valorDescuento) + Number.EPSILON) * 100) / 100
         })
+        //console.log (typeof (this.sumaTotalForm.value.sumaTotal));
 
       })
     )
   }
+
+  //seleccionar la unidad y eliminar campo unidad en la tabla ya que es redundante
 
   onCreatePagoMensualidad() {
 
@@ -252,8 +256,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       confirmText: 'Sí',
       cancelText: 'No',
     }).subscribe(res => {
-      this.saldo = this.pagoMensualidadForm.value.valorTotal - this.pagoMensualidadForm.value.valorPago
-      console.log(this.saldo);
+      this.saldo = (this.sumaTotalForm.value.sumaTotal - this.pagoMensualidadForm.value.valorPago);
       if (res) {
         const pagoMensualidad: any = {
           idAdministrador: this.idAdministrador,
@@ -277,7 +280,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           estadoReciboPago: this.pagoMensualidadForm.value.estadoReciboPago,
           estadoIngreso: this.pagoMensualidadForm.value.estadoIngreso,
           valorPago: this.pagoMensualidadForm.value.valorPago,
-          saldo: this.saldo
+          saldo: this.saldo,
+          modoPago: this.pagoMensualidadForm.value.modoPago
         }
         this.loading = true;
         this._ingresoUnidades.savePago(pagoMensualidad).then(() => {

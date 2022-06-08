@@ -70,6 +70,7 @@ export class BalanceComponent implements OnInit {
             ...element.payload.doc.data()
           })
         })
+        this.sumaEgresos = 0;
         this.egresos.map(data => {
           this.sumaEgresos += data.valorEgreso;
         })
@@ -89,7 +90,7 @@ export class BalanceComponent implements OnInit {
         })
         this.sumaIngresos = 0;
         this.ingresos.map(data => {
-          this.sumaIngresos += data.valorTotal;
+          this.sumaIngresos += data.valorPago;
         })
       })
     )

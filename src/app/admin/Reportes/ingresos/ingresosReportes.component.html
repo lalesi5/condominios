@@ -9,25 +9,18 @@
           <div class="card">
             <div>
               <div class="cardName">Total Ingresos Unidades</div>
-              <div class="numbers">$ {{sumaIngresos}}</div>
-            </div>
-          </div>
-          <div class="card">
-            <div>
-              <div class="cardName">Total Ingresos Extraordinarios</div>
-              <div class="numbers">$ {{sumaExtraordinarios}}</div>
+              <div class="numbers">$ {{sumaIngresos | number : '1.1-2'}}</div>
             </div>
           </div>
           <div class="card">
             <div>
               <div class="cardName">Total Ingresos</div>
-              <div class="numbers">$ {{total}}</div>
+              <div class="numbers">$ {{total | number : '1.1-2'}}</div>
             </div>
           </div>
         </div>
       </div>
       <br>
-      <h3>Ingresos Unidades</h3>
       <div class="control-section">
         <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
                   [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
@@ -39,38 +32,14 @@
             <e-column field='numeroReciboPago' headerText='Número Recibo de Egreso' width=100></e-column>
             <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100></e-column>
             <e-column field='tiposPago' headerText='Tipo de Pago' width=100></e-column>
+            <e-column field='modoPago' headerText='Modo de Pago' width=100></e-column>
             <e-column field='observaciones' headerText='Detalle de Pago' width=100></e-column>
-            <e-column field='valorTotal' headerText='Valor Total' width=80 format="C2"></e-column>
+            <e-column field='valorPago' headerText='Valor Total' width=80 format="C2"></e-column>
           </e-columns>
           <e-aggregates>
             <e-aggregate>
               <e-columns>
-                <e-column type="Sum" field="valorTotal" format="C2">
-                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
-                </e-column>
-              </e-columns>
-            </e-aggregate>
-          </e-aggregates>
-        </ejs-grid>
-        <h3>Ingresos Extraordinarios</h3>
-        <ejs-grid #grid id='Grid2' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true"
-                  gridLines="Both"
-                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
-                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-                  (excelExportComplete)="excelExportComplete()"
-                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
-          <e-columns>
-            <e-column field='fechaReciboPagoExtraordinario' headerText='Fecha de Pago' width=100></e-column>
-            <e-column field='numeroReciboPagoExtraordinario' headerText='Número Recibo de Pago' width=100></e-column>
-            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=100></e-column>
-            <e-column field='tiposPago' headerText='Tipo de Pago' width=100></e-column>
-            <e-column field='observacionesPagoExtraordinario' headerText='Detalle de Pago' width=100></e-column>
-            <e-column field='valorPagoExtraordinario' headerText='Valor Total' width=80 format="C2"></e-column>
-          </e-columns>
-          <e-aggregates>
-            <e-aggregate>
-              <e-columns>
-                <e-column type="Sum" field="valorPagoExtraordinario" format="C2">
+                <e-column type="Sum" field="valorPago" format="C2">
                   <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
                 </e-column>
               </e-columns>
