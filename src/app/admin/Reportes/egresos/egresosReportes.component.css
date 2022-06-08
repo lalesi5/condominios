@@ -42,8 +42,7 @@
 }
 
 .cardsDatosEgresos .card {
-  left: 155%;
-  position: relative;
+  position: revert;
   align-items: center;
   padding: 20px;
   border-radius: 20px;
