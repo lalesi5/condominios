@@ -22,11 +22,14 @@
     width: 100%;
     text-align: center;
     list-style: none;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
 }
 .navigation ul li:hover{
     background: #fff;
+}
+
+.navigation ul li .active {
+  background: #fff;
+
 }
 
 .navigation ul li:nth-child(1){
@@ -47,15 +50,18 @@
 
 .navigation ul li a{
     position: relative;
-
     width: 100%;
     display: flex;
     text-decoration: none;
     color: #fff;
 }
 
-.navigation ul li:hover a l{
+.navigation ul li:hover a{
     color: #287bff;
+}
+
+a.active{
+  color: #287bff !important;
 }
 
 .navigation ul li a .icon{
@@ -82,33 +88,6 @@
     white-space: nowrap;
 }
 
-/*Curva saliente*/
-.navigation ul li:hover a::before{
-    content: '';
-    position: absolute;
-    right: 0;
-    top: -50px;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px #fff;
-    pointer-events: none;
-}
-
-.navigation ul li:hover a::after,
-.navigation ul li.hovered a::after{
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: -50px;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px #fff;
-    pointer-events: none;
-}
 
 @media only screen and (max-width: 900px) {
 

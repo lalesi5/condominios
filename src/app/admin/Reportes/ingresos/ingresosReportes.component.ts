@@ -67,7 +67,7 @@ export class IngresosReportesComponent implements OnInit {
         })
         this.sumaIngresos = 0;
         this.ingresos.map(data => {
-          this.sumaIngresos += data.valorTotal;
+          this.sumaIngresos += data.valorPago;
         })
       })
     )

@@ -1,8 +1,8 @@
 <div class="selectorMensualidades">
-  <div class="containerInfo">
-    <mat-card>
+  <div class="containerInfo" *ngFor="let info of unidad">
+    <mat-card >
       <h2>Registrar Mensualidades</h2>
-      <h3>Historico Pagos Unidades</h3>
+      <h3>Historico Pagos {{info.unidad}}</h3>
 
       <div class="cardsBalance">
         <div class="card">
@@ -35,7 +35,6 @@
                   (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
                   [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
-            <e-column field='unidad' headerText='Unidad' width=100> </e-column>
             <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160> </e-column>
             <e-column field='numeroReciboPago' headerText='Número Recibo de Pago' width=190> </e-column>
             <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140> </e-column>
@@ -44,6 +43,8 @@
             <e-column field='sumaValorReservas' headerText='Valor de Reservas' width=140 format="C2"> </e-column>
             <e-column field='valorDescuento' headerText='Descuento' width=140 format="C2"> </e-column>
             <e-column field='valorTotal' headerText='Valor Total' width=140 format="C2"> </e-column>
+            <e-column field='valorPago' headerText='Valor Cancelado' width=140 format="C2"> </e-column>
+            <e-column field='saldo' headerText='Saldo' width=140 format="C2"> </e-column>
             <e-column headerText='Opciones' width=110 [commands]='commands'></e-column>
           </e-columns>
         </ejs-grid>`

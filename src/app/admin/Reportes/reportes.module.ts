@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {GridModule} from "@syncfusion/ej2-angular-grids";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
 
@@ -20,7 +21,8 @@ import {GridModule} from "@syncfusion/ej2-angular-grids";
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        GridModule
+        GridModule,
+        CommonModule
     ],
     declarations: [
         BalanceComponent,

@@ -7,6 +7,7 @@ import { TiposPagoService } from "../../../services/tiposPago.service";
 import { DialogService } from "../../../services/dialog.service";
 import { ToastrService } from "ngx-toastr";
 import { extraordinariosService } from "../../../services/extraordinarios.service";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
 
 @Component({
   selector: 'app-registrar-extraordinarios-finanzas',
@@ -34,6 +35,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     private _tipoPagoService: TiposPagoService,
     private _dialogService: DialogService,
     private _extraordinariosService: extraordinariosService,
+    private _ingresoUnidades: IngresoUnidadesService,
     private toastr: ToastrService,
     private fb: FormBuilder,
   ) {
@@ -47,6 +49,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
       valorPago: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
+      modoPago: ['Extraordinario']
     });
 
     this.tiposPagoForm = this.fb.group({
@@ -138,19 +141,20 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
         const pagoExtraordinarias: any = {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
-          fechaReciboPagoExtraordinario: this.date.toLocaleString(),
-          numeroReciboPagoExtraordinario: this.extraordinariosForm.value.numeroReciboPagoExtraordinario,
-          valorPagoExtraordinario: this.extraordinariosForm.value.valorPagoExtraordinario,
+          fechaReciboPago: this.date.toLocaleString(),
+          numeroReciboPago: this.extraordinariosForm.value.numeroReciboPago,
+          valorPago: this.extraordinariosForm.value.valorPago,
           nombreCuenta: this.cuentasPagoForm.value.nombreCuenta,
           tipoCuenta: this.cuentasPagoForm.value.tipoCuenta,
           tiposPago: this.tiposPagoForm.value.tiposPago,
           detalleTiposPago: this.tiposPagoForm.value.detalleTiposPago,
-          observacionesPagoExtraordinario: this.extraordinariosForm.value.observacionesPagoExtraordinario,
+          observaciones: this.extraordinariosForm.value.observaciones,
           estadoReciboPago: this.extraordinariosForm.value.estadoReciboPago,
-          estadoIngreso: this.extraordinariosForm.value.estadoIngreso
+          estadoIngreso: this.extraordinariosForm.value.estadoIngreso,
+          modoPago: this.extraordinariosForm.value.modoPago
         }
         this.loading = true;
-        this._extraordinariosService.saveExtraordinario(pagoExtraordinarias).then(() => {
+        this._ingresoUnidades.savePago(pagoExtraordinarias).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
             positionClass: 'toast-bottom-right'
           });

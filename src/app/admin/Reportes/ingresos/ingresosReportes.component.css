@@ -37,8 +37,8 @@
   width: 100%;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(3,1fr) ;
-  grid-gap: 100px;
+  grid-template-columns: repeat(2,1fr) ;
+  grid-gap: 25px;
 }
 
 .cardsDatosEgresos .card {
