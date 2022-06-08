@@ -34,15 +34,15 @@
 }
 
 .cardsDatosEgresos {
-  width: 100%;
+  width: 30%;
+  margin-left: 35%;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(3,1fr) ;
-  grid-gap: 100px;
+  grid-template-columns: repeat(1,1fr) ;
+  grid-gap: 25px;
 }
 
 .cardsDatosEgresos .card {
-  left: 155%;
   position: relative;
   align-items: center;
   padding: 20px;
