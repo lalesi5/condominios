@@ -28,6 +28,7 @@ export class CuentasCreateComponent implements OnInit {
     this.cuentasForm = this.fb.group({
       nombreCuenta: ['', Validators.required],
       tipoCuenta: ['', Validators.required],
+      saldoInicial: ['']
     });
 
     this.recoverData();
@@ -49,6 +50,7 @@ export class CuentasCreateComponent implements OnInit {
         const Cuenta: any = {
           nombreCuenta: nombreCuentaData,
           tipoCuenta: tipoCuentaData,
+          saldoInicial: this.cuentasForm.value.saldoInicial
         }
 
         //Crea el documento

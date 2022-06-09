@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from "rxjs";
 import {
   CommandModel,
@@ -8,27 +8,20 @@ import {
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
-import {IngresoUnidadesService} from "../../../services/pagos.service";
-import {extraordinariosService} from "../../../services/extraordinarios.service";
 import {DialogService} from "../../../services/dialog.service";
-import {egresosService} from "../../../services/egresos.service";
+import {CuentasService} from "../../../services/cuentas.service";
 import {Query} from "@syncfusion/ej2-data";
 
 @Component({
-  selector: 'app-balance',
-  templateUrl: 'balance.component.html',
-  styleUrls: ['./balance.component.css']
+  selector: 'app-cuentas',
+  templateUrl: './cuentas.component.html',
+  styleUrls: ['./cuentas.component.css']
 })
-
-export class BalanceComponent implements OnInit {
+export class CuentasComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idCondominio: string = '';
-  ingresos: any[] = [];
-  egresos: any[] = [];
-  sumaIngresos: number = 0;
-  sumaExtraordinarios: number = 0;
-  sumaEgresos: number = 0;
+  cuentas: any[] = [];
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -38,66 +31,47 @@ export class BalanceComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _ingresosService: IngresoUnidadesService,
-    private _extraordinariosService: extraordinariosService,
+    private _cuentasService: CuentasService,
     private _dialogService: DialogService,
-    private _egresoService: egresosService
   ) {
     this.recoverData();
     this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Anular Egreso', buttonOption: {iconCss: 'e-icons e-delete', cssClass: 'e-flat'}}];
+    this.commands = [{title: 'Seleccionar', buttonOption: {iconCss: 'e-icons e-eye', cssClass: 'e-flat'}}];
   }
 
-  ngOnInit() {
-    this.getIngresos();
-    this.getEgresos();
+  ngOnInit(): void {
+    this.getCuentas();
   }
 
   recoverData() {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getEgresos() {
+  getCuentas() {
     this.subscription.add(
-      this._egresoService.getEgresos(this.idCondominio).subscribe(data => {
-        this.egresos = [];
+      this._cuentasService.getCuentas(this.idCondominio).subscribe(data => {
+        this.cuentas = [];
         data.forEach((element: any) => {
-          this.egresos.push({
+          this.cuentas.push({
             ...element.payload.doc.data()
           })
-        })
-        this.sumaEgresos = 0;
-        this.egresos.map(data => {
-          this.sumaEgresos += data.valorEgreso;
         })
       })
     )
   }
 
-
-  getIngresos() {
-    this.subscription.add(
-      this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
-        this.ingresos = [];
-        data.forEach((element: any) => {
-          this.ingresos.push({
-            ...element.payload.doc.data()
-          })
-        })
-        this.sumaIngresos = 0;
-        this.ingresos.map(data => {
-          this.sumaIngresos += data.valorPago;
-        })
-      })
-    )
+  commandClick(item: any): void {
+    if (item.target?.title === 'Seleccionar') {
+      sessionStorage.setItem('idCuenta', <string>item.rowData['idCuenta']);
+      this.router.navigate(['/admin/reportes/cuentasSelect']);
+    }
   }
-
 
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'ingresosUnidades.pdf'
+        fileName: 'cuentas.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
@@ -110,6 +84,12 @@ export class BalanceComponent implements OnInit {
     }
   }
 
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
+
   pdfExportComplete(): void {
     this.grid.query = this.queryClone;
   }
@@ -117,4 +97,5 @@ export class BalanceComponent implements OnInit {
   excelExportComplete(): void {
     this.grid.query = this.queryClone;
   }
+
 }
