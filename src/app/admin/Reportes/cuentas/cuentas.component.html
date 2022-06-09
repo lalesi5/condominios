@@ -1,0 +1,22 @@
+<div class="cuentas">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Cuentas</h2>
+      <h3>Selección de Cuenta</h3>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="cuentas" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" (commandClick)="commandClick($event)"
+                  [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+                  (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
+          <e-columns>
+            <e-column field='nombreCuenta' headerText='Nombre Cuenta' width=160></e-column>
+            <e-column field='tipoCuenta' headerText='Datos de Cuenta' width=200></e-column>
+            <e-column field='saldoInicial' headerText='Valor Inicial' width=140></e-column>
+            <e-column headerText='Seleccionar' width=110 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </mat-card>
+  </div>
+</div>

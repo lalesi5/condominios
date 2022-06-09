@@ -9,19 +9,19 @@
           <div class="card">
             <div>
               <div class="cardName">Total Ingresos</div>
-              <div class="numbers">$ {{total}}</div>
+              <div class="numbers">$ {{sumaIngresos | number : '1.1-2'}}</div>
             </div>
           </div>
           <div class="card">
             <div>
               <div class="cardName">Total Egresos</div>
-              <div class="numbers">$ {{sumaEgresos}}</div>
+              <div class="numbers">$ {{sumaEgresos | number : '1.1-2'}}</div>
             </div>
           </div>
           <div class="card">
             <div>
               <div class="cardName">Total</div>
-              <div class="numbers">$ {{total-sumaEgresos | number : '1.1-2'}}</div>
+              <div class="numbers">$ {{sumaIngresos-sumaEgresos | number : '1.1-2'}}</div>
             </div>
           </div>
         </div>

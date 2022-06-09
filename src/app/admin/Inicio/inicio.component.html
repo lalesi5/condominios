@@ -1,80 +1,85 @@
 <div class="inicio">
-    <app-topbar></app-topbar>
+  <app-topbar></app-topbar>
 
-    <div class="headerReseMenUni">
-        <div class="card" [routerLink]="['/admin/administracion/areasComunes/reservasPendientes']" [routerLinkActive]="['active']" (click)="onGoReservas()">
-            <div>
-                <div class="numbers"> {{reservasPendientes.length}} </div>
-                <div class="cardName">Reservas Pendientes</div>
-            </div>
-            <div class="iconBx">
-                <mat-icon>visibility</mat-icon>
-            </div>
-        </div>
-        <div class="card" [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']" (click)="onGoMensajes()">
-            <div>
-                <div class="numbers"> {{anuncios.length}}</div>
-                <div class="cardName">Anuncios Generales</div>
-            </div>
-            <div class="iconBx">
-                <mat-icon> comment</mat-icon>
-            </div>
-        </div>
-        <div class="card" [routerLink]="['/admin/administracion/listarUnidades']" [routerLinkActive]="['active']" (click)="onGoUnidades()">
-            <div>
-                <div class="numbers"> {{unidades.length}} </div>
-                <div class="cardName">Unidades</div>
-            </div>
-            <div class="iconBx">
-                <mat-icon> money</mat-icon>
-            </div>
-        </div>
+  <div class="headerReseMenUni">
+    <div class="card" [routerLink]="['/admin/administracion/areasComunes/reservasPendientes']"
+         [routerLinkActive]="['active']" (click)="onGoReservas()">
+      <div>
+        <div class="numbers"> {{reservasPendientes.length}} </div>
+        <div class="cardName">Reservas Pendientes</div>
+      </div>
+      <div class="iconBx">
+        <mat-icon>visibility</mat-icon>
+      </div>
+    </div>
+    <div class="card" [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']"
+         (click)="onGoMensajes()">
+      <div>
+        <div class="numbers"> {{anuncios.length}}</div>
+        <div class="cardName">Anuncios Generales</div>
+      </div>
+      <div class="iconBx">
+        <mat-icon> comment</mat-icon>
+      </div>
+    </div>
+    <div class="card" [routerLink]="['/admin/administracion/listarUnidades']" [routerLinkActive]="['active']"
+         (click)="onGoUnidades()">
+      <div>
+        <div class="numbers"> {{unidades.length}} </div>
+        <div class="cardName">Unidades</div>
+      </div>
+      <div class="iconBx">
+        <mat-icon> money</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="details">
+    <!-- order detail list -->
+    <div class="recentOrders">
+      <div class="cardHeader">
+        <h2> Reservas</h2>
+        <a [routerLink]="['/admin/administracion/areasComunes/reservasTotales']" [routerLinkActive]="['active']"
+           (click)="onGoReservasTotales()" class="btn">Ver Todo</a>
+      </div>
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <td>Nombre</td>
+          <td>Unidad</td>
+          <td>Area Comunal</td>
+          <td>Estado</td>
+        </tr>
+        </thead>
+        <tbody *ngFor="let reserva of reservas">
+        <tr>
+          <td>{{reserva.nombreResidente}} {{reserva.apellidoResidente}}</td>
+          <td>{{reserva.unidad}}</td>
+          <td>{{reserva.nombreAreaComunal}}</td>
+          <td>
+            <span class="status aceptado">{{reserva.estadoReserva}}</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="details">
-        <!-- order detail list -->
-        <div class="recentOrders">
-            <div class="cardHeader">
-                <h2> Reservas</h2>
-                <a [routerLink]="['/admin/administracion/areasComunes/reservasTotales']" [routerLinkActive]="['active']" (click)="onGoReservasTotales()" class="btn">Ver Todo</a>
-            </div>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Unidad</td>
-                        <td>Area Comunal</td>
-                        <td>Estado</td>
-                    </tr>
-                </thead>
-                <tbody  *ngFor="let reserva of reservas">
-                    <tr>
-                        <td>{{reserva.nombreResidente}} {{reserva.apellidoResidente}}</td>
-                        <td>{{reserva.unidad}}</td>
-                        <td>{{reserva.nombreAreaComunal}}</td>
-                        <td>
-                          <span class="status aceptado">{{reserva.estadoReserva}}</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="recentCustomers">
-            <div class="unidadesHeader">
-                <h2>Unidades</h2>
-                <a [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']" (click)="onGoUnidades()" class="btn">Ver Todo</a>
-            </div>
-            <table *ngFor="let unidad of unidades">
-                <tr>
-                    <td>
-                        <div class="imgBx"> <img src="../../../assets/casa.jpg" alt="logoCasa"> </div>
-                    </td>
-                    <td>
-                      <h4>{{unidad.unidad}}</h4>
-                      <p>{{unidad.nombrePropietario}} {{unidad.apellidoPropietario}}</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <div class="recentCustomers">
+      <div class="unidadesHeader">
+        <h2>Unidades</h2>
+        <a [routerLink]="['/admin/administracion']" [routerLinkActive]="['active']" (click)="onGoUnidades()"
+           class="btn">Ver Todo</a>
+      </div>
+      <table *ngFor="let unidad of unidades">
+        <tr>
+          <td>
+            <div class="imgBx"><img src="../../../assets/casa.jpg" alt="logoCasa"></div>
+          </td>
+          <td>
+            <h4>{{unidad.unidad}}</h4>
+            <p>{{unidad.nombrePropietario}} {{unidad.apellidoPropietario}}</p>
+          </td>
+        </tr>
+      </table>
     </div>
+  </div>

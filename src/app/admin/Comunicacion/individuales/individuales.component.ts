@@ -1,9 +1,15 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { UnidadesService } from '../../../services/unidades.service';
-import { Subscription } from "rxjs";
-import { Query } from '@syncfusion/ej2-data';
-import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from "@syncfusion/ej2-angular-grids";
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {Router} from "@angular/router";
+import {UnidadesService} from '../../../services/unidades.service';
+import {Subscription} from "rxjs";
+import {Query} from '@syncfusion/ej2-data';
+import {
+  CommandModel,
+  GridComponent,
+  PageSettingsModel,
+  PdfExportProperties,
+  ToolbarItems
+} from "@syncfusion/ej2-angular-grids";
 
 @Component({
   selector: 'app-individuales',
@@ -28,10 +34,10 @@ export class IndividualesComponent implements OnInit {
     private router: Router,
     private _unidadesService: UnidadesService
   ) {
-    this.pageSettings = { pageSize: 4 }
+    this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{ title: 'Ver Mensaje', buttonOption: { iconCss: 'e-icons e-comments', cssClass: 'e-flat' } },
-    { title: 'Nuevo', buttonOption: { iconCss: 'e-icons e-save-as', cssClass: 'e-flat' } }];
+    this.commands = [{title: 'Ver Mensaje', buttonOption: {iconCss: 'e-icons e-comments', cssClass: 'e-flat'}},
+      {title: 'Nuevo', buttonOption: {iconCss: 'e-icons e-save-as', cssClass: 'e-flat'}}];
     this.recoverData();
   }
 
@@ -110,17 +116,6 @@ export class IndividualesComponent implements OnInit {
     this.grid.query = this.queryClone;
   }
 
-  rowDataBound(args: any) {
-    // aquí estamos calculando el número de serie
-    var rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
-    var page = this.grid.pageSettings.currentPage! - 1;
-
-    var totalPages = this.grid.pageSettings.pageSize;
-    var startIndex = page * totalPages!;
-    var sno = startIndex + (rowIndex + 1);
-    //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
-    args.row.cells[0].innerText = sno;
-  }
 
   //evento para buscar al coincidir una letra
   created(): void {

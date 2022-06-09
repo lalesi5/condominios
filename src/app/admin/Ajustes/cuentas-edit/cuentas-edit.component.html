@@ -27,6 +27,16 @@
             Campo requerido
           </div>
         </div>
+        <div class="form-group">
+          <label>Saldo Inicial</label>
+          <input type="number" class="form-control" formControlName="saldoInicial"
+                 [ngClass]="{ 'is-invalid': !cuentasForm.controls['saldoInicial'].valid  && cuentasForm.controls['saldoInicial'].touched }">
+          <div
+            *ngIf=" cuentasForm.controls['saldoInicial'].touched  && !cuentasForm.controls['saldoInicial'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
+        </div>
         <div class="centrarBotones">
           <button type="submit" class="btn btn-success mr-2" [disabled]="cuentasForm.invalid">Guardar</button>
           <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
