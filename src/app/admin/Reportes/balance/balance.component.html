@@ -21,15 +21,18 @@
           <div class="card">
             <div>
               <div class="cardName">Total</div>
-              <div class="numbers">$ {{sumaIngresos-sumaEgresos | number : '1.1-2'}}</div>
+              <div class="numbers">$ {{sumaIngresos+sumaEgresos | number : '1.1-2'}}</div>
             </div>
           </div>
         </div>
       </div>
       <br>
-      <h3>Ingresos</h3>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="ingresos" [allowSorting]="true" [allowPaging]="true" gridLines="Both">
+        <ejs-grid #grid id='Grid' [dataSource]="balance" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
             <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160></e-column>
             <e-column field='numeroReciboPago' headerText='Número Recibo de Egreso' width=200></e-column>
@@ -44,26 +47,6 @@
               <e-columns>
                 <e-column type="Sum" field="valorPago" format="C2">
                   <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
-                </e-column>
-              </e-columns>
-            </e-aggregate>
-          </e-aggregates>
-        </ejs-grid>
-        <h3>Egresos</h3>
-        <ejs-grid #grid id='Grid3' [dataSource]="egresos" [allowPaging]="true" gridLines="Both">
-          <e-columns>
-            <e-column field='fechaEgreso' headerText='Fecha de Pago' width=160></e-column>
-            <e-column field='numeroReciboEgreso' headerText='Número Recibo de Egreso' width=200></e-column>
-            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140></e-column>
-            <e-column field='tiposPago' headerText='Tipo de Pago' width=140></e-column>
-            <e-column field='observacionesEgreso' headerText='Detalle de Pago' width=160></e-column>
-            <e-column field='valorEgreso' headerText='Valor Total' width=110 format="C2"></e-column>
-          </e-columns>
-          <e-aggregates>
-            <e-aggregate>
-              <e-columns>
-                <e-column type="Sum" field="valorEgreso" format="C2">
-                  <ng-template let-egresos>{{egresos.sum}}</ng-template>
                 </e-column>
               </e-columns>
             </e-aggregate>

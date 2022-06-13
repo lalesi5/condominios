@@ -13,23 +13,23 @@
           <div class="row">
             <div class="col">
               <label>Número de Recibo: </label>
-              <input type="text" class="form-control" formControlName="numeroReciboEgreso"
-                [ngClass]="{ 'is-invalid': !egresosForm.controls['numeroReciboEgreso'].valid && egresosForm.controls['numeroReciboEgreso'].touched }">
-              <div *ngIf="form['numeroReciboEgreso'].errors" class="invalid-feedback">
-                <div *ngIf="form['numeroReciboEgreso'].errors['pattern']">
+              <input type="text" class="form-control" formControlName="numeroReciboPago"
+                [ngClass]="{ 'is-invalid': !egresosForm.controls['numeroReciboPago'].valid && egresosForm.controls['numeroReciboPago'].touched }">
+              <div *ngIf="form['numeroReciboPago'].errors" class="invalid-feedback">
+                <div *ngIf="form['numeroReciboPago'].errors['pattern']">
                   La longitud del número no es válida
                 </div>
               </div>
             </div>
             <div class="col">
               <label>Valor: </label>
-              <input type="number" class="form-control" formControlName="valorEgreso"
-                [ngClass]="{ 'is-invalid': !egresosForm.controls['valorEgreso'].valid && egresosForm.controls['valorEgreso'].touched }">
-              <div *ngIf="form['valorEgreso'].errors" class="invalid-feedback">
-                <div *ngIf="form['valorEgreso'].errors['required']">
+              <input type="number" class="form-control" formControlName="valorPago"
+                [ngClass]="{ 'is-invalid': !egresosForm.controls['valorPago'].valid && egresosForm.controls['valorPago'].touched }">
+              <div *ngIf="form['valorPago'].errors" class="invalid-feedback">
+                <div *ngIf="form['valorPago'].errors['required']">
                   Campo requerido
                 </div>
-                <div *ngIf="form['valorEgreso'].errors['pattern']">
+                <div *ngIf="form['valorPago'].errors['pattern']">
                   El campo solo debe contener números, números positivos con dos decimales.
                 </div>
               </div>
@@ -103,7 +103,7 @@
             <form [formGroup]='egresosForm'>
               <div class="form-group">
                 <label>Concepto de Pago: </label>
-                <textarea type="text" class="form-control" formControlName="observacionesEgreso">
+                <textarea type="text" class="form-control" formControlName="observaciones">
                 </textarea>
               </div>
             </form>
