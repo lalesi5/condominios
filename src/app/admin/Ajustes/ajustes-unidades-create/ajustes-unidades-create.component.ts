@@ -44,7 +44,7 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
       emailResidente: [''],
       nombrePropietario: ['', Validators.required],
       apellidoPropietario: ['', Validators.required],
-      telefonoPropietario: ['', [Validators.pattern(/^.{9,13}$/)]],
+      telefonoPropietario: ['', [Validators.pattern(/^.{6,13}$/)]],
       emailPropietario: ['', [Validators.required, Validators.pattern(this.isEmail)]],
     });
 

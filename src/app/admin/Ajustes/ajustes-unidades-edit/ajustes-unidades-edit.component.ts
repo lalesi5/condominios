@@ -49,7 +49,7 @@ export class AjustesUnidadesEditComponent implements OnInit, OnDestroy {
       areaUnidad: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       nombrePropietario: ['', Validators.required],
       apellidoPropietario: ['', Validators.required],
-      telefonoPropietario: ['', [Validators.pattern(/^.{9,13}$/)]],
+      telefonoPropietario: ['', [Validators.pattern(/^.{6,13}$/)]],
       emailPropietario: ['', [Validators.required, Validators.pattern(this.isEmail)]],
     });
 
