@@ -61,9 +61,11 @@ export class IngresosReportesComponent implements OnInit {
       this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
         this.ingresos = [];
         data.forEach((element: any) => {
-          this.ingresos.push({
-            ...element.payload.doc.data()
-          })
+          if (element.payload.doc.data()['modoPago'] === 'Mensualidad' || element.payload.doc.data()['modoPago'] === 'Extraordinario') {
+            this.ingresos.push({
+              ...element.payload.doc.data()
+            })
+          }
         })
         this.sumaIngresos = 0;
         this.ingresos.map(data => {

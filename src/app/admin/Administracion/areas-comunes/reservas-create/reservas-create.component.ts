@@ -162,8 +162,6 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
           valorReserva: <number>this.areaComunalForm.value.valorReserva
         }
 
-        console.log(reserva);
-
         this.loading = true;
         this._reservaService.agregarReserva(reserva).then(() => {
           this.toastr.success('La reserva fue creada con exito', 'Reserva registrada', {

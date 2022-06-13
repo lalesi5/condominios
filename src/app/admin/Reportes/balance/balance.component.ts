@@ -13,6 +13,7 @@ import {extraordinariosService} from "../../../services/extraordinarios.service"
 import {DialogService} from "../../../services/dialog.service";
 import {egresosService} from "../../../services/egresos.service";
 import {Query} from "@syncfusion/ej2-data";
+import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 @Component({
   selector: 'app-balance',
@@ -24,10 +25,11 @@ export class BalanceComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idCondominio: string = '';
+  balance: any[] = [];
   ingresos: any[] = [];
   egresos: any[] = [];
   sumaIngresos: number = 0;
-  sumaExtraordinarios: number = 0;
+  sumaBalance: number = 0;
   sumaEgresos: number = 0;
 
   public pageSettings: PageSettingsModel;
@@ -50,6 +52,7 @@ export class BalanceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getBalance();
     this.getIngresos();
     this.getEgresos();
   }
@@ -58,36 +61,53 @@ export class BalanceComponent implements OnInit {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getEgresos() {
+
+  getBalance() {
     this.subscription.add(
-      this._egresoService.getEgresos(this.idCondominio).subscribe(data => {
-        this.egresos = [];
+      this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
+        this.balance = [];
         data.forEach((element: any) => {
-          this.egresos.push({
+          this.balance.push({
             ...element.payload.doc.data()
           })
-        })
-        this.sumaEgresos = 0;
-        this.egresos.map(data => {
-          this.sumaEgresos += data.valorEgreso;
         })
       })
     )
   }
-
 
   getIngresos() {
     this.subscription.add(
       this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
         this.ingresos = [];
         data.forEach((element: any) => {
-          this.ingresos.push({
-            ...element.payload.doc.data()
-          })
+          if (element.payload.doc.data()['modoPago'] === 'Mensualidad' || element.payload.doc.data()['modoPago'] === 'Extraordinario') {
+            this.ingresos.push({
+              ...element.payload.doc.data()
+            })
+          }
         })
         this.sumaIngresos = 0;
         this.ingresos.map(data => {
           this.sumaIngresos += data.valorPago;
+        })
+      })
+    )
+  }
+
+  getEgresos() {
+    this.subscription.add(
+      this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
+        this.egresos = [];
+        data.forEach((element: any) => {
+          if (element.payload.doc.data()['modoPago'] === 'Egreso') {
+            this.egresos.push({
+              ...element.payload.doc.data()
+            })
+          }
+        })
+        this.sumaEgresos = 0;
+        this.egresos.map(data => {
+          this.sumaEgresos += data.valorPago;
         })
       })
     )

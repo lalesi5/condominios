@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 import {egresosService} from "../../../services/egresos.service";
 import {DialogService} from "../../../services/dialog.service";
 import {Query} from "@syncfusion/ej2-data";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
 
 @Component({
   selector: 'app-egresoReportes',
@@ -35,7 +36,7 @@ export class EgresosReportesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _egresoService: egresosService,
+    private _egresoService: IngresoUnidadesService,
     private _dialogService: DialogService
   ) {
     this.recoverData();
@@ -54,16 +55,18 @@ export class EgresosReportesComponent implements OnInit {
 
   getEgresos() {
     this.subscription.add(
-      this._egresoService.getEgresos(this.idCondominio).subscribe(data => {
+      this._egresoService.getPagosCondominio(this.idCondominio).subscribe(data => {
         this.egresos = [];
         data.forEach((element: any) => {
-          this.egresos.push({
-            ...element.payload.doc.data()
-          })
+          if (element.payload.doc.data()['modoPago'] === 'Egreso') {
+            this.egresos.push({
+              ...element.payload.doc.data()
+            })
+          }
         })
         this.sumaEgresos = 0;
         this.egresos.map(data => {
-          this.sumaEgresos += data.valorEgreso;
+          this.sumaEgresos += data.valorPago;
         })
       })
     )

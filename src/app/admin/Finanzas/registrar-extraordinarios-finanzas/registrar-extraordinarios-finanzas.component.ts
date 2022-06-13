@@ -175,11 +175,11 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     return this.extraordinariosForm.controls;
   }
 
-  get numeroReciboPagoExtraordinario() {
-    return this.extraordinariosForm.get('numeroReciboPagoExtraordinario');
+  get numeroReciboPago() {
+    return this.extraordinariosForm.get('numeroReciboPago');
   }
 
-  get valorPagoExtraordinario() {
-    return this.extraordinariosForm.get('valorPagoExtraordinario');
+  get valorPago() {
+    return this.extraordinariosForm.get('valorPago');
   }
 }
