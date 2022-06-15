@@ -68,7 +68,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       estadoReciboPago: ['Pagado'],
       valorPago: ['', Validators.required],
       saldo: [''],
-      modoPago: ['Mensualidad']
+      modoPago: ['Mensualidad'],
+      mes: ['']
     });
 
     this.datosUnidadForm = this.fb.group({
@@ -281,8 +282,10 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           estadoIngreso: this.pagoMensualidadForm.value.estadoIngreso,
           valorPago: this.pagoMensualidadForm.value.valorPago,
           saldo: this.saldo,
-          modoPago: this.pagoMensualidadForm.value.modoPago
+          modoPago: this.pagoMensualidadForm.value.modoPago,
+          mes: this.date.toLocaleString("es-ES", { month: "long" }) + this.date.toLocaleString("es-ES", { year: 'numeric' })
         }
+        
         this.loading = true;
         this._ingresoUnidades.savePago(pagoMensualidad).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {

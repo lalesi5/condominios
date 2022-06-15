@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {GridModule} from "@syncfusion/ej2-angular-grids";
 import {CommonModule} from "@angular/common";
 import {CuentasComponent} from './cuentas/cuentas.component';
+import { TablaCobranzasComponent } from './tabla-cobranzas/tabla-cobranzas.component';
 
 @NgModule({
 
@@ -29,7 +30,8 @@ import {CuentasComponent} from './cuentas/cuentas.component';
     BalanceComponent,
     EgresosReportesComponent,
     IngresosReportesComponent,
-    CuentasComponent
+    CuentasComponent,
+    TablaCobranzasComponent
   ],
   exports: [],
   providers: []
