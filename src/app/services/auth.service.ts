@@ -251,6 +251,10 @@ export class AuthService {
         return 'Lo sentimos, se ingresó una contraseña incorrecta. Inténtalo de nuevo.';
       }
 
+      case 'auth/email-already-in-use': {
+        return 'El correo que ingreso ya se encuentra en uso.';
+      }
+
       default: {
         return 'Error de inicio de sesión inténtalo de nuevo más tarde.';
       }

@@ -33,7 +33,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
-      phone: ['', [Validators.pattern(/^.{9,13}$/)]],
+      phone: ['', [Validators.pattern(/^.{6,13}$/)]],
       address: [''],
     })
 
@@ -86,7 +86,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
 
     this._dialogService.confirmDialog({
       title: 'Modificar Usuario',
-      message: '¿Está seguro de modificar el usuario?',
+      message: '¿Está seguro de modificar la información?',
       confirmText: 'Si',
       cancelText: 'No',
     }).subscribe(res => {
