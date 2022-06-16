@@ -6,6 +6,7 @@ import {EgresosReportesComponent} from "./egresos/egresosReportes.component";
 import {IngresosReportesComponent} from "./ingresos/ingresosReportes.component";
 import {ReportesComponent} from "./reportes.component";
 import {CuentasComponent} from "./cuentas/cuentas.component";
+import {TablaCobranzasComponent} from "./tabla-cobranzas/tabla-cobranzas.component";
 
 
 const routesReportes: Routes = [
@@ -16,7 +17,8 @@ const routesReportes: Routes = [
         {path: 'balance', component: BalanceComponent},
         {path: 'egresosReportes', component: EgresosReportesComponent},
         {path: 'ingresosReportes', component: IngresosReportesComponent},
-        {path: 'cuentas', component: CuentasComponent}
+        {path: 'cuentas', component: CuentasComponent},
+        {path: 'tablaCobranzas', component: TablaCobranzasComponent}
       ]
   },
 ];

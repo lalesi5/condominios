@@ -1,0 +1,38 @@
+<div class="tablaCobranzas">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Tabla de Cobranzas</h2>
+      <h3>2022/2023</h3>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings"
+                  [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+                  (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
+          <e-columns>
+            <e-column field='unidad' headerText='Unidad' width=100></e-column>
+            <e-column field='jun2022' headerText='Jun' width=70></e-column>
+            <e-column field='jul2022' headerText='Jul' width=70></e-column>
+            <e-column headerText='Ago' width=70></e-column>
+            <e-column headerText='Sep' width=70></e-column>
+            <e-column headerText='Oct' width=70></e-column>
+            <e-column headerText='Nov' width=70></e-column>
+            <e-column headerText='Dic' width=70></e-column>
+            <e-column headerText='Ene' width=70></e-column>
+            <e-column headerText='Feb' width=70></e-column>
+            <e-column headerText='Mar' width=70></e-column>
+            <e-column headerText='Abr' width=70></e-column>
+            <e-column headerText='May' width=70></e-column>
+            <e-column headerText='Jun' width=70></e-column>
+            <e-column headerText='Jul' width=70></e-column>
+            <e-column headerText='Ago' width=70></e-column>
+            <e-column headerText='Sep' width=70></e-column>
+            <e-column headerText='Oct' width=70></e-column>
+            <e-column headerText='Nov' width=70></e-column>
+            <e-column headerText='Dic' width=70></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </mat-card>
+  </div>
+</div>
