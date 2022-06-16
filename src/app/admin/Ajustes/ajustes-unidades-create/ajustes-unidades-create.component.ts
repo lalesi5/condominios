@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 import { UsuariosService } from "../../../services/usuarios.service";
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'src/app/services/dialog.service';
+import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
 
 @Component({
   selector: 'app-ajustes-unidades-create',
@@ -28,6 +29,7 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
+    private _tablaCobranzasService: TablaCobranzaService,
     private _usuarioService: UsuariosService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
@@ -64,6 +66,7 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
     this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
     this.idUsuario = <string>sessionStorage.getItem('idUsuario');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
   }
 
   getUsuarios() {
@@ -126,6 +129,28 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
         })
       }
     });
+    this.onCreateTablaCobranzas();
+  }
+
+  onCreateTablaCobranzas(){
+    const tabla: any = {
+      unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+      idUnidad: this.idUnidad,
+      idCondominio: this.idCondominio,
+      enero2022: 0,
+      febrero2022: 0,
+      marzo2022: 0,
+      abril2022: 0,
+      mayo2022: 0,
+      junio2022: 0,
+      julio2022: 0,
+      agosto2022: 0,
+      septiembre2022: 0,
+      octubre2022: 0,
+      noviembre2022: 0,
+      diciembre2022: 0
+    }
+    this._tablaCobranzasService.createTablaCobranzas(tabla);
   }
 
   onBacktoList(): void {

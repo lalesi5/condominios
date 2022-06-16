@@ -1,18 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { Subscription } from 'rxjs';
-import { UnidadesService } from "../../../services/unidades.service";
-import { CuentasService } from "../../../services/cuentas.service";
-import { ReservasService } from "../../../services/reservas.service";
-import { TiposPagoService } from "../../../services/tiposPago.service";
-import { DescuentosService } from "../../../services/descuentos.service";
-import { DialogService } from "../../../services/dialog.service";
-import { IngresoUnidadesService } from "../../../services/pagos.service";
-import { ToastrService } from "ngx-toastr";
-import {BigInteger} from "@angular/compiler/src/i18n/big_integer";
-import {toInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {Subscription} from 'rxjs';
+import {UnidadesService} from "../../../services/unidades.service";
+import {CuentasService} from "../../../services/cuentas.service";
+import {ReservasService} from "../../../services/reservas.service";
+import {TiposPagoService} from "../../../services/tiposPago.service";
+import {DescuentosService} from "../../../services/descuentos.service";
+import {DialogService} from "../../../services/dialog.service";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
+import {ToastrService} from "ngx-toastr";
+import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
 
 
 @Component({
@@ -36,6 +34,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   reservas: any[] = [];
   tiposPago: any[] = [];
   descuentos: any[] = [];
+  tablaCobranzas: any[] = [];
 
   pagoMensualidadForm: FormGroup;
   datosUnidadForm: FormGroup;
@@ -52,6 +51,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     private _cuentaPagoService: CuentasService,
     private _tipoPagoService: TiposPagoService,
     private _descuentoService: DescuentosService,
+    private _tablaCobranzaService: TablaCobranzaService,
     private _dialogService: DialogService,
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -109,6 +109,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.getValoresReservas();
     this.getTiposPago();
     this.getDescuentos();
+    this.getTablaCobranzas();
+    this.onUpdateTablaCobranzas();
   }
 
   ngOnDestroy(): void {
@@ -130,6 +132,20 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
             ...element.payload.doc.data()
           })
         })
+      })
+    );
+  }
+
+  getTablaCobranzas() {
+    this.subscription.add(
+      this._tablaCobranzaService.getTablaCobranzasByUnidad(this.idUnidad).subscribe(data => {
+        this.tablaCobranzas = [];
+        data.forEach((element: any) => {
+          this.tablaCobranzas.push({
+            ...element.payload.doc.data()
+          })
+        })
+        //console.log(this.tablaCobranzas);
       })
     );
   }
@@ -283,9 +299,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           valorPago: this.pagoMensualidadForm.value.valorPago,
           saldo: this.saldo,
           modoPago: this.pagoMensualidadForm.value.modoPago,
-          mes: this.date.toLocaleString("es-ES", { month: "long" }) + this.date.toLocaleString("es-ES", { year: 'numeric' })
+          mes: this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
         }
-        
         this.loading = true;
         this._ingresoUnidades.savePago(pagoMensualidad).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
@@ -308,6 +323,38 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       }
       this._reservasService.actualizarReserva(element.idReserva, pagoReservaData);
     })
+  }
+
+  onUpdateTablaCobranzas() {
+    let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
+    console.log(fecha);
+    if (fecha == 'junio2022') {
+      console.log(this.tablaCobranzas);
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          junio2022: this.saldo
+        }
+        //this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
+    else if (fecha == 'julio2022'){
+
+    }
+    else if (fecha == 'agosto2022'){
+
+    }
+    else if (fecha == 'septiembre2022'){
+
+    }
+    else if (fecha == 'octubre2022'){
+
+    }
+    else if (fecha == 'noviembre2022'){
+
+    }
+    else if (fecha == 'diciembre2022'){
+
+    }
   }
 
   onBacktoList(): void {

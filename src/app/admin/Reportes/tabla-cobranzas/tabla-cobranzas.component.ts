@@ -12,6 +12,7 @@ import {CuentasService} from "../../../services/cuentas.service";
 import {DialogService} from "../../../services/dialog.service";
 import {UnidadesService} from "../../../services/unidades.service";
 import {Query} from "@syncfusion/ej2-data";
+import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
 
 @Component({
   selector: 'app-tabla-cobranzas',
@@ -22,7 +23,7 @@ export class TablaCobranzasComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idCondominio: string = '';
-  unidades: any[] = [];
+  tablaCobranzas: any[] = [];
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -32,7 +33,7 @@ export class TablaCobranzasComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _unidadesService: UnidadesService,
+    private _tablaCobranzas: TablaCobranzaService,
     private _dialogService: DialogService,
   ) {
     this.recoverData();
@@ -42,19 +43,19 @@ export class TablaCobranzasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUnidades();
+    this.getTablaCobranzas();
   }
 
   recoverData() {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getUnidades() {
+  getTablaCobranzas() {
     this.subscription.add(
-      this._unidadesService.getAllUnidades(this.idCondominio).subscribe(data => {
-        this.unidades = [];
+      this._tablaCobranzas.getTablaCobranzasByCondominio(this.idCondominio).subscribe(data => {
+        this.tablaCobranzas = [];
         data.forEach((element: any) => {
-          this.unidades.push({
+          this.tablaCobranzas.push({
             ...element.payload.doc.data()
           })
         })

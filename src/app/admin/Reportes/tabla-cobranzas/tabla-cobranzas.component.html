@@ -4,32 +4,25 @@
       <h2>Tabla de Cobranzas</h2>
       <h3>2022/2023</h3>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+        <ejs-grid #grid id='Grid' [dataSource]="tablaCobranzas" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
                   [pageSettings]="pageSettings"
                   [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
                   (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
                   (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
             <e-column field='unidad' headerText='Unidad' width=100></e-column>
-            <e-column field='jun2022' headerText='Jun' width=70></e-column>
-            <e-column field='jul2022' headerText='Jul' width=70></e-column>
-            <e-column headerText='Ago' width=70></e-column>
-            <e-column headerText='Sep' width=70></e-column>
-            <e-column headerText='Oct' width=70></e-column>
-            <e-column headerText='Nov' width=70></e-column>
-            <e-column headerText='Dic' width=70></e-column>
-            <e-column headerText='Ene' width=70></e-column>
-            <e-column headerText='Feb' width=70></e-column>
-            <e-column headerText='Mar' width=70></e-column>
-            <e-column headerText='Abr' width=70></e-column>
-            <e-column headerText='May' width=70></e-column>
-            <e-column headerText='Jun' width=70></e-column>
-            <e-column headerText='Jul' width=70></e-column>
-            <e-column headerText='Ago' width=70></e-column>
-            <e-column headerText='Sep' width=70></e-column>
-            <e-column headerText='Oct' width=70></e-column>
-            <e-column headerText='Nov' width=70></e-column>
-            <e-column headerText='Dic' width=70></e-column>
+            <e-column field='enero2022'  headerText='Ene' width=70></e-column>
+            <e-column field='febrero2022'  headerText='Feb' width=70></e-column>
+            <e-column field='marzo2022'  headerText='Mar' width=70></e-column>
+            <e-column field='abril2022'  headerText='Abr' width=70></e-column>
+            <e-column field='mayo2022'  headerText='May' width=70></e-column>
+            <e-column field='junio2022'  headerText='Jun' width=70></e-column>
+            <e-column field='julio2022'  headerText='Jul' width=70></e-column>
+            <e-column field='agosto2022'  headerText='Ago' width=70></e-column>
+            <e-column field='septiembre2022'  headerText='Sep' width=70></e-column>
+            <e-column field='octubre2022'  headerText='Oct' width=70></e-column>
+            <e-column field='noviembre2022'  headerText='Nov' width=70></e-column>
+            <e-column field='diciembre2022'  headerText='Dic' width=70></e-column>
           </e-columns>
         </ejs-grid>
       </div>
