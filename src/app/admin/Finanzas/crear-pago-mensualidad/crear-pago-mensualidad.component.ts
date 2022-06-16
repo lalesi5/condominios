@@ -110,7 +110,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.getTiposPago();
     this.getDescuentos();
     this.getTablaCobranzas();
-    this.onUpdateTablaCobranzas();
+    //this.onUpdateTablaCobranzas();
   }
 
   ngOnDestroy(): void {
@@ -312,8 +312,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           console.log(error);
         })
       }
+      this.onUpdateEstadoReservasPagadas();
+      this.onUpdateTablaCobranzas();
     });
-    this.onUpdateEstadoReservasPagadas();
   }
 
   onUpdateEstadoReservasPagadas() {
@@ -327,33 +328,112 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
 
   onUpdateTablaCobranzas() {
     let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
-    console.log(fecha);
+    //console.log(fecha);
+    //console.log(this.saldo);
     if (fecha == 'junio2022') {
-      console.log(this.tablaCobranzas);
+      //console.log(this.tablaCobranzas);
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           junio2022: this.saldo
         }
-        //this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     }
     else if (fecha == 'julio2022'){
-
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          julio2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
     }
     else if (fecha == 'agosto2022'){
-
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          agosto2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
     }
     else if (fecha == 'septiembre2022'){
-
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          septiembre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
     }
     else if (fecha == 'octubre2022'){
-
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          octubre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
     }
     else if (fecha == 'noviembre2022'){
-
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          noviembre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
     }
     else if (fecha == 'diciembre2022'){
-
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          diciembre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
+    else if (fecha == 'enero2023'){
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          enero2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
+    else if (fecha == 'febrero2023'){
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          febrero2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
+    else if (fecha == 'marzo2023'){
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          marzo2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
+    else if (fecha == 'abril2023'){
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          abril2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
+    else if (fecha == 'mayo2023'){
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          mayo2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
+    else if (fecha == 'junio2023'){
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          junio2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
     }
   }
 

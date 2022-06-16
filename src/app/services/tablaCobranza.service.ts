@@ -23,7 +23,7 @@ export class TablaCobranzaService {
   }
 
   getTablaCobranzasByCondominio(idCondominio: string): Observable<any> {
-    return this.firestore.collection('TablaCobranzas', ref => ref.where('idCondominio', '==', idCondominio))
+    return this.firestore.collection('TablaCobranzas', ref => ref.where('idCondominio', '==', idCondominio).orderBy('unidad', "asc"))
       .snapshotChanges();
   }
 

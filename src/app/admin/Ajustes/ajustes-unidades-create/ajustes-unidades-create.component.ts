@@ -66,7 +66,6 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
     this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
     this.idUsuario = <string>sessionStorage.getItem('idUsuario');
-    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
   }
 
   getUsuarios() {
@@ -128,27 +127,18 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
           console.log(error);
         })
       }
+      this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+      console.log(this.idUnidad);
+      this.onCreateTablaCobranzas(this.idUnidad);
     });
-    this.onCreateTablaCobranzas();
   }
 
-  onCreateTablaCobranzas(){
+  async onCreateTablaCobranzas(idUnidad: string){
+    console.log('On create table',idUnidad);
     const tabla: any = {
       unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
-      idUnidad: this.idUnidad,
       idCondominio: this.idCondominio,
-      enero2022: 0,
-      febrero2022: 0,
-      marzo2022: 0,
-      abril2022: 0,
-      mayo2022: 0,
-      junio2022: 0,
-      julio2022: 0,
-      agosto2022: 0,
-      septiembre2022: 0,
-      octubre2022: 0,
-      noviembre2022: 0,
-      diciembre2022: 0
+      idUnidad: idUnidad
     }
     this._tablaCobranzasService.createTablaCobranzas(tabla);
   }
