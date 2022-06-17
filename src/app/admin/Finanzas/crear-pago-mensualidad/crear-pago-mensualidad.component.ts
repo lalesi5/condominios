@@ -11,6 +11,7 @@ import {DialogService} from "../../../services/dialog.service";
 import {IngresoUnidadesService} from "../../../services/pagos.service";
 import {ToastrService} from "ngx-toastr";
 import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
+import {DatePipe} from "@angular/common";
 
 
 @Component({
@@ -28,6 +29,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   sumaValorReservas: number = 0;
   saldo: number = 0;
   date = new Date();
+  pipe = new DatePipe('en-US');
 
   unidades: any[] = [];
   cuentasPago: any[] = [];
@@ -138,6 +140,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   }
 
   getTablaCobranzas() {
+    console.log(this.idUnidad)
     this.subscription.add(
       this._tablaCobranzaService.getTablaCobranzasByUnidad(this.idUnidad).subscribe(data => {
         this.tablaCobranzas = [];
@@ -276,6 +279,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       cancelText: 'No',
     }).subscribe(res => {
       this.saldo = (this.sumaTotalForm.value.sumaTotal - this.pagoMensualidadForm.value.valorPago);
+
       if (res) {
         const pagoMensualidad: any = {
           idAdministrador: this.idAdministrador,
@@ -283,7 +287,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           idUnidad: this.idUnidad,
           idCuenta: this.cuentasPagoForm.value.idCuenta,
           unidad: this.datosUnidadForm.value.unidad,
-          fechaReciboPago: this.date.toLocaleString(),
+          fechaReciboPago: this.pipe.transform(this.date, 'yyyy/MM/dd'),
           numeroReciboPago: this.pagoMensualidadForm.value.numeroReciboPago,
           nombreResidente: this.datosUnidadForm.value.nombreResidente,
           apellidoResidente: this.datosUnidadForm.value.apellidoResidente,
@@ -334,7 +338,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     //console.log(fecha);
     //console.log(this.saldo);
     if (fecha == 'junio2022') {
-      //console.log(this.tablaCobranzas);
+      console.log(this.tablaCobranzas);
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           junio2022: this.saldo

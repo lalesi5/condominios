@@ -12,12 +12,26 @@
         <div class="form-group">
 
           <label>Fecha de Inicio</label>
-          <ejs-daterangepicker formControlName="fechaInicio" placeholder="Seleccione fecha inicio"
+          <ejs-datepicker formControlName="fechaInicio" placeholder="Seleccione fecha inicio"
                               floatLabelType="Auto"
                               [ngClass]="{ 'is-invalid': !dataForm.controls['fechaInicio'].valid && dataForm.controls['fechaInicio'].touched }">
-          </ejs-daterangepicker>
+          </ejs-datepicker>
           <div
             *ngIf=" dataForm.controls['fechaInicio'].touched && !dataForm.controls['fechaInicio'].valid"
+            class="invalid-feedback">
+            Fecha invalida
+          </div>
+        </div>
+
+        <div class="form-group">
+
+          <label>Fecha de Fin</label>
+          <ejs-datepicker formControlName="fechaFin" placeholder="Seleccione fecha fin"
+                          floatLabelType="Auto"
+                          [ngClass]="{ 'is-invalid': !dataForm.controls['fechaFin'].valid && dataForm.controls['fechaFin'].touched }">
+          </ejs-datepicker>
+          <div
+            *ngIf=" dataForm.controls['fechaFin'].touched && !dataForm.controls['fechaFin'].valid"
             class="invalid-feedback">
             Fecha invalida
           </div>

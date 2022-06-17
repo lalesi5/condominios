@@ -14,8 +14,10 @@ export class CuentasSelectedComponent implements OnInit {
   private subscription: Subscription = new Subscription;
   idCondominio: string = '';
   idCuenta: string = '';
-  rangoFecha: string = '';
+  fechaInicio: string = '';
+  fechaFin: string = '';
   cuenta: any[] = [];
+  timestamp = new Date();
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -34,13 +36,29 @@ export class CuentasSelectedComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCuentasFechaRango();
   }
 
   recoverData() {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
     this.idCuenta = <string>sessionStorage.getItem('idCuenta');
-    this.rangoFecha = <string>sessionStorage.getItem('fechaInicio');
   }
+
+  getCuentasFechaRango() {
+    this.subscription.add(
+      this._cuentasService.getPagosCondominioCuenta(this.idCondominio, this.idCuenta).subscribe(data => {
+        this.cuenta = [];
+        data.forEach((element: any) => {
+          this.cuenta.push({
+            ...element.payload.doc.data()
+          })
+        })
+
+      })
+    )
+  }
+
+
 
 
 }

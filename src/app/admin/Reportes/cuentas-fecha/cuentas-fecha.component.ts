@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {DialogService} from "../../../services/dialog.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-cuentas-fecha',
@@ -13,9 +14,13 @@ export class CuentasFechaComponent implements OnInit {
   idAdministrador: string = '';
   idCondominio: string = '';
   idCuenta: string = '';
-  date: string = '';
-  date2: string = '';
+  date = Date;
+  date2 = Date;
   loading = false;
+  pipe = new DatePipe('en-US');
+  pipe2 = new DatePipe('en-US');
+  dateWithPipe: string = '';
+  dateWithPipe2: string = '';
 
   dataForm: FormGroup;
 
@@ -26,6 +31,7 @@ export class CuentasFechaComponent implements OnInit {
   ) {
     this.dataForm = this.fb.group({
       fechaInicio: ['', Validators.required],
+      fechaFin: ['', Validators.required],
     })
   }
 
@@ -36,17 +42,27 @@ export class CuentasFechaComponent implements OnInit {
   }
 
   onGoSeleccion() {
-    this.date = this.dataForm.value.fechaInicio.toLocaleString();
-    console.log(this.date);
+    this.date = this.dataForm.value.fechaInicio;
+    this.date2 = this.dataForm.value.fechaFin;
+    //console.log(this.date);
+    //console.log(typeof(this.date));
+
     this._dialogService.confirmDialog({
       title: 'Seleccionar Fecha',
       message: '¿Está seguro del rango de fechas?',
       confirmText: 'Si',
       cancelText: 'No',
     }).subscribe(res => {
+      // @ts-ignore
+      this.dateWithPipe = this.pipe.transform(this.date,'yyyy/MM/dd');
+      let fecha1 = Date.parse(this.dateWithPipe);
+      // @ts-ignore
+      this.dateWithPipe2 = this.pipe.transform(this.date2,'yyyy/MM/dd')
+      let fecha2 = Date.parse(this.dateWithPipe2);
       if (res) {
-        sessionStorage.setItem('fechaInicio', this.date);
-        console.log(this.date);
+        sessionStorage.setItem('fechaInicio', String(fecha1));
+        sessionStorage.setItem('fechaFin', String(fecha2));
+        //console.log(sessionStorage);
       }
       this.loading = true;
       this.router.navigate(['admin/reportes/cuentasSelected']);

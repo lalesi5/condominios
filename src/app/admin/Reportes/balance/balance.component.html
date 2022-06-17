@@ -30,8 +30,8 @@
       <div class="control-section">
         <ejs-grid #grid id='Grid' [dataSource]="balance" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
                   [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
-                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-                  (excelExportComplete)="excelExportComplete()"
+                  (toolbarClick)="toolbarClick($event)"
+                  [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
                   [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
             <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160></e-column>

@@ -8,6 +8,7 @@ import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
 import {egresosService} from "../../../services/egresos.service";
 import {IngresoUnidadesService} from "../../../services/pagos.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-registrar-egreso',
@@ -21,6 +22,7 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
   idCondominio: string = '';
   loading = false;
   date = new Date();
+  pipe = new DatePipe('en-US');
 
   tiposPago: any[] = [];
   cuentasPago: any[] = [];
@@ -143,7 +145,7 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idCuenta: this.cuentasPagoForm.value.idCuenta,
-          fechaReciboPago: this.date.toLocaleString(),
+          fechaReciboPago: this.pipe.transform(this.date, 'yyyy/MM/dd'),
           numeroReciboPago: this.egresosForm.value.numeroReciboPago,
           valorPago: -this.egresosForm.value.valorPago,
           nombreCuenta: this.cuentasPagoForm.value.nombreCuenta,
