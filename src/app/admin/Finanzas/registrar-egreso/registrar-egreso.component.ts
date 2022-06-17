@@ -58,6 +58,7 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
     });
 
     this.cuentasPagoForm = this.fb.group({
+      idCuenta: [''],
       nombreCuenta: [''],
       tipoCuenta: ['']
     });
@@ -110,6 +111,7 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
       this._cuentaPagoService.getCuenta(item).subscribe(data => {
         this.loading = false;
         this.cuentasPagoForm.setValue({
+          idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
           tipoCuenta: data.payload.data()['tipoCuenta']
         })
@@ -140,6 +142,7 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
         const pagoEgreso: any = {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
+          idCuenta: this.cuentasPagoForm.value.idCuenta,
           fechaReciboPago: this.date.toLocaleString(),
           numeroReciboPago: this.egresosForm.value.numeroReciboPago,
           valorPago: -this.egresosForm.value.valorPago,

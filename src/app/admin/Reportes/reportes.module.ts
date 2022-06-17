@@ -14,6 +14,16 @@ import {GridModule} from "@syncfusion/ej2-angular-grids";
 import {CommonModule} from "@angular/common";
 import {CuentasComponent} from './cuentas/cuentas.component';
 import { TablaCobranzasComponent } from './tabla-cobranzas/tabla-cobranzas.component';
+import { CuentasFechaComponent } from './cuentas-fecha/cuentas-fecha.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {
+  CalendarModule,
+  DatePickerModule,
+  DateRangePickerModule,
+  DateTimePickerModule
+} from "@syncfusion/ej2-angular-calendars";
+import { CuentasSelectedComponent } from './cuentas-selected/cuentas-selected.component';
 
 @NgModule({
 
@@ -24,14 +34,22 @@ import { TablaCobranzasComponent } from './tabla-cobranzas/tabla-cobranzas.compo
     MatInputModule,
     MatSelectModule,
     GridModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    DateTimePickerModule,
+    DatePickerModule,
+    CalendarModule,
+    DateRangePickerModule
   ],
   declarations: [
     BalanceComponent,
     EgresosReportesComponent,
     IngresosReportesComponent,
     CuentasComponent,
-    TablaCobranzasComponent
+    TablaCobranzasComponent,
+    CuentasFechaComponent,
+    CuentasSelectedComponent
   ],
   exports: [],
   providers: []

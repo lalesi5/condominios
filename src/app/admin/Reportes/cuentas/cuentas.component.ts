@@ -64,7 +64,7 @@ export class CuentasComponent implements OnInit {
   commandClick(item: any): void {
     if (item.target?.title === 'Seleccionar') {
       sessionStorage.setItem('idCuenta', <string>item.rowData['idCuenta']);
-      this.router.navigate(['/admin/reportes/cuentasSelect']);
+      this.router.navigate(['/admin/reportes/cuentasFecha']);
     }
   }
 

@@ -81,6 +81,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     });
 
     this.cuentasPagoForm = this.fb.group({
+      idCuenta:[''],
       nombreCuenta: [''],
       tipoCuenta: ['']
     });
@@ -226,6 +227,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       this._cuentaPagoService.getCuenta(item).subscribe(data => {
         this.loading = false;
         this.cuentasPagoForm.setValue({
+          idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
           tipoCuenta: data.payload.data()['tipoCuenta']
         })
@@ -279,6 +281,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idUnidad: this.idUnidad,
+          idCuenta: this.cuentasPagoForm.value.idCuenta,
           unidad: this.datosUnidadForm.value.unidad,
           fechaReciboPago: this.date.toLocaleString(),
           numeroReciboPago: this.pagoMensualidadForm.value.numeroReciboPago,

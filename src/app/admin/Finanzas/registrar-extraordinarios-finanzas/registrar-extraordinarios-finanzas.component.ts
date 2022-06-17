@@ -58,6 +58,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     });
 
     this.cuentasPagoForm = this.fb.group({
+      idCuenta: [''],
       nombreCuenta: [''],
       tipoCuenta: ['']
     });
@@ -111,6 +112,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
       this._cuentaPagoService.getCuenta(item).subscribe(data => {
         this.loading = false;
         this.cuentasPagoForm.setValue({
+          idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
           tipoCuenta: data.payload.data()['tipoCuenta']
         })
@@ -141,6 +143,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
         const pagoExtraordinarias: any = {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
+          idCuenta: this.cuentasPagoForm.value.idCuenta,
           fechaReciboPago: this.date.toLocaleString(),
           numeroReciboPago: this.extraordinariosForm.value.numeroReciboPago,
           valorPago: this.extraordinariosForm.value.valorPago,

@@ -7,6 +7,8 @@ import {IngresosReportesComponent} from "./ingresos/ingresosReportes.component";
 import {ReportesComponent} from "./reportes.component";
 import {CuentasComponent} from "./cuentas/cuentas.component";
 import {TablaCobranzasComponent} from "./tabla-cobranzas/tabla-cobranzas.component";
+import {CuentasFechaComponent} from "./cuentas-fecha/cuentas-fecha.component";
+import {CuentasSelectedComponent} from "./cuentas-selected/cuentas-selected.component";
 
 
 const routesReportes: Routes = [
@@ -18,6 +20,8 @@ const routesReportes: Routes = [
         {path: 'egresosReportes', component: EgresosReportesComponent},
         {path: 'ingresosReportes', component: IngresosReportesComponent},
         {path: 'cuentas', component: CuentasComponent},
+        {path: 'cuentasFecha', component: CuentasFechaComponent},
+        {path: 'cuentasSelected', component: CuentasSelectedComponent},
         {path: 'tablaCobranzas', component: TablaCobranzasComponent}
       ]
   },
