@@ -63,7 +63,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
       idDescuento: ['', Validators.required],
-      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{10,20}$/)]],
       fechaReciboPago: [this.date.toLocaleString],
       observacionesMensualidadPago: [''],
       estadoIngreso: ['Activo'],
@@ -83,9 +83,10 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     });
 
     this.cuentasPagoForm = this.fb.group({
-      idCuenta:[''],
+      idCuenta: [''],
       nombreCuenta: [''],
-      tipoCuenta: ['']
+      tipoCuenta: [''],
+      saldoInicial: ['']
     });
 
     this.tiposPagoForm = this.fb.group({
@@ -140,7 +141,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   }
 
   getTablaCobranzas() {
-    console.log(this.idUnidad)
+    //console.log(this.idUnidad)
     this.subscription.add(
       this._tablaCobranzaService.getTablaCobranzasByUnidad(this.idUnidad).subscribe(data => {
         this.tablaCobranzas = [];
@@ -232,7 +233,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
         this.cuentasPagoForm.setValue({
           idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
-          tipoCuenta: data.payload.data()['tipoCuenta']
+          tipoCuenta: data.payload.data()['tipoCuenta'],
+          saldoInicial: data.payload.data()['saldoInicial']
         })
       })
     )
@@ -321,6 +323,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       }
       this.onUpdateEstadoReservasPagadas();
       this.onUpdateTablaCobranzas();
+      this.onUpdateSaldo();
     });
   }
 
@@ -333,108 +336,105 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     })
   }
 
+  onUpdateSaldo() {
+
+    const cuentaData: any = {
+      saldoInicial: this.cuentasPagoForm.value.saldoInicial + this.pagoMensualidadForm.value.valorPago
+    }
+    //console.log(cuentaData, this.cuentasPagoForm.value.idCuenta);
+    this._cuentaPagoService.updateCuenta(this.cuentasPagoForm.value.idCuenta, cuentaData);
+  }
+
   onUpdateTablaCobranzas() {
     let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
     //console.log(fecha);
     //console.log(this.saldo);
     if (fecha == 'junio2022') {
-      console.log(this.tablaCobranzas);
+      //console.log(this.tablaCobranzas);
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           junio2022: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'julio2022'){
+    } else if (fecha == 'julio2022') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           julio2022: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'agosto2022'){
+    } else if (fecha == 'agosto2022') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           agosto2022: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'septiembre2022'){
+    } else if (fecha == 'septiembre2022') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           septiembre2022: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'octubre2022'){
+    } else if (fecha == 'octubre2022') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           octubre2022: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'noviembre2022'){
+    } else if (fecha == 'noviembre2022') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           noviembre2022: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'diciembre2022'){
+    } else if (fecha == 'diciembre2022') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           diciembre2022: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'enero2023'){
+    } else if (fecha == 'enero2023') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           enero2023: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'febrero2023'){
+    } else if (fecha == 'febrero2023') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           febrero2023: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'marzo2023'){
+    } else if (fecha == 'marzo2023') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           marzo2023: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'abril2023'){
+    } else if (fecha == 'abril2023') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           abril2023: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'mayo2023'){
+    } else if (fecha == 'mayo2023') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           mayo2023: this.saldo
         }
         this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
-    }
-    else if (fecha == 'junio2023'){
+    } else if (fecha == 'junio2023') {
       this.tablaCobranzas.forEach((element: any) => {
         const actualizarTabla: any = {
           junio2023: this.saldo

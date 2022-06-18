@@ -45,7 +45,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     this.extraordinariosForm = this.fb.group({
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
-      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{10,20}$/)]],
       fechaReciboPago: [this.date.toLocaleString],
       observaciones: ['', Validators.required],
       valorPago: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
@@ -62,7 +62,8 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     this.cuentasPagoForm = this.fb.group({
       idCuenta: [''],
       nombreCuenta: [''],
-      tipoCuenta: ['']
+      tipoCuenta: [''],
+      saldoInicial: ['']
     });
 
     this.recoverData();
@@ -116,7 +117,8 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
         this.cuentasPagoForm.setValue({
           idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
-          tipoCuenta: data.payload.data()['tipoCuenta']
+          tipoCuenta: data.payload.data()['tipoCuenta'],
+          saldoInicial: data.payload.data()['saldoInicial']
         })
       })
     )
@@ -169,7 +171,16 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
           console.log(error);
         })
       }
+      this.onUpdateSaldo();
     });
+  }
+
+  onUpdateSaldo() {
+
+    const cuentaData: any = {
+      saldoInicial: this.cuentasPagoForm.value.saldoInicial + this.extraordinariosForm.value.valorPago
+    }
+    this._cuentaPagoService.updateCuenta(this.cuentasPagoForm.value.idCuenta, cuentaData);
   }
 
   onBacktoList(): void {
