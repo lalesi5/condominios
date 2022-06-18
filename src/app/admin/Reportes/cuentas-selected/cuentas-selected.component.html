@@ -1,7 +1,7 @@
 <div class="cuentasSelected" >
   <div class="containerInfo" >
     <mat-card>
-      <h2>Cuenta:</h2>
+      <h2>Cuenta: {{nombreCuenta}}</h2>
       <h3>Reporte desde: {{fechaInicio | date: 'yyyy-MM-dd'}} hasta: {{fechaFin | date: 'yyyy-MM-dd'}} </h3>
       <div class="control-section">
         <ejs-grid #grid id='Grid' [dataSource]="cuenta" [allowSorting]="true" [allowPaging]="true" gridLines="Both"

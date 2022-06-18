@@ -21,6 +21,7 @@ export class CuentasSelectedComponent implements OnInit {
   private subscription: Subscription = new Subscription;
   idCondominio: string = '';
   idCuenta: string = '';
+  nombreCuenta: string = '';
   fechaInicio: number = 0;
   fechaFin: number = 0;
   cuenta: any[] = [];
@@ -65,6 +66,7 @@ export class CuentasSelectedComponent implements OnInit {
         this.fechaInicio = parseInt(String(this.fechaInicio));
         this.fechaFin = parseInt(String(this.fechaFin));
         data.forEach((element: any) => {
+          this.nombreCuenta = element.payload.doc.data()['nombreCuenta'];
           //console.log(typeof (Date.parse(element.payload.doc.data()['fechaReciboPago'])));
           //console.log(typeof (this.fechaInicio));
           if( Date.parse(element.payload.doc.data()['fechaReciboPago']) >= this.fechaInicio && Date.parse(element.payload.doc.data()['fechaReciboPago']) <= this.fechaFin){
