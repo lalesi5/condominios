@@ -1,0 +1,26 @@
+<div class="ajustesUnidades">
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Unidades</h2>
+      <h3>Lista de Unidades</h3>
+      <div>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
+      </div>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+          [pageSettings]="pageSettings" (commandClick)="commandClick($event)" [toolbar]="toolbarOptions"
+          (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+          [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
+          <e-columns>
+            <e-column field='unidad' headerText='Unidad' width=200> </e-column>
+            <e-column field='nombrePropietario' headerText='Nombre Propietario' width=110> </e-column>
+            <e-column field='apellidoPropietario' headerText='Apellido Propietario' width=110> </e-column>
+            <e-column field='areaUnidad' headerText='Area Unidad' width=120> </e-column>
+            <e-column field='cuotaUnidad' headerText='Cuota Unidad' width=200> </e-column>
+            <e-column headerText='Opciones' width=110 [commands]='commands'></e-column>
+          </e-columns>
+        </ejs-grid>`
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from "rxjs";
-import {UnidadesService} from "../../../../services/unidades.service";
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from "rxjs";
+import { UnidadesService } from "../../../../services/unidades.service";
 import {
   CommandModel,
   GridComponent,
@@ -8,8 +8,8 @@ import {
   PdfExportProperties,
   ToolbarItems
 } from '@syncfusion/ej2-angular-grids';
-import {Router} from '@angular/router';
-import {Query} from '@syncfusion/ej2-data';
+import { Router } from '@angular/router';
+import { Query } from '@syncfusion/ej2-data';
 
 @Component({
   selector: 'app-listar-unidades',
@@ -26,16 +26,16 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
   public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
   public queryClone: any;
-  @ViewChild('grid', {static: true})
+  @ViewChild('grid', { static: true })
   public grid!: GridComponent;
 
   constructor(
     private router: Router,
     private _unidadService: UnidadesService
   ) {
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'seleccionar', buttonOption: {iconCss: 'e-icons e-eye', cssClass: 'e-flat'}}];
+    this.commands = [{ title: 'seleccionar', buttonOption: { iconCss: 'e-icons e-eye', cssClass: 'e-flat' } }];
     this.recoverData();
   }
 
@@ -76,7 +76,7 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/administracion/unidades']);
   }
 
-  rowDataBound(args: any) {
+  /*rowDataBound(args: any) {
     // aquí estamos calculando el número de serie
     var rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
     var page = this.grid.pageSettings.currentPage! - 1;
@@ -86,7 +86,7 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
     var sno = startIndex + (rowIndex + 1);
     //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
     args.row.cells[0].innerText = sno;
-  }
+  }*/
 
   commandClick(args: any) {
     if (args.target?.title === 'seleccionar') {
@@ -94,6 +94,13 @@ export class ListarUnidadesComponent implements OnInit, OnDestroy {
       this.router.navigate(['/admin/administracion/unidades']);
     }
     //console.log(JSON.stringify(args.rowData));
+  }
+
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
   }
 
   //Seleccionar exportar excel y pdf

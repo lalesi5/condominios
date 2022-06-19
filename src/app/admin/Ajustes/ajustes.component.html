@@ -9,6 +9,22 @@
              (click)="onGoAjustesAdmin()">Perfil Usuario</a>
         </li>
         <li>
+          <a [routerLink]="['/admin/ajustes/ajustesCondominio']" [routerLinkActive]="['active']"
+             (click)="onGoAjustesCondominio()">Condominio</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/ajustes/ajustesUsuarios']" [routerLinkActive]="['active']"
+             (click)="onGoAjustesUsuarios()">Usuarios</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/ajustes/ajustesListarUnidades']" [routerLinkActive]="['active']"
+             (click)="onGoAjustesajustesUnidades()">Unidades</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/ajustes/ajustesAreasComunales']" [routerLinkActive]="['active']"
+             (click)="onGoAjustesAreasComunales()">Areas Comunales</a>
+        </li>
+        <li>
           <a [routerLink]="['/admin/ajustes/Cuentas']" [routerLinkActive]="['active']"
              (click)="onGoCuentas()">Cuentas</a>
         </li>
@@ -18,19 +34,7 @@
         </li>
         <li>
           <a [routerLink]="['/admin/ajustes/Cuentas']" [routerLinkActive]="['active']"
-             (click)="onGoPagos()">Metodos de Pagos</a>
-        </li>
-        <li>
-          <a [routerLink]="['/admin/ajustes/ajustesCondominio']" [routerLinkActive]="['active']"
-             (click)="onGoAjustesCondominio()">Condominio</a>
-        </li>
-        <li>
-          <a [routerLink]="['/admin/ajustes/ajustesUsuarios']" [routerLinkActive]="['active']"
-             (click)="onGoAjustesUsuarios()">Usuarios</a>
-        </li>
-        <li>
-          <a [routerLink]="['/admin/ajustes/ajustesUnidadesSelectUser']" [routerLinkActive]="['active']"
-             (click)="onGoAjustesajustesUnidades()">Unidades</a>
+             (click)="onGoPagos()">Tipos de Pagos</a>
         </li>
       </nav>
     </mat-card>

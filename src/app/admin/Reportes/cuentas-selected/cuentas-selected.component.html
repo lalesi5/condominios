@@ -1,0 +1,38 @@
+<div class="cuentasSelected" >
+  <div class="containerInfo" >
+    <mat-card>
+      <h2>Cuenta: {{nombreCuenta}}</h2>
+      <h3>Reporte desde: {{fechaInicio | date: 'yyyy-MM-dd'}} hasta: {{fechaFin | date: 'yyyy-MM-dd'}} </h3>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="cuenta" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)"
+                  [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+          <e-columns>
+            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160></e-column>
+            <e-column field='numeroReciboPago' headerText='Número de Recibo' width=200></e-column>
+            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140></e-column>
+            <e-column field='modoPago' headerText='Modo de Pago' width=140></e-column>
+            <e-column field='tiposPago' headerText='Tipo de Pago' width=140></e-column>
+            <e-column field='observaciones' headerText='Detalle de Pago' width=160></e-column>
+            <e-column field='valorPago' headerText='Valor Total' width=110 format="C2"></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+              <e-columns>
+                <e-column type="Sum" field="valorPago" format="C2">
+                  <ng-template let-ingresos>{{ingresos.sum}}</ng-template>
+                </e-column>
+              </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+      </div>
+      <br>
+      <div class="centrarBotones">
+        <button type="button" class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

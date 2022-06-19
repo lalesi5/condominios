@@ -7,6 +7,8 @@ import {TiposPagoService} from "../../../services/tiposPago.service";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
 import {egresosService} from "../../../services/egresos.service";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-registrar-egreso',
@@ -20,6 +22,7 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
   idCondominio: string = '';
   loading = false;
   date = new Date();
+  pipe = new DatePipe('en-US');
 
   tiposPago: any[] = [];
   cuentasPago: any[] = [];
@@ -34,18 +37,21 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
     private _tipoPagoService: TiposPagoService,
     private _dialogService: DialogService,
     private _egresoService: egresosService,
+    private _ingresoUnidades: IngresoUnidadesService,
     private toastr: ToastrService,
     private fb: FormBuilder,
   ) {
+
     this.egresosForm = this.fb.group({
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
-      numeroReciboEgreso: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
-      fechaEgreso: [this.date.toLocaleString],
-      observacionesEgreso: ['', Validators.required],
-      valorEgreso: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
+      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{10,20}$/)]],
+      fechaReciboPago: [this.date.toLocaleString],
+      observaciones: ['', Validators.required],
+      valorPago: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
+      modoPago: ['Egreso']
     });
 
     this.tiposPagoForm = this.fb.group({
@@ -54,8 +60,10 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
     });
 
     this.cuentasPagoForm = this.fb.group({
+      idCuenta: [''],
       nombreCuenta: [''],
-      tipoCuenta: ['']
+      tipoCuenta: [''],
+      saldoInicial: ['']
     });
 
     this.recoverData();
@@ -106,8 +114,10 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
       this._cuentaPagoService.getCuenta(item).subscribe(data => {
         this.loading = false;
         this.cuentasPagoForm.setValue({
+          idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
-          tipoCuenta: data.payload.data()['tipoCuenta']
+          tipoCuenta: data.payload.data()['tipoCuenta'],
+          saldoInicial: data.payload.data()['saldoInicial']
         })
       })
     )
@@ -136,19 +146,20 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
         const pagoEgreso: any = {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
-          fechaEgreso: this.date.toLocaleString(),
-          numeroReciboEgreso: this.egresosForm.value.numeroReciboEgreso,
-          valorEgreso: this.egresosForm.value.valorEgreso,
+          idCuenta: this.cuentasPagoForm.value.idCuenta,
+          fechaReciboPago: this.pipe.transform(this.date, 'yyyy/MM/dd'),
+          numeroReciboPago: this.egresosForm.value.numeroReciboPago,
+          valorPago: -this.egresosForm.value.valorPago,
           nombreCuenta: this.cuentasPagoForm.value.nombreCuenta,
           tipoCuenta: this.cuentasPagoForm.value.tipoCuenta,
           tiposPago: this.tiposPagoForm.value.tiposPago,
           detalleTiposPago: this.tiposPagoForm.value.detalleTiposPago,
-          observacionesEgreso: this.egresosForm.value.observacionesEgreso,
-          estadoReciboPago: this.egresosForm.value.estadoReciboPago,
-          estadoIngreso: this.egresosForm.value.estadoIngreso
+          observaciones: this.egresosForm.value.observaciones,
+          estadoIngreso: this.egresosForm.value.estadoIngreso,
+          modoPago: this.egresosForm.value.modoPago
         }
         this.loading = true;
-        this._egresoService.saveEgreso(pagoEgreso).then(() => {
+        this._ingresoUnidades.savePago(pagoEgreso).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
             positionClass: 'toast-bottom-right'
           });
@@ -158,7 +169,16 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
           console.log(error);
         })
       }
+      this.onUpdateSaldo();
     });
+  }
+
+  onUpdateSaldo() {
+
+    const cuentaData: any = {
+      saldoInicial: this.cuentasPagoForm.value.saldoInicial - this.egresosForm.value.valorPago
+    }
+    this._cuentaPagoService.updateCuenta(this.cuentasPagoForm.value.idCuenta, cuentaData);
   }
 
   onBacktoList(): void {
@@ -169,11 +189,11 @@ export class RegistrarEgresoComponent implements OnInit, OnDestroy {
     return this.egresosForm.controls;
   }
 
-  get numeroReciboEgreso() {
-    return this.egresosForm.get('numeroReciboEgreso');
+  get numeroReciboPago() {
+    return this.egresosForm.get('numeroReciboPago');
   }
 
   get valorEgreso() {
-    return this.egresosForm.get('valorEgreso');
+    return this.egresosForm.get('valorPago');
   }
 }

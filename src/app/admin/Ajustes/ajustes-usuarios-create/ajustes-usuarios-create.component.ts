@@ -39,7 +39,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
       password: ['', [Validators.required,
       Validators.minLength(6),
       Validators.maxLength(15)]],
-      phone: ['', [Validators.pattern(/^.{9,13}$/)]],
+      phone: ['', [Validators.pattern(/^.{6,13}$/)]],
       address: [''],
     })
     this.recoverData();
@@ -71,7 +71,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           name: nombre,
           last_name: apellido,
           email: this.createUsuarioForm.value.email,
-          password: this.createUsuarioForm.value.password,
+          password:'',
           phone: this.createUsuarioForm.value.phone,
           fechaCreacion: new Date(),
           fechaActualizacion: new Date(),
@@ -105,6 +105,11 @@ export class AjustesUsuariosCreateComponent implements OnInit {
               console.log(error);
               this.loading = false;
             });
+          } else {
+            this.toastr.error('El correo electrónico utilizado ya se encuentra en uso', 'Error de registro', {
+              positionClass: 'toast-bottom-right'
+            });
+            this.loading = false;
           }
         });
       }

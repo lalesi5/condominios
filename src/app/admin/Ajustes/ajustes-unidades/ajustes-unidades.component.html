@@ -8,12 +8,10 @@
       </div>
       <div class="control-section">
         <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
-          [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
-          [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-          (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
-          (pdfExportComplete)="pdfExportComplete()">
+          [pageSettings]="pageSettings" (commandClick)="commandClick($event)" [toolbar]="toolbarOptions"
+          (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+          [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
-            <e-column headerText=" No" width='50'> </e-column>
             <e-column field='unidad' headerText='Unidad' width=100> </e-column>
             <e-column field='areaUnidad' headerText='Área unidad' width=100> </e-column>
             <e-column field='cuotaUnidad' headerText='Cuota' width=110> </e-column>

@@ -7,6 +7,7 @@ import {ReservasCreateComponent} from "./reservas-create/reservas-create.compone
 import {MisReservasComponent} from "./mis-reservas/mis-reservas.component";
 import {ListarAreasComunalesUserComponent} from "./listar-areas-comunales/listar-areas-comunales.component";
 import { AreasComunesUsuarioComponent } from "./areasComunesUsuario.component";
+import { ListaReservasComponent } from "./lista-reservas/lista-reservas.component";
 
 
 const routesAreasComunesUsuario: Routes = [
@@ -17,7 +18,8 @@ const routesAreasComunesUsuario: Routes = [
       {path: 'listarAreas',component: ListarAreasComunalesUserComponent },
       {path: 'reservas', component: ReservasComponent},
       {path: 'reservasCreate', component: ReservasCreateComponent},
-      {path: 'misReservas', component: MisReservasComponent}
+      {path: 'misReservas', component: MisReservasComponent},
+      {path: 'listaReservas', component: ListaReservasComponent}
     ]
   }
 ]

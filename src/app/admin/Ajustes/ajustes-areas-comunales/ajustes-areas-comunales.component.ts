@@ -94,7 +94,7 @@ export class AjustesAreasComunalesComponent implements OnInit {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
+        fileName: 'areasComunes.pdf'
       };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
@@ -125,5 +125,12 @@ export class AjustesAreasComunalesComponent implements OnInit {
     var sno = startIndex + (rowIndex + 1);
     //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
     args.row.cells[0].innerText = sno;
+  }
+
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
   }
 }

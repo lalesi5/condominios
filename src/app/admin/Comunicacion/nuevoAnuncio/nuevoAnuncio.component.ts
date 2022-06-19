@@ -29,7 +29,7 @@ export class NuevoAnuncioComponent implements OnInit {
 
     this.mensajesForm = this.fb.group({
       tituloAnuncio: ['', Validators.required],
-      descripcionAnuncio: [''],
+      descripcionAnuncio: ['', Validators.required],
     })
 
     this.recoverData();

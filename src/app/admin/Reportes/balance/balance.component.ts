@@ -24,13 +24,12 @@ export class BalanceComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idCondominio: string = '';
+  balance: any[] = [];
   ingresos: any[] = [];
   egresos: any[] = [];
-  pagosExtraordinarios: any[] = [];
   sumaIngresos: number = 0;
-  sumaExtraordinarios: number = 0;
+  sumaBalance: number = 0;
   sumaEgresos: number = 0;
-  total: number = 0;
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -52,8 +51,8 @@ export class BalanceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getBalance();
     this.getIngresos();
-    this.getPagosExtraordinarios();
     this.getEgresos();
   }
 
@@ -61,63 +60,58 @@ export class BalanceComponent implements OnInit {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getEgresos() {
+
+  getBalance() {
     this.subscription.add(
-      this._egresoService.getEgresos(this.idCondominio).subscribe(data => {
-        this.egresos = [];
+      this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
+        this.balance = [];
         data.forEach((element: any) => {
-          this.egresos.push({
+          this.balance.push({
             ...element.payload.doc.data()
           })
-        })
-        this.egresos.map(data => {
-          this.sumaEgresos += data.valorEgreso;
         })
       })
     )
   }
-
 
   getIngresos() {
     this.subscription.add(
       this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
         this.ingresos = [];
         data.forEach((element: any) => {
-          this.ingresos.push({
-            ...element.payload.doc.data()
-          })
+          if (element.payload.doc.data()['modoPago'] === 'Mensualidad' || element.payload.doc.data()['modoPago'] === 'Extraordinario') {
+            this.ingresos.push({
+              ...element.payload.doc.data()
+            })
+          }
         })
         this.sumaIngresos = 0;
         this.ingresos.map(data => {
-          this.sumaIngresos += data.valorTotal;
+          this.sumaIngresos += data.valorPago;
         })
       })
     )
   }
 
-  getPagosExtraordinarios() {
+  getEgresos() {
     this.subscription.add(
-      this._extraordinariosService.getExtraordinarios(this.idCondominio).subscribe(data => {
-        this.pagosExtraordinarios = [];
+      this._ingresosService.getPagosCondominio(this.idCondominio).subscribe(data => {
+        this.egresos = [];
         data.forEach((element: any) => {
-          this.pagosExtraordinarios.push({
-            ...element.payload.doc.data()
-          })
+          if (element.payload.doc.data()['modoPago'] === 'Egreso') {
+            this.egresos.push({
+              ...element.payload.doc.data()
+            })
+          }
         })
-        this.sumaExtraordinarios = 0;
-        this.total = 0;
-        this.pagosExtraordinarios.map(data => {
-          this.sumaExtraordinarios += data.valorPagoExtraordinario;
+        this.sumaEgresos = 0;
+        this.egresos.map(data => {
+          this.sumaEgresos += data.valorPago;
         })
-        this.total = this.sumaExtraordinarios + this.sumaIngresos;
       })
     )
   }
 
-  unirPagos() {
-    this.pagosExtraordinarios = this.pagosExtraordinarios.concat(this.ingresos, this.egresos);
-    console.log(this.pagosExtraordinarios);
-  }
 
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {

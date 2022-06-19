@@ -1,22 +1,17 @@
 <header id="header">
   <div class="center">
-
     <!--logo-->
-    <div id="logo">
+    <div id="logo" class="item1">
       <a [routerLink]="['/home']" [routerLinkActive]="['active']">
         Condominio<strong>EPN</strong>
       </a>
     </div>
-
-    <!--contacto-->
-
-    <div id="contacto">
-
-      <a type="button" (click)="onLogout()" [routerLinkActive]="['active']">Cerrar Sesión</a>
-
+    <div id="bienvenido" class="item2" *ngFor="let admin of administrador">
+      <a><strong>BIENVENIDO:</strong> {{admin.name}} {{admin.last_name}}</a>
     </div>
-
-
+    <!--contacto-->
+    <div id="contacto" class="item3">
+      <a type="button" (click)="onLogout()" [routerLinkActive]="['active']">Cerrar Sesión</a>
+    </div>
   </div>
-
 </header>

@@ -1,0 +1,95 @@
+.cuentasSelected {
+  position: absolute;
+  width: calc(100% - 231px);
+  left: 231px;
+  top: 150px;
+  min-height: 74vh;
+}
+
+.containerInfo mat-card {
+  display: grid;
+  width: 98%;
+  left: 1%;
+  border-radius: 20px;
+  padding-bottom: 25px;
+  overflow: auto;
+  min-height: 310px;
+  max-height: 74vh;
+}
+
+.containerInfo mat-card h2 {
+  background-color: #287bff;
+  max-height: 35px;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px;
+  text-align: center;
+}
+
+.containerInfo mat-card h3 {
+  background-color: #2ba846;
+  max-height: 35px;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px;
+  text-align: center;
+}
+
+.cardsDatosEgresos {
+  width: 100%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr) ;
+  grid-gap: 50px;
+}
+
+.cardsDatosEgresos .card {
+  position: relative;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardsDatosEgresos .card:hover {
+  background: #287bff;
+}
+
+.cardsDatosEgresos .card .numbers {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 600;
+  font-size: 2em;
+  color: #287bff;
+}
+
+.cardsDatosEgresos .card .cardName {
+  color: #999;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+
+.cardsDatosEgresos .card:hover .numbers,
+.cardsDatosEgresos .card:hover .cardName {
+  color: #fff;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .cuentasSelected {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

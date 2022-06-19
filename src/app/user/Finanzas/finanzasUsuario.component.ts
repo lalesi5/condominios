@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import {
   CommandModel,
   GridComponent,
@@ -8,12 +8,12 @@ import {
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {ReservasService} from "../../services/reservas.service";
-import {UnidadesService} from "../../services/unidades.service";
-import {IngresoUnidadesService} from "../../services/pagos.service";
-import {DialogService} from "../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
-import {Query} from "@syncfusion/ej2-data";
+import { ReservasService } from "../../services/reservas.service";
+import { UnidadesService } from "../../services/unidades.service";
+import { IngresoUnidadesService } from "../../services/pagos.service";
+import { DialogService } from "../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
+import { Query } from "@syncfusion/ej2-data";
 
 @Component({
   selector: 'app-finanzasUsuario',
@@ -27,7 +27,7 @@ export class FinanzasUsuarioComponent implements OnInit {
   idUnidad: string = '';
   reservas: any[] = [];
   unidad: any[] = [];
-  ingresoUnidades: any [] = [];
+  ingresoUnidades: any[] = [];
   sumaValorReservas: number = 0;
   cuotaUnidad: number = 0;
 
@@ -46,7 +46,7 @@ export class FinanzasUsuarioComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.recoverData();
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [{ title: 'Anular Pago', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
   }
@@ -123,15 +123,15 @@ export class FinanzasUsuarioComponent implements OnInit {
     }
   }
 
-  commandClick(item: any): void{
-    if(item.target?.title == 'Anular Pago'){
+  commandClick(item: any): void {
+    if (item.target?.title == 'Anular Pago') {
       const id = <string>item.rowData['idPago'];
       this._dialogService.confirmDialog({
         title: 'Anular Pago',
         message: '¿Está seguro de anular el pago?',
         confirmText: 'Sí',
         cancelText: 'No'
-      }).subscribe( res => {
+      }).subscribe(res => {
         if (res) {
           const pagoMensualidad: any = {
             estadoIngreso: 'Inactivo'
@@ -154,6 +154,13 @@ export class FinanzasUsuarioComponent implements OnInit {
 
   excelExportComplete(): void {
     this.grid.query = this.queryClone;
+  }
+
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
   }
 
   onBacktoList(): void {

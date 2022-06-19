@@ -13,23 +13,23 @@
           <div class="row">
             <div class="col">
               <label>Número de Recibo: </label>
-              <input type="text" class="form-control" formControlName="numeroReciboPagoExtraordinario"
-                [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['numeroReciboPagoExtraordinario'].valid && extraordinariosForm.controls['numeroReciboPagoExtraordinario'].touched }">
-              <div *ngIf="form['numeroReciboPagoExtraordinario'].errors" class="invalid-feedback">
-                <div *ngIf="form['numeroReciboPagoExtraordinario'].errors['pattern']">
+              <input type="text" class="form-control" formControlName="numeroReciboPago"
+                [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['numeroReciboPago'].valid && extraordinariosForm.controls['numeroReciboPago'].touched }">
+              <div *ngIf="form['numeroReciboPago'].errors" class="invalid-feedback">
+                <div *ngIf="form['numeroReciboPago'].errors['pattern']">
                   La longitud del número no es válida
                 </div>
               </div>
             </div>
             <div class="col">
               <label>Valor: </label>
-              <input type="number" class="form-control" formControlName="valorPagoExtraordinario"
-                [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['valorPagoExtraordinario'].valid && extraordinariosForm.controls['valorPagoExtraordinario'].touched }">
-              <div *ngIf="form['valorPagoExtraordinario'].errors" class="invalid-feedback">
-                <div *ngIf="form['valorPagoExtraordinario'].errors['required']">
+              <input type="number" class="form-control" formControlName="valorPago"
+                [ngClass]="{ 'is-invalid': !extraordinariosForm.controls['valorPago'].valid && extraordinariosForm.controls['valorPago'].touched }">
+              <div *ngIf="form['valorPago'].errors" class="invalid-feedback">
+                <div *ngIf="form['valorPago'].errors['required']">
                   Campo requerido
                 </div>
-                <div *ngIf="form['valorPagoExtraordinario'].errors['pattern']">
+                <div *ngIf="form['valorPago'].errors['pattern']">
                   El campo solo debe contener números, números positivos con dos decimales.
                 </div>
               </div>
@@ -105,7 +105,7 @@
             <form [formGroup]='extraordinariosForm'>
               <div class="form-group">
                 <label>Concepto de Pago: </label>
-                <textarea type="text" class="form-control" formControlName="observacionesPagoExtraordinario">
+                <textarea type="text" class="form-control" formControlName="observaciones">
                 </textarea>
               </div>
             </form>

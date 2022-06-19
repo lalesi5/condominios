@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { ToastrService } from 'ngx-toastr';
@@ -24,14 +23,14 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
   public queryClone: any;
-  @ViewChild('grid') public grid: GridComponent | any;
+  @ViewChild('grid') public grid!: GridComponent;
 
   constructor(
     private router: Router,
     private _usuarioService: UsuariosService,
     private toastr: ToastrService,
     private _dialogService: DialogService,
-    public firestore: AngularFirestore
+
   ) {
     this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
@@ -41,6 +40,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.toolbarOptions = ['Search'];
     this.getUsuarios();
   }
 
@@ -71,7 +71,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     if (item.target?.title === 'Editar') {
       sessionStorage.setItem('idUsuario', <string>item.rowData['idUsuario']);
       this.router.navigate(['/admin/ajustes/ajustesUsuariosEdit']);
-      
+
     } else if (item.target?.title === 'Eliminar') {
       const id = <string>item.rowData['idUsuario'];
       this._dialogService.confirmDialog({
@@ -144,4 +144,10 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
     args.row.cells[0].innerText = sno;
   }
 
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
 }

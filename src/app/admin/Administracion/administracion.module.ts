@@ -16,6 +16,7 @@ import { GridModule } from "@syncfusion/ej2-angular-grids";
 import { ListarUnidadesComponent } from './unidades/listar-unidades/listar-unidades.component';
 import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { AreasComunesComponent } from "./areas-comunes/areas-comunes.component";
+import { AreasComunalesComponent } from './areas-comunales/areas-comunales.component';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { AreasComunesComponent } from "./areas-comunes/areas-comunes.component";
         UnidadesComponent,
         UsuariosComponent,
         AreasComunesComponent,
-        ListarUnidadesComponent
+        ListarUnidadesComponent,
+        AreasComunalesComponent
     ],
     exports: [
         MatCardModule,

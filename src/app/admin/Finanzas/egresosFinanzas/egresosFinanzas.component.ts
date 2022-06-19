@@ -10,8 +10,8 @@ import {
 import {Router} from "@angular/router";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
-import {egresosService} from "../../../services/egresos.service";
 import {Query} from "@syncfusion/ej2-data";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
 
 @Component({
   selector: 'app-egresosFinanzas',
@@ -33,7 +33,7 @@ export class EgresosFinanzasComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _egresoService: egresosService,
+    private _egresos: IngresoUnidadesService,
     private _dialogService: DialogService,
     private toastr: ToastrService
   ) {
@@ -53,7 +53,7 @@ export class EgresosFinanzasComponent implements OnInit {
 
   getEgresos(){
     this.subscription.add(
-      this._egresoService.getEgresos(this.idCondominio).subscribe(data => {
+      this._egresos.getEgresos(this.idCondominio).subscribe(data => {
         this.egresos = [];
         data.forEach((element: any) => {
           this.egresos.push({
@@ -87,7 +87,7 @@ export class EgresosFinanzasComponent implements OnInit {
 
   commandClick(item: any): void{
     if(item.target?.title == 'Anular Egreso'){
-      const id = <string>item.rowData['idExtraordinario'];
+      const id = <string>item.rowData['idPago'];
       this._dialogService.confirmDialog({
         title: 'Anular Egreso',
         message: '¿Está seguro de anular el egreso?',
@@ -98,7 +98,7 @@ export class EgresosFinanzasComponent implements OnInit {
           const egreso: any = {
             estadoIngreso: 'Inactivo'
           }
-          this._egresoService.updateEgreso(id, egreso).then(() => {
+          this._egresos.updatePago(id, egreso).then(() => {
             this.toastr.success('El egreso ha sido anulado con exito', 'Egreso Anulado', {
               positionClass: 'toast-bottom-right'
             });

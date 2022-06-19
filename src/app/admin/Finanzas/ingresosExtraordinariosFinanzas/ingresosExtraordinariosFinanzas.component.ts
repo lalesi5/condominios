@@ -10,8 +10,8 @@ import {
 import {Router} from "@angular/router";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
-import {extraordinariosService} from "../../../services/extraordinarios.service";
 import {Query} from "@syncfusion/ej2-data";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
 
 @Component({
   selector: 'app-ingresosExtraordinariosFinanzas',
@@ -33,7 +33,7 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _extraordinariosService: extraordinariosService,
+    private _ingresos: IngresoUnidadesService,
     private _dialogService: DialogService,
     private toastr: ToastrService
   ) {
@@ -53,7 +53,7 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
 
   getPagosExtraordinarios(){
     this.subscription.add(
-      this._extraordinariosService.getExtraordinarios(this.idCondominio).subscribe(data => {
+      this._ingresos.getPagosCondominioExtraordinario(this.idCondominio).subscribe(data => {
         this.pagosExtraordinarios = [];
         data.forEach((element: any) => {
           this.pagosExtraordinarios.push({
@@ -87,7 +87,7 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
 
   commandClick(item: any): void{
     if(item.target?.title == 'Anular Pago'){
-      const id = <string>item.rowData['idExtraordinario'];
+      const id = <string>item.rowData['idPago'];
       this._dialogService.confirmDialog({
         title: 'Anular Pago',
         message: '¿Está seguro de anular el pago?',
@@ -98,7 +98,7 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
           const pagoExtraordinario: any = {
             estadoIngreso: 'Inactivo'
           }
-          this._extraordinariosService.updateExtraordinario(id, pagoExtraordinario).then(() => {
+          this._ingresos.updatePago(id, pagoExtraordinario).then(() => {
             this.toastr.success('El pago ha sido anulado con exito', 'Pago Anulado', {
               positionClass: 'toast-bottom-right'
             });

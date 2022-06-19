@@ -33,6 +33,7 @@ export class CuentasEditComponent implements OnInit {
     this.cuentasForm = this.fb.group({
       nombreCuenta: ['', Validators.required],
       tipoCuenta: ['', Validators.required],
+      saldoInicial: ['']
     });
 
     this.recoverData();
@@ -57,6 +58,7 @@ export class CuentasEditComponent implements OnInit {
           this.cuentasForm.setValue({
             nombreCuenta: data.payload.data()['nombreCuenta'],
             tipoCuenta: data.payload.data()['tipoCuenta'],
+            saldoInicial: data.payload.data()['saldoInicial']
           })
         })
       )
@@ -73,6 +75,8 @@ export class CuentasEditComponent implements OnInit {
     const Cuenta: any = {
       nombreCuenta: nombreCuentaData,
       tipoCuenta: tipoCuentaData,
+      saldoInicial: this.cuentasForm.value.saldoInicial
+
     }
 
     this._dialogService.confirmDialog({

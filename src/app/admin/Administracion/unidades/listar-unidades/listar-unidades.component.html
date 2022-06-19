@@ -6,14 +6,15 @@
       <h3>Seleccione la Unidad</h3>
         <div class="control-section">
           <ejs-grid #grid id='Grid' [dataSource]="unidades" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
-            [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)" (commandClick)="commandClick($event)"
+            [pageSettings]="pageSettings" (commandClick)="commandClick($event)"
             [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
             (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
-            (pdfExportComplete)="pdfExportComplete()">
+            (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
             <e-columns>
-              <e-column headerText="No" width='25'></e-column>
+              <!--(rowDataBound)="rowDataBound($event)"
+              <e-column headerText="No" width='25'></e-column>-->
               <e-column field='unidad' headerText='Unidad' width=110> </e-column>
-              <e-column headerText='Ver' width='25' [commands]='commands'></e-column>
+              <e-column headerText='Ver' width='10' [commands]='commands'></e-column>
             </e-columns>
           </ejs-grid>
         </div>

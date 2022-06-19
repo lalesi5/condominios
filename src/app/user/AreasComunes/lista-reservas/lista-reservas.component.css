@@ -1,0 +1,33 @@
+.reservas {
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    top: 165px;
+    min-height: 82vh;
+  }
+  
+  .containerInfo mat-card {
+    display: grid;
+    width: 80%;
+    left: 10%;
+    top: 7vh;
+    border-radius: 20px;
+    padding-bottom: 25px;
+  }
+  
+  .containerInfo mat-card h2 {
+    background-color: #2b85a8;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .containerInfo mat-card h3 {
+    background-color: #2ba846;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+  }
+  

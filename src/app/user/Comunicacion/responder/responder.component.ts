@@ -35,7 +35,7 @@ export class ResponderComponent implements OnInit {
 
     this.mensajesForm = this.fb.group({
       tituloMensaje: ['', Validators.required],
-      descripcionMensaje: [''],
+      descripcionMensaje: ['', Validators.required],
     })
     this.recoverData();
   }

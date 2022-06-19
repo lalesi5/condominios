@@ -15,7 +15,7 @@ const routerAdministracion: Routes = [
   {
     path: '', component: AreasComunesComponent, children:
       [
-        { path: '', redirectTo: 'listarAreasComunes', pathMatch: 'full' },
+        { path: '', redirectTo: 'reservasPendientes', pathMatch: 'full' },
         { path: 'listarAreasComunes', component: ListarAreasComunesComponent },
         { path: 'areasComunesEdit', component: AreasComunesEditComponent },
         { path: 'areasComunesCreate', component: AreasComunesCreateComponent },

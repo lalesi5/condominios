@@ -46,7 +46,7 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   getUnidades() {
     this.subscription.add(
-      this._unidades.getAllUnidadesOrdenadas(this.idCondominio).subscribe(data => {
+      this._unidades.getAllUnidades(this.idCondominio).subscribe(data => {
         this.unidades = [];
         data.forEach((element: any) => {
           this.unidades.push({

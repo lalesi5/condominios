@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AreasComunalesService} from '../../../services/areasComunales.service';
 import {Subscription} from "rxjs";
@@ -33,6 +33,7 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
     this.areaComunalForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
+      valorReserva: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]]
     })
 
     this.recoverData();
@@ -57,6 +58,7 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
           this.areaComunalForm.setValue({
             nombre: data.payload.data()['nombre'],
             descripcion: data.payload.data()['descripcion'],
+            valorReserva: data.payload.data()['valorReserva']
           })
         })
       )
@@ -67,12 +69,14 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
 
     const nombreArea = String(this.areaComunalForm.value.nombre).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.nombre).slice(1);
     const descripcionArea = String(this.areaComunalForm.value.descripcion).charAt(0).toLocaleUpperCase() + String(this.areaComunalForm.value.descripcion).slice(1);
+    const valorReservaData = this.areaComunalForm.value.valorReserva;
 
     const idArea = this.idAreaComunal;
 
     const areaComunal: any = {
       nombre: nombreArea,
       descripcion: descripcionArea,
+      valorReserva: valorReservaData
     }
 
     this._dialogService.confirmDialog({
@@ -95,8 +99,17 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
     });
   }
 
+
+
   onBacktoList(): void {
     this.router.navigate(['/admin/ajustes/ajustesAreasComunales']);
   }
 
+  get form(): { [key: string]: AbstractControl; } {
+    return this.areaComunalForm.controls;
+  }
+
+  get valorReserva() {
+    return this.areaComunalForm.get('valorReserva');
+  }
 }

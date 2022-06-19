@@ -130,7 +130,7 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
     } else if (item.target?.title === 'Eliminar') {
 
       this._dialogService.confirmDialog({
-        title: 'Eliminar área',
+        title: 'Eliminar reserva',
         message: '¿Está seguro de eliminar la reserva?',
         confirmText: 'Si',
         cancelText: 'No',

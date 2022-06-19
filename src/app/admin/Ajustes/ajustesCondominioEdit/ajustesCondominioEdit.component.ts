@@ -107,7 +107,7 @@ export class AjustesCondominioEditComponent implements OnInit {
 */
     this._dialogService.confirmDialog({
       title: 'Modificar información de condominio',
-      message: '¿Está seguro de modificar la información del condominio?',
+      message: '¿Está seguro de modificar la información?',
       confirmText: 'Si',
       cancelText: 'No',
     }).subscribe(res => {

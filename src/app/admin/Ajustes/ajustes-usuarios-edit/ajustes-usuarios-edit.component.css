@@ -3,32 +3,35 @@
   width: calc(100% - 231px);
   left: 231px;
   top: 150px;
+  min-height: 74vh;
 }
 
 .containerInfo mat-card {
   display: grid;
-  width: 50%;
-  left: 25%;
-  top: 9vh;
+  width: 98%;
+  left: 1%;
   border-radius: 20px;
   padding-bottom: 25px;
   overflow: auto;
-  max-height: 800px;
+  min-height: 310px;
+  max-height: 74vh;
 }
 
 .containerInfo mat-card h2 {
   background-color: #287bff;
+  max-height: 35px;
   color: #fff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 1px;
   text-align: center;
 }
 
 .containerInfo mat-card h3 {
   background-color: #2ba846;
+  max-height: 35px;
   color: #fff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 1px;
   text-align: center;
 }
 

@@ -1,19 +1,17 @@
 <div class="ajustesPagos">
   <div class="containerInfo">
     <mat-card>
-      <h2>Métodos de Pagos</h2>
-      <h3>Información de los Métodos de Pago</h3>
+      <h2>Tipo de Pagos</h2>
+      <h3>Información de los Tipo de Pago</h3>
       <div>
-        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Tipo de Pago</button>
+        <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
       </div>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="pagos" [allowSorting]="true" [allowPaging]="true"
-                  gridLines="Both" [pageSettings]="pageSettings" (rowDataBound)="rowDataBound($event)"
-                  (commandClick)="commandClick($event)" [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)"
-                  [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
-                  (pdfExportComplete)="pdfExportComplete()">
+        <ejs-grid #grid id='Grid' [dataSource]="pagos" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
+          [pageSettings]="pageSettings" (commandClick)="commandClick($event)" [toolbar]="toolbarOptions"
+          (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
+          [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
-            <e-column headerText=" No" width='50'> </e-column>
             <e-column field='tiposPago' headerText='Tipo de Pago' width=100> </e-column>
             <e-column field='detalleTiposPago' headerText='Detalle' width=100> </e-column>
             <e-column headerText='Opciones' width=95 [commands]='commands'></e-column>
