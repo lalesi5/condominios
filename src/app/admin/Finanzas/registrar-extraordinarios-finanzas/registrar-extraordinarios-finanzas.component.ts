@@ -8,6 +8,7 @@ import { DialogService } from "../../../services/dialog.service";
 import { ToastrService } from "ngx-toastr";
 import { extraordinariosService } from "../../../services/extraordinarios.service";
 import {IngresoUnidadesService} from "../../../services/pagos.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-registrar-extraordinarios-finanzas',
@@ -21,6 +22,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
   idCondominio: string = '';
   loading = false;
   date = new Date();
+  pipe = new DatePipe('en-US');
 
   tiposPago: any[] = [];
   cuentasPago: any[] = [];
@@ -43,7 +45,7 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     this.extraordinariosForm = this.fb.group({
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
-      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{10,20}$/)]],
       fechaReciboPago: [this.date.toLocaleString],
       observaciones: ['', Validators.required],
       valorPago: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
@@ -58,8 +60,10 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
     });
 
     this.cuentasPagoForm = this.fb.group({
+      idCuenta: [''],
       nombreCuenta: [''],
-      tipoCuenta: ['']
+      tipoCuenta: [''],
+      saldoInicial: ['']
     });
 
     this.recoverData();
@@ -111,8 +115,10 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
       this._cuentaPagoService.getCuenta(item).subscribe(data => {
         this.loading = false;
         this.cuentasPagoForm.setValue({
+          idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
-          tipoCuenta: data.payload.data()['tipoCuenta']
+          tipoCuenta: data.payload.data()['tipoCuenta'],
+          saldoInicial: data.payload.data()['saldoInicial']
         })
       })
     )
@@ -141,7 +147,8 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
         const pagoExtraordinarias: any = {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
-          fechaReciboPago: this.date.toLocaleString(),
+          idCuenta: this.cuentasPagoForm.value.idCuenta,
+          fechaReciboPago: this.pipe.transform(this.date, 'yyyy/MM/dd'),
           numeroReciboPago: this.extraordinariosForm.value.numeroReciboPago,
           valorPago: this.extraordinariosForm.value.valorPago,
           nombreCuenta: this.cuentasPagoForm.value.nombreCuenta,
@@ -164,7 +171,16 @@ export class RegistrarExtraordinariosFinanzasComponent implements OnInit, OnDest
           console.log(error);
         })
       }
+      this.onUpdateSaldo();
     });
+  }
+
+  onUpdateSaldo() {
+
+    const cuentaData: any = {
+      saldoInicial: this.cuentasPagoForm.value.saldoInicial + this.extraordinariosForm.value.valorPago
+    }
+    this._cuentaPagoService.updateCuenta(this.cuentasPagoForm.value.idCuenta, cuentaData);
   }
 
   onBacktoList(): void {

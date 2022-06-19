@@ -1,18 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { Subscription } from 'rxjs';
-import { UnidadesService } from "../../../services/unidades.service";
-import { CuentasService } from "../../../services/cuentas.service";
-import { ReservasService } from "../../../services/reservas.service";
-import { TiposPagoService } from "../../../services/tiposPago.service";
-import { DescuentosService } from "../../../services/descuentos.service";
-import { DialogService } from "../../../services/dialog.service";
-import { IngresoUnidadesService } from "../../../services/pagos.service";
-import { ToastrService } from "ngx-toastr";
-import {BigInteger} from "@angular/compiler/src/i18n/big_integer";
-import {toInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {Subscription} from 'rxjs';
+import {UnidadesService} from "../../../services/unidades.service";
+import {CuentasService} from "../../../services/cuentas.service";
+import {ReservasService} from "../../../services/reservas.service";
+import {TiposPagoService} from "../../../services/tiposPago.service";
+import {DescuentosService} from "../../../services/descuentos.service";
+import {DialogService} from "../../../services/dialog.service";
+import {IngresoUnidadesService} from "../../../services/pagos.service";
+import {ToastrService} from "ngx-toastr";
+import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
+import {DatePipe} from "@angular/common";
 
 
 @Component({
@@ -30,12 +29,14 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   sumaValorReservas: number = 0;
   saldo: number = 0;
   date = new Date();
+  pipe = new DatePipe('en-US');
 
   unidades: any[] = [];
   cuentasPago: any[] = [];
   reservas: any[] = [];
   tiposPago: any[] = [];
   descuentos: any[] = [];
+  tablaCobranzas: any[] = [];
 
   pagoMensualidadForm: FormGroup;
   datosUnidadForm: FormGroup;
@@ -52,6 +53,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     private _cuentaPagoService: CuentasService,
     private _tipoPagoService: TiposPagoService,
     private _descuentoService: DescuentosService,
+    private _tablaCobranzaService: TablaCobranzaService,
     private _dialogService: DialogService,
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -61,7 +63,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       idCuenta: ['', Validators.required],
       idTiposPago: ['', Validators.required],
       idDescuento: ['', Validators.required],
-      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{19,20}$/)]],
+      numeroReciboPago: ['', [Validators.required, Validators.pattern(/^.{10,20}$/)]],
       fechaReciboPago: [this.date.toLocaleString],
       observacionesMensualidadPago: [''],
       estadoIngreso: ['Activo'],
@@ -81,8 +83,10 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     });
 
     this.cuentasPagoForm = this.fb.group({
+      idCuenta: [''],
       nombreCuenta: [''],
-      tipoCuenta: ['']
+      tipoCuenta: [''],
+      saldoInicial: ['']
     });
 
     this.tiposPagoForm = this.fb.group({
@@ -109,6 +113,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     this.getValoresReservas();
     this.getTiposPago();
     this.getDescuentos();
+    this.getTablaCobranzas();
+    //this.onUpdateTablaCobranzas();
   }
 
   ngOnDestroy(): void {
@@ -130,6 +136,21 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
             ...element.payload.doc.data()
           })
         })
+      })
+    );
+  }
+
+  getTablaCobranzas() {
+    //console.log(this.idUnidad)
+    this.subscription.add(
+      this._tablaCobranzaService.getTablaCobranzasByUnidad(this.idUnidad).subscribe(data => {
+        this.tablaCobranzas = [];
+        data.forEach((element: any) => {
+          this.tablaCobranzas.push({
+            ...element.payload.doc.data()
+          })
+        })
+        //console.log(this.tablaCobranzas);
       })
     );
   }
@@ -210,8 +231,10 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       this._cuentaPagoService.getCuenta(item).subscribe(data => {
         this.loading = false;
         this.cuentasPagoForm.setValue({
+          idCuenta: data.payload.data()['idCuenta'],
           nombreCuenta: data.payload.data()['nombreCuenta'],
-          tipoCuenta: data.payload.data()['tipoCuenta']
+          tipoCuenta: data.payload.data()['tipoCuenta'],
+          saldoInicial: data.payload.data()['saldoInicial']
         })
       })
     )
@@ -258,13 +281,15 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       cancelText: 'No',
     }).subscribe(res => {
       this.saldo = (this.sumaTotalForm.value.sumaTotal - this.pagoMensualidadForm.value.valorPago);
+
       if (res) {
         const pagoMensualidad: any = {
           idAdministrador: this.idAdministrador,
           idCondominio: this.idCondominio,
           idUnidad: this.idUnidad,
+          idCuenta: this.cuentasPagoForm.value.idCuenta,
           unidad: this.datosUnidadForm.value.unidad,
-          fechaReciboPago: this.date.toLocaleString(),
+          fechaReciboPago: this.pipe.transform(this.date, 'yyyy/MM/dd'),
           numeroReciboPago: this.pagoMensualidadForm.value.numeroReciboPago,
           nombreResidente: this.datosUnidadForm.value.nombreResidente,
           apellidoResidente: this.datosUnidadForm.value.apellidoResidente,
@@ -283,9 +308,8 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           valorPago: this.pagoMensualidadForm.value.valorPago,
           saldo: this.saldo,
           modoPago: this.pagoMensualidadForm.value.modoPago,
-          mes: this.date.toLocaleString("es-ES", { month: "long" }) + this.date.toLocaleString("es-ES", { year: 'numeric' })
+          mes: this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
         }
-        
         this.loading = true;
         this._ingresoUnidades.savePago(pagoMensualidad).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
@@ -297,8 +321,10 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           console.log(error);
         })
       }
+      this.onUpdateEstadoReservasPagadas();
+      this.onUpdateTablaCobranzas();
+      this.onUpdateSaldo();
     });
-    this.onUpdateEstadoReservasPagadas();
   }
 
   onUpdateEstadoReservasPagadas() {
@@ -308,6 +334,114 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       }
       this._reservasService.actualizarReserva(element.idReserva, pagoReservaData);
     })
+  }
+
+  onUpdateSaldo() {
+
+    const cuentaData: any = {
+      saldoInicial: this.cuentasPagoForm.value.saldoInicial + this.pagoMensualidadForm.value.valorPago
+    }
+    //console.log(cuentaData, this.cuentasPagoForm.value.idCuenta);
+    this._cuentaPagoService.updateCuenta(this.cuentasPagoForm.value.idCuenta, cuentaData);
+  }
+
+  onUpdateTablaCobranzas() {
+    let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
+    //console.log(fecha);
+    //console.log(this.saldo);
+    if (fecha == 'junio2022') {
+      //console.log(this.tablaCobranzas);
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          junio2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'julio2022') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          julio2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'agosto2022') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          agosto2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'septiembre2022') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          septiembre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'octubre2022') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          octubre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'noviembre2022') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          noviembre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'diciembre2022') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          diciembre2022: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'enero2023') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          enero2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'febrero2023') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          febrero2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'marzo2023') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          marzo2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'abril2023') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          abril2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'mayo2023') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          mayo2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    } else if (fecha == 'junio2023') {
+      this.tablaCobranzas.forEach((element: any) => {
+        const actualizarTabla: any = {
+          junio2023: this.saldo
+        }
+        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+      })
+    }
   }
 
   onBacktoList(): void {

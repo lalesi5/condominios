@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 import { UsuariosService } from "../../../services/usuarios.service";
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'src/app/services/dialog.service';
+import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
 
 @Component({
   selector: 'app-ajustes-unidades-create',
@@ -28,6 +29,7 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private _unidadesService: UnidadesService,
+    private _tablaCobranzasService: TablaCobranzaService,
     private _usuarioService: UsuariosService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
@@ -125,7 +127,20 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
           console.log(error);
         })
       }
+      this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+      console.log(this.idUnidad);
+      this.onCreateTablaCobranzas(this.idUnidad);
     });
+  }
+
+  async onCreateTablaCobranzas(idUnidad: string){
+    console.log('On create table',idUnidad);
+    const tabla: any = {
+      unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+      idCondominio: this.idCondominio,
+      idUnidad: idUnidad
+    }
+    this._tablaCobranzasService.createTablaCobranzas(tabla);
   }
 
   onBacktoList(): void {

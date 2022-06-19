@@ -13,7 +13,6 @@ import {extraordinariosService} from "../../../services/extraordinarios.service"
 import {DialogService} from "../../../services/dialog.service";
 import {egresosService} from "../../../services/egresos.service";
 import {Query} from "@syncfusion/ej2-data";
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 @Component({
   selector: 'app-balance',

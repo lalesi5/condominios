@@ -45,8 +45,10 @@ export class UnidadesService {
 
   createUnidades(unidad: any): Promise<any> {
     const idUnidad = this.firestore.createId();
+    sessionStorage.setItem('idUnidad', idUnidad)
     const data = { idUnidad, ...unidad }
     return this.firestore.collection('Unidades').doc(idUnidad).set(data);
+
   }
 
   actualizarUnidad(id: string, data: any): Promise<any> {
