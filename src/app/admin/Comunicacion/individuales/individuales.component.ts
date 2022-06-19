@@ -36,8 +36,8 @@ export class IndividualesComponent implements OnInit {
   ) {
     this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Ver Mensaje', buttonOption: {iconCss: 'e-icons e-comments', cssClass: 'e-flat'}},
-      {title: 'Nuevo', buttonOption: {iconCss: 'e-icons e-save-as', cssClass: 'e-flat'}}];
+    this.commands = [{title: 'Ver Mensajes', buttonOption: {iconCss: 'e-icons e-comments', cssClass: 'e-flat'}},
+      {title: 'Crear Nuevo', buttonOption: {iconCss: 'e-icons e-save-as', cssClass: 'e-flat'}}];
     this.recoverData();
   }
 
@@ -66,13 +66,13 @@ export class IndividualesComponent implements OnInit {
 
   //Seleccionar editar o eliminar usuario
   commandClick(item: any): void {
-    if (item.target?.title === 'Ver Mensaje') {
+    if (item.target?.title === 'Ver Mensajes') {
       sessionStorage.setItem('idUnidad', <string>item.rowData['idUnidad']);
       sessionStorage.setItem('idUsuario', <string>item.rowData['idUsuario']);
       sessionStorage.setItem('nombreResidente', <string>item.rowData['nombreResidente']);
       sessionStorage.setItem('apellidoResidente', <string>item.rowData['apellidoResidente']);
       this.router.navigate(['/admin/comunicacion/mensajeUsuario']);
-    } else if (item.target?.title === 'Nuevo') {
+    } else if (item.target?.title === 'Crear Nuevo') {
       sessionStorage.setItem('idUnidad', <string>item.rowData['idUnidad']);
       this.router.navigate(['/admin/comunicacion/nuevoMensaje']);
     }
