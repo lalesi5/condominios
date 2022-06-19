@@ -12,7 +12,7 @@
           <div class="form-group">
             <label>Asunto</label>
             <input type="text" class="form-control" formControlName="tituloMensaje"
-                   [ngClass]="{ 'is-invalid': !mensajesForm.controls['tituloMensaje'].valid  && mensajesForm.controls['tituloMensaje'].touched }">
+              [ngClass]="{ 'is-invalid': !mensajesForm.controls['tituloMensaje'].valid  && mensajesForm.controls['tituloMensaje'].touched }">
             <div
               *ngIf=" mensajesForm.controls['tituloMensaje'].touched  && !mensajesForm.controls['tituloMensaje'].valid"
               class="invalid-feedback">
@@ -21,7 +21,13 @@
           </div>
           <div class="form-group">
             <label>Descripcion</label><br>
-            <textarea formControlName="descripcionMensaje" class="form-control" rows="3"></textarea>
+            <textarea formControlName="descripcionMensaje" class="form-control" rows="3"
+              [ngClass]="{ 'is-invalid': !mensajesForm.controls['descripcionMensaje'].valid  && mensajesForm.controls['descripcionMensaje'].touched }"></textarea>
+            <div
+              *ngIf=" mensajesForm.controls['descripcionMensaje'].touched  && !mensajesForm.controls['descripcionMensaje'].valid"
+              class="invalid-feedback">
+              Campo requerido
+            </div>
           </div>
           <div>
             <button type="submit" class="btn btn-success mr-2" [disabled]="mensajesForm.invalid">Guardar</button>

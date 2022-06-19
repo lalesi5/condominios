@@ -33,7 +33,7 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
   ) {
     this.mensajesForm = this.fb.group({
       tituloMensaje: ['', Validators.required],
-      descripcionMensaje: [''],
+      descripcionMensaje: ['', Validators.required],
     })
 
 
