@@ -37,7 +37,7 @@ export class IndividualesComponent implements OnInit {
     this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [{title: 'Ver Mensajes', buttonOption: {iconCss: 'e-icons e-comments', cssClass: 'e-flat'}},
-      {title: 'Crear Nuevo', buttonOption: {iconCss: 'e-icons e-save-as', cssClass: 'e-flat'}}];
+      {title: 'Crear Nuevo', buttonOption: {iconCss: 'e-icons e-add', cssClass: 'e-flat'}}];
     this.recoverData();
   }
 
