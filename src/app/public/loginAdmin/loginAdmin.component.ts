@@ -47,26 +47,64 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
       if (res) {
         // @ts-ignore
         const idAdministrador = res.user.uid;
+        const path = 'Administrador';
+        this.subscription.add(
+          this.fstore.getDoc<AdminI>(path, idAdministrador).subscribe(res => {
+            this.rolUser = res?.rol;
+            if (this.rolUser === 'Administrador') {
+
+              this.authSvc.getCurrentUser().subscribe((user => {
+                if (user?.emailVerified == true) {
+                  this.toastr.success('Usuario logeado Correctamente', 'Inicio de Sesión', {
+                    positionClass: 'toast-bottom-right'
+                  });
+                  sessionStorage.setItem('idAdministrador', <string>res?.idAdministrador);
+                  this.router.navigate(['/selectCondominio']);
+                } else {
+                  this.toastr.warning('Por favor verifique su correo electrónico', 'Correo electrónico no verificado', {
+                    positionClass: 'toast-bottom-right'
+                  });
+                  //alert('Por favor verifique el correo electronico');
+                  this.authSvc.logout();
+                  this.router.navigate(['../loginAdmin']);
+                }
+              }))
+            } else if (this.rolUser === 'Usuario') {
+              // @ts-ignore
+              sessionStorage.setItem('idUsuario', <string>res?.idUsuario);
+              this.router.navigate(['/selectUnidad']);
+            }
+          })
+        )
+
 
         //Comprueba si el usuario ha verificado su correo al momento de registrarse
         /*this.subscription.add(
           this.authSvc.getCurrentUser().subscribe((user => {
             if (user?.emailVerified == true) {
+              this.toastr.success('Usuario logeado Correctamente', 'Inicio de Sesión', {
+                positionClass: 'toast-bottom-right'
+              });
               this.getDatosUser(idAdministrador);
             } else {
-              alert('Por favor verifique el correo electronico');
+              this.toastr.warning('Por favor verifique su correo electrónico', 'Correo electrónico no verificado', {
+                positionClass: 'toast-bottom-right'
+              });
+              //alert('Por favor verifique el correo electronico');
               this.authSvc.logout();
               this.router.navigate(['../loginAdmin']);
             }
           }))
         )*/
-        this.toastr.success('Usuario logeado Correctamente', 'Inicio de Sesión', {
+        /*this.toastr.success('Usuario logeado Correctamente', 'Inicio de Sesión', {
           positionClass: 'toast-bottom-right'
         });
-        this.getDatosUser(idAdministrador);
-      } //else {
-      //alert('Usuario no autenticado');
-      //}
+        this.getDatosUser(idAdministrador);*/
+      } /*else {
+        this.toastr.warning('Por favor verifique su correo electrónico', 'Correo electrónico no verificado', {
+          positionClass: 'toast-bottom-right'
+        });
+      }*/
     })
   }
 
@@ -82,8 +120,6 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
           // @ts-ignore
           sessionStorage.setItem('idUsuario', <string>res?.idUsuario);
           this.router.navigate(['/selectUnidad']);
-        } else if (this.rolUser === 'admin-user') {
-
         }
       })
     )
