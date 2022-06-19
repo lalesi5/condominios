@@ -112,7 +112,7 @@ export class RegisterAdminComponent implements OnInit {
                 console.log(error);
                 this.loading = false;
               });
-              //this.authSvc.verificarCorreo();
+              this.authSvc.verificarCorreo();
               //console.log('Correo de verificacion enviado');
               this.authSvc.logout();
               this.router.navigate(['./loginAdmin']);

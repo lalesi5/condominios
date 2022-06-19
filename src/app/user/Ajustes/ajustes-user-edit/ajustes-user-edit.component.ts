@@ -153,11 +153,12 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
 
   onChangePassword() {
     const userAuth = getAuth();
-    const contrasenia = this.cambioPasswordForm.value.password;
+    //const password = this.cambioPasswordForm.value.password;
+    const password = '';
     var date = new Date();
 
     const data = {
-      password: contrasenia,
+      password: '',
       fechaActualizacion: date.toLocaleString()
     }
 
@@ -168,7 +169,7 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
       cancelText: 'No',
     }).subscribe(res => {
       if (res) {
-        this.auth.updatePassword(userAuth.currentUser, contrasenia);
+        this.auth.updatePassword(userAuth.currentUser, password);
         this.loading = true;
         this._adminService.updateAdministrador(this.idUsuario, data).then(() => {
           this.loading = false;

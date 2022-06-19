@@ -161,8 +161,8 @@ export class AjustesAdminEditComponent implements OnInit, OnDestroy {
   onChangePassword() {
     //this.passwordAministrador = this.cambioPasswordForm.value('password');
     const userAuth = getAuth();
-    const password = this.cambioPasswordForm.get('password')?.value;
-
+    //const password = this.cambioPasswordForm.get('password')?.value;
+    const password = '';
     this._dialogService.confirmDialog({
       title: 'Cambiar contraseña',
       message: '¿Está seguro de cambiar su contraseña?',

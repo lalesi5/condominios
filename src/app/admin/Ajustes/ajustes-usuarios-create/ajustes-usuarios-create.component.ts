@@ -71,7 +71,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           name: nombre,
           last_name: apellido,
           email: this.createUsuarioForm.value.email,
-          password: this.createUsuarioForm.value.password,
+          password:'',
           phone: this.createUsuarioForm.value.phone,
           fechaCreacion: new Date(),
           fechaActualizacion: new Date(),
