@@ -33,7 +33,7 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
 
     this.anunciosForm = this.fb.group({
       tituloAnuncio: ['', Validators.required],
-      descripcionAnuncio: [''],
+      descripcionAnuncio: ['', Validators.required],
     })
 
     this.id = aRoute.snapshot.paramMap.get('id');

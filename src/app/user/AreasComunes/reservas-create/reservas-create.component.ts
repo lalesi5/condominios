@@ -114,7 +114,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
         this.loading = true;
         this._reservaService.agregarReserva(reserva).then(() => {
           this.toastr.success('La reserva fue creada con exito', 'Reserva registrada', {
-            positionClass: 'toast-top-rigth'
+            positionClass: 'toast-bottom-right'
           });
           this.loading = false;
           this.router.navigate(['/user/areasComunes/listarAreas']);

@@ -79,16 +79,19 @@ export class MisReservasComponent implements OnInit, OnDestroy {
   commandClick(item: any): void {
     const id = <string>item.rowData['idReserva'];
 
-    if (item.target?.title === 'Eliminar reservación') {
+    if (item.target?.title === 'Cancelar reservación') {
       this._dialogService.confirmDialog({
-        title: 'Eliminar área',
-        message: '¿Está seguro de eliminar la reservación?',
+        title: 'Cancelar Reserva',
+        message: '¿Está seguro de cancelar la reservación?',
         confirmText: 'Si',
         cancelText: 'No',
       }).subscribe(res => {
         if (res) {
-          this._reservaService.eliminarReserva(id).then(() => {
-            this.toastr.success('La reservación fue eliminada con exito', 'Registro eliminado', {
+          const reserva: any = {
+            estadoReserva: 'Cancelado',
+          }
+          this._reservaService.actualizarReserva(id, reserva).then(() => {
+            this.toastr.success('La reservación fue cancelada con exito', 'Registro eliminado', {
               positionClass: 'toast-bottom-right'
             });
           }).catch(error => {

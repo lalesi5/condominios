@@ -19,7 +19,13 @@
         </div>
         <div class="form-group">
           <label>Descripcion</label><br>
-          <textarea formControlName="descripcionAnuncio" class="form-control" rows="3"></textarea>
+          <textarea formControlName="descripcionAnuncio" class="form-control" rows="3"
+            [ngClass]="{ 'is-invalid': !anunciosForm.controls['descripcionAnuncio'].valid  && anunciosForm.controls['descripcionAnuncio'].touched }"></textarea>
+          <div
+            *ngIf=" anunciosForm.controls['descripcionAnuncio'].touched  && !anunciosForm.controls['descripcionAnuncio'].valid"
+            class="invalid-feedback">
+            Campo requerido
+          </div>
         </div>
         <div>
           <button type="submit" class="btn btn-success mr-2" [disabled]="anunciosForm.invalid">Guardar</button>
