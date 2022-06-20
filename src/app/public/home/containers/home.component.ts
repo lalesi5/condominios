@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { EmailService } from "src/app/services/email.service";
+
 
 @Component({
     selector: 'app-home',
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
                 console.error(res);
             }
         });
-    
+
     }*/
 
     get form(): { [key: string]: AbstractControl; } {
