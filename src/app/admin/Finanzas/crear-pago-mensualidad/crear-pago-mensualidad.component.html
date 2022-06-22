@@ -175,7 +175,16 @@
                 <div class="row">
                   <div class="col">
                     <label>Valor Pago </label>
-                    <input type="number" class="form-control" formControlName="valorPago">
+                    <input type="number" class="form-control" formControlName="valorPago"
+                      [ngClass]="{ 'is-invalid': !pagoMensualidadForm.controls['valorPago'].valid  && pagoMensualidadForm.controls['valorPago'].touched }">
+                    <div *ngIf="form['valorPago'].errors" class="invalid-feedback">
+                      <div *ngIf="form['valorPago'].errors['required']">
+                        Campo requerido (Solo debe contener números)
+                      </div>
+                      <div *ngIf="form['valorPago'].errors['pattern']">
+                        El campo solo debe contener números, números positivos con dos decimales.
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

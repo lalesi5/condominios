@@ -11,18 +11,17 @@
         <div class="form-group">
           <label>Nombre del la Cuenta</label>
           <input type="text" class="form-control" formControlName="nombreCuenta"
-                 [ngClass]="{ 'is-invalid': !cuentasForm.controls['nombreCuenta'].valid  && cuentasForm.controls['nombreCuenta'].touched }">
+            [ngClass]="{ 'is-invalid': !cuentasForm.controls['nombreCuenta'].valid  && cuentasForm.controls['nombreCuenta'].touched }">
           <div *ngIf=" cuentasForm.controls['nombreCuenta'].touched  && !cuentasForm.controls['nombreCuenta'].valid"
-               class="invalid-feedback">
+            class="invalid-feedback">
             Campo requerido
           </div>
         </div>
         <div class="form-group">
           <label>Tipo de Cuenta</label>
           <input type="text" class="form-control" formControlName="tipoCuenta"
-                 [ngClass]="{ 'is-invalid': !cuentasForm.controls['tipoCuenta'].valid  && cuentasForm.controls['tipoCuenta'].touched }">
-          <div
-            *ngIf=" cuentasForm.controls['tipoCuenta'].touched  && !cuentasForm.controls['tipoCuenta'].valid"
+            [ngClass]="{ 'is-invalid': !cuentasForm.controls['tipoCuenta'].valid  && cuentasForm.controls['tipoCuenta'].touched }">
+          <div *ngIf=" cuentasForm.controls['tipoCuenta'].touched  && !cuentasForm.controls['tipoCuenta'].valid"
             class="invalid-feedback">
             Campo requerido
           </div>
@@ -30,11 +29,14 @@
         <div class="form-group">
           <label>Saldo Inicial</label>
           <input type="number" class="form-control" formControlName="saldoInicial"
-                 [ngClass]="{ 'is-invalid': !cuentasForm.controls['saldoInicial'].valid  && cuentasForm.controls['saldoInicial'].touched }">
-          <div
-            *ngIf=" cuentasForm.controls['saldoInicial'].touched  && !cuentasForm.controls['saldoInicial'].valid"
-            class="invalid-feedback">
-            Campo requerido
+            [ngClass]="{ 'is-invalid': !cuentasForm.controls['saldoInicial'].valid && cuentasForm.controls['saldoInicial'].touched }">
+          <div *ngIf="form['saldoInicial'].errors && form['saldoInicial'].touched" class="invalid-feedback">
+            <div *ngIf="form['saldoInicial'].errors['required']">
+              Campo requerido (Solo debe contener números)
+            </div>
+            <div *ngIf="form['saldoInicial'].errors['pattern']">
+              El campo solo debe contener números, números positivos con dos decimales.
+            </div>
           </div>
         </div>
         <div class="centrarBotones">

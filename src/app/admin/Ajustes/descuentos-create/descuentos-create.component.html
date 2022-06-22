@@ -24,7 +24,7 @@
             [ngClass]="{ 'is-invalid': !descuentosForm.controls['valorDescuento'].valid  && descuentosForm.controls['valorDescuento'].touched }">
           <div *ngIf="form['valorDescuento'].errors" class="invalid-feedback">
             <div *ngIf="form['valorDescuento'].errors['required']">
-              Campo requerido
+              Campo requerido (Solo debe contener números)
             </div>
             <div *ngIf="form['valorDescuento'].errors['pattern']">
               Solo números positivos

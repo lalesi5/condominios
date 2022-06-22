@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from "rxjs";
-import {ReservasService} from "../../../services/reservas.service";
-import {UnidadesService} from "../../../services/unidades.service";
-import {Router} from "@angular/router";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from "rxjs";
+import { ReservasService } from "../../../services/reservas.service";
+import { UnidadesService } from "../../../services/unidades.service";
+import { Router } from "@angular/router";
 import {
   CommandModel,
   GridComponent,
@@ -10,10 +10,10 @@ import {
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {Query} from "@syncfusion/ej2-data";
-import {IngresoUnidadesService} from "../../../services/pagos.service";
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
+import { Query } from "@syncfusion/ej2-data";
+import { IngresoUnidadesService } from "../../../services/pagos.service";
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-registro-mensualidad',
@@ -26,7 +26,7 @@ export class RegistroMensualidadComponent implements OnInit {
   idUnidad: string = '';
   reservas: any[] = [];
   unidad: any[] = [];
-  ingresoUnidades: any [] = [];
+  ingresoUnidades: any[] = [];
   sumaValorReservas: number = 0;
   cuotaUnidad: number = 0;
 
@@ -45,7 +45,7 @@ export class RegistroMensualidadComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.recoverData();
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [{ title: 'Anular Pago', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
   }
@@ -128,29 +128,29 @@ export class RegistroMensualidadComponent implements OnInit {
     }
   }
 
-  commandClick(item: any): void{
-  if(item.target?.title == 'Anular Pago'){
-    const id = <string>item.rowData['idPago'];
-    this._dialogService.confirmDialog({
-      title: 'Anular Pago',
-      message: '¿Está seguro de anular el pago?',
-      confirmText: 'Sí',
-      cancelText: 'No'
-    }).subscribe( res => {
-      if (res) {
-        const pagoMensualidad: any = {
-          estadoIngreso: 'Inactivo'
+  commandClick(item: any): void {
+    if (item.target?.title == 'Anular Pago') {
+      const id = <string>item.rowData['idPago'];
+      this._dialogService.confirmDialog({
+        title: 'Anular Pago',
+        message: '¿Está seguro de anular el pago?',
+        confirmText: 'Sí',
+        cancelText: 'No'
+      }).subscribe(res => {
+        if (res) {
+          const pagoMensualidad: any = {
+            estadoIngreso: 'Inactivo'
+          }
+          this._ingresoUnidadesService.updatePago(id, pagoMensualidad).then(() => {
+            this.toastr.success('El pago ha sido anulado con exito', 'Pago Anulado', {
+              positionClass: 'toast-bottom-right'
+            });
+          }).catch(error => {
+            console.log(error);
+          })
         }
-        this._ingresoUnidadesService.updatePago(id, pagoMensualidad).then(() => {
-          this.toastr.success('El pago ha sido anulado con exito', 'Pago Anulado', {
-            positionClass: 'toast-bottom-right'
-          });
-        }).catch(error => {
-          console.log(error);
-        })
-      }
-    })
-  }
+      })
+    }
   }
 
   pdfExportComplete(): void {
@@ -165,4 +165,10 @@ export class RegistroMensualidadComponent implements OnInit {
     this.router.navigate(['/admin/finanzas/ingresosFinanzas']);
   }
 
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
 }

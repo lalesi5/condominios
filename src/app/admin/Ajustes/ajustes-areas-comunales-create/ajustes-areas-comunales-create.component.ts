@@ -51,7 +51,7 @@ export class AjustesAreasComunalesCreateComponent implements OnInit {
 
     this._dialogService.confirmDialog({
       title: 'Agregar área',
-      message: '¿Está seguro de agregar el área?',
+      message: '¿Está seguro de agregar el área común?',
       confirmText: 'Si',
       cancelText: 'No',
     }).subscribe(res => {
