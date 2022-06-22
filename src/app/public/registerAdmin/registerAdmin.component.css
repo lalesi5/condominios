@@ -1,9 +1,8 @@
 #register {
-  margin-top: 150px;
-  padding-top: 100px;
-  margin-bottom: 70px;
+  padding-top: 2vh;
   text-align: center;
-  height: calc(100vh - 230px);
+  min-height: calc(100vh - 130px);
+  overflow: auto;
 }
 
 #register span {
@@ -21,3 +20,8 @@
   margin-top: 20px;
 }
 
+@media only screen and (max-width: 900px) {
+  #register {
+    height: calc(100vh - 220px);
+  }
+}
