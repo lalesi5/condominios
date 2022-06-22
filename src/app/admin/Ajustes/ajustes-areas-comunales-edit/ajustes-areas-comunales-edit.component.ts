@@ -80,8 +80,8 @@ export class AjustesAreasComunalesEditComponent implements OnInit {
     }
 
     this._dialogService.confirmDialog({
-      title: 'Modificar área',
-      message: '¿Está seguro de modificar el área?',
+      title: 'Modificar información',
+      message: '¿Está seguro de modificar la información?',
       confirmText: 'Si',
       cancelText: 'No',
     }).subscribe(res => {

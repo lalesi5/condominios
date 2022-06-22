@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {Subscription} from "rxjs";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Subscription } from "rxjs";
 import {
   CommandModel,
   GridComponent,
@@ -7,11 +7,11 @@ import {
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {Router} from "@angular/router";
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
-import {Query} from "@syncfusion/ej2-data";
-import {IngresoUnidadesService} from "../../../services/pagos.service";
+import { Router } from "@angular/router";
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
+import { Query } from "@syncfusion/ej2-data";
+import { IngresoUnidadesService } from "../../../services/pagos.service";
 
 @Component({
   selector: 'app-ingresosExtraordinariosFinanzas',
@@ -38,12 +38,12 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.recoverData();
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Anular Pago', buttonOption: {iconCss: 'e-icons e-delete', cssClass: 'e-flat'}}];
+    this.commands = [{ title: 'Anular Pago', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getPagosExtraordinarios();
   }
 
@@ -51,7 +51,7 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  getPagosExtraordinarios(){
+  getPagosExtraordinarios() {
     this.subscription.add(
       this._ingresos.getPagosCondominioExtraordinario(this.idCondominio).subscribe(data => {
         this.pagosExtraordinarios = [];
@@ -85,15 +85,15 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
     }
   }
 
-  commandClick(item: any): void{
-    if(item.target?.title == 'Anular Pago'){
+  commandClick(item: any): void {
+    if (item.target?.title == 'Anular Pago') {
       const id = <string>item.rowData['idPago'];
       this._dialogService.confirmDialog({
         title: 'Anular Pago',
         message: '¿Está seguro de anular el pago?',
         confirmText: 'Sí',
         cancelText: 'No'
-      }).subscribe( res => {
+      }).subscribe(res => {
         if (res) {
           const pagoExtraordinario: any = {
             estadoIngreso: 'Inactivo'
@@ -118,4 +118,10 @@ export class IngresosExtraordinariosFinanzasComponent implements OnInit {
     this.grid.query = this.queryClone;
   }
 
+  //evento para buscar al coincidir una letra
+  created(): void {
+    document.getElementById(this.grid.element.id + "_searchbar")!.addEventListener('keyup', () => {
+      this.grid.search((event!.target as HTMLInputElement).value)
+    });
+  }
 }

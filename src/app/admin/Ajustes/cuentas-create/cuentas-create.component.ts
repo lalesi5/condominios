@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
 import {CuentasService} from "../../../services/cuentas.service";
@@ -28,7 +28,7 @@ export class CuentasCreateComponent implements OnInit {
     this.cuentasForm = this.fb.group({
       nombreCuenta: ['', Validators.required],
       tipoCuenta: ['', Validators.required],
-      saldoInicial: ['']
+      saldoInicial: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]]
     });
 
     this.recoverData();
@@ -85,4 +85,11 @@ export class CuentasCreateComponent implements OnInit {
     this.router.navigate(['/admin/ajustes/cuentas']);
   }
 
+  get form(): { [key: string]: AbstractControl; } {
+    return this.cuentasForm.controls;
+  }
+
+  get areaUnidad() {
+    return this.cuentasForm.get('saldoInicial');
+  }
 }
