@@ -68,7 +68,6 @@
   position: absolute;
   width: calc(100% - 10px);
   left: 10px;
-  top: 35vh;
   min-height: 60vh;
 }
 
