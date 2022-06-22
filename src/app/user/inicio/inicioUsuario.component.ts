@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {ReservasService} from "src/app/services/reservas.service";
 import {AnunciosGeneralesService} from "../../services/anunciosGenerales.service";
 import {MensajesService} from "../../services/mensajes.service";
+import {UnidadesService} from "../../services/unidades.service";
 
 @Component({
   selector: 'app-inicioUsuario',
@@ -18,12 +19,16 @@ export class InicioUsuarioComponent implements OnInit, OnDestroy {
   idUnidad: string = '';
   idUsuario: string = '';
   anunciosGenerales: any[] = [];
+  unidad: any[] = [];
   reservas: any[] = [];
   mensajes: any[] = [];
+  cuotaUnidad: number = 0;
+  sumaValorReservas: number = 0;
 
   constructor(
     private router: Router,
     private _reservaService: ReservasService,
+    private _unidadesService: UnidadesService,
     private _anunciosGeneralesService: AnunciosGeneralesService,
     private _mensajesService: MensajesService
   ) {
@@ -34,6 +39,8 @@ export class InicioUsuarioComponent implements OnInit, OnDestroy {
     this.getAnunciosGenerales();
     this.getReservas();
     this.getMensajesUsuario();
+    this.getValoresReservas();
+    this.getUnidadCuotaReserva();
   }
 
   ngOnDestroy(): void {
@@ -48,7 +55,7 @@ export class InicioUsuarioComponent implements OnInit, OnDestroy {
 
   getReservas() {
     this.subscription.add(
-      this._reservaService.getReservasUsuario(this.idCondominio, this.idUnidad).subscribe(data => {
+      this._reservaService.getReservasUsuarioPendientes(this.idCondominio, this.idUnidad).subscribe(data => {
         this.reservas = [];
         data.forEach((element: any) => {
           this.reservas.push({
@@ -83,5 +90,40 @@ export class InicioUsuarioComponent implements OnInit, OnDestroy {
         })
       })
     );
+  }
+
+  getValoresReservas() {
+    this.subscription.add(
+      this._reservaService.getReservasValorPago(this.idUnidad).subscribe(data => {
+        this.reservas = [];
+        this.sumaValorReservas = 0;
+        data.forEach((element: any) => {
+          this.reservas.push({
+            ...element.payload.doc.data()
+          })
+        })
+        //suma todos los valores de reservas que pertenecen a esa unidad y que tienen pagoReserva = Por Pagar
+        this.reservas.map(data => {
+          this.sumaValorReservas += data.valorReserva;
+        })
+      })
+    )
+  }
+
+  getUnidadCuotaReserva() {
+    this.subscription.add(
+      this._unidadesService.getUnidadesById(this.idUnidad).subscribe(data => {
+        this.unidad = [];
+        this.cuotaUnidad = 0;
+        data.forEach((element: any) => {
+          this.unidad.push({
+            ...element.payload.doc.data()
+          })
+        })
+        this.unidad.map(data => {
+          this.cuotaUnidad = data.cuotaUnidad;
+        })
+      })
+    )
   }
 }

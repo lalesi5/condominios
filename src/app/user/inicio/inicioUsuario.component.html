@@ -14,7 +14,7 @@
     <div class="card" [routerLink]="['/user/finanzas']" [routerLinkActive]="['active']">
       <div>
         <div class="cardName">Valor a Pagar</div>
-        <div class="numbers"> $450.00</div>
+        <div class="numbers"> ${{cuotaUnidad + sumaValorReservas}}</div>
       </div>
       <div class="iconBx">
         <mat-icon>attach_money</mat-icon>
