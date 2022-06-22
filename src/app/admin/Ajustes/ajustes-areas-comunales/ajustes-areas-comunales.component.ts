@@ -69,7 +69,7 @@ export class AjustesAreasComunalesComponent implements OnInit {
       const id = <string>item.rowData['idAreaComunal'];
       this._dialogService.confirmDialog({
         title: 'Eliminar área',
-        message: '¿Está seguro de eliminar el área?',
+        message: '¿Está seguro de eliminar el área común?',
         confirmText: 'Si',
         cancelText: 'No',
       }).subscribe(res => {

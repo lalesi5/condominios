@@ -1,17 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {Subscription} from 'rxjs';
-import {UnidadesService} from "../../../services/unidades.service";
-import {CuentasService} from "../../../services/cuentas.service";
-import {ReservasService} from "../../../services/reservas.service";
-import {TiposPagoService} from "../../../services/tiposPago.service";
-import {DescuentosService} from "../../../services/descuentos.service";
-import {DialogService} from "../../../services/dialog.service";
-import {IngresoUnidadesService} from "../../../services/pagos.service";
-import {ToastrService} from "ngx-toastr";
-import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
-import {DatePipe} from "@angular/common";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { Subscription } from 'rxjs';
+import { UnidadesService } from "../../../services/unidades.service";
+import { CuentasService } from "../../../services/cuentas.service";
+import { ReservasService } from "../../../services/reservas.service";
+import { TiposPagoService } from "../../../services/tiposPago.service";
+import { DescuentosService } from "../../../services/descuentos.service";
+import { DialogService } from "../../../services/dialog.service";
+import { IngresoUnidadesService } from "../../../services/pagos.service";
+import { ToastrService } from "ngx-toastr";
+import { TablaCobranzaService } from "../../../services/tablaCobranza.service";
+import { DatePipe } from "@angular/common";
 
 
 @Component({
@@ -68,7 +68,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       observacionesMensualidadPago: [''],
       estadoIngreso: ['Activo'],
       estadoReciboPago: ['Pagado'],
-      valorPago: ['', Validators.required],
+      valorPago: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       saldo: [''],
       modoPago: ['Mensualidad'],
       mes: ['']
@@ -308,7 +308,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           valorPago: this.pagoMensualidadForm.value.valorPago,
           saldo: this.saldo,
           modoPago: this.pagoMensualidadForm.value.modoPago,
-          mes: this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
+          mes: this.date.toLocaleString("es-ES", { month: "long" }) + this.date.toLocaleString("es-ES", { year: 'numeric' })
         }
         this.loading = true;
         this._ingresoUnidades.savePago(pagoMensualidad).then(() => {
@@ -346,7 +346,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   }
 
   onUpdateTablaCobranzas() {
-    let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
+    let fecha = this.date.toLocaleString("es-ES", { month: "long" }) + this.date.toLocaleString("es-ES", { year: 'numeric' })
     //console.log(fecha);
     //console.log(this.saldo);
     if (fecha == 'junio2022') {
@@ -454,5 +454,9 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
 
   get numeroReciboPago() {
     return this.pagoMensualidadForm.get('numeroReciboPago');
+  }
+
+  get valorPago() {
+    return this.pagoMensualidadForm.get('valorPago');
   }
 }

@@ -23,7 +23,7 @@
             [ngClass]="{ 'is-invalid': !unidadesForm.controls['cuotaUnidad'].valid && unidadesForm.controls['cuotaUnidad'].touched }">
           <div *ngIf="form['cuotaUnidad'].errors && form['cuotaUnidad'].touched" class="invalid-feedback">
             <div *ngIf="form['cuotaUnidad'].errors['required']">
-              Campo requerido
+              Campo requerido (Solo debe contener números)
             </div>
             <div *ngIf="form['cuotaUnidad'].errors['pattern']">
               El campo solo debe contener números, números positivos con dos decimales.
@@ -36,7 +36,7 @@
             [ngClass]="{ 'is-invalid': !unidadesForm.controls['areaUnidad'].valid && unidadesForm.controls['areaUnidad'].touched}">
           <div *ngIf="form['areaUnidad'].errors" class="invalid-feedback">
             <div *ngIf="form['areaUnidad'].errors['required']">
-              Campo requerido
+              Campo requerido (Solo debe contener números)
             </div>
             <div *ngIf="form['areaUnidad'].errors['pattern']">
               El campo solo debe contener números, números positivos con dos decimales.

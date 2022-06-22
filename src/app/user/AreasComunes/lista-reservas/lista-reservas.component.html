@@ -1,22 +1,24 @@
 <div class="reservas">
-    <div class="containerInfo">
-        <mat-card>
-            <h3>Todas las Reservas</h3>
-            <div class="control-section">
-                <ejs-grid #grid id='Grid' [dataSource]="reservas" [allowSorting]="true" [allowPaging]="true"
-                    [editSettings]="editSettings" gridLines="Both" [pageSettings]="pageSettings"
-                     [toolbar]="toolbarOptions"
-                    (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
-                    (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
-                    (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
-                    <e-columns>
-                        <e-column field='fechaReservaInicio' headerText='Fecha Inicio' width=100> </e-column>
-                        <e-column field='fechaReservaFin' headerText='Fecha Fin' width=100> </e-column>
-                        <e-column field='nombreAreaComunal' headerText='Área' width=100> </e-column>
-                        <e-column field='estadoReserva' headerText='Estado' width=80> </e-column>
-                    </e-columns>
-                </ejs-grid>`
-            </div>
-        </mat-card>
-    </div>
+  <div class="containerInfo">
+    <mat-card>
+      <h2>Todas las Reservas</h2>
+      <h3>Detalles de Reservas</h3>
+      <div class="control-section">
+        <ejs-grid #grid id='Grid' [dataSource]="reservas" [allowSorting]="true" [allowPaging]="true"
+                  [editSettings]="editSettings" gridLines="Both" [pageSettings]="pageSettings"
+                  [toolbar]="toolbarOptions"
+                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+                  (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+                  (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
+          <e-columns>
+            <e-column field='fechaReservaInicio' headerText='Fecha Inicio' width=100></e-column>
+            <e-column field='fechaReservaFin' headerText='Fecha Fin' width=100></e-column>
+            <e-column field='nombreAreaComunal' headerText='Área' width=100></e-column>
+            <e-column field='estadoReserva' headerText='Estado' width=80></e-column>
+          </e-columns>
+        </ejs-grid>
+        `
+      </div>
+    </mat-card>
+  </div>
 </div>

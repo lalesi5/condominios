@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {DialogService} from "../../../services/dialog.service";
-import {ToastrService} from "ngx-toastr";
-import {CuentasService} from "../../../services/cuentas.service";
+import { Subscription } from "rxjs";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { DialogService } from "../../../services/dialog.service";
+import { ToastrService } from "ngx-toastr";
+import { CuentasService } from "../../../services/cuentas.service";
 
 @Component({
   selector: 'app-cuentas-edit',
@@ -33,7 +33,7 @@ export class CuentasEditComponent implements OnInit {
     this.cuentasForm = this.fb.group({
       nombreCuenta: ['', Validators.required],
       tipoCuenta: ['', Validators.required],
-      saldoInicial: ['']
+      saldoInicial: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]]
     });
 
     this.recoverData();
@@ -103,4 +103,11 @@ export class CuentasEditComponent implements OnInit {
     this.router.navigate(['/admin/ajustes/cuentas']);
   }
 
+  get form(): { [key: string]: AbstractControl; } {
+    return this.cuentasForm.controls;
+  }
+
+  get areaUnidad() {
+    return this.cuentasForm.get('saldoInicial');
+  }
 }

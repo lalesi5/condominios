@@ -9,10 +9,11 @@
       </div>
       <br>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
-                  [pageSettings]="pageSettings" [toolbar]="toolbarOptions" (commandClick)="commandClick($event)"
-                  (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
-                  [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
+        <ejs-grid #grid id='Grid' [dataSource]="pagosExtraordinarios" [allowSorting]="true" [allowPaging]="true"
+          gridLines="Both" [pageSettings]="pageSettings" [toolbar]="toolbarOptions"
+          (commandClick)="commandClick($event)" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+          (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+          (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
             <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160> </e-column>
             <e-column field='numeroReciboPago' headerText='Número Recibo de Pago' width=200> </e-column>

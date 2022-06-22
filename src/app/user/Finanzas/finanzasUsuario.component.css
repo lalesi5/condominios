@@ -4,17 +4,17 @@
   left: 231px;
   min-height: 100vh;
   transition: 0.5s;
-  background: rgb(36,149,193);
-  background: linear-gradient(90deg, rgba(36,149,193,1) 0%, rgba(40,137,175,1) 50%, rgba(43,133,168,1) 100%);
+  background: rgb(40,133,255);
+  background: linear-gradient(90deg, rgba(40,133,255,0.8477766106442577) 0%, rgba(40,82,255,0.8477766106442577) 50%, rgba(22,6,128,1) 100%);
 }
 
 .cardsBalance{
   display: grid;
   grid-template-columns: repeat(3,1fr) ;
-  grid-gap: 1px;
+  grid-gap: 5px;
   width: 100%;
   left: 20%;
-  top: 5vh;
+  top: 100px;
 }
 
 .cardsBalance .card{
@@ -33,7 +33,7 @@
   position: relative;
   font-weight: 580;
   font-size: 1.5em;
-  color: #2b85a8;
+  color: #287bff;
 }
 
 .cardsBalance .card .cardName{
@@ -45,26 +45,31 @@
 
 .containerInfo mat-card {
   display: grid;
-  width: 80%;
-  left: 10%;
-  top: 5vh;
+  width: 98%;
+  left: 1%;
+  top: 5px;
   border-radius: 20px;
   padding-bottom: 25px;
+  overflow: auto;
+  min-height: 310px;
+  max-height: 74vh;
 }
 
 .containerInfo mat-card h2 {
-  background-color: #2b85a8;
+  background-color: #287bff;
+  max-height: 35px;
   color: #fff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 1px;
   text-align: center;
 }
 
 .containerInfo mat-card h3 {
   background-color: #2ba846;
+  max-height: 35px;
   color: #fff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 1px;
   text-align: center;
 }
 
@@ -72,3 +77,17 @@ a.active{
   color: black !important;
 }
 
+@media only screen and (max-width: 900px) {
+
+  .finanzas {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
+}

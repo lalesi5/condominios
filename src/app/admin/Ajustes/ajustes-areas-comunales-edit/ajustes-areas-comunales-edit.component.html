@@ -32,7 +32,7 @@
                      [ngClass]="{ 'is-invalid': !areaComunalForm.controls['valorReserva'].valid  && areaComunalForm.controls['valorReserva'].touched }">
               <div *ngIf="form['valorReserva'].errors" class="invalid-feedback">
                 <div *ngIf="form['valorReserva'].errors['required']">
-                  Campo requerido
+                  Campo requerido (Solo debe contener números)
                 </div>
                 <div *ngIf="form['valorReserva'].errors['pattern']">
                   El campo solo debe contener números, números positivos con dos decimales.

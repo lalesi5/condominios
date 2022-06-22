@@ -5,7 +5,7 @@
                 <span class="icon">
                     <mat-icon>donut_small</mat-icon>
                 </span>
-                <span class="title">Usuario</span>
+                <span class="title">{{nombreUnidad}}</span>
             </a>
         </li>
         <li>
@@ -48,18 +48,26 @@
                 <span class="title">Ajustes</span>
             </a>
         </li>
-        <li>
-            <a [routerLink]="['/selectUnidad']" [routerLinkActive]="['active']" (click)="onLogout()">
+      <li>
+        <a [routerLink]="['/selectUnidad']" [routerLinkActive]="['active']" (click)="onLeave()">
+                <span class="icon">
+                    <mat-icon>arrow_back</mat-icon>
+                </span>
+          <span class="title">Regresar</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="[]" [routerLinkActive]="['']" (click)="onLogout()">
                 <span class="icon">
                     <mat-icon>exit_to_app</mat-icon>
                 </span>
-                <span class="title">Salir</span>
-            </a>
-        </li>
+          <span class="title">Salir</span>
+        </a>
+      </li>
         <li>
             <a>
                 <span class="icon">
-                    <mat-icon>donut_small</mat-icon>
+                    <mat-icon>domain</mat-icon>
                 </span>
                 <span class="title">CondominioEPN</span>
             </a>

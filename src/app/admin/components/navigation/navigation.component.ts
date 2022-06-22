@@ -4,7 +4,6 @@ import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
-import {AdminService} from "../../../services/admin.service";
 import {CondominioService} from "../../../services/condominios.service";
 
 @Component({

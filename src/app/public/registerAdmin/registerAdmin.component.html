@@ -2,7 +2,7 @@
 
 <div class="clearfix"></div>
 
-<div id="register" class="mb-5 mt-5">
+<div id="register">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
@@ -10,7 +10,7 @@
           <div class="card">
             <div class="card-body text-center">
               <form [formGroup]='registerForm' (ngSubmit)="onRegister()">
-                <h1 class="h3 mb-3 font-weight-normal"><b>Registrarse</b>
+                <h1 class="h2 mb-3 font-weight-normal"><b>Registrarse</b>
                   <div *ngIf="loading" class="spinner-border float-right" role="status">
                     <span class="sr-only">Procesando...</span>
                   </div>

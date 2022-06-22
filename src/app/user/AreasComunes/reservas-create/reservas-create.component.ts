@@ -69,7 +69,7 @@ export class ReservasCreateComponent implements OnInit, OnDestroy {
     this.idAdministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
     this.pagoReserva = 'Por Pagar';
-    console.log(sessionStorage);
+    //console.log(sessionStorage);
   }
 
   ongetArea() {
