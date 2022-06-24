@@ -2,32 +2,36 @@
   position: absolute;
   width: calc(100% - 231px);
   left: 231px;
-  top: 165px;
-  min-height: 82vh;
+  top: 150px;
+  min-height: 74vh;
 }
 
 .containerInfo mat-card {
   display: grid;
-  width: 80%;
-  left: 10%;
-  top: 7vh;
+  width: 98%;
+  left: 1%;
   border-radius: 20px;
   padding-bottom: 25px;
+  overflow: auto;
+  min-height: 310px;
+  max-height: 74vh;
 }
 
 .containerInfo mat-card h2 {
-  background-color: #2b85a8;
+  background-color: #287bff;
+  max-height: 35px;
   color: #fff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 1px;
   text-align: center;
 }
 
 .containerInfo mat-card h3 {
   background-color: #2ba846;
+  max-height: 35px;
   color: #fff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 1px;
   text-align: center;
 }
 
@@ -53,14 +57,14 @@
 }
 
 .headerAreaComunal .card:hover {
-  background: #2b85a8;
+  background: #287bff
 }
 
 .headerAreaComunal .card .cardName {
   font-size: 1.4em;
   margin-top: 10px;
   text-align: center;
-  color: #2b85a8
+  color: #287bff
 }
 
 .headerAreaComunal .card .iconBx {
@@ -94,5 +98,20 @@
   color: #fff;
 }
 .headerAreaComunal .card:hover .iconBx {
-  color: #2b85a8
+  color: #287bff
+}
+
+@media only screen and (max-width: 900px) {
+
+  .areas {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerInfo mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
 }
