@@ -7,10 +7,11 @@
         <button class="btn btn-primary mb-2" (click)="onGoCreate()">Crear Nuevo</button>
       </div>
       <div class="control-section">
-        <ejs-grid #grid id='Grid' [dataSource]="usuarios" [allowSorting]="true" [allowPaging]="true" gridLines="Both"
-          [pageSettings]="pageSettings" (commandClick)="commandClick($event)" [toolbar]="toolbarOptions"
-          (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
-          [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
+        <ejs-grid #grid id='Grid' [dataSource]="usuarios" [allowSorting]="true" [allowPaging]="true"
+          gridLines="Both" [pageSettings]="pageSettings" (commandClick)="commandClick($event)"
+          [toolbar]="toolbarOptions" (toolbarClick)="toolbarClick($event)" [allowExcelExport]="true"
+          (excelExportComplete)="excelExportComplete()" [allowPdfExport]="true"
+          (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
             <e-column field='name' headerText='Nombre' width=110> </e-column>
             <e-column field='last_name' headerText='Apellido' width=110> </e-column>
