@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/services/dialog.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Subscription } from "rxjs";
+import { DialogService } from 'src/app/services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
 import { Query } from '@syncfusion/ej2-data';
+import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-ajustes-usuarios',
@@ -23,7 +23,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
   public queryClone: any;
-  @ViewChild('grid') public grid!: GridComponent;
+  @ViewChild('grid') public grid: GridComponent | any;
 
   constructor(
     private router: Router,
@@ -40,7 +40,6 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.toolbarOptions = ['Search'];
     this.getUsuarios();
   }
 
@@ -130,18 +129,6 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   excelExportComplete(): void {
     this.grid.query = this.queryClone;
-  }
-
-  rowDataBound(args: any) {
-    // aquí estamos calculando el número de serie
-    var rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
-    var page = this.grid.pageSettings.currentPage! - 1;
-
-    var totalPages = this.grid.pageSettings.pageSize;
-    var startIndex = page * totalPages!;
-    var sno = startIndex + (rowIndex + 1);
-    //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
-    args.row.cells[0].innerText = sno;
   }
 
   //evento para buscar al coincidir una letra
