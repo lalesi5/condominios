@@ -21,6 +21,8 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
   usuario: any[] = [];
   unidades: any[] = [];
   condominio: any[] = [];
+  nombreResidente: string = '';
+  apellidoResidente: string = '';
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -54,6 +56,8 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
     this.idAministrador = <string>sessionStorage.getItem('idAministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
     this.idUsuario = <string>sessionStorage.getItem('idUsuario');
+    this.nombreResidente = <string>sessionStorage.getItem('nombreResidente');
+    this.apellidoResidente = <string>sessionStorage.getItem('apellidoResidente');    
   }
 
   getDatosUnidades() {
@@ -127,18 +131,6 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
 
   excelExportComplete(): void {
     this.grid.query = this.queryClone;
-  }
-
-  rowDataBound(args: any) {
-    // aquí estamos calculando el número de serie
-    var rowIndex = parseInt(args.row.getAttribute('aria-rowIndex'));
-    var page = this.grid.pageSettings.currentPage! - 1;
-
-    var totalPages = this.grid.pageSettings.pageSize;
-    var startIndex = page * totalPages!;
-    var sno = startIndex + (rowIndex + 1);
-    //  actualizando el valor en la primera celda de la fila donde hemos representado una columna vacía para esto
-    args.row.cells[0].innerText = sno;
   }
 
   //evento para buscar al coincidir una letra
