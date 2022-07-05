@@ -152,11 +152,9 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.pdfExport(pdfExportProperties);
-      //this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
       const excelExportProperties: ExcelExportProperties = {
         fileName: 'Usuarios.xlsx',
-
         header: {
           headerRows: 7,
           rows: [
