@@ -5,7 +5,8 @@ import { Subscription } from "rxjs";
 import { DialogService } from 'src/app/services/dialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { Query } from '@syncfusion/ej2-data';
-import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
+import { CommandModel, ExcelExportProperties, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-ajustes-usuarios',
@@ -15,7 +16,8 @@ import { CommandModel, GridComponent, PageSettingsModel, PdfExportProperties, To
 export class AjustesUsuariosComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
-  idCondominio: string = ''
+  idCondominio: string = '';
+  imgCondominio: string = '';
   usuarios: any[] = [];
   condominio: any[] = [];
 
@@ -48,7 +50,10 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   }
 
   recoverData() {
+    console.log(sessionStorage);
+
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.imgCondominio = <string>sessionStorage.getItem('imgCondominio');
   }
 
   getUsuarios() {
@@ -64,6 +69,7 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
       })
     );
   }
+
 
   //Seleccionar editar o eliminar usuario
   commandClick(item: any): void {
@@ -110,16 +116,75 @@ export class AjustesUsuariosComponent implements OnInit, OnDestroy {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
-      };
+        fileName: 'usuarios.pdf',
+        theme: {
+          header: {
+            font: new PdfStandardFont(PdfFontFamily.TimesRoman, 11, PdfFontStyle.Bold)
+          }
+        },
+        header: {
+          fromTop: 0,
+          height: 130,
+          contents: [
+            {
+              type: 'Text',
+              value: "CONDOMINIOS EPN - Información de Usuarios",
+              position: { x: 0, y: 50 },
+              style: { textBrushColor: '#000000', fontSize: 20 }
+            },
+          ]
+        },
+        footer: {
+          fromBottom: 160,
+          height: 150,
+          contents: [
+            {
+              type: 'PageNumber',
+              pageNumberType: 'Arabic',
+              format: 'Página {$current} de {$total}',
+              position: { x: 0, y: 25 },
+              style: { textBrushColor: '#000000', fontSize: 15 }
+            }
+          ]
+        }
+      }
+
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.pdfExport(pdfExportProperties);
       //this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: 'Usuarios.xlsx',
+
+        header: {
+          headerRows: 7,
+          rows: [
+            {
+              cells: [{
+                colSpan: 4, value: 'CONDOMINIOS EPN',
+                style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
+              }]
+            },
+            {
+              cells: [{
+                colSpan: 4, value: 'Información de Usuarios',
+                style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
+              }]
+            },
+            { cells: [{ colSpan: 4, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+          ]
+        },
+        footer: {
+          footerRows: 4,
+          rows: [
+            { cells: [{ colSpan: 4, value: 'Información del Sistema de Gestion de Condominios GlobalGad!', style: { hAlign: 'Center', bold: true } }] }
+          ]
+        },
+      };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
-      this.grid.excelExport();
+      this.grid.excelExport(excelExportProperties);
     }
   }
 
