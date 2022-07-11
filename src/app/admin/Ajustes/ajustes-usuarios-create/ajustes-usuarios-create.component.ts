@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -53,7 +54,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
   }
 
-  agregarUsuario() {
+  agregarUsuario(e: Event) {
 
     const nombre = String(this.createUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const apellido = String(this.createUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
@@ -71,7 +72,7 @@ export class AjustesUsuariosCreateComponent implements OnInit {
           name: nombre,
           last_name: apellido,
           email: this.createUsuarioForm.value.email,
-          password:'',
+          password: '',
           phone: this.createUsuarioForm.value.phone,
           fechaCreacion: new Date(),
           fechaActualizacion: new Date(),
@@ -98,6 +99,17 @@ export class AjustesUsuariosCreateComponent implements OnInit {
               this.toastr.success('El usuario fue registrado con exito', 'Usuario registrado', {
                 positionClass: 'toast-bottom-right'
               });
+
+              e.preventDefault();
+
+              emailjs.sendForm('default_service', 'template_etrsbf9', e.target as HTMLFormElement, '0Cxe1Mx3gDATMrfDQ')
+                .then((result: EmailJSResponseStatus) => {
+                  console.log(result.text);
+                }, (error) => {
+                  console.log(error.text);
+                });
+
+
               this.loading = false;
               this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
 

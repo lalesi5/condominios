@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from "rxjs";
 import {
   CommandModel,
+  ExcelExportProperties,
   GridComponent,
   PageSettingsModel,
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
+import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
 import { Router } from "@angular/router";
-import { UsuariosService } from "../../../services/usuarios.service";
 import { ToastrService } from "ngx-toastr";
 import { DialogService } from "../../../services/dialog.service";
 import { UnidadesService } from "../../../services/unidades.service";
@@ -109,24 +110,76 @@ export class AjustesListarUnidadesComponent implements OnInit, OnDestroy {
   }
 
   //Seleccionar exportar excel y pdf
-  toolbarClick(args
-    :
-    any
-  ):
-    void {
-    if (args.item.id === 'Grid_pdfexport'
-    ) {
+  toolbarClick(args: any): void {
+    if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
-      };
+        fileName: 'Unidades.pdf',
+        theme: {
+          header: {
+            font: new PdfStandardFont(PdfFontFamily.TimesRoman, 11, PdfFontStyle.Bold)
+          }
+        },
+        header: {
+          fromTop: 0,
+          height: 130,
+          contents: [
+            {
+              type: 'Text',
+              value: "CONDOMINIOS EPN - Información de Unidades",
+              position: { x: 0, y: 50 },
+              style: { textBrushColor: '#000000', fontSize: 20 }
+            },
+          ]
+        },
+        footer: {
+          fromBottom: 160,
+          height: 150,
+          contents: [
+            {
+              type: 'PageNumber',
+              pageNumberType: 'Arabic',
+              format: 'Página {$current} de {$total}',
+              position: { x: 0, y: 25 },
+              style: { textBrushColor: '#000000', fontSize: 15 }
+            }
+          ]
+        }
+      }
+
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.pdfExport(pdfExportProperties);
-      //this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: 'Unidades.xlsx',
+        header: {
+          headerRows: 7,
+          rows: [
+            {
+              cells: [{
+                colSpan: 4, value: 'CONDOMINIOS EPN',
+                style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
+              }]
+            },
+            {
+              cells: [{
+                colSpan: 4, value: 'Información de Unidades',
+                style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
+              }]
+            },
+            { cells: [{ colSpan: 4, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+          ]
+        },
+        footer: {
+          footerRows: 4,
+          rows: [
+            { cells: [{ colSpan: 4, value: 'Información del Sistema de Gestion de Condominios GlobalGad!', style: { hAlign: 'Center', bold: true } }] }
+          ]
+        },
+      };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
-      this.grid.excelExport();
+      this.grid.excelExport(excelExportProperties);
     }
   }
 

@@ -60,6 +60,7 @@ export class SelectCondominioComponent implements OnInit, OnDestroy {
 
   onGoAdmin(item: any) {
     sessionStorage.setItem('idCondominio', <string>item.idCondominio);
+    sessionStorage.setItem('imgCondominio', <string>item.imgCondominio);
     this.router.navigate(['/admin']);
   }
 

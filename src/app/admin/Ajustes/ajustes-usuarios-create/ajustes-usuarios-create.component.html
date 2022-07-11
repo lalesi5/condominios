@@ -7,10 +7,10 @@
                     <span class="sr-only">Procesando...</span>
                 </div>
             </h3>
-            <form [formGroup]='createUsuarioForm' (ngSubmit)="agregarUsuario()">
+            <form [formGroup]='createUsuarioForm' (ngSubmit)="agregarUsuario($event)">
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" class="form-control" formControlName="name"
+                    <input type="text" class="form-control" formControlName="name" name="name"
                         [ngClass]="{ 'is-invalid': !createUsuarioForm.controls['name'].valid  && createUsuarioForm.controls['name'].touched }">
                     <div *ngIf=" createUsuarioForm.controls['name'].touched  && !createUsuarioForm.controls['name'].valid"
                         class="invalid-feedback">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label>Apellido</label>
-                    <input type="text" class="form-control" formControlName="last_name"
+                    <input type="text" class="form-control" formControlName="last_name" name="last_name"
                         [ngClass]="{ 'is-invalid': !createUsuarioForm.controls['last_name'].valid  && createUsuarioForm.controls['last_name'].touched }">
                     <div *ngIf=" createUsuarioForm.controls['last_name'].touched  && !createUsuarioForm.controls['last_name'].valid"
                         class="invalid-feedback">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" formControlName="email"
+                    <input type="email" class="form-control" formControlName="email" name="email"
                         [ngClass]="{ 'is-invalid': !createUsuarioForm.controls['email'].valid && createUsuarioForm.controls['email'].touched}">
                     <div *ngIf="form['email'].errors" class="invalid-feedback">
                         <div *ngIf="form['email'].errors['required']">
@@ -77,7 +77,9 @@
                     <input type="text" class="form-control" formControlName="address">
                 </div>
                 <div class="centrarBotones">
-                    <button type="submit" class="btn btn-success mr-2" [disabled]="createUsuarioForm.invalid">Guardar</button>
+                    <input type="submit" id="button" value="Guardar" class="btn btn-success mr-2"
+                    [disabled]="createUsuarioForm.invalid">
+                    <!--<button type="submit" class="btn btn-success mr-2" [disabled]="createUsuarioForm.invalid">Guardar</button>-->
                     <button class="btn btn-primary ml-2" (click)="onBacktoList()">Volver</button>
                 </div>
             </form>
