@@ -1,8 +1,8 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {UnidadesService} from "../../../services/unidades.service";
-import {ReservasService} from "../../../services/reservas.service";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { UnidadesService } from "../../../services/unidades.service";
+import { ReservasService } from "../../../services/reservas.service";
 
 @Component({
   selector: 'app-unidades',
@@ -34,12 +34,12 @@ export class UnidadesComponent implements OnInit {
     this.getUnidadCuotaReserva();
   }
 
-  ngOnDestroy():void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   recoverData() {
-    this.idUnidad = <string> sessionStorage.getItem('idUnidad');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
   }
 
   onBacktoList(): void {
