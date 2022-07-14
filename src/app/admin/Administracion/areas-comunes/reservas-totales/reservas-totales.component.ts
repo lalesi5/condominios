@@ -194,27 +194,27 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
       const excelExportProperties: ExcelExportProperties = {
         fileName: 'ReservasTotales.xlsx',
         header: {
-          headerRows: 7,
+          headerRows: 5,
           rows: [
             {
               cells: [{
-                colSpan: 4, value: 'CONDOMINIOS EPN',
+                colSpan: 7, value: 'CONDOMINIOS EPN',
                 style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
               }]
             },
             {
               cells: [{
-                colSpan: 4, value: 'Lista de Reservas Totales',
+                colSpan: 7, value: 'Lista de Reservas Totales',
                 style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
               }]
             },
-            { cells: [{ colSpan: 4, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+            { cells: [{ colSpan: 7, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
           ]
         },
         footer: {
           footerRows: 4,
           rows: [
-            { cells: [{ colSpan: 4, value: 'Información del Sistema de Gestion de Condominios GlobalGad!', style: { hAlign: 'Center', bold: true } }] }
+            { cells: [{ colSpan: 7, value: 'Información del Sistema de Gestion de Condominios!', style: { hAlign: 'Center', bold: true } }] }
           ]
         },
       };

@@ -1,18 +1,20 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {Subscription} from "rxjs";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Subscription } from "rxjs";
 import {
   CommandModel,
+  ExcelExportProperties,
   GridComponent,
   PageSettingsModel,
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {Router} from "@angular/router";
-import {IngresoUnidadesService} from "../../../services/pagos.service";
-import {extraordinariosService} from "../../../services/extraordinarios.service";
-import {DialogService} from "../../../services/dialog.service";
-import {egresosService} from "../../../services/egresos.service";
-import {Query} from "@syncfusion/ej2-data";
+import { Router } from "@angular/router";
+import { IngresoUnidadesService } from "../../../services/pagos.service";
+import { extraordinariosService } from "../../../services/extraordinarios.service";
+import { DialogService } from "../../../services/dialog.service";
+import { egresosService } from "../../../services/egresos.service";
+import { Query } from "@syncfusion/ej2-data";
+import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
 
 @Component({
   selector: 'app-balance',
@@ -45,9 +47,9 @@ export class BalanceComponent implements OnInit {
     private _egresoService: egresosService
   ) {
     this.recoverData();
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Anular Egreso', buttonOption: {iconCss: 'e-icons e-delete', cssClass: 'e-flat'}}];
+    this.commands = [{ title: 'Anular Egreso', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }];
   }
 
   ngOnInit() {
@@ -112,20 +114,78 @@ export class BalanceComponent implements OnInit {
     )
   }
 
-
+  //Seleccionar exportar excel y pdf
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'ingresosUnidades.pdf'
-      };
+        pageOrientation: 'Landscape',
+        fileName: 'Reportes.pdf',
+        theme: {
+          header: {
+            font: new PdfStandardFont(PdfFontFamily.TimesRoman, 11, PdfFontStyle.Bold)
+          }
+        },
+        header: {
+          fromTop: 0,
+          height: 130,
+          contents: [
+            {
+              type: 'Text',
+              value: "CONDOMINIOS EPN - Historial de Movimientos",
+              position: { x: 0, y: 50 },
+              style: { textBrushColor: '#000000', fontSize: 20 }
+            },
+          ]
+        },
+        footer: {
+          fromBottom: 160,
+          height: 150,
+          contents: [
+            {
+              type: 'PageNumber',
+              pageNumberType: 'Arabic',
+              format: 'Página {$current} de {$total}',
+              position: { x: 0, y: 25 },
+              style: { textBrushColor: '#000000', fontSize: 15 }
+            }
+          ]
+        }
+      }
+
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.pdfExport(pdfExportProperties);
-      //this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: 'Reportes.xlsx',
+        header: {
+          headerRows: 5,
+          rows: [
+            {
+              cells: [{
+                colSpan: 7, value: 'CONDOMINIOS EPN',
+                style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
+              }]
+            },
+            {
+              cells: [{
+                colSpan: 7, value: 'Historial de Movimientos',
+                style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
+              }]
+            },
+            { cells: [{ colSpan: 7, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+          ]
+        },
+        footer: {
+          footerRows: 3,
+          rows: [
+            { cells: [{ colSpan: 7, value: 'Información del Sistema de Gestion de Condominios!', style: { hAlign: 'Center', bold: true } }] }
+          ]
+        },
+      };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
-      this.grid.excelExport();
+      this.grid.excelExport(excelExportProperties);
     }
   }
 

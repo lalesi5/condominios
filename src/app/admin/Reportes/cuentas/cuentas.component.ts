@@ -1,16 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from "rxjs";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from "rxjs";
 import {
   CommandModel,
+  ExcelExportProperties,
   GridComponent,
   PageSettingsModel,
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {Router} from "@angular/router";
-import {DialogService} from "../../../services/dialog.service";
-import {CuentasService} from "../../../services/cuentas.service";
-import {Query} from "@syncfusion/ej2-data";
+import { Router } from "@angular/router";
+import { DialogService } from "../../../services/dialog.service";
+import { CuentasService } from "../../../services/cuentas.service";
+import { Query } from "@syncfusion/ej2-data";
+import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
 
 @Component({
   selector: 'app-cuentas',
@@ -35,9 +37,9 @@ export class CuentasComponent implements OnInit {
     private _dialogService: DialogService,
   ) {
     this.recoverData();
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'Seleccionar', buttonOption: {iconCss: 'e-icons e-eye', cssClass: 'e-flat'}}];
+    this.commands = [{ title: 'Seleccionar', buttonOption: { iconCss: 'e-icons e-eye', cssClass: 'e-flat' } }];
   }
 
   ngOnInit(): void {
@@ -68,19 +70,78 @@ export class CuentasComponent implements OnInit {
     }
   }
 
+  //Seleccionar exportar excel y pdf
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'cuentas.pdf'
-      };
+        pageOrientation: 'Landscape',
+        fileName: 'Cuentas.pdf',
+        theme: {
+          header: {
+            font: new PdfStandardFont(PdfFontFamily.TimesRoman, 11, PdfFontStyle.Bold)
+          }
+        },
+        header: {
+          fromTop: 0,
+          height: 130,
+          contents: [
+            {
+              type: 'Text',
+              value: "CONDOMINIOS EPN - Cuentas",
+              position: { x: 0, y: 50 },
+              style: { textBrushColor: '#000000', fontSize: 20 }
+            },
+          ]
+        },
+        footer: {
+          fromBottom: 160,
+          height: 150,
+          contents: [
+            {
+              type: 'PageNumber',
+              pageNumberType: 'Arabic',
+              format: 'Página {$current} de {$total}',
+              position: { x: 0, y: 25 },
+              style: { textBrushColor: '#000000', fontSize: 15 }
+            }
+          ]
+        }
+      }
+
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.pdfExport(pdfExportProperties);
-      //this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: 'Cuentas.xlsx',
+        header: {
+          headerRows: 5,
+          rows: [
+            {
+              cells: [{
+                colSpan: 3, value: 'CONDOMINIOS EPN',
+                style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
+              }]
+            },
+            {
+              cells: [{
+                colSpan: 3, value: 'Cuentas',
+                style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
+              }]
+            },
+            { cells: [{ colSpan: 3, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+          ]
+        },
+        footer: {
+          footerRows: 3,
+          rows: [
+            { cells: [{ colSpan: 3, value: 'Información del Sistema de Gestion de Condominios!', style: { hAlign: 'Center', bold: true } }] }
+          ]
+        },
+      };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
-      this.grid.excelExport();
+      this.grid.excelExport(excelExportProperties);
     }
   }
 
