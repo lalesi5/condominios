@@ -3,7 +3,11 @@
   <div class="containerInfo">
     <mat-card>
       <h2>Reportes</h2>
+<<<<<<< HEAD
       <h3>Detalle de Reportes </h3>
+=======
+      <h3>Historial de movimientos</h3>
+>>>>>>> featureD1
       <div class="centrar">
         <div class="cardsDatosEgresos">
           <div class="card">
@@ -34,7 +38,7 @@
                   [allowExcelExport]="true" (excelExportComplete)="excelExportComplete()"
                   [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()">
           <e-columns>
-            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160></e-column>
+            <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=100></e-column>
             <e-column field='numeroReciboPago' headerText='Número de Recibo' width=200></e-column>
             <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140></e-column>
             <e-column field='modoPago' headerText='Modo de Pago' width=140></e-column>

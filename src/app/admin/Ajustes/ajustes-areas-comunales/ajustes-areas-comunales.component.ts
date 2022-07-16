@@ -135,27 +135,27 @@ export class AjustesAreasComunalesComponent implements OnInit {
       const excelExportProperties: ExcelExportProperties = {
         fileName: 'areasComunales.xlsx',
         header: {
-          headerRows: 7,
+          headerRows: 5,
           rows: [
             {
               cells: [{
-                colSpan: 4, value: 'CONDOMINIOS EPN',
+                colSpan: 3, value: 'CONDOMINIOS EPN',
                 style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
               }]
             },
             {
               cells: [{
-                colSpan: 4, value: 'Lista de Áreas Comunales',
+                colSpan: 3, value: 'Lista de Áreas Comunales',
                 style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
               }]
             },
-            { cells: [{ colSpan: 4, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+            { cells: [{ colSpan: 3, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
           ]
         },
         footer: {
-          footerRows: 4,
+          footerRows: 3,
           rows: [
-            { cells: [{ colSpan: 4, value: 'Información del Sistema de Gestion de Condominios GlobalGad!', style: { hAlign: 'Center', bold: true } }] }
+            { cells: [{ colSpan: 3, value: 'Información del Sistema de Gestion de Condominios!', style: { hAlign: 'Center', bold: true } }] }
           ]
         },
       };
