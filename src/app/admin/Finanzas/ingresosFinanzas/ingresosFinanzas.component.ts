@@ -1,15 +1,17 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {Subscription} from "rxjs";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Subscription } from "rxjs";
 import {
   CommandModel,
+  ExcelExportProperties,
   GridComponent,
   PageSettingsModel,
   PdfExportProperties,
   ToolbarItems
 } from "@syncfusion/ej2-angular-grids";
-import {Router} from "@angular/router";
-import {UnidadesService} from "../../../services/unidades.service";
-import {Query} from "@syncfusion/ej2-data";
+import { Router } from "@angular/router";
+import { UnidadesService } from "../../../services/unidades.service";
+import { Query } from "@syncfusion/ej2-data";
+import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
 
 @Component({
   selector: 'app-ingresosFinanzas',
@@ -26,16 +28,16 @@ export class IngresosFinanzasComponent implements OnInit {
   public toolbarOptions: ToolbarItems[];
   public commands: CommandModel[];
   public queryClone: any;
-  @ViewChild('grid', {static: true})
+  @ViewChild('grid', { static: true })
   public grid!: GridComponent;
 
   constructor(
     private router: Router,
     private _unidadService: UnidadesService
   ) {
-    this.pageSettings = {pageSize: 6}
+    this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{title: 'seleccionar', buttonOption: {iconCss: 'e-icons e-save', cssClass: 'e-flat'}}];
+    this.commands = [{ title: 'seleccionar', buttonOption: { iconCss: 'e-icons e-save', cssClass: 'e-flat' } }];
     this.recoverData();
   }
 
@@ -86,6 +88,7 @@ export class IngresosFinanzasComponent implements OnInit {
   commandClick(args: any) {
     if (args.target?.title === 'seleccionar') {
       sessionStorage.setItem('idUnidad', <string>args.rowData['idUnidad']);
+      sessionStorage.setItem('unidad', <string>args.rowData['unidad']);
       sessionStorage.setItem('cuotaUnidad', args.rowData['cuotaUnidad'])
       this.router.navigate(['/admin/finanzas/registrarMensualidad']);
     }
@@ -96,16 +99,74 @@ export class IngresosFinanzasComponent implements OnInit {
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'usuarios.pdf'
-      };
+        pageOrientation: 'Landscape',
+        fileName: 'Mensualidades.pdf',
+        theme: {
+          header: {
+            font: new PdfStandardFont(PdfFontFamily.TimesRoman, 11, PdfFontStyle.Bold)
+          }
+        },
+        header: {
+          fromTop: 0,
+          height: 130,
+          contents: [
+            {
+              type: 'Text',
+              value: "CONDOMINIOS EPN - Lista de Mensualidades",
+              position: { x: 0, y: 50 },
+              style: { textBrushColor: '#000000', fontSize: 20 }
+            },
+          ]
+        },
+        footer: {
+          fromBottom: 160,
+          height: 150,
+          contents: [
+            {
+              type: 'PageNumber',
+              pageNumberType: 'Arabic',
+              format: 'Página {$current} de {$total}',
+              position: { x: 0, y: 25 },
+              style: { textBrushColor: '#000000', fontSize: 15 }
+            }
+          ]
+        }
+      }
+
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.pdfExport(pdfExportProperties);
-      //this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: 'Mensualidades.xlsx',
+        header: {
+          headerRows: 5,
+          rows: [
+            {
+              cells: [{
+                colSpan: 5, value: 'CONDOMINIOS EPN',
+                style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
+              }]
+            },
+            {
+              cells: [{
+                colSpan: 5, value: 'Lista de Mensualidades',
+                style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
+              }]
+            },
+            { cells: [{ colSpan: 5, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+          ]
+        },
+        footer: {
+          footerRows: 3,
+          rows: [
+            { cells: [{ colSpan: 5, value: 'Información del Sistema de Gestion de Condominios!', style: { hAlign: 'Center', bold: true } }] }
+          ]
+        },
+      };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
-      this.grid.excelExport();
+      this.grid.excelExport(excelExportProperties);
     }
   }
 

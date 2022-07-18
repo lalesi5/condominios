@@ -4,9 +4,14 @@
     <div class="user">
         <img src="{{condominio.imgCondominio}}" alt="userImage">
     </div>
+    <div id="bienvenido" class="item2" *ngFor="let admin of administrador">
+        <a><strong>BIENVENIDO:</strong> {{admin.name}} {{admin.last_name}}</a>
+    </div>
 
     <!--manualUsuario-->
     <div>
         <a href="#" class="btn">Manual de Usuario</a>
     </div>
+
+
 </div>

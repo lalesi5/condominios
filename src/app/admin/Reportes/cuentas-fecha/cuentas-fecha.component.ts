@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {DialogService} from "../../../services/dialog.service";
-import {DatePipe} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { DialogService } from "../../../services/dialog.service";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-cuentas-fecha',
@@ -54,10 +54,10 @@ export class CuentasFechaComponent implements OnInit {
       cancelText: 'No',
     }).subscribe(res => {
       // @ts-ignore
-      this.dateWithPipe = this.pipe.transform(this.date,'yyyy/MM/dd');
+      this.dateWithPipe = this.pipe.transform(this.date, 'yyyy/MM/dd');
       let fecha1 = Date.parse(this.dateWithPipe);
       // @ts-ignore
-      this.dateWithPipe2 = this.pipe.transform(this.date2,'yyyy/MM/dd')
+      this.dateWithPipe2 = this.pipe.transform(this.date2, 'yyyy/MM/dd')
       let fecha2 = Date.parse(this.dateWithPipe2);
       if (res) {
         sessionStorage.setItem('fechaInicio', String(fecha1));

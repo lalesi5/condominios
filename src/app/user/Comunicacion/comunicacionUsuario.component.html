@@ -6,7 +6,7 @@
         <h2>Comunicados Individuales</h2>
         <h3> Mensajes Pertenecientes a: {{nombreUsuario}}</h3>
         <h5 style="margin-top: 30px;" *ngIf='mensajes.length == 0'>No hay datos para mostrar</h5>
-        <button class="btn btn-primary mb-2" (click)="onAnswer()">Responder</button>
+        <button class="btn btn-primary mb-2" (click)="onAnswer()">Enviar Mensaje</button>
         <div>
           <mat-card *ngFor="let mensaje of mensajes">
             <mat-card-title><b>Asunto: </b> {{mensaje.tituloMensaje}}</mat-card-title>

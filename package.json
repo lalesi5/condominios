@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@emailjs/browser": "^3.6.2",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@popperjs/core": "^2.11.0",
     "@syncfusion/ej2-angular-calendars": "^19.4.56",
@@ -33,9 +34,11 @@
     "jquery": "^3.6.0",
     "mdb-ui-kit": "^3.11.0",
     "ngx-toastr": "^14.2.2",
+    "nodemailer": "^6.7.6",
     "rxfire": "^6.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
+    "util": "^0.12.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

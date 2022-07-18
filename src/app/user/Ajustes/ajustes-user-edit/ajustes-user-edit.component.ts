@@ -153,8 +153,8 @@ export class AjustesUserEditComponent implements OnInit, OnDestroy {
 
   onChangePassword() {
     const userAuth = getAuth();
-    //const password = this.cambioPasswordForm.value.password;
-    const password = '';
+    const password = this.cambioPasswordForm.value.password;
+    //const password = '';
     var date = new Date();
 
     const data = {

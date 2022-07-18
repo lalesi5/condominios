@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import {
   CommandModel,
+  ExcelExportProperties,
   GridComponent,
   PageSettingsModel,
   PdfExportProperties,
@@ -14,6 +15,7 @@ import { IngresoUnidadesService } from "../../services/pagos.service";
 import { DialogService } from "../../services/dialog.service";
 import { ToastrService } from "ngx-toastr";
 import { Query } from "@syncfusion/ej2-data";
+import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
 
 @Component({
   selector: 'app-finanzasUsuario',
@@ -107,19 +109,78 @@ export class FinanzasUsuarioComponent implements OnInit {
     )
   }
 
+  //Seleccionar exportar excel y pdf
   toolbarClick(args: any): void {
     if (args.item.id === 'Grid_pdfexport') {
       const pdfExportProperties: PdfExportProperties = {
-        fileName: 'reservas.pdf'
-      };
+        pageOrientation: 'Landscape',
+        fileName: 'HistoricoPagoMensualidad.pdf',
+        theme: {
+          header: {
+            font: new PdfStandardFont(PdfFontFamily.TimesRoman, 11, PdfFontStyle.Bold)
+          }
+        },
+        header: {
+          fromTop: 0,
+          height: 130,
+          contents: [
+            {
+              type: 'Text',
+              value: "CONDOMINIOS EPN - Histórico Pago de Mensualidades",
+              position: { x: 0, y: 50 },
+              style: { textBrushColor: '#000000', fontSize: 20 }
+            },
+          ]
+        },
+        footer: {
+          fromBottom: 160,
+          height: 150,
+          contents: [
+            {
+              type: 'PageNumber',
+              pageNumberType: 'Arabic',
+              format: 'Página {$current} de {$total}',
+              position: { x: 0, y: 25 },
+              style: { textBrushColor: '#000000', fontSize: 15 }
+            }
+          ]
+        }
+      }
+
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
       this.grid.pdfExport(pdfExportProperties);
-      //this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
+      const excelExportProperties: ExcelExportProperties = {
+        fileName: 'HistoricoPagoMensualidad.xlsx',
+        header: {
+          headerRows: 5,
+          rows: [
+            {
+              cells: [{
+                colSpan: 10, value: 'CONDOMINIOS EPN',
+                style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
+              }]
+            },
+            {
+              cells: [{
+                colSpan: 10, value: 'Histórico Pago de Mensualidades',
+                style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
+              }]
+            },
+            { cells: [{ colSpan: 10, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+          ]
+        },
+        footer: {
+          footerRows: 3,
+          rows: [
+            { cells: [{ colSpan: 10, value: 'Información del Sistema de Gestion de Condominios!', style: { hAlign: 'Center', bold: true } }] }
+          ]
+        },
+      };
       this.queryClone = this.grid.query;
       this.grid.query = new Query().addParams('recordcount', '12');
-      this.grid.excelExport();
+      this.grid.excelExport(excelExportProperties);
     }
   }
 

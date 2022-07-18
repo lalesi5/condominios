@@ -29,7 +29,9 @@
         <div class="form-group">
           <input type="text" class="form-control" formControlName="descripcionCondominio">
         </div>
-        <span>Imgen del Condominio:</span>
+        <span>En caso de no subir una imagen para el condominio el sistema le otorgará una por defecto</span>
+        <br><br>
+        <span>Imagen del Condominio:</span>
         <br><br>
         <input type="file" class="file-upload" accept=".png, .jpg, .jpeg" (change)="cargarImagen($event)">
         <br>
