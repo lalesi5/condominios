@@ -90,7 +90,7 @@ export class RegisterAdminComponent implements OnInit {
 
         if (this.registerForm.valid) {
           this.loading = true;
-          console.log('Datos validos');
+          //console.log('Datos validos');
           this.authSvc.registerByEmailAdmin(formValue).then(async (res) => {
             if (res) {
               const path = 'Administrador';
