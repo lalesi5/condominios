@@ -87,7 +87,7 @@ export class NuevoAnuncioComponent implements OnInit {
 
   audit(anuncio:any) {
     const datos: any = {
-      modulo: 'Comunicacion',
+      modulo: 'Comunicacion-General',
       idUsuario: sessionStorage.getItem('idAdministrador'),
       accion: 'Creación Anuncio',
       fechaActualizacion: this.myDate,

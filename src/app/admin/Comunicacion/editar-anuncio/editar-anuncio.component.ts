@@ -110,7 +110,7 @@ export class EditarAnuncioComponent implements OnInit, OnDestroy {
 
   audit(anuncio:any) {
     const datos: any = {
-      modulo: 'Comunicacion',
+      modulo: 'Comunicacion-General',
       idUsuario: sessionStorage.getItem('idAdministrador'),
       accion: 'Edición Anuncio',
       fechaActualizacion: this.myDate,

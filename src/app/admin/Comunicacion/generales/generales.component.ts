@@ -82,7 +82,7 @@ export class GeneralesComponent implements OnInit, OnDestroy {
 
   audit(id:any) {
     const datos: any = {
-      modulo: 'Comunicacion',
+      modulo: 'Comunicacion-General',
       idUsuario: sessionStorage.getItem('idAdministrador'),
       accion: 'Eliminación Anuncio',
       fechaActualizacion: this.myDate,
