@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
+import {audithService} from "../../../../services/audith.service";
 
 @Component({
   selector: 'app-reservas-totales',
@@ -19,6 +20,7 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
   idAreaComunal: string = '';
   idCondominio: string = '';
   reservas: any[] = [];
+  myDate = new Date();
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -30,7 +32,8 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
     private router: Router,
     private _reservaService: ReservasService,
     private toastr: ToastrService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _auditService: audithService
   ) {
     this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
@@ -88,6 +91,7 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
           const reserva: any = {
             estadoReserva: 'Aceptado',
           }
+          this.audit(id, reserva);
           this._reservaService.actualizarReserva(id, reserva).then(() => {
             this.toastr.success('La reserva fue actualizada con exito', 'Reserva actualizada', {
               positionClass: 'toast-bottom-rigth'
@@ -111,6 +115,7 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
           const reserva: any = {
             estadoReserva: 'Rechazado',
           }
+          this.audit(id, reserva);
 
           this._reservaService.actualizarReserva(id, reserva).then(() => {
             this.toastr.success('La reserva fue actualizada con exito', 'Reserva actualizada', {
@@ -137,6 +142,10 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
         cancelText: 'No',
       }).subscribe(res => {
         if (res) {
+          const reserva: any = {
+            estadoReserva: 'Eliminado',
+          }
+          this.audit(id, reserva);
           this._reservaService.eliminarReserva(id).then(() => {
             this.toastr.success('El registro fue eliminado con exito', 'Registro eliminado', {
               positionClass: 'toast-bottom-right'
@@ -147,6 +156,17 @@ export class ReservasTotalesComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  audit(id:any, datosReserva:any) {
+    const datos: any = {
+      modulo: 'ReservasPendientes',
+      idUsuario: sessionStorage.getItem('idAdministrador'),
+      accion: 'Estado: ' + datosReserva.estadoReserva,
+      fechaActualizacion: this.myDate,
+      idReservaModificada: id
+    }
+    this._auditService.saveAudith(datos);
   }
 
   //Seleccionar exportar excel y pdf
