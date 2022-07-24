@@ -3,6 +3,7 @@ import { Subscription } from "rxjs";
 import { ReservasService } from "../../../services/reservas.service";
 import { UnidadesService } from "../../../services/unidades.service";
 import { Router } from "@angular/router";
+import {audithService} from "../../../services/audith.service";
 import {
   CommandModel,
   ExcelExportProperties,
@@ -31,6 +32,7 @@ export class RegistroMensualidadComponent implements OnInit {
   ingresoUnidades: any[] = [];
   sumaValorReservas: number = 0;
   cuotaUnidad: number = 0;
+  myDate = new Date();
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -44,7 +46,8 @@ export class RegistroMensualidadComponent implements OnInit {
     private _unidadesService: UnidadesService,
     private _ingresoUnidadesService: IngresoUnidadesService,
     private _dialogService: DialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _auditService: audithService
   ) {
     this.recoverData();
     this.pageSettings = { pageSize: 6 }
@@ -198,6 +201,7 @@ export class RegistroMensualidadComponent implements OnInit {
         cancelText: 'No'
       }).subscribe(res => {
         if (res) {
+          this.audit(id);
           const pagoMensualidad: any = {
             estadoIngreso: 'Inactivo'
           }
@@ -211,6 +215,17 @@ export class RegistroMensualidadComponent implements OnInit {
         }
       })
     }
+  }
+
+  audit(idMensualidad:any) {
+    const datos: any = {
+      modulo: 'Registrar-Mensualidad',
+      idUsuario: sessionStorage.getItem('idAdministrador'),
+      accion: 'Eliminar Pago Mensualidad',
+      fechaActualizacion: this.myDate,
+      idMensualidadEliminada: idMensualidad
+    }
+    this._auditService.saveAudith(datos);
   }
 
   pdfExportComplete(): void {
