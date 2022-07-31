@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Subscription} from 'rxjs';
-import {DialogService} from 'src/app/services/dialog.service';
-import {MensajesService} from 'src/app/services/mensajes.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/services/dialog.service';
+import { MensajesService } from 'src/app/services/mensajes.service';
 
 @Component({
   selector: 'app-editar-mensaje',
@@ -85,7 +85,8 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
           descripcionMensaje: this.mensajesForm.value.descripcionMensaje,
           fechaMensaje: date.toLocaleString(),
           tituloMensaje: titulo,
-          estado: 'Activo'
+          estado: 'Activo',
+          visto: 'No'
         }
         //Crea el documento
         this.loading = true;
@@ -95,7 +96,7 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
             positionClass: 'toast-bottom-right'
           });
           this.loading = false;
-          this.router.navigate(['/admin/comunicacion/mensajeUsuario']);
+          this.router.navigate(['/admin/comunicacion/mensajeUsuarioEnviados']);
 
         }).catch(error => {
           console.log(error);
@@ -106,7 +107,7 @@ export class EditarMensajeComponent implements OnInit, OnDestroy {
   }
 
   onBacktoList() {
-    this.router.navigate(['/admin/comunicacion/mensajeUsuario']);
+    this.router.navigate(['/admin/comunicacion/mensajeUsuarioEnviados']);
   }
 
 }

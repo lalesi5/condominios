@@ -9,6 +9,7 @@ import { NuevoAnuncioComponent } from "./nuevoAnuncio/nuevoAnuncio.component";
 import { NuevoMensajeComponent } from "./nuevoMensaje/nuevoMensaje.component";
 import { EditarAnuncioComponent } from './editar-anuncio/editar-anuncio.component';
 import { EditarMensajeComponent } from "./editar-mensaje/editar-mensaje.component";
+import { MensajesUsuarioEnviadosComponent } from "./mensajes-usuario-enviados/mensajes-usuario-enviados.component";
 
 const routesComunicacion: Routes = [
     {
@@ -20,6 +21,7 @@ const routesComunicacion: Routes = [
             {path: 'nuevoMensaje', component: NuevoMensajeComponent},
             {path: 'nuevoAnuncio', component: NuevoAnuncioComponent},
             {path: 'mensajeUsuario', component: MensajeUsuarioComponent},
+            {path: 'mensajeUsuarioEnviados', component: MensajesUsuarioEnviadosComponent},
             {path: 'editarAnuncio', component: EditarAnuncioComponent},
             {path: 'editarMensaje', component: EditarMensajeComponent}
         ]

@@ -1,0 +1,63 @@
+.mensajesUsuario {
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    top: 150px;
+    min-height: 74vh;
+  }
+  
+  .headerMensajesUsuario mat-card {
+    display: grid;
+    width: 98%;
+    left: 1%;
+    border-radius: 20px;
+    padding-bottom: 25px;
+    overflow: auto;
+    min-height: 310px;
+    max-height: 74vh;
+  }
+  
+  .headerMensajesUsuario mat-card h2 {
+    background-color: #287bff;
+    max-height: 35px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px;
+    text-align: center;
+  }
+  
+  .headerMensajesUsuario mat-card h3 {
+    background-color: #2ba846;
+    max-height: 35px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px;
+    text-align: center;
+  }
+  
+  .containerMensajes mat-card {
+    display: grid;
+    width: 98%;
+    left: 1%;
+    top: 1vh;
+    margin-bottom: 7px;
+    border-radius: 20px;
+    padding-bottom: 25px;
+    background-color: #eeebeb;
+  }
+  
+  @media only screen and (max-width: 900px) {
+  
+    .mensajesUsuario {
+      width: calc(100% - 15px);
+      left: 15px;
+      max-height: 750px;
+    }
+  
+    .headerMensajesUsuario mat-card {
+      width: 85%;
+      left: 10%;
+    }
+  
+  }
+  

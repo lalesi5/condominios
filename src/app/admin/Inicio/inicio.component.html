@@ -12,11 +12,11 @@
         <mat-icon>visibility</mat-icon>
       </div>
     </div>
-    <div class="card" [routerLink]="['/admin/comunicacion/generales']" [routerLinkActive]="['active']"
+    <div class="card" [routerLink]="['/admin/comunicacion/individuales']" [routerLinkActive]="['active']"
          (click)="onGoMensajes()">
       <div>
-        <div class="numbers"> {{anuncios.length}}</div>
-        <div class="cardName">Anuncios Generales</div>
+        <div class="numbers"> {{mensajes.length}}</div>
+        <div class="cardName">Mensajes</div>
       </div>
       <div class="iconBx">
         <mat-icon> comment</mat-icon>

@@ -1,18 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { Subscription } from "rxjs";
-import { DialogService } from "src/app/services/dialog.service";
-import { MensajesService } from '../../../services/mensajes.service';
-import { UnidadesService } from "../../../services/unidades.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/services/dialog.service';
+import { MensajesService } from 'src/app/services/mensajes.service';
+import { UnidadesService } from 'src/app/services/unidades.service';
 
 @Component({
-  selector: 'app-mensajesUsuario',
-  templateUrl: './mensajesUsuario.component.html',
-  styleUrls: ['./mensajesUsuario.component.css']
+  selector: 'app-mensajes-usuario-enviados',
+  templateUrl: './mensajes-usuario-enviados.component.html',
+  styleUrls: ['./mensajes-usuario-enviados.component.css']
 })
-
-export class MensajeUsuarioComponent implements OnInit {
+export class MensajesUsuarioEnviadosComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idCondominio: string = '';
@@ -68,7 +67,7 @@ export class MensajeUsuarioComponent implements OnInit {
   getMensajes() {
     this.subscription.add(
       this._mensajesService
-        .getMensajes(this.idUsuario, this.idUnidad)
+        .getMensajesAdmin(this.idUsuario, this.idUnidad)
         .subscribe(data => {
           this.mensajes = [];
           data.forEach((element: any) => {
