@@ -1,0 +1,42 @@
+<div class="mensajesUsuario">
+    <div class="headerMensajesUsuario">
+        <mat-card>
+            <div class="containerMensajes" *ngFor="let data of unidad">
+                <h2>Comunicados Individuales</h2>
+
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="bold" [routerLink]="['/admin/comunicacion/mensajeUsuario']"
+                        [routerLinkActive]="['active']">Mensajes Recibidos
+                    </mat-button-toggle>
+                    <mat-button-toggle value="bold" [routerLink]="['/admin/comunicacion/mensajeUsuarioEnviados']">
+                        Mensajes Enviados
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+
+                <br><br>
+                <h3> Mensajes Enviados de: {{data.unidad}}</h3>
+                <h5 style="margin-top: 30px;" *ngIf='mensajes.length == 0'>No hay datos para mostrar</h5>
+                <button class="btn btn-primary mb-2" (click)="onBackToUnits()">Volver</button>
+                <div>
+                    <mat-card *ngFor="let mensaje of mensajes">
+                        <mat-card-title><b>Asunto: </b> {{mensaje.tituloMensaje}}</mat-card-title>
+                        <div class="clearfix"></div>
+                        <mat-card-subtitle><b>Fecha: </b> {{mensaje.fechaMensaje}} </mat-card-subtitle>
+                        <mat-card-subtitle><b>Escrito por: </b> {{mensaje.escritoPor}}</mat-card-subtitle>
+                        <mat-card-content>
+                            <p>{{mensaje.descripcionMensaje}}</p>
+                        </mat-card-content>
+                        <!--<div>
+                <button class="btn btn-info mr-2" (click)="visualizarMensaje(mensaje.id)">
+                  {{mensaje.visto}}</button>
+              </div>-->
+                        <div>
+                            <button class="btn btn-success mr-2" (click)="onGoEdit(mensaje)">Editar</button>
+                            <button class="btn btn-danger" (click)="onDelete(mensaje.id)">Eliminar</button>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

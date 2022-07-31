@@ -1,0 +1,36 @@
+<div class="comunicacion">
+    <app-topbarUser></app-topbarUser>
+    <div class="headerMensajesUsuario">
+        <mat-card>
+            <div class="containerMensajes">
+                <h2>Comunicados Individuales</h2>
+
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="bold" [routerLink]="['/user/comunicacion']"
+                        [routerLinkActive]="['active']">Mensajes Recibidos
+                    </mat-button-toggle>
+                    <mat-button-toggle value="bold" [routerLink]="['/user/mensajesEnviados']">
+                        Mensajes
+                        Enviados
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+
+                <br><br>
+                <h3> Mensajes Enviados Pertenecientes a: {{nombreUsuario}}</h3>
+                <h5 style="margin-top: 30px;" *ngIf='mensajes.length == 0'>No hay datos para mostrar</h5>
+                <button class="btn btn-primary mb-2" (click)="onAnswer()">Enviar Mensaje</button>
+                <div>
+                    <mat-card *ngFor="let mensaje of mensajes">
+                        <mat-card-title><b>Asunto: </b> {{mensaje.tituloMensaje}}</mat-card-title>
+                        <div class="clearfix"></div>
+                        <mat-card-subtitle><b>Fecha: </b> {{mensaje.fechaMensaje}} </mat-card-subtitle>
+                        <mat-card-subtitle><b>Escrito por: </b> {{mensaje.escritoPor}}</mat-card-subtitle>
+                        <mat-card-content>
+                            <p>{{mensaje.descripcionMensaje}}</p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

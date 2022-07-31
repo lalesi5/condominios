@@ -6,7 +6,7 @@
   min-height: 74vh;
 }
 
-.containerInfo mat-card {
+.containerAnuncio mat-card {
   display: grid;
   width: 98%;
   left: 1%;
@@ -17,7 +17,7 @@
   max-height: 74vh;
 }
 
-.containerInfo mat-card h2 {
+.containerAnuncio mat-card h2 {
   background-color: #287bff;
   max-height: 35px;
   color: #fff;
@@ -26,11 +26,26 @@
   text-align: center;
 }
 
-.containerInfo mat-card h3 {
+.containerAnuncio mat-card h3 {
   background-color: #2ba846;
   max-height: 35px;
   color: #fff;
   border-radius: 10px;
   padding: 1px;
   text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .nuevoAnuncio {
+    width: calc(100% - 15px);
+    left: 15px;
+    max-height: 750px;
+  }
+
+  .containerAnuncio mat-card {
+    width: 85%;
+    left: 10%;
+  }
+
 }

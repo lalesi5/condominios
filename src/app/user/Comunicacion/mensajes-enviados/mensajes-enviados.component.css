@@ -1,0 +1,66 @@
+.comunicacion {
+    position: absolute;
+    width: calc(100% - 231px);
+    left: 231px;
+    min-height: 100vh;
+    transition: 0.5s;
+    background: rgb(40, 133, 255);
+    background: linear-gradient(90deg, rgba(40, 133, 255, 0.8477766106442577) 0%, rgba(40, 82, 255, 0.8477766106442577) 50%, rgba(22, 6, 128, 1) 100%);
+  }
+  
+  .headerMensajesUsuario mat-card {
+    display: grid;
+    width: 98%;
+    left: 1%;
+    top: 5px;
+    border-radius: 20px;
+    padding-bottom: 25px;
+    overflow: auto;
+    min-height: 310px;
+    max-height: 90vh;
+  }
+  
+  .headerMensajesUsuario mat-card h2 {
+    background-color: #287bff;
+    max-height: 35px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px;
+    text-align: center;
+  }
+  
+  .headerMensajesUsuario mat-card h3 {
+    background-color: #2ba846;
+    max-height: 35px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px;
+    text-align: center;
+  }
+  
+  .containerMensajes mat-card {
+    display: grid;
+    width: 98%;
+    left: 1%;
+    top: 1vh;
+    margin-bottom: 7px;
+    border-radius: 20px;
+    padding-bottom: 25px;
+    background-color: #eeebeb;
+  }
+  
+  @media only screen and (max-width: 900px) {
+  
+    .mensajesUsuario {
+      width: calc(100% - 15px);
+      left: 15px;
+      max-height: 750px;
+    }
+  
+    .headerMensajesUsuario mat-card {
+      width: 85%;
+      left: 10%;
+    }
+  
+  }
+  

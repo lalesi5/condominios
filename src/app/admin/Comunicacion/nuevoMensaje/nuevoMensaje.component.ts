@@ -76,7 +76,8 @@ export class NuevoMensajeComponent implements OnInit {
           idUsuario: this.idUsuario,
           idUnidad: this.idUnidad,
           estado: 'Activo',
-          escritoPor: 'Administrador'
+          escritoPor: 'Administrador',
+          visto: 'No Visto'
         }
 
         this.audit(mensaje);

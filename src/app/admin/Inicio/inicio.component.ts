@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {UnidadesService} from '../../services/unidades.service';
 import {ReservasService} from "../../services/reservas.service";
 import {AnunciosGeneralesService} from "../../services/anunciosGenerales.service";
+import { MensajesService } from "src/app/services/mensajes.service";
 
 @Component({
   selector: 'app-inicio',
@@ -15,16 +16,20 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription;
   idCondominio: string = ';'
+  idUnidad: string = '';
+  idUsuario: string = '';
   unidades: any[] = [];
   reservas: any[] = [];
   reservasPendientes: any[] = [];
   anuncios: any[] = [];
+  mensajes: any[] = [];
 
   constructor(
     private router: Router,
     private _unidades: UnidadesService,
     private _reservas: ReservasService,
-    private _anuncios: AnunciosGeneralesService
+    private _anuncios: AnunciosGeneralesService,
+    private _mensajesService: MensajesService
   ) {
     this.recoverData();
   }
@@ -32,7 +37,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getUnidades();
     this.getReservas();
-    this.getAnuncios();
+    this.getMensajes();
     this.getReservasPendientes();
   }
 
@@ -42,6 +47,8 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   recoverData() {
     this.idCondominio = <string> sessionStorage.getItem('idCondominio');
+    this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   getUnidades() {
@@ -84,7 +91,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     )
   }
 
-
   getAnuncios() {
     this.subscription.add(
       this._anuncios.getAnunciosGenerales(this.idCondominio).subscribe(data => {
@@ -96,6 +102,19 @@ export class InicioComponent implements OnInit, OnDestroy {
         })
       })
     )
+  }
+
+  getMensajes() {
+    this.subscription.add(
+      this._mensajesService.getMensajesNoVistosAdmin(this.idUsuario, this.idUnidad).subscribe(data => {
+        this.mensajes = [];
+        data.forEach((element: any) => {
+          this.mensajes.push({
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    );
   }
 
   onGoUnidades() {
@@ -111,6 +130,6 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   onGoMensajes() {
-    this.router.navigate(['/admin/comunicacion/generales']);
+    this.router.navigate(['/admin/comunicacion/individuales']);
   }
 }
