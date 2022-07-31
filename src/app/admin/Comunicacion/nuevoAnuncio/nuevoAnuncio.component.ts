@@ -4,6 +4,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
 import { AnunciosGeneralesService } from "src/app/services/anunciosGenerales.service";
 import { DialogService } from "src/app/services/dialog.service";
+import {audithService} from "../../../services/audith.service";
 
 @Component({
   selector: 'app-nuevoAnuncio',
@@ -16,6 +17,7 @@ export class NuevoAnuncioComponent implements OnInit {
   idCondominio: string = '';
   idAministrador: string = '';
   loading = false;
+  myDate = new Date();
 
   mensajesForm: FormGroup;
 
@@ -24,7 +26,8 @@ export class NuevoAnuncioComponent implements OnInit {
     private _anuncios: AnunciosGeneralesService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _auditService: audithService
   ) {
 
     this.mensajesForm = this.fb.group({
@@ -61,6 +64,9 @@ export class NuevoAnuncioComponent implements OnInit {
           idCondominio: this.idCondominio,
           tituloAnuncio: titulo
         }
+
+        this.audit(anuncio);
+
         //Crea el documento
         this.loading = true;
         this._anuncios.saveAnunciosGenerales(anuncio).then(() => {
@@ -77,6 +83,18 @@ export class NuevoAnuncioComponent implements OnInit {
         });
       }
     });
+  }
+
+  audit(anuncio:any) {
+    const datos: any = {
+      modulo: 'Comunicacion-General',
+      idUsuario: sessionStorage.getItem('idAdministrador'),
+      accion: 'Creación Anuncio',
+      fechaActualizacion: this.myDate,
+      tituloAnuncio: anuncio.tituloAnuncio,
+      descripcionAnuncio: anuncio.descripcionAnuncio
+    }
+    this._auditService.saveAudith(datos);
   }
 
   onBacktoList(): void {

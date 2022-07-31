@@ -1,12 +1,20 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommandModel, ExcelExportProperties, GridComponent, PageSettingsModel, PdfExportProperties, ToolbarItems } from '@syncfusion/ej2-angular-grids';
-import { Query } from '@syncfusion/ej2-data';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/services/dialog.service';
-import { ReservasService } from 'src/app/services/reservas.service';
-import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {
+  CommandModel,
+  ExcelExportProperties,
+  GridComponent,
+  PageSettingsModel,
+  PdfExportProperties,
+  ToolbarItems
+} from '@syncfusion/ej2-angular-grids';
+import {Query} from '@syncfusion/ej2-data';
+import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
+import {DialogService} from 'src/app/services/dialog.service';
+import {ReservasService} from 'src/app/services/reservas.service';
+import {PdfStandardFont, PdfFontFamily, PdfFontStyle} from '@syncfusion/ej2-pdf-export';
+import {audithService} from "../../../../services/audith.service";
 
 @Component({
   selector: 'app-reservas-pendientes',
@@ -19,6 +27,7 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
   idAreaComunal: string = '';
   idCondominio: string = '';
   reservas: any[] = [];
+  myDate = new Date();
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -30,13 +39,14 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
     private router: Router,
     private _reservaService: ReservasService,
     private toastr: ToastrService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _auditService: audithService
   ) {
-    this.pageSettings = { pageSize: 6 }
+    this.pageSettings = {pageSize: 6}
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
     this.commands = [
-      { title: 'Aceptar', buttonOption: { iconCss: 'e-icons e-circle-check', cssClass: 'e-success e-flat' } },
-      { title: 'Rechazar', buttonOption: { iconCss: 'e-icons e-circle-close', cssClass: 'e-danger e-flat' } }
+      {title: 'Aceptar', buttonOption: {iconCss: 'e-icons e-circle-check', cssClass: 'e-success e-flat'}},
+      {title: 'Rechazar', buttonOption: {iconCss: 'e-icons e-circle-close', cssClass: 'e-danger e-flat'}}
     ];
 
     this.recoverData();
@@ -88,6 +98,8 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
             estadoReserva: 'Aceptado',
           }
 
+          this.audit(id, reserva);
+
           this._reservaService.actualizarReserva(id, reserva).then(() => {
             this.toastr.success('La reserva fue actualizada con exito', 'Reserva actualizada', {
               positionClass: 'toast-bottom-rigth'
@@ -112,6 +124,8 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
             estadoReserva: 'Rechazado',
           }
 
+          this.audit(id, reserva);
+
           this._reservaService.actualizarReserva(id, reserva).then(() => {
             this.toastr.success('La reserva fue actualizada con exito', 'Reserva actualizada', {
               positionClass: 'toast-bottom-rigth'
@@ -122,6 +136,17 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
         }
       })
     }
+  }
+
+  audit(id:any, datosReserva:any) {
+    const datos: any = {
+      modulo: 'ReservasPendientes',
+      idUsuario: sessionStorage.getItem('idAdministrador'),
+      accion: 'Estado: ' + datosReserva.estadoReserva,
+      fechaActualizacion: this.myDate,
+      idReservaModificada: id
+    }
+    this._auditService.saveAudith(datos);
   }
 
   //Seleccionar exportar excel y pdf
@@ -142,8 +167,8 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
             {
               type: 'Text',
               value: "CONDOMINIOS EPN - Lista de Reservas Pendientes",
-              position: { x: 0, y: 50 },
-              style: { textBrushColor: '#000000', fontSize: 20 }
+              position: {x: 0, y: 50},
+              style: {textBrushColor: '#000000', fontSize: 20}
             },
           ]
         },
@@ -155,8 +180,8 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
               type: 'PageNumber',
               pageNumberType: 'Arabic',
               format: 'Página {$current} de {$total}',
-              position: { x: 0, y: 25 },
-              style: { textBrushColor: '#000000', fontSize: 15 }
+              position: {x: 0, y: 25},
+              style: {textBrushColor: '#000000', fontSize: 15}
             }
           ]
         }
@@ -174,22 +199,28 @@ export class ReservasPendientesComponent implements OnInit, OnDestroy {
             {
               cells: [{
                 colSpan: 7, value: 'CONDOMINIOS EPN',
-                style: { fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true, }
+                style: {fontColor: '#C67878', fontSize: 20, hAlign: 'Center', bold: true,}
               }]
             },
             {
               cells: [{
                 colSpan: 7, value: 'Lista de Reservas Pendientes',
-                style: { fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true, }
+                style: {fontColor: '#C67878', fontSize: 15, hAlign: 'Center', bold: true,}
               }]
             },
-            { cells: [{ colSpan: 7, hyperlink: { target: 'mailto:condominios.epn@gmail.com' }, style: { hAlign: 'Center' } }] },
+            {cells: [{colSpan: 7, hyperlink: {target: 'mailto:condominios.epn@gmail.com'}, style: {hAlign: 'Center'}}]},
           ]
         },
         footer: {
           footerRows: 3,
           rows: [
-            { cells: [{ colSpan: 7, value: 'Información del Sistema de Gestion de Condominios!', style: { hAlign: 'Center', bold: true } }] }
+            {
+              cells: [{
+                colSpan: 7,
+                value: 'Información del Sistema de Gestion de Condominios!',
+                style: {hAlign: 'Center', bold: true}
+              }]
+            }
           ]
         },
       };
