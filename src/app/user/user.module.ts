@@ -22,6 +22,7 @@ import {AjustesUserEditComponent} from './Ajustes/ajustes-user-edit/ajustes-user
 import {DateTimePickerModule} from "@syncfusion/ej2-angular-calendars";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {GridModule} from "@syncfusion/ej2-angular-grids";
+import { MensajesEnviadosComponent } from './Comunicacion/mensajes-enviados/mensajes-enviados.component';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import {GridModule} from "@syncfusion/ej2-angular-grids";
     ReactiveFormsModule,
     DateTimePickerModule,
     MatButtonToggleModule,
-    GridModule
+    GridModule,
   ],
   declarations: [
     UserComponent,
@@ -50,12 +51,14 @@ import {GridModule} from "@syncfusion/ej2-angular-grids";
     FinanzasUsuarioComponent,
     ResponderComponent,
     AjustesUserEditComponent,
+    MensajesEnviadosComponent,
   ],
   exports: [
     MatCardModule,
     MatIconModule,
     MatSelectModule,
-    TopBarUserComponent
+    TopBarUserComponent,
+    MatButtonToggleModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }

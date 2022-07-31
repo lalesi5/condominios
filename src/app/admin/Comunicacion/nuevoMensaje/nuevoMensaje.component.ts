@@ -4,6 +4,7 @@ import { NavigationExtras, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { DialogService } from "src/app/services/dialog.service";
 import { MensajesService } from "../../../services/mensajes.service";
+import {audithService} from "../../../services/audith.service";
 
 @Component({
   selector: 'app-nuevoMensaje',
@@ -19,6 +20,7 @@ export class NuevoMensajeComponent implements OnInit {
   idUnidad: string = '';
   mensajes: any[] = [];
   condominio: any[] = [];
+  myDate = new Date();
 
   loading = false;
 
@@ -29,7 +31,8 @@ export class NuevoMensajeComponent implements OnInit {
     private _mensajesService: MensajesService,
     private fb: FormBuilder,
     private _dialogService: DialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _auditService: audithService
   ) {
 
     this.mensajesForm = this.fb.group({
@@ -73,8 +76,12 @@ export class NuevoMensajeComponent implements OnInit {
           idUsuario: this.idUsuario,
           idUnidad: this.idUnidad,
           estado: 'Activo',
-          escritoPor: 'Administrador'
+          escritoPor: 'Administrador',
+          visto: 'No Visto'
         }
+
+        this.audit(mensaje);
+
         //Crea el documento
         this.loading = true;
         this._mensajesService.guardarMensaje(mensaje).then(() => {
@@ -91,6 +98,18 @@ export class NuevoMensajeComponent implements OnInit {
         });
       }
     });
+  }
+
+  audit(anuncio:any) {
+    const datos: any = {
+      modulo: 'Comunicacion-Individual',
+      idUsuario: sessionStorage.getItem('idAdministrador'),
+      accion: 'Creación Mensaje',
+      fechaActualizacion: this.myDate,
+      tituloMensaje: anuncio.tituloMensaje,
+      datos: anuncio.descripcionMensaje
+    }
+    this._auditService.saveAudith(datos);
   }
 
 }

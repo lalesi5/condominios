@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import {Subscription} from "rxjs";
+import { AdminService } from "src/app/services/admin.service";
 import {CondominioService} from "../../../services/condominios.service";
 
 @Component({
@@ -13,15 +14,19 @@ export class TopBarUserComponent implements OnInit{
   idAministrador: string = '';
   idCondominio: string = '';
   condominios: any[] = [];
+  usuarios: any[] = [];
+  idUsuario: string = '';
 
   constructor(
-    private _condominiosService: CondominioService
+    private _condominiosService: CondominioService,
+    private _adminService: AdminService
   ) {
     this.recoverData();
   }
 
   ngOnInit(): void {
     this.onListCondominios();
+    this.getAdministrador();
   }
 
   ngOnDestroy(): void {
@@ -31,6 +36,7 @@ export class TopBarUserComponent implements OnInit{
   recoverData() {
     this.idAministrador = <string>sessionStorage.getItem('idAdministrador');
     this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+    this.idUsuario = <string>sessionStorage.getItem('idUsuario');
   }
 
   onListCondominios() {
@@ -50,5 +56,19 @@ export class TopBarUserComponent implements OnInit{
     } catch (err) {
       console.log(err);
     }
+  }
+
+  getAdministrador() {
+    this.subscription.add(
+      this._adminService.getUserID(this.idUsuario).subscribe(data => {
+        this.usuarios = [];
+        data.forEach((element: any) => {
+          this.usuarios.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          })
+        })
+      })
+    );
   }
 }

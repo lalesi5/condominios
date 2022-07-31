@@ -77,9 +77,11 @@ export class ResponderComponent implements OnInit {
           tituloMensaje: titulo,
           idUsuario: this.idUsuario,
           estado: 'Activo',
+          visto: 'No Visto',
           escritoPor: this.nombreUsuario,
           idUnidad: this.idUnidad
         }
+        
         //Crea el documento
         this.loading = true;
         this._mensajesService.guardarMensaje(mensaje).then(() => {

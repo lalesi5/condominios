@@ -12,6 +12,7 @@ import {ResponderComponent} from "./Comunicacion/responder/responder.component";
 import {AjustesUserEditComponent} from "./Ajustes/ajustes-user-edit/ajustes-user-edit.component";
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
+import { MensajesEnviadosComponent } from "./Comunicacion/mensajes-enviados/mensajes-enviados.component";
 
 const routesUsuarios: Routes = [
   {
@@ -29,6 +30,7 @@ const routesUsuarios: Routes = [
         },
         {path: 'ajustes', component: AjustesUsuarioComponent, canActivate: [CheckLoginGuard]},
         {path: 'responder', component: ResponderComponent, canActivate: [CheckLoginGuard]},
+        {path: 'mensajesEnviados', component: MensajesEnviadosComponent, canActivate: [CheckLoginGuard]},
         {path: 'editarUsuario', component: AjustesUserEditComponent, canActivate: [CheckLoginGuard]},
       ]
   },

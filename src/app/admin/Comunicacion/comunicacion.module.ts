@@ -17,6 +17,8 @@ import { EditarAnuncioComponent } from './editar-anuncio/editar-anuncio.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditarMensajeComponent } from './editar-mensaje/editar-mensaje.component';
 import { GridModule } from "@syncfusion/ej2-angular-grids";
+import { MensajesUsuarioEnviadosComponent } from './mensajes-usuario-enviados/mensajes-usuario-enviados.component';
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { GridModule } from "@syncfusion/ej2-angular-grids";
         SharedModule,
         CommonModule,
         ReactiveFormsModule,
-        GridModule
+        GridModule,
+        MatButtonToggleModule
     ],
     declarations:[
         GeneralesComponent,
@@ -38,12 +41,14 @@ import { GridModule } from "@syncfusion/ej2-angular-grids";
         MensajeUsuarioComponent,
         NuevoAnuncioComponent,
         EditarAnuncioComponent,
-        EditarMensajeComponent
+        EditarMensajeComponent,
+        MensajesUsuarioEnviadosComponent
     ],
     exports: [
         MatCardModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        MatButtonToggleModule
     ]
 })
 

@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,30 @@ export class MensajesService {
   }
 
   getMensajes(idUser: string, idUnidad: string): Observable<any> {
-    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad)
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('escritoPor', '!=', 'Administrador'))
+      .snapshotChanges();
+  }
+
+  getMensajesAdmin(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('escritoPor', '==', 'Administrador')
       .orderBy('fechaMensaje', 'desc'))
+      .snapshotChanges();
+  }
+
+  getMensajesUser(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('escritoPor', '!=', 'Administrador'))
+      .snapshotChanges();
+  }
+
+  getMensajesNoVistosAdmin(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('visto', '==', 'No Visto')
+      .where('escritoPor', '!=', 'Administrador'))
+      .snapshotChanges();
+  }
+
+  getMensajesNoVistosUser(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('visto', '==', 'No Visto')
+      .where('escritoPor', '==', 'Administrador'))
       .snapshotChanges();
   }
 
@@ -25,7 +47,7 @@ export class MensajesService {
 
   guardarMensaje(mensaje: any) {
     const idMensaje = this.firestore.createId();
-    const data = {idMensaje, ...mensaje}
+    const data = { idMensaje, ...mensaje }
     return this.firestore.collection('Mensajes').doc(idMensaje).set(data);
   }
 

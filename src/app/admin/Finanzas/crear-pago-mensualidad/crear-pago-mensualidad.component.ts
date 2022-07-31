@@ -12,6 +12,8 @@ import { IngresoUnidadesService } from "../../../services/pagos.service";
 import { ToastrService } from "ngx-toastr";
 import { TablaCobranzaService } from "../../../services/tablaCobranza.service";
 import { DatePipe } from "@angular/common";
+import {audithService} from "../../../services/audith.service";
+import {onAuthStateChanged} from "@angular/fire/auth";
 
 
 @Component({
@@ -30,6 +32,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
   saldo: number = 0;
   date = new Date();
   pipe = new DatePipe('en-US');
+  myDate = new Date();
 
   unidades: any[] = [];
   cuentasPago: any[] = [];
@@ -57,6 +60,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
     private _dialogService: DialogService,
     private toastr: ToastrService,
     private fb: FormBuilder,
+    private _auditService: audithService
   ) {
     this.pagoMensualidadForm = this.fb.group({
       idUnidad: ['', Validators.required],
@@ -311,6 +315,10 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           mes: this.date.toLocaleString("es-ES", { month: "long" }) + this.date.toLocaleString("es-ES", { year: 'numeric' })
         }
         this.loading = true;
+        this.audit(pagoMensualidad);
+        this.onUpdateEstadoReservasPagadas();
+        this.onUpdateTablaCobranzas();
+        this.onUpdateSaldo();
         this._ingresoUnidades.savePago(pagoMensualidad).then(() => {
           this.toastr.success('El pago fue registrado exitosamente', 'Pago Registrado', {
             positionClass: 'toast-bottom-right'
@@ -321,10 +329,18 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
           console.log(error);
         })
       }
-      this.onUpdateEstadoReservasPagadas();
-      this.onUpdateTablaCobranzas();
-      this.onUpdateSaldo();
     });
+  }
+
+  audit(pagoMensualidad:any) {
+    const datos: any = {
+      modulo: 'Crear-Pago-Mensualidad',
+      idUsuario: sessionStorage.getItem('idAdministrador'),
+      accion: 'Crear Pago Mensualidad',
+      fechaActualizacion: this.myDate,
+      ...pagoMensualidad
+    }
+    this._auditService.saveAudith(datos);
   }
 
   onUpdateEstadoReservasPagadas() {

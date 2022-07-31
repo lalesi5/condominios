@@ -4,6 +4,7 @@ import {AnunciosGeneralesService} from '../../../services/anunciosGenerales.serv
 import {DialogService} from "../../../services/dialog.service";
 import {ToastrService} from "ngx-toastr";
 import {Subscription} from "rxjs";
+import {audithService} from "../../../services/audith.service";
 
 @Component({
   selector: 'app-generales',
@@ -16,12 +17,14 @@ export class GeneralesComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   idCondominio: string = ''
   anunciosGenerales: any[] = [];
+  myDate = new Date();
 
   constructor(
     private router: Router,
     private _anunciosGeneralesService: AnunciosGeneralesService,
     private _dialogService: DialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _auditService: audithService
   ) {
     this.recoverData();
   }
@@ -65,6 +68,7 @@ export class GeneralesComponent implements OnInit, OnDestroy {
       cancelText: 'No',
     }).subscribe(res => {
       if (res) {
+        this.audit(id);
         this._anunciosGeneralesService.deleteAnunciosGenerales(id).then(() => {
           this.toastr.success('El anuncio fue eliminado con exito', 'Anuncio eliminado', {
             positionClass: 'toast-bottom-right'
@@ -74,6 +78,16 @@ export class GeneralesComponent implements OnInit, OnDestroy {
         })
       }
     });
+  }
+
+  audit(id:any) {
+    const datos: any = {
+      modulo: 'Comunicacion-General',
+      idUsuario: sessionStorage.getItem('idAdministrador'),
+      accion: 'Eliminación Anuncio',
+      fechaActualizacion: this.myDate,
+    }
+    this._auditService.saveAudith(datos);
   }
 
   onGoEdit(item: any) {
