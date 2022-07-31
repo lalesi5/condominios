@@ -81,7 +81,7 @@ export class InicioUsuarioComponent implements OnInit, OnDestroy {
 
   getMensajesUsuario() {
     this.subscription.add(
-      this._mensajesService.getMensajes(this.idUsuario, this.idUnidad).subscribe(data => {
+      this._mensajesService.getMensajesNoVistosUser(this.idUsuario, this.idUnidad).subscribe(data => {
         this.mensajes = [];
         data.forEach((element: any) => {
           this.mensajes.push({

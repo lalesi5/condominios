@@ -1,16 +1,14 @@
-import { BoundElementProperty } from "@angular/compiler";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { MensajesService } from "../../services/mensajes.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { MensajesService } from 'src/app/services/mensajes.service';
 
 @Component({
-  selector: 'app-comunicacionUsuario',
-  templateUrl: './comunicacionUsuario.component.html',
-  styleUrls: ['./comunicacionUsuario.component.css']
+  selector: 'app-mensajes-enviados',
+  templateUrl: './mensajes-enviados.component.html',
+  styleUrls: ['./mensajes-enviados.component.css']
 })
-
-export class ComunicacionUsuarioComponent implements OnInit {
+export class MensajesEnviadosComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idUsuario: string = '';
@@ -25,7 +23,7 @@ export class ComunicacionUsuarioComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _mensajesService: MensajesService,
+    private _mensajesService: MensajesService
   ) {
     this.recoverData();
   }
@@ -45,7 +43,7 @@ export class ComunicacionUsuarioComponent implements OnInit {
   getMensajes() {
     this.subscription.add(
       this._mensajesService
-        .getMensajesNoVistosUser(this.idUsuario, this.idUnidad)
+        .getMensajesUser(this.idUsuario, this.idUnidad)
         .subscribe(data => {
           this.mensajes = [];
           data.forEach((element: any) => {
@@ -76,5 +74,4 @@ export class ComunicacionUsuarioComponent implements OnInit {
   onAnswer() {
     this.router.navigate(['/user/responder']);
   }
-
 }

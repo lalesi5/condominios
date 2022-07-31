@@ -24,14 +24,20 @@ export class MensajesService {
       .snapshotChanges();
   }
 
-  getMensajesNoVistosAdmin(idUser: string, idUnidad: string): Observable<any> {    
-    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('visto', '==', 'No Visto')
-    .where('escritoPor', '!=', 'Administrador'))
+  getMensajesUser(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('escritoPor', '!=', 'Administrador'))
       .snapshotChanges();
   }
 
-  getMensajesNoVistos(idUser: string, idUnidad: string): Observable<any> {
-    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('visto', '==', 'No Visto'))
+  getMensajesNoVistosAdmin(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('visto', '==', 'No Visto')
+      .where('escritoPor', '!=', 'Administrador'))
+      .snapshotChanges();
+  }
+
+  getMensajesNoVistosUser(idUser: string, idUnidad: string): Observable<any> {
+    return this.firestore.collection('Mensajes', ref => ref.where('idUsuario', '==', idUser).where('idUnidad', '==', idUnidad).where('visto', '==', 'No Visto')
+      .where('escritoPor', '==', 'Administrador'))
       .snapshotChanges();
   }
 
