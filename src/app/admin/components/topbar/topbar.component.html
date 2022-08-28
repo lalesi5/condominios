@@ -2,7 +2,7 @@
 
     <!--userImg-->
     <div class="user">
-        <img src="{{condominio.imgCondominio}}" alt="userImage">
+        <img src="{{condominio.imgCondominio}}" alt="userImage" (click)="onGoCondominio()">
     </div>
     <div id="bienvenido" class="item2" *ngFor="let admin of administrador">
         <a class="text-white"><strong>BIENVENIDO:</strong> {{admin.name}} {{admin.last_name}}</a>

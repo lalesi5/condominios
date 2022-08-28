@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
+import { Router } from "@angular/router";
 import {Subscription} from "rxjs";
 import { AdminService } from "src/app/services/admin.service";
 import {CondominioService} from "../../../services/condominios.service";
@@ -19,7 +20,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   constructor(
     private _condominiosService: CondominioService,
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private router: Router
   ) {
     this.recoverData();
   }
@@ -69,5 +71,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  onGoCondominio() {
+    this.router.navigate(['/admin/ajustes/ajustesCondominio']);
   }
 }

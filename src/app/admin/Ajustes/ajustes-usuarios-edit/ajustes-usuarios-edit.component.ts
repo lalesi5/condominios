@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {ToastrService} from 'ngx-toastr';
 import {DialogService} from 'src/app/services/dialog.service';
 import {UsuariosService} from 'src/app/services/usuarios.service';
+import { UnidadesService } from 'src/app/services/unidades.service';
 
 @Component({
   selector: 'app-ajustes-usuarios-edit',
@@ -27,7 +28,8 @@ export class AjustesUsuariosEditComponent implements OnInit {
     private _dialogService: DialogService,
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private _usuarioService: UsuariosService
+    private _usuarioService: UsuariosService,
+    private _unidadesService: UnidadesService
   ) {
     this.editUsuarioForm = this.fb.group({
       name: ['', Validators.required],
@@ -74,7 +76,6 @@ export class AjustesUsuariosEditComponent implements OnInit {
     const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const direccion = String(this.editUsuarioForm.value.address).charAt(0).toLocaleUpperCase() + String(this.editUsuarioForm.value.address).slice(1);
 
-
     const usuario: any = {
       name: nombre,
       last_name: apellido,
@@ -92,6 +93,8 @@ export class AjustesUsuariosEditComponent implements OnInit {
     }).subscribe(res => {
       if (res) {
         this.loading = true;
+        //actualizar la info en unidades
+
         this._usuarioService.actualizarUsuario(this.idUsuario!, usuario).then(() => {
           this.loading = false;
           this.toastr.success('El usuario fue modificado con exito', 'Usuario modificado', {
@@ -102,6 +105,19 @@ export class AjustesUsuariosEditComponent implements OnInit {
         this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
       }
     });
+  }
+
+  onUpdateUnidades(){
+
+    const nombre = String(this.editUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+
+    const unidad: any = {
+      nombreResidente: nombre,
+      apellidoResidente: apellido,
+      telefonoResidente: this.editUsuarioForm.value.phone,
+    }
+    //this._unidadesService.actualizarUnidad(this.idUnidad, unidad);
   }
 
   onBacktoList(): void {
