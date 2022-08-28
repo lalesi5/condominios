@@ -113,6 +113,15 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
           idUsuario: this.idUsuario
         }
 
+        //prueba guardar idUnidad en coleccion Administrador
+        /*let unidadesA : any = [];
+        unidadesA.push("asd");
+        const usuario: any = {
+          arregloUnidades: unidadesA
+        }
+
+        this._unidadesService.actualizarUsuario(this.idUsuario!);*/
+
         //Crea el documento
         this.loading = true;
         this._unidadesService.createUnidades(unidad).then(() => {
