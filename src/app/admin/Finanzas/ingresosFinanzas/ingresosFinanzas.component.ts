@@ -37,7 +37,7 @@ export class IngresosFinanzasComponent implements OnInit {
   ) {
     this.pageSettings = { pageSize: 6 }
     this.toolbarOptions = ['PdfExport', 'ExcelExport', 'Search'];
-    this.commands = [{ title: 'seleccionar', buttonOption: { iconCss: 'e-icons e-save', cssClass: 'e-flat' } }];
+    this.commands = [{ title: 'seleccionar', buttonOption: { iconCss: 'e-icons e-pan', cssClass: 'e-flat' } }];
     this.recoverData();
   }
 
