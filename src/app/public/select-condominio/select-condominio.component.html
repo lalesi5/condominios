@@ -12,6 +12,7 @@
           <div class="iconBx">
             <img src="{{condominio.imgCondominio}}" (click)="onGoAdmin(condominio)" alt="userImage">
           </div>
+          <button type="button" class="btn btn-success" (click)="onGoAdmin(condominio)">Gestionar Condominio</button>
           <button type="button" class="btn btn-danger" (click)="onDelete(condominio)">Eliminar Condominio</button>
         </div>
         <div class="card" (click)="onGoCreate()">
