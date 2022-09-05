@@ -84,6 +84,7 @@ export class AjustesListarUnidadesComponent implements OnInit, OnDestroy {
 
     } else if (item.target?.title === 'Eliminar') {
       const id = <string>item.rowData['idUnidad'];
+      const idUser = <string>item.rowData['idUsuario'];
       this._dialogService.confirmDialog({
         title: 'Eliminar unidad',
         message: '¿Está seguro de eliminar la unidad?',
@@ -92,7 +93,7 @@ export class AjustesListarUnidadesComponent implements OnInit, OnDestroy {
       }).subscribe(res => {
         if (res) {
 
-          this._unidadesService.deleteUnidades(id).then(() => {
+          this._unidadesService.deleteUnidades(id, idUser).then(() => {
             this.toastr.success('La unidad fue eliminado con exito', 'Registro eliminado', {
               positionClass: 'toast-bottom-right'
             });
