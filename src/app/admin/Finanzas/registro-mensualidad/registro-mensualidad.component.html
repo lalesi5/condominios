@@ -36,14 +36,16 @@
                   [allowPdfExport]="true" (pdfExportComplete)="pdfExportComplete()" (created)='created()'>
           <e-columns>
             <e-column field='fechaReciboPago' headerText='Fecha de Pago' width=160> </e-column>
+            <e-column field='mes2' headerText='Mes' width=140> </e-column>
             <e-column field='numeroReciboPago' headerText='Número Recibo de Pago' width=190> </e-column>
-            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140> </e-column>
-            <e-column field='tiposPago' headerText='Tipo de Pago' width=140> </e-column>
+<!--            <e-column field='tipoCuenta' headerText='Tipo de Cuenta' width=140> </e-column>-->
+<!--            <e-column field='tiposPago' headerText='Tipo de Pago' width=140> </e-column>-->
             <e-column field='cuotaUnidad' headerText='Cuota Unidad' width=140 format="C2"> </e-column>
-            <e-column field='sumaValorReservas' headerText='Valores Adicionales' width=140 format="C2"> </e-column>
+            <e-column field='sumaValorReservas' headerText='Valores Reserva' width=140 format="C2"> </e-column>
             <e-column field='valorDescuento' headerText='Descuento' width=140 format="C2"> </e-column>
-            <e-column field='valorTotal' headerText='Valor Total' width=140 format="C2"> </e-column>
+            <e-column field='valorTotal' headerText='Valor a Pagar' width=140 format="C2"> </e-column>
             <e-column field='valorPago' headerText='Valor Cancelado' width=140 format="C2"> </e-column>
+
             <!--<e-column field='saldo' headerText='Saldo' width=140 format="C2"> </e-column>-->
             <e-column headerText='Opciones' width=110 [commands]='commands'></e-column>
           </e-columns>

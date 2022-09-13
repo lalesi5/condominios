@@ -137,17 +137,31 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
         })
       }
       this.idUnidad = <string>sessionStorage.getItem('idUnidad');
-      console.log(this.idUnidad);
+      //console.log(this.idUnidad);
       this.onCreateTablaCobranzas(this.idUnidad);
     });
   }
 
   async onCreateTablaCobranzas(idUnidad: string){
-    console.log('On create table',idUnidad);
+    //console.log('On create table',idUnidad);
     const tabla: any = {
       unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
       idCondominio: this.idCondominio,
-      idUnidad: idUnidad
+      idUnidad: idUnidad,
+      junio2022: 0,
+      julio2022: 0,
+      agosto2022: 0,
+      septiembre2022: this.unidadesForm.value.cuotaUnidad,
+      octubre2022: this.unidadesForm.value.cuotaUnidad,
+      noviembre2022: this.unidadesForm.value.cuotaUnidad,
+      diciembre2022: this.unidadesForm.value.cuotaUnidad,
+      enero2023: this.unidadesForm.value.cuotaUnidad,
+      febrero2023: this.unidadesForm.value.cuotaUnidad,
+      marzo2023: this.unidadesForm.value.cuotaUnidad,
+      abril2023: this.unidadesForm.value.cuotaUnidad,
+      mayo2023: this.unidadesForm.value.cuotaUnidad,
+      junio2023: this.unidadesForm.value.cuotaUnidad,
+      valorCuota: this.unidadesForm.value.cuotaUnidad,
     }
     this._tablaCobranzasService.createTablaCobranzas(tabla);
   }
