@@ -117,6 +117,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
 
     //this._usuarioService.pruebaget(idUser);
     //this.getIdUnidadFromArray();
+    this.saveDataUnidades();
 
     this._dialogService.confirmDialog({
       title: 'Modificar Usuario',
@@ -135,7 +136,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
             positionClass: 'toast-bottom-right'
           });
         })
-        this.saveDataUnidades();
+        //this.saveDataUnidades();
         this.loading = false;
         this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
       }
@@ -144,22 +145,21 @@ export class AjustesUsuariosEditComponent implements OnInit {
 
   saveDataUnidades() {
     const idUser = <string>sessionStorage.getItem('idUsuario');
-    let bandera = 1;
+    //let bandera = 1;
+    const nombre = String(this.editUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+    const unidad: any = {
+      nombreResidente: nombre,
+      apellidoResidente: apellido,
+      telefonoResidente: this.editUsuarioForm.value.phone,
+    }
 
     this._usuarioService.getUsuariosID(idUser).subscribe(data => {
       data.forEach((element: any) => {
-//el metodo debe ser controlado por si se agregan mas unidades
+        //el metodo debe ser controlado por si se agregan mas unidades
         element.payload.doc.data().arregloUnidades.forEach((dentro: string) => {
-          const nombre = String(this.editUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
-          const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
-
-          const unidad: any = {
-            nombreResidente: nombre,
-            apellidoResidente: apellido,
-            telefonoResidente: this.editUsuarioForm.value.phone,
-          }
           this._unidadesService.actualizarUnidad(dentro, unidad);
-          bandera++;
+          //bandera++;
         })
 
       })
