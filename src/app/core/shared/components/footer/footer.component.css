@@ -2,7 +2,7 @@
   position: relative;
   background: #f7f7f7;
   width: 100%;
-  
+
   line-height: 70px;
   text-align: center;
 }
@@ -13,34 +13,34 @@
 }
 
 #lista1 li {
-  display:inline;
-  padding-left:3px;
-  padding-right:3px;
- 
+  display: inline;
+  padding-left: 3px;
+  padding-right: 3px;
+
 }
 
-img.pequeña{
+img.pequeña {
   margin-top: 10px;
   height: auto;
   overflow: hidden;
   width: 100px;
 }
 
-img.poli{
+img.poli {
   margin-top: 10px;
   height: auto;
   overflow: hidden;
   width: 150px;
 }
 
-img.fb{
+img.fb {
   margin-top: 10px;
   height: auto;
   overflow: hidden;
   width: 80px;
 }
 
-img.buho{
+img.buho {
   margin-top: 10px;
   height: auto;
   overflow: hidden;
