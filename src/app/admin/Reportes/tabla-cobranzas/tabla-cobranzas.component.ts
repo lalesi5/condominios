@@ -68,249 +68,236 @@ export class TablaCobranzasComponent implements OnInit {
   }
 
   customiseCell(args: QueryCellInfoEventArgs) {
-
     // @ts-ignore
     if (args.column.field === 'junio2022') {
       // @ts-ignore
-      if (args.data['junio2022'] > 150) {
+      if (args.data['junio2022'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['junio2022'] > 0 && args.data['junio2022'] <=150 ) {
+      else if (args.data['junio2022'] > 0 && args.data['junio2022'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['junio2022'] === 0) {
+      else if (args.data['junio2022'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'julio2022') {
       // @ts-ignore
-      if (args.data['julio2022'] > 150) {
+      if (args.data['julio2022'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['julio2022'] > 0 && args.data['julio2022'] <=150 ) {
+      else if (args.data['julio2022'] > 0 && args.data['julio2022'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['julio2022'] === 0) {
+      else if (args.data['julio2022'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'agosto2022') {
       // @ts-ignore
-      if (args.data['agosto2022'] > 150) {
+      if (args.data['agosto2022'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['agosto2022'] > 0 && args.data['agosto2022'] <=150 ) {
+      else if (args.data['agosto2022'] > 0 && args.data['agosto2022'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['agosto2022'] === 0) {
+      else if (args.data['agosto2022'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'septiembre2022') {
       // @ts-ignore
-      if (args.data['septiembre2022'] > 150) {
+      if (args.data['septiembre2022'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['septiembre2022'] > 0 && args.data['septiembre2022'] <=150 ) {
+      else if (args.data['septiembre2022'] > 0 && args.data['septiembre2022'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['septiembre2022'] === 0) {
+      else if (args.data['septiembre2022'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'octubre2022') {
       // @ts-ignore
-      if (args.data['octubre2022'] > 150) {
+      if (args.data['octubre2022'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['octubre2022'] > 0 && args.data['octubre2022'] <=150 ) {
+      else if (args.data['octubre2022'] > 0 && args.data['octubre2022'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['octubre2022'] === 0) {
+      else if (args.data['octubre2022'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'noviembre2022') {
       // @ts-ignore
-      if (args.data['noviembre2022'] > 150) {
+      if (args.data['noviembre2022'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['noviembre2022'] > 0 && args.data['noviembre2022'] <=150 ) {
+      else if (args.data['noviembre2022'] > 0 && args.data['noviembre2022'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['noviembre2022'] === 0) {
+      else if (args.data['noviembre2022'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'diciembre2022') {
       // @ts-ignore
-      if (args.data['diciembre2022'] > 150) {
+      if (args.data['diciembre2022'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['diciembre2022'] > 0 && args.data['diciembre2022'] <=150 ) {
+      else if (args.data['diciembre2022'] > 0 && args.data['diciembre2022'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['diciembre2022'] === 0) {
+      else if (args.data['diciembre2022'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'enero2023') {
       // @ts-ignore
-      if (args.data['enero2023'] > 150) {
+      if (args.data['enero2023'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['enero2023'] > 0 && args.data['enero2023'] <=150 ) {
+      else if (args.data['enero2023'] > 0 && args.data['enero2023'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['enero2023'] === 0) {
+      else if (args.data['enero2023'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'febrero2023') {
       // @ts-ignore
-      if (args.data['febrero2023'] > 150) {
+      if (args.data['febrero2023'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['febrero2023'] > 0 && args.data['febrero2023'] <=150 ) {
+      else if (args.data['febrero2023'] > 0 && args.data['febrero2023'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['febrero2023'] === 0) {
+      else if (args.data['febrero2023'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'marzo2023') {
       // @ts-ignore
-      if (args.data['marzo2023'] > 150) {
+      if (args.data['marzo2023'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['marzo2023'] > 0 && args.data['marzo2023'] <=150 ) {
+      else if (args.data['marzo2023'] > 0 && args.data['marzo2023'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['marzo2023'] === 0) {
+      else if (args.data['marzo2023'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'abril2023') {
       // @ts-ignore
-      if (args.data['abril2023'] > 150) {
+      if (args.data['abril2023'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['abril2023'] > 0 && args.data['abril2023'] <=150 ) {
+      else if (args.data['abril2023'] > 0 && args.data['abril2023'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['abril2023'] === 0) {
+      else if (args.data['abril2023'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'mayo2023') {
       // @ts-ignore
-      if (args.data['mayo2023'] > 150) {
+      if (args.data['mayo2023'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['mayo2023'] > 0 && args.data['mayo2023'] <=150 ) {
+      else if (args.data['mayo2023'] > 0 && args.data['mayo2023'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['mayo2023'] === 0) {
+      else if (args.data['mayo2023'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
     }
-
     // @ts-ignore
     if (args.column.field === 'junio2023') {
       // @ts-ignore
-      if (args.data['junio2023'] > 150) {
+      if (args.data['junio2023'] == args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "red";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['junio2023'] > 0 && args.data['junio2023'] <=150 ) {
+      else if (args.data['junio2023'] > 0 && args.data['junio2023'] <= args.data['valorCuota']) {
         (args.cell as any).style.backgroundColor = "orange";
         (args.cell as any).style.color = "white";
       }
       // @ts-ignore
-      else if(args.data['junio2023'] === 0) {
+      else if (args.data['junio2023'] === 0) {
         (args.cell as any).style.backgroundColor = "green";
         (args.cell as any).style.color = "white";
       }
