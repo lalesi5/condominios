@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="clearfix"> </div>
+<div class="clearfix"></div>
 
 <!--SliderLogin-->
 
@@ -8,41 +8,7 @@
   <h1> Condominios EPN</h1>
 </div>
 
-<!--Fin SliderLogin-->
-
-<div class="clearfix"> </div>
-
-<!--Seccion Nosotros-->
-
-<div id="nosotros">
-  <h2>Nosotros</h2>
-  <div class="container-border">
-    <div class="row justify-content-around">
-      <div class="col-sm-3">
-        <mat-card class="example-card">
-          <mat-card-title>Alex Carrera</mat-card-title>
-          <mat-card-subtitle>
-            Estudiante de Ingenieria en Sistemas<br>Escuela Politecnica Nacional
-          </mat-card-subtitle>
-          <img mat-card-lg-image src="../../../../assets/alexCarrera.jpg">
-        </mat-card>
-      </div>
-      <div class="col-sm-3">
-        <mat-card class="example-card">
-          <mat-card-title>Alejandro Tupiza</mat-card-title>
-          <mat-card-subtitle>
-            Estudiante de Ingenieria en Sistemas <br> Escuela Politecnica Nacional
-          </mat-card-subtitle>
-          <img mat-card-lg-image src="../../../../assets/alejandroTupiza.jpg">
-        </mat-card>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Fin Seccion Nosotros-->
-
-<div class="clearfix"> </div>
+<div class="clearfix"></div>
 
 <!-- Inicio de Seccion Servicios -->
 
@@ -121,26 +87,26 @@
 
 <!--Fin Seccion Servicios-->
 
-<div class="clearfix"> </div>
+<div class="clearfix"></div>
 
 <!--Inicio Seccion Mapa-->
 
 <div id="mapa">
   <div class="embed-responsive embed-responsive-4by3">
     <iframe class="embed-responsive-item"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4883.718290847799!2d-78.49041917656263!3d-0.2103980373679002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a107e1cd44b%3A0x88a284f66939ed4!2sEscuela%20Polit%C3%A9cnica%20Nacional!5e0!3m2!1ses!2sec!4v1638413054739!5m2!1ses!2sec"
-      loading="lazy" allowfullscreen></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4883.718290847799!2d-78.49041917656263!3d-0.2103980373679002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a107e1cd44b%3A0x88a284f66939ed4!2sEscuela%20Polit%C3%A9cnica%20Nacional!5e0!3m2!1ses!2sec!4v1638413054739!5m2!1ses!2sec"
+            loading="lazy" allowfullscreen></iframe>
   </div>
 </div>
 
 <!--Fin Seccion Mapa-->
 
-<div class="clearfix"> </div>
+<div class="clearfix"></div>
 
 <!--Inicio Seccion Contactanos-->
 
 <div id="contactanos">
-  <h2>Contactanos</h2>
+  <h2>Contáctanos</h2>
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -150,10 +116,10 @@
               <div class="form-group">
                 <div class="col-md-12">
                   <input type="text" class="form-control" formControlName="name" placeholder="Ingresa tu nombre"
-                    name="name"
-                    [ngClass]="{ 'is-invalid': !contactForm.controls['name'].valid  && contactForm.controls['name'].touched }">
+                         name="name"
+                         [ngClass]="{ 'is-invalid': !contactForm.controls['name'].valid  && contactForm.controls['name'].touched }">
                   <div *ngIf=" contactForm.controls['name'].touched  && !contactForm.controls['name'].valid"
-                    class="invalid-feedback">
+                       class="invalid-feedback">
                     Campo requerido
                   </div>
                 </div>
@@ -161,8 +127,8 @@
               <div class="form-group">
                 <div class="col-md-12">
                   <input type="email" class="form-control" formControlName="email" placeholder="Ingresa tu email"
-                    name="email"
-                    [ngClass]="{ 'is-invalid': !contactForm.controls['email'].valid && contactForm.controls['email'].touched}">
+                         name="email"
+                         [ngClass]="{ 'is-invalid': !contactForm.controls['email'].valid && contactForm.controls['email'].touched}">
                   <div *ngIf="form['email'].errors" class="invalid-feedback">
                     <div *ngIf="form['email'].errors['required']">
                       Campo requerido
@@ -175,8 +141,9 @@
               </div>
               <div class="form-group">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" formControlName="phone" name="phone" placeholder="Ingresa tu teléfono"
-                    [ngClass]="{ 'is-invalid': !contactForm.controls['phone'].valid  && contactForm.controls['phone'].touched }">
+                  <input type="text" class="form-control" formControlName="phone" name="phone"
+                         placeholder="Ingresa tu teléfono"
+                         [ngClass]="{ 'is-invalid': !contactForm.controls['phone'].valid  && contactForm.controls['phone'].touched }">
                   <div *ngIf="form['phone'].errors" class="invalid-feedback">
                     <div *ngIf="form['phone'].errors['pattern']">
                       La longitud del número no es válida
@@ -187,10 +154,10 @@
               <div class="form-group">
                 <div class="col-md-12">
                   <textarea class="form-control" id="message" name="message" placeholder="Ingresa tu mensaje"
-                    name="message" formControlName="message" rows="6"
-                    [ngClass]="{ 'is-invalid': !contactForm.controls['message'].valid  && contactForm.controls['message'].touched }"></textarea>
+                            name="message" formControlName="message" rows="6"
+                            [ngClass]="{ 'is-invalid': !contactForm.controls['message'].valid  && contactForm.controls['message'].touched }"></textarea>
                   <div *ngIf=" contactForm.controls['message'].touched  && !contactForm.controls['message'].valid"
-                    class="invalid-feedback">
+                       class="invalid-feedback">
                     Campo requerido
                   </div>
                 </div>
@@ -198,7 +165,7 @@
               <div class="form-group">
                 <div class="col-md-12 text-center">
                   <input type="submit" id="button" value="Enviar" class="btn btn-primary btn-lg"
-                    [disabled]="contactForm.invalid">
+                         [disabled]="contactForm.invalid">
                   <!--<button type="submit" id="button" class="btn btn-primary btn-lg"
                     [disabled]="contactForm.invalid">Enviar</button>-->
                 </div>
@@ -213,6 +180,6 @@
 
 <!--Fin Seccion Contactanos-->
 
-<div class="clearfix"> </div>
+<div class="clearfix"></div>
 
 <app-footer></app-footer>

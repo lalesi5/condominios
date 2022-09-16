@@ -42,7 +42,8 @@ export class UnidadesService {
       .snapshotChanges();
   }
 
-  deleteUnidades(id: string): Promise<any> {
+  deleteUnidades(id: string, idUser: string): Promise<any> {
+    this.borrarIdUnidadColAdmin(idUser, id);
     return this.firestore.collection('Unidades').doc(id).delete();
   }
 
@@ -61,6 +62,10 @@ export class UnidadesService {
 
   actualizarUsuario(idUsuario: string, idUnidad: string): Promise<any> {
     return this.firestore.collection('Administrador').doc(idUsuario).update({arregloUnidades: arrayUnion(idUnidad)});
+  }
+
+  borrarIdUnidadColAdmin(idUsuario: string, idUnidad: string): Promise<any> {
+    return this.firestore.collection('Administrador').doc(idUsuario).update({arregloUnidades: arrayRemove(idUnidad)});
   }
 
 }

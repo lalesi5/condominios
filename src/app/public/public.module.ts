@@ -16,6 +16,7 @@ import { SelectCondominioComponent } from './select-condominio/select-condominio
 import { CreateCondominioComponent } from './create-condominio/create-condominio.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SelectUnidadesComponent } from './select-unidades/select-unidades.component';
+import { ContacComponent } from './contac/contac.component';
 
 
 
@@ -40,7 +41,8 @@ import { SelectUnidadesComponent } from './select-unidades/select-unidades.compo
     SelectCondominioComponent,
     CreateCondominioComponent,
     ForgotPasswordComponent,
-    SelectUnidadesComponent
+    SelectUnidadesComponent,
+    ContacComponent
   ],
   exports: [],
   providers: [

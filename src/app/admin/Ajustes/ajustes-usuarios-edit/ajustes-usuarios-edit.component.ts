@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Subscription} from "rxjs";
-import {ToastrService} from 'ngx-toastr';
-import {DialogService} from 'src/app/services/dialog.service';
-import {UsuariosService} from 'src/app/services/usuarios.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from 'src/app/services/dialog.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UnidadesService } from 'src/app/services/unidades.service';
 
 @Component({
@@ -84,6 +84,40 @@ export class AjustesUsuariosEditComponent implements OnInit {
       fechaActualizacion: new Date(),
       address: direccion
     }
+    const idUser = <string>sessionStorage.getItem('idUsuario');
+    const prueba = this._usuarioService.getUsuario(idUser);
+
+    /*this._usuarioService.getUsuariosID(idUser).subscribe(data => {
+      //this.arrayUnidades = [];
+      console.log("data ", data.length);
+      //this.arrayUnidades.push(data.payload.doc.data().arregloUnidades);
+      console.log("array ", this.arrayUnidades.length);
+
+      data.forEach((element: any) => {
+
+        if (this.arrayUnidades.length < 1) {
+          this.arrayUnidades.push(element.payload.doc.data().arregloUnidades);
+        }
+
+        element.payload.doc.data().arregloUnidades.forEach((element: any) => {
+ 
+          console.log("elemento dentro ", element);
+          //console.log("elemento dentro ", );
+          //this.arrayUnidades.push(element);
+          //if(this.arrayUnidades.length < )
+        });
+
+        //console.log("data ",element.payload.doc.data().arregloUnidades);
+        //this.arrayUnidades.push(element.payload.doc.data().arregloUnidades);
+        //this.unidadPrueba.concat(element.payload.doc.data().arregloUnidades)
+
+        //element.payload.doc.data().arregloUnidades;
+      })
+    })*/
+
+    //this._usuarioService.pruebaget(idUser);
+    //this.getIdUnidadFromArray();
+    this.saveDataUnidades();
 
     this._dialogService.confirmDialog({
       title: 'Modificar Usuario',
@@ -92,6 +126,7 @@ export class AjustesUsuariosEditComponent implements OnInit {
       cancelText: 'No',
     }).subscribe(res => {
       if (res) {
+        //funcion buscar idUnidad de array
         this.loading = true;
         //actualizar la info en unidades
 
@@ -101,23 +136,34 @@ export class AjustesUsuariosEditComponent implements OnInit {
             positionClass: 'toast-bottom-right'
           });
         })
+        //this.saveDataUnidades();
         this.loading = false;
         this.router.navigate(['/admin/ajustes/ajustesUsuarios']);
       }
     });
   }
 
-  onUpdateUnidades(){
-
+  saveDataUnidades() {
+    const idUser = <string>sessionStorage.getItem('idUsuario');
+    //let bandera = 1;
     const nombre = String(this.editUsuarioForm.value.name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
     const apellido = String(this.editUsuarioForm.value.last_name).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
-
     const unidad: any = {
       nombreResidente: nombre,
       apellidoResidente: apellido,
       telefonoResidente: this.editUsuarioForm.value.phone,
     }
-    //this._unidadesService.actualizarUnidad(this.idUnidad, unidad);
+
+    this._usuarioService.getUsuariosID(idUser).subscribe(data => {
+      data.forEach((element: any) => {
+        //el metodo debe ser controlado por si se agregan mas unidades
+        element.payload.doc.data().arregloUnidades.forEach((dentro: string) => {
+          this._unidadesService.actualizarUnidad(dentro, unidad);
+          //bandera++;
+        })
+
+      })
+    })
   }
 
   onBacktoList(): void {

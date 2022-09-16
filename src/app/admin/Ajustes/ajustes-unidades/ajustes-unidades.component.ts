@@ -86,6 +86,7 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
       sessionStorage.setItem('idUnidad', <string>args.rowData['idUnidad']);
       this.router.navigate(['/admin/ajustes/ajustesUnidadesEdit']);
     } else if (args.target?.title === 'Eliminar') {
+      const idUser = <string>args.rowData['idUsuario'];
       const id = <string>args.rowData['idUnidad'];
       this._dialogService.confirmDialog({
         title: 'Eliminar Unidad',
@@ -94,7 +95,7 @@ export class AjustesUnidadesComponent implements OnInit, OnDestroy {
         cancelText: 'No',
       }).subscribe(res => {
         if (res) {
-          this._unidadesService.deleteUnidades(id).then(() => {
+          this._unidadesService.deleteUnidades(id, idUser).then(() => {
             this.toastr.success('El registro fue eliminado con exito', 'Registro eliminado', {
               positionClass: 'toast-bottom-right'
             });

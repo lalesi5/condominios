@@ -17,6 +17,8 @@ import { IngresoUnidadesService } from "../../../services/pagos.service";
 import { DialogService } from "../../../services/dialog.service";
 import { ToastrService } from "ngx-toastr";
 import { PdfStandardFont, PdfFontFamily, PdfFontStyle } from '@syncfusion/ej2-pdf-export';
+import {DatePipe} from "@angular/common";
+import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
 
 @Component({
   selector: 'app-registro-mensualidad',
@@ -27,12 +29,16 @@ export class RegistroMensualidadComponent implements OnInit {
 
   private subscription: Subscription = new Subscription;
   idUnidad: string = '';
+  idCondominio: string = '';
   reservas: any[] = [];
   unidad: any[] = [];
   ingresoUnidades: any[] = [];
+  tablaCobranzas: any[] = [];
   sumaValorReservas: number = 0;
   cuotaUnidad: number = 0;
   myDate = new Date();
+  date = new Date();
+  pipe = new DatePipe('en-US');
 
   public pageSettings: PageSettingsModel;
   public toolbarOptions: ToolbarItems[];
@@ -46,6 +52,7 @@ export class RegistroMensualidadComponent implements OnInit {
     private _unidadesService: UnidadesService,
     private _ingresoUnidadesService: IngresoUnidadesService,
     private _dialogService: DialogService,
+    private _tablaCobranzas: TablaCobranzaService,
     private toastr: ToastrService,
     private _auditService: audithService
   ) {
@@ -59,10 +66,110 @@ export class RegistroMensualidadComponent implements OnInit {
     this.getValoresReservas();
     this.getUnidadCuotaReserva();
     this.getIngresoUnidades();
+    this.getTablaCobranzas();
   }
 
   recoverData() {
     this.idUnidad = <string>sessionStorage.getItem('idUnidad');
+    this.idCondominio = <string>sessionStorage.getItem('idCondominio');
+  }
+
+
+  getTablaCobranzas() {
+    //let fecha = 'noviembre2022'
+    let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
+
+    this.subscription.add(
+      this._tablaCobranzas.getTablaCobranzasByUnidad(this.idUnidad).subscribe(data => {
+        this.tablaCobranzas = [];
+        data.forEach((element: any) => {
+          this.tablaCobranzas.push({
+            ...element.payload.doc.data(),
+          })
+        })
+
+        if(fecha == 'septiembre2022'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'octubre2022'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.octubre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'noviembre2022'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.noviembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'diciembre2022'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'enero2023'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'febrero2023'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'marzo2023'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'abril2023'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'mayo2023'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+        else if(fecha == 'junio2023'){
+          this.tablaCobranzas.forEach((element: any) => {
+            const actualizarUnidad = {
+              cuotaUnidad: element.septiembre2022
+            }
+            this._unidadesService.actualizarUnidad(this.idUnidad, actualizarUnidad);
+          })
+        }
+      })
+    )
   }
 
   getValoresReservas() {
@@ -104,7 +211,7 @@ export class RegistroMensualidadComponent implements OnInit {
         this.ingresoUnidades = [];
         data.forEach((element: any) => {
           this.ingresoUnidades.push({
-            ...element.payload.doc.data()
+            ...element.payload.doc.data(),
           })
         })
       })

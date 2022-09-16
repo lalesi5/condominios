@@ -2,12 +2,49 @@
   position: relative;
   background: #f7f7f7;
   width: 100%;
-  height: 70px;
-  line-height: 70px;
+  max-height: 150px;
   text-align: center;
 }
 
 #footer p {
   margin: 0px;
   padding: 0px;
+}
+
+#lista1 li {
+  display: inline;
+  padding-left: 3px;
+  padding-right: 3px;
+  max-height: 150px;
+
+}
+
+img.yt {
+  margin-top: 10px;
+  overflow: hidden;
+  max-height: 50px;
+}
+
+img.tw {
+  margin-top: 10px;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+img.poli {
+  margin-top: 10px;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+img.fb {
+  margin-top: 10px;
+  overflow: hidden;
+  max-height: 50px;
+}
+
+img.buho {
+  margin-top: 10px;
+  overflow: hidden;
+  max-height: 50px;
 }
