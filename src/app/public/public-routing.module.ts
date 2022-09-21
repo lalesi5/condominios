@@ -12,6 +12,7 @@ import {CreateCondominioComponent} from './create-condominio/create-condominio.c
 import {CheckLoginGuard} from "../core/shared/guards/check-login.guard";
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 import {SelectUnidadesComponent} from "./select-unidades/select-unidades.component";
+import {ContacComponent} from "./contac/contac.component";
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
         {path: 'forgotPassword', component: ForgotPasswordComponent},
         {path: 'selectCondominio', component: SelectCondominioComponent, canActivate: [CheckLoginGuard]},
         {path: 'createCondominio', component: CreateCondominioComponent, canActivate: [CheckLoginGuard]},
-        {path: 'selectUnidad', component: SelectUnidadesComponent, canActivate: [CheckLoginGuard]}
+        {path: 'selectUnidad', component: SelectUnidadesComponent, canActivate: [CheckLoginGuard]},
+        {path: 'contacto', component: ContacComponent}
       ]
   },
 ];
