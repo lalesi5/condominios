@@ -364,6 +364,7 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
 
   onUpdateTablaCobranzas() {
     let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
+    //let fecha = 'octubre2022';
     //console.log(fecha);
     //console.log(this.saldo);
     if (fecha == 'septiembre2022') {
@@ -495,66 +496,500 @@ export class CrearPagoMensualidadComponent implements OnInit, OnDestroy {
       })
     } else if (fecha == 'octubre2022') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          octubre2022: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            octubre2022: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.octubre2022
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              octubre2022: 0,
+              noviembre2022: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          } else {
+            this.saldo += element.noviembre2022
+            if (this.saldo >= 0) {
+              const actualizarTabla: any = {
+                octubre2022: 0,
+                noviembre2022: 0,
+                diciembre2022: this.saldo
+              }
+              this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+            } else {
+              this.saldo += element.diciembre2022
+              if (this.saldo >= 0) {
+                const actualizarTabla: any = {
+                  octubre2022: 0,
+                  noviembre2022: 0,
+                  diciembre2022: 0,
+                  enero2023: this.saldo
+                }
+                this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+              } else {
+                this.saldo += element.enero2023
+                if (this.saldo >= 0) {
+                  const actualizarTabla: any = {
+                    octubre2022: 0,
+                    noviembre2022: 0,
+                    diciembre2022: 0,
+                    enero2023: 0,
+                    febrero2023: this.saldo
+                  }
+                  this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                } else {
+                  this.saldo += element.febrero2023
+                  if (this.saldo >= 0) {
+                    const actualizarTabla: any = {
+                      octubre2022: 0,
+                      noviembre2022: 0,
+                      diciembre2022: 0,
+                      enero2023: 0,
+                      febrero2023: 0,
+                      marzo2023: this.saldo
+                    }
+                    this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                  } else {
+                    this.saldo += element.marzo2023
+                    if (this.saldo >= 0) {
+                      const actualizarTabla: any = {
+                        octubre2022: 0,
+                        noviembre2022: 0,
+                        diciembre2022: 0,
+                        enero2023: 0,
+                        febrero2023: 0,
+                        marzo2023: 0,
+                        abril2023: this.saldo
+                      }
+                      this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                    } else {
+                      this.saldo += element.abril2023
+                      if (this.saldo >= 0) {
+                        const actualizarTabla: any = {
+                          octubre2022: 0,
+                          noviembre2022: 0,
+                          diciembre2022: 0,
+                          enero2023: 0,
+                          febrero2023: 0,
+                          marzo2023: 0,
+                          abril2023: 0,
+                          mayo2023: this.saldo
+                        }
+                        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                      } else {
+                        this.saldo += element.mayo2023
+                        if (this.saldo >= 0) {
+                          const actualizarTabla: any = {
+                            octubre2022: 0,
+                            noviembre2022: 0,
+                            diciembre2022: 0,
+                            enero2023: 0,
+                            febrero2023: 0,
+                            marzo2023: 0,
+                            abril2023: 0,
+                            mayo2023: 0,
+                            junio2023: this.saldo
+                          }
+                          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'noviembre2022') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          noviembre2022: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            noviembre2022: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.noviembre2022
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              noviembre2022: 0,
+              diciembre2022: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          } else {
+            this.saldo += element.diciembre2022
+            if (this.saldo >= 0) {
+              const actualizarTabla: any = {
+                noviembre2022: 0,
+                diciembre2022: 0,
+                enero2023: this.saldo
+              }
+              this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+            } else {
+              this.saldo += element.enero2023
+              if (this.saldo >= 0) {
+                const actualizarTabla: any = {
+                  noviembre2022: 0,
+                  diciembre2022: 0,
+                  enero2023: 0,
+                  febrero2023: this.saldo
+                }
+                this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+              } else {
+                this.saldo += element.febrero2023
+                if (this.saldo >= 0) {
+                  const actualizarTabla: any = {
+                    noviembre2022: 0,
+                    diciembre2022: 0,
+                    enero2023: 0,
+                    febrero2023: 0,
+                    marzo2023: this.saldo
+                  }
+                  this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                } else {
+                  this.saldo += element.marzo2023
+                  if (this.saldo >= 0) {
+                    const actualizarTabla: any = {
+                      noviembre2022: 0,
+                      diciembre2022: 0,
+                      enero2023: 0,
+                      febrero2023: 0,
+                      marzo2023: 0,
+                      abril2023: this.saldo
+                    }
+                    this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                  } else {
+                    this.saldo += element.abril2023
+                    if (this.saldo >= 0) {
+                      const actualizarTabla: any = {
+                        noviembre2022: 0,
+                        diciembre2022: 0,
+                        enero2023: 0,
+                        febrero2023: 0,
+                        marzo2023: 0,
+                        abril2023: 0,
+                        mayo2023: this.saldo
+                      }
+                      this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                    } else {
+                      this.saldo += element.mayo2023
+                      if (this.saldo >= 0) {
+                        const actualizarTabla: any = {
+                          noviembre2022: 0,
+                          diciembre2022: 0,
+                          enero2023: 0,
+                          febrero2023: 0,
+                          marzo2023: 0,
+                          abril2023: 0,
+                          mayo2023: 0,
+                          junio2023: this.saldo
+                        }
+                        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'diciembre2022') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          diciembre2022: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            diciembre2022: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.diciembre2022
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              diciembre2022: 0,
+              enero2023: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          } else {
+            this.saldo += element.enero2023
+            if (this.saldo >= 0) {
+              const actualizarTabla: any = {
+                diciembre2022: 0,
+                enero2023: 0,
+                febrero2023: this.saldo
+              }
+              this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+            } else {
+              this.saldo += element.febrero2023
+              if (this.saldo >= 0) {
+                const actualizarTabla: any = {
+                  diciembre2022: 0,
+                  enero2023: 0,
+                  febrero2023: 0,
+                  marzo2023: this.saldo
+                }
+                this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+              } else {
+                this.saldo += element.marzo2023
+                if (this.saldo >= 0) {
+                  const actualizarTabla: any = {
+                    diciembre2022: 0,
+                    enero2023: 0,
+                    febrero2023: 0,
+                    marzo2023: 0,
+                    abril2023: this.saldo
+                  }
+                  this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                } else {
+                  this.saldo += element.abril2023
+                  if (this.saldo >= 0) {
+                    const actualizarTabla: any = {
+                      diciembre2022: 0,
+                      enero2023: 0,
+                      febrero2023: 0,
+                      marzo2023: 0,
+                      abril2023: 0,
+                      mayo2023: this.saldo
+                    }
+                    this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                  } else {
+                    this.saldo += element.mayo2023
+                    if (this.saldo >= 0) {
+                      const actualizarTabla: any = {
+                        diciembre2022: 0,
+                        enero2023: 0,
+                        febrero2023: 0,
+                        marzo2023: 0,
+                        abril2023: 0,
+                        mayo2023: 0,
+                        junio2023: this.saldo
+                      }
+                      this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'enero2023') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          enero2023: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            enero2023: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.enero2023
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              enero2023: 0,
+              febrero2023: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          } else {
+            this.saldo += element.febrero2023
+            if (this.saldo >= 0) {
+              const actualizarTabla: any = {
+                enero2023: 0,
+                febrero2023: 0,
+                marzo2023: this.saldo
+              }
+              this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+            } else {
+              this.saldo += element.marzo2023
+              if (this.saldo >= 0) {
+                const actualizarTabla: any = {
+                  enero2023: 0,
+                  febrero2023: 0,
+                  marzo2023: 0,
+                  abril2023: this.saldo
+                }
+                this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+              } else {
+                this.saldo += element.abril2023
+                if (this.saldo >= 0) {
+                  const actualizarTabla: any = {
+                    enero2023: 0,
+                    febrero2023: 0,
+                    marzo2023: 0,
+                    abril2023: 0,
+                    mayo2023: this.saldo
+                  }
+                  this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                } else {
+                  this.saldo += element.mayo2023
+                  if (this.saldo >= 0) {
+                    const actualizarTabla: any = {
+                      enero2023: 0,
+                      febrero2023: 0,
+                      marzo2023: 0,
+                      abril2023: 0,
+                      mayo2023: 0,
+                      junio2023: this.saldo
+                    }
+                    this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                  }
+                }
+              }
+            }
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'febrero2023') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          febrero2023: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            febrero2023: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.febrero2023
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              febrero2023: 0,
+              marzo2023: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          } else {
+            this.saldo += element.marzo2023
+            if (this.saldo >= 0) {
+              const actualizarTabla: any = {
+                febrero2023: 0,
+                marzo2023: 0,
+                abril2023: this.saldo
+              }
+              this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+            } else {
+              this.saldo += element.abril2023
+              if (this.saldo >= 0) {
+                const actualizarTabla: any = {
+                  febrero2023: 0,
+                  marzo2023: 0,
+                  abril2023: 0,
+                  mayo2023: this.saldo
+                }
+                this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+              } else {
+                this.saldo += element.mayo2023
+                if (this.saldo >= 0) {
+                  const actualizarTabla: any = {
+                    febrero2023: 0,
+                    marzo2023: 0,
+                    abril2023: 0,
+                    mayo2023: 0,
+                    junio2023: this.saldo
+                  }
+                  this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+                }
+              }
+            }
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'marzo2023') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          marzo2023: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            marzo2023: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.marzo2023
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              marzo2023: 0,
+              abril2023: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          } else {
+            this.saldo += element.abril2023
+            if (this.saldo >= 0) {
+              const actualizarTabla: any = {
+                marzo2023: 0,
+                abril2023: 0,
+                mayo2023: this.saldo
+              }
+              this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+            } else {
+              this.saldo += element.mayo2023
+              if (this.saldo >= 0) {
+                const actualizarTabla: any = {
+                  marzo2023: 0,
+                  abril2023: 0,
+                  mayo2023: 0,
+                  junio2023: this.saldo
+                }
+                this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+              }
+            }
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'abril2023') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          abril2023: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            abril2023: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.abril2023
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              abril2023: 0,
+              mayo2023: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          } else {
+            this.saldo += element.mayo2023
+            if (this.saldo >= 0) {
+              const actualizarTabla: any = {
+                abril2023: 0,
+                mayo2023: 0,
+                junio2023: this.saldo
+              }
+              this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+            }
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'mayo2023') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          mayo2023: this.saldo
+
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            mayo2023: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+        } else {
+          this.saldo += element.mayo2023
+          if (this.saldo >= 0) {
+            const actualizarTabla: any = {
+              mayo2023: 0,
+              junio2023: this.saldo
+            }
+            this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
+          }
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     } else if (fecha == 'junio2023') {
       this.tablaCobranzas.forEach((element: any) => {
-        const actualizarTabla: any = {
-          junio2023: this.saldo
+        if (this.saldo >= 0) {
+          const actualizarTabla: any = {
+            junio2023: this.saldo
+          }
+          this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
         }
-        this._tablaCobranzaService.actualizarTablaCobranzas(element.idTablaCobranzas, actualizarTabla);
       })
     }
   }

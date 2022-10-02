@@ -1,12 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UnidadesService } from '../../../services/unidades.service';
-import { Subscription } from "rxjs";
-import { UsuariosService } from "../../../services/usuarios.service";
-import { ToastrService } from 'ngx-toastr';
-import { DialogService } from 'src/app/services/dialog.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UnidadesService} from '../../../services/unidades.service';
+import {Subscription} from "rxjs";
+import {UsuariosService} from "../../../services/usuarios.service";
+import {ToastrService} from 'ngx-toastr';
+import {DialogService} from 'src/app/services/dialog.service';
 import {TablaCobranzaService} from "../../../services/tablaCobranza.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-ajustes-unidades-create',
@@ -23,6 +24,9 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
   usuarios: any[] = [];
   private isEmail = /\S+@\S+\.\S+/;
   loading = false;
+  myDate = new Date();
+  date = new Date();
+  pipe = new DatePipe('en-US');
 
   unidadesForm: FormGroup;
 
@@ -142,29 +146,238 @@ export class AjustesUnidadesCreateComponent implements OnInit, OnDestroy {
     });
   }
 
-  async onCreateTablaCobranzas(idUnidad: string){
-    //console.log('On create table',idUnidad);
-    const tabla: any = {
-      unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
-      idCondominio: this.idCondominio,
-      idUnidad: idUnidad,
-      junio2022: 0,
-      julio2022: 0,
-      agosto2022: 0,
-      septiembre2022: this.unidadesForm.value.cuotaUnidad,
-      octubre2022: this.unidadesForm.value.cuotaUnidad,
-      noviembre2022: this.unidadesForm.value.cuotaUnidad,
-      diciembre2022: this.unidadesForm.value.cuotaUnidad,
-      enero2023: this.unidadesForm.value.cuotaUnidad,
-      febrero2023: this.unidadesForm.value.cuotaUnidad,
-      marzo2023: this.unidadesForm.value.cuotaUnidad,
-      abril2023: this.unidadesForm.value.cuotaUnidad,
-      mayo2023: this.unidadesForm.value.cuotaUnidad,
-      junio2023: this.unidadesForm.value.cuotaUnidad,
-      valorCuota: this.unidadesForm.value.cuotaUnidad,
+  async onCreateTablaCobranzas(idUnidad: string) {
+
+    let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
+    //let fecha = 'noviembre2022'
+
+    if (fecha == 'septiembre2022') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: this.unidadesForm.value.cuotaUnidad,
+        octubre2022: this.unidadesForm.value.cuotaUnidad,
+        noviembre2022: this.unidadesForm.value.cuotaUnidad,
+        diciembre2022: this.unidadesForm.value.cuotaUnidad,
+        enero2023: this.unidadesForm.value.cuotaUnidad,
+        febrero2023: this.unidadesForm.value.cuotaUnidad,
+        marzo2023: this.unidadesForm.value.cuotaUnidad,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'octubre2022') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: this.unidadesForm.value.cuotaUnidad,
+        noviembre2022: this.unidadesForm.value.cuotaUnidad,
+        diciembre2022: this.unidadesForm.value.cuotaUnidad,
+        enero2023: this.unidadesForm.value.cuotaUnidad,
+        febrero2023: this.unidadesForm.value.cuotaUnidad,
+        marzo2023: this.unidadesForm.value.cuotaUnidad,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'noviembre2022') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: this.unidadesForm.value.cuotaUnidad,
+        diciembre2022: this.unidadesForm.value.cuotaUnidad,
+        enero2023: this.unidadesForm.value.cuotaUnidad,
+        febrero2023: this.unidadesForm.value.cuotaUnidad,
+        marzo2023: this.unidadesForm.value.cuotaUnidad,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'diciembre2022') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: 0,
+        diciembre2022: this.unidadesForm.value.cuotaUnidad,
+        enero2023: this.unidadesForm.value.cuotaUnidad,
+        febrero2023: this.unidadesForm.value.cuotaUnidad,
+        marzo2023: this.unidadesForm.value.cuotaUnidad,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'enero2023') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: 0,
+        diciembre2022: 0,
+        enero2023: this.unidadesForm.value.cuotaUnidad,
+        febrero2023: this.unidadesForm.value.cuotaUnidad,
+        marzo2023: this.unidadesForm.value.cuotaUnidad,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'febrero2023') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: 0,
+        diciembre2022: 0,
+        enero2023: 0,
+        febrero2023: this.unidadesForm.value.cuotaUnidad,
+        marzo2023: this.unidadesForm.value.cuotaUnidad,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'marzo2023') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: 0,
+        diciembre2022: 0,
+        enero2023: 0,
+        febrero2023: 0,
+        marzo2023: this.unidadesForm.value.cuotaUnidad,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'abril2023') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: 0,
+        diciembre2022: 0,
+        enero2023: 0,
+        febrero2023: 0,
+        marzo2023: 0,
+        abril2023: this.unidadesForm.value.cuotaUnidad,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'mayo2023') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: 0,
+        diciembre2022: 0,
+        enero2023: 0,
+        febrero2023: 0,
+        marzo2023: 0,
+        abril2023: 0,
+        mayo2023: this.unidadesForm.value.cuotaUnidad,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+    } else if (fecha == 'junio2023') {
+      const tabla: any = {
+        unidad: String(this.unidadesForm.value.unidad).replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
+        idCondominio: this.idCondominio,
+        idUnidad: idUnidad,
+        junio2022: 0,
+        julio2022: 0,
+        agosto2022: 0,
+        septiembre2022: 0,
+        octubre2022: 0,
+        noviembre2022: 0,
+        diciembre2022: 0,
+        enero2023: 0,
+        febrero2023: 0,
+        marzo2023: 0,
+        abril2023: 0,
+        mayo2023: 0,
+        junio2023: this.unidadesForm.value.cuotaUnidad,
+        valorCuota: this.unidadesForm.value.cuotaUnidad,
+      }
+      this._tablaCobranzasService.createTablaCobranzas(tabla);
+
     }
-    this._tablaCobranzasService.createTablaCobranzas(tabla);
+
+
   }
+
+  //console.log('On create table',idUnidad);
+
 
   onBacktoList(): void {
     this.router.navigate(['/admin/ajustes/ajustesUnidades']);

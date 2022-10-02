@@ -76,7 +76,7 @@ export class RegistroMensualidadComponent implements OnInit {
 
 
   getTablaCobranzas() {
-    //let fecha = 'noviembre2022'
+    //let fecha = 'octubre2022'
     let fecha = this.date.toLocaleString("es-ES", {month: "long"}) + this.date.toLocaleString("es-ES", {year: 'numeric'})
 
     this.subscription.add(
